@@ -9,5 +9,6 @@
 	- [Datasets Hosted on ILIFU](data/hosted_data.md)
     - [Copying Data From Outside of ILIFU](data/moving_data.md)
 - **Help and Info**
+    - [FAQ](help/faq.md)
     - [Contact and Communication](help/contact.md)
     - [Requesting Help](help/requesting_help.md)
