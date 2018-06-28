@@ -2,7 +2,7 @@
 
 ILIFU is a research computing facility focused on astronomy and bioinformatics
 which is managed by a consortium of insitutions: University of Cape Town (lead),
-University of Western Cape, University of Stellenbosch, Cape Peninsular Institute
+University of Western Cape, University of Stellenbosch, Cape Peninsular University
 of Technology, Sol Plaatje University, and South African Radio Astonomy Observatory.
 
 Hardware comprising the compute facility is contributed by DIRISA through a 3-year
