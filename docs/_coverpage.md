@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-![logo](_media/ilifu_transparent.png)
+![logo](_media/IlifuLogoHiRes.png)
 
 > Welcome to the Ilifu user documentation page.
 
