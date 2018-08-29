@@ -1,3 +1,3 @@
-# Datasets hosted on ILIFU
+# Datasets hosted on Ilifu
 
 The following datasets are hosted....

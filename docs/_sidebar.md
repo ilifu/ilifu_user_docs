@@ -1,13 +1,13 @@
 - **About**
-    - [What is ILIFU?](about/what_is.md)
+    - [What is Ilifu?](about/what_is.md)
 - **Access**
-    - [Requesting time on the ILIFU Cluster](access/request_time.md)
+    - [Requesting time on the Ilifu Cluster](access/request_time.md)
 - **Cluster**
     - [Logging into the headnode](cluster/login_to_headnode.md)
     - [Running jobs from the cluster](cluster/running_jobs.md)
 - **Data**
-	- [Datasets Hosted on ILIFU](data/hosted_data.md)
-    - [Copying Data From Outside of ILIFU](data/moving_data.md)
+	- [Datasets Hosted on Ilifu](data/hosted_data.md)
+    - [Copying Data From Outside of Ilifu](data/moving_data.md)
 - **Help and Info**
     - [FAQ](help/faq.md)
     - [Contact and Communication](help/contact.md)

@@ -1,6 +1,6 @@
 # Contact and Communication
 
-If you need to get hold of any one of the developers or administrators at ILIFU then there are a few options for you.
+If you need to get hold of any one of the developers or administrators at Ilifu then there are a few options for you.
 
 ## Email support Tickets
 
