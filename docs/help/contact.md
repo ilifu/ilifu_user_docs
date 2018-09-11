@@ -2,23 +2,21 @@
 
 If you need to get hold of any one of the developers or administrators at Ilifu then there are a few options for you.
 
-## Email support Tickets
+### Email support Tickets
 
 The primary method of support is via email to [support@ilifu.ac.za](mailto:support@ilifu.ac.za) . This goes into a ticket
 system which the technical staff will respond to.
 
-## Slack
+### Slack
 
-Slack is a platform that connects teams with the apps, services, and resources they need to get work done.
+Slack is a platform that connects teams with the apps, services, and resources they need to get work done. For Ilifu, the slack channel is used for informal help (not official support).
 
-For informal help (not official support) ....
+Please contact the official support channel by emailing [support@ilifu.ac.za](mailto:support@ilifu.ac.za) and ask to be added to the informal Slack channel :)
 
-Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) and ask to be added to the Slack channel.
+### Direct Contact
 
-## Direct Contact
-
-### Administrative
+#### Administrative
 
 |Person                  |Email                    
 |------------------------|:-----------------------:|
-|Nicky Walker.           |nicky.walker_at_uct.ac.za|
+|Nicky Walker            |nicky.walker_at_uct.ac.za|

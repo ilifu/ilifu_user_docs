@@ -3,6 +3,7 @@ Ilifu User Documentation
 
 Welcome to the Ilifu user documentation repository.
 
-All the information that a user may need in order
-to use the Ilifu systems and services should be made
-available here over time.
+This site will become the top node of the knowledge base relating to the technical use of the Ilifu facility with information on systems and services.
+
+The information on this site is sparse currently as the site is **UNDER CONSTRUCTION**.
+

@@ -1,3 +1,0 @@
-# Logging in to the Ilifu head node
-
-To use Ilifu, you need to first log in to the head node...

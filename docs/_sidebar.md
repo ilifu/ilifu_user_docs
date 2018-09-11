@@ -3,11 +3,8 @@
 - **Access**
     - [Requesting time on the Ilifu Cluster](access/request_time.md)
 - **Cluster**
-    - [Logging into the headnode](cluster/login_to_headnode.md)
-    - [Running jobs from the cluster](cluster/running_jobs.md)
-- **Data**
-	- [Datasets Hosted on Ilifu](data/hosted_data.md)
-    - [Copying Data From Outside of Ilifu](data/moving_data.md)
+    - [Running jobs on the cluster](cluster/running_jobs.md)
+    - [Supported software environments](cluster/software_environments.md)
 - **Help and Info**
     - [FAQ](help/faq.md)
     - [Contact and Communication](help/contact.md)
