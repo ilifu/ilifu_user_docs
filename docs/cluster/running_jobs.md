@@ -15,10 +15,10 @@ There are several methods to run jobs on Ilifu.
 The jupyter spawner can be accessed via web browser at jupyter.ilifu.ac.za.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.  
 
 After logging in to the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
-<img src="https://github.com/ilifu/ilifu_user_docs/blob/master/docs/cluster/jupyter_spawner_dropdown.png" alt=dropdown>
+<img src="http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png" alt=dropdown>
 
 Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, and the intervals are currently very long (one to two weeks).  A user can also terminate the spawner themselves in order to free up resources or to choose a different node type:
-<img src="https://github.com/ilifu/ilifu_user_docs/blob/master/docs/cluster/hub_selection.png" alt=dropdown>
+<img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt=dropdown>
 
 
 ## 2. Slurm Batch Scheduler
