@@ -18,7 +18,7 @@ After logging in to the jupyter node, one must select the type of node on which 
 <img src="https://github.com/ilifu/ilifu_user_docs/blob/master/docs/cluster/jupyter_spawner_dropdown.png" alt=dropdown>
 
 Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, and the intervals are currently very long (one to two weeks).  A user can also terminate the spawner themselves in order to free up resources or to choose a different node type:
-[[https://github.com/ilifu/ilifu_user_docs/blob/master/docs/cluster/hub_selection.png|alt=dropdown]]
+<img src="https://github.com/ilifu/ilifu_user_docs/blob/master/docs/cluster/hub_selection.png" alt=dropdown>
 
 
 ## 2. Slurm Batch Scheduler
