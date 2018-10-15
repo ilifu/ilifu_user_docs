@@ -8,17 +8,21 @@ There are several methods to run jobs on Ilifu.
 
 3. Selected users will be given access to the OpenStack dashboard in order to have full control over the setup of a computing environment. This is available at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za)
 
-## Jupyter Spawner
+---
 
-## Slurm Batch Scheduler
+## 1. Jupyter Spawner
 
-Slurm is a general purpose job scheduling system which is highly versatile.  There are numerous resources available online as to how to submit batch systems.  The simplest procedure for submitting and running a SLURM batch job is as is detailed below.
+## 2. Slurm Batch Scheduler
 
-We will create a python script for each job, say `casa_job_N.py`, where N represents the job number.  We could ordinarily run this script using `casa -c casa_job_N.py`, but since our script will be run on a worker node, we use a singularity container to execute the script.  The simplest way to do this is by using the `singularity exec` command:
+Slurm is a general purpose job scheduling system which is highly versatile.  There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs.  This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a SLURM batch job.
 
-	singularity exec /data/exp_soft/containers/casa-stable.img casa -c casa_job_N.py
+The SLURM batch system can be accessed via `ssh` with private key to `batch.ilifu.idia.ac.za`.  It can also be accessed using jupyter by web browser at https://batch.ilifu.idia.ac.za.  Note that this node should only be used to submit and manage batch jobs and not for running code or software directly.  This node does not have significant resources and will likely crash under heavy usage.  From this node you can submit jobs to a queue where it subsequently allocated to the computing cluster such that it uses resources in an optimal manner. 
 
-To execute our set of scripts using the SLURM batch scheduler, you must create a SLURM submit script. This bash script contains our casa command along with a set of parameters to instruct SLURM how to run the jobs:
+To do so, we must create a submit script.  In this example we will assume that the user is executing their analysis or data processing code using python.  We thus create a python script for each compute job called `casa_job_N.py`, where N represents the job number.  If you were working directly on your laptop you could run this script by running `python -c casa_job_N.py`.  However, since our script will be run on a worker node, we use a singularity container to encapsulate our environment and requisite software.  The simplest way to execute our python script is by prepending the `singularity exec` command:
+
+	singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
+
+To execute our (set of) scripts using the SLURM batch scheduler, you must create an additional SLURM submit script. This is a bash script that contains the above command, along with a set of parameters that instruct SLURM how to run the jobs:
 
 	#!/bin/bash
 	#file: casaslurm_N.sh:
@@ -40,4 +44,4 @@ To submit this script to the job queue, run
 To check the progress of the jobs, use the `squeue` command or check the `logs` directory...
 
 
-## Openstack Cloud Dashboard
+## 3. Openstack Cloud Dashboard
