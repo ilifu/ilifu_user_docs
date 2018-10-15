@@ -18,7 +18,8 @@ After logging in to the jupyter node, one must select the type of node on which 
 <img src="http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png" alt=dropdown>
 
 Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, and the intervals are currently very long (one to two weeks).  A user can also terminate the spawner themselves in order to free up resources or to choose a different node type:
-<img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt=dropdown width=400>
+
+<img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt=dropdown width=600>
 
 
 ## 2. Slurm Batch Scheduler
