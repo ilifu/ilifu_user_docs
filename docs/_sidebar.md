@@ -5,6 +5,7 @@
 - **Cluster**
     - [Running jobs on the cluster](cluster/running_jobs.md)
     - [Supported software environments](cluster/software_environments.md)
+    - [Openstack flavours](openstack/flavours.md)
 - **Help and Info**
     - [FAQ](help/faq.md)
     - [Contact and Communication](help/contact.md)

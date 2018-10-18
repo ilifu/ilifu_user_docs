@@ -1,7 +1,9 @@
 Flavours
 ========
 
-| Name			| VCPUS	| RAM	| Disk	    |
+The following virtual machine flavours are supported on Ilifu:
+
+| Name			| VCPUS	| RAM (GB)	| Disk (GB)   |
 |----- 	 		|       |     	  	    | 	    |
 | ilifu-A	       	| 1	| 4   	    |	20	    
 | ilifu-B		| 2	| 8   	    |	20	    |
