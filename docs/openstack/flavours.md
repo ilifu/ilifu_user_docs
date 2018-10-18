@@ -13,4 +13,3 @@ The following virtual machine flavours are supported on Ilifu:
 | liifu-F		| 16	| 124       |	20	    |
 | liifu-G		| 32	| 250       |	20	    |
 | liifu-H		| 32	| 500       |	20	    |
-| 			| 	| 	    |		    |
