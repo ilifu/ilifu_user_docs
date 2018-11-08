@@ -4,7 +4,7 @@ There are several methods to run jobs on Ilifu.
 
 1. Users may get access to a Jupyter Lab spawner mechanism on the cluster. This provides a Jupyter lab environment where users select what size compute node they need to run. This is a good environment for users to experiment with code and visualise certain results. This environment will be made available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. Users can login to the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [batch.ilifu.ac.za](https://batch.ilifu.ac.za).
+2. Users can login to the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 3. Selected users will be given access to the OpenStack dashboard in order to have full control over the setup of a computing environment. This is available at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za)
 
@@ -26,7 +26,7 @@ Each node will be terminated after a preset interval of time, however the user's
 
 Slurm is a general purpose job scheduling system which is highly versatile.  There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs.  This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a SLURM batch job.
 
-The SLURM batch system can be accessed via `ssh` with private key to `batch.ilifu.idia.ac.za`.  It can also be accessed using jupyter by web browser at https://batch.ilifu.idia.ac.za.  Note that this node should only be used to submit and manage batch jobs and not for running code or software directly.  This node does not have significant resources and will likely crash under heavy usage.  From this node you can submit jobs to a queue where it subsequently allocated to the computing cluster such that it uses resources in an optimal manner. 
+The SLURM batch system can be accessed via `ssh` with private key to `slurm.ilifu.idia.ac.za`.  It can also be accessed using jupyter by web browser at https://slurm.ilifu.idia.ac.za.  Note that this node should only be used to submit and manage batch jobs and not for running code or software directly.  This node does not have significant resources and will likely crash under heavy usage.  From this node you can submit jobs to a queue where it subsequently allocated to the computing cluster such that it uses resources in an optimal manner. 
 
 To do so, we must create a submit script.  In this example we will assume that the user is executing their analysis or data processing code using python.  We thus create a python script for each compute job called `casa_job_N.py`, where N represents the job number.  If you were working directly on your laptop you could run this script by running `python -c casa_job_N.py`.  However, since our script will be run on a worker node, we use a singularity container to encapsulate our environment and requisite software.  The simplest way to execute our python script is by prepending the `singularity exec` command:
 
