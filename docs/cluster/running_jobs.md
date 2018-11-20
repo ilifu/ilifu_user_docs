@@ -12,21 +12,25 @@ There are several methods to run jobs on Ilifu.
 
 ## 1. Jupyter Spawner
 
-The jupyter spawner can be accessed via web browser at jupyter.ilifu.ac.za.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.  
+The jupyter spawner can be accessed via web browser at `https://jupyter.ilifu.ac.za`.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.  
 
 After logging in to the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
-<img src="http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png" alt=dropdown>
+<img src="http://docs.ilifu.ac.za/_media/profile_dropdown_options.png" alt=dropdown>
 
-Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, and the intervals are currently very long (one to two weeks).  A user can also terminate the spawner themselves in order to free up resources or to choose a different node type:
+Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, so when a new jupyter server is spawned the workspace is recreated. Some data is also persisted in the notebook file. A user can terminate the server in order to free up resources on the cloud, or to choose a different node type.  This is done by choosing the 'hub' option from the top menu bar of JupyterLab,
 
-<img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt=dropdown width=600>
+<img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt="menu bar options" width=500>
+
+Choose the 'control panel' option to view or stop your server, 
+
+<img src="http://docs.ilifu.ac.za/_media/stop_server_button.png" alt="stop server button" width=600>
 
 
 ## 2. Slurm Batch Scheduler
 
 Slurm is a general purpose job scheduling system which is highly versatile.  There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs.  This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a SLURM batch job.
 
-The SLURM batch system can be accessed via `ssh` with private key to `slurm.ilifu.idia.ac.za`.  It can also be accessed using jupyter by web browser at https://slurm.ilifu.idia.ac.za.  Note that this node should only be used to submit and manage batch jobs and not for running code or software directly.  This node does not have significant resources and will likely crash under heavy usage.  From this node you can submit jobs to a queue where it subsequently allocated to the computing cluster such that it uses resources in an optimal manner. 
+The SLURM batch system can be accessed via `ssh` with private key to `slurm.ilifu.idia.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly.  This node does not have significant resources and will likely crash under heavy usage.  From this node you can submit jobs to a queue where it subsequently allocated to the computing cluster such that it uses resources in an optimal manner. 
 
 To do so, we must create a submit script.  In this example we will assume that the user is executing their analysis or data processing code using python.  We thus create a python script for each compute job called `casa_job_N.py`, where N represents the job number.  If you were working directly on your laptop you could run this script by running `python -c casa_job_N.py`.  However, since our script will be run on a worker node, we use a singularity container to encapsulate our environment and requisite software.  The simplest way to execute our python script is by prepending the `singularity exec` command:
 
@@ -55,3 +59,7 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 
 ## 3. Openstack Cloud Dashboard
+
+The Openstack dashboard is available for certain users at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters. 
+
+<img src="http://docs.ilifu.ac.za/_media/dashboard_view.png" alt="openstack dashboard" width=600>
