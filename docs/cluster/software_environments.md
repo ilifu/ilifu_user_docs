@@ -101,10 +101,12 @@ Several containers have been developed and are currently maintained. These conta
 | libboost-system1.58.0          | libqwt6abi1        | wcslib-dev                 |                   |
 | libboost-thread-dev            | libreadline-dev    | wget                       |                   |
 | libcfitsio2                    | libsakura          | xvfb                       |                   |
+
 </details>
 
 <details>
 <summary>kern-2 container</summary>
+
 | Name   | Def file   | URL                            | OSVesion |
 |--------|------------|--------------------------------|----------|
 | kern-2 | kern-2.def | idia-container-kern/kern-2.def | xenial   |
@@ -155,6 +157,7 @@ Several containers have been developed and are currently maintained. These conta
 | libcasa-scimath2      | psrcat                     | wsclean                   |                  |
 | libcasa-tables2       | psrchive                   | wsclean-dev               |                  |
 | libcasasynthesis-dev  | purify                     |                           |                  |
+
 </details>
 
 <details>
@@ -186,6 +189,7 @@ Several containers have been developed and are currently maintained. These conta
 | gbt-seti             | psrcat         | tigger                |                  |
 | gsm                  | psrchive       | tirific               |                  |
 | heimdall-astero      | psrdada        | turbo-seti            |                  |
+
 </details>
   
 <details>
@@ -212,6 +216,7 @@ Several containers have been developed and are currently maintained. These conta
 | bzip2                | netlib-lapack     | Z0GY              |                  |
 | cdsclient            | netpbm            | zip               |                  |
 | conda-forge-sphinx   | openastronomy-sep | zlib1g-dev        |                  |
+
 </details>
   
 <details>
@@ -226,6 +231,7 @@ Several containers have been developed and are currently maintained. These conta
 | apt-utils            | doxygen | Pink |                  |
 | build-essential      | gcc     | vim  |                  |
 | cmake                | make    | wget |                  |
+
 </details>
   
 <details>
