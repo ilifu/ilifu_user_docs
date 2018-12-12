@@ -61,9 +61,9 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>Jupter-Casa container</summary>
 
-| Name                     | Recipe File            | URL                                                   | OSVesion |
-|--------------------------|------------------------|-------------------------------------------------------|----------|
-| jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel/jupyter-casa-build.def      | xenial   |
+| Name                     | Recipe File            | URL                                                   | OSVersion |
+|--------------------------|------------------------|-------------------------------------------------------|-----------|
+| jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel/jupyter-casa-build.def      | xenial    |
 
 | Packages & Libraries           |                    |                            | Python Libraries  |
 |--------------------------------|--------------------|----------------------------|-------------------|
@@ -107,9 +107,9 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>kern-2 container</summary>
 
-| Name   | Def file   | URL                            | OSVesion |
-|--------|------------|--------------------------------|----------|
-| kern-2 | kern-2.def | idia-container-kern/kern-2.def | xenial   |
+| Name   | Def file   | URL                            | OSVersion |
+|--------|------------|--------------------------------|-----------|
+| kern-2 | kern-2.def | idia-container-kern/kern-2.def | xenial    |
 
 | Packages & Libraries  |                            |                           | Python Libraries |
 |-----------------------|----------------------------|---------------------------|------------------|
@@ -163,9 +163,9 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>kern-4 container</summary>
 
-| Name  | Def file  | URL                             | OSVesion |
-|-------|-----------|---------------------------------|----------|
-| kern4 | kern4.def | idia-container-kern-4/kern4.def | bionic   |
+| Name  | Def file  | URL                             | OSVersion |
+|-------|-----------|---------------------------------|-----------|
+| kern4 | kern4.def | idia-container-kern-4/kern4.def | bionic    |
 
 | Packages & Libraries |                |                       | Python Libraries |
 |----------------------|----------------|-----------------------|------------------|
@@ -195,9 +195,9 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>meerlicht container</summary>
   
-| Name      | Def file      | URL                                    | OSVesion |
-|-----------|---------------|----------------------------------------|----------|
-| meerlicht | meerlicht.def | idia-container-meerlicht/meerlicht.def | xenial   |
+| Name      | Def file      | URL                                    | OSVersion |
+|-----------|---------------|----------------------------------------|-----------|
+| meerlicht | meerlicht.def | idia-container-meerlicht/meerlicht.def | xenial    |
 
 | Packages & Libraries |                   |                   | Python Libraries |
 |----------------------|-------------------|-------------------|------------------|
@@ -222,9 +222,9 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>pink container</summary>
   
-| Name | Def file | URL                          | OSVesion |
-|------|----------|------------------------------|----------|
-| pink | pink.def | idia-container-pink/pink.def | xenial   |
+| Name | Def file | URL                          | OSVersion |
+|------|----------|------------------------------|-----------|
+| pink | pink.def | idia-container-pink/pink.def | xenial    |
 
 | Packages & Libraries |         |      | Python Libraries |
 |----------------------|---------|------|------------------|
@@ -237,10 +237,10 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary>sourcefinding_py3 container</summary>
 
-| Name              | Def file                     | URL                                                           | OSVesion |
-|-------------------|------------------------------|---------------------------------------------------------------|----------|
-| Source Finding P3 | sourcefinding_py3.def        | idia-container-sourcefinding-py3/sourcefinding_py3.def        | xenial   |
-| Source Finding P3 | sourcefinding_py3_update.def | idia-container-sourcefinding-py3/sourcefinding_py3_update.def | xenial   |
+| Name              | Def file                     | URL                                                           | OSVersion |
+|-------------------|------------------------------|---------------------------------------------------------------|-----------|
+| Source Finding P3 | sourcefinding_py3.def        | idia-container-sourcefinding-py3/sourcefinding_py3.def        | xenial    |
+| Source Finding P3 | sourcefinding_py3_update.def | idia-container-sourcefinding-py3/sourcefinding_py3_update.def | xenial    |
 
 | Packages & Libraries  |                            |                           | Python Libraries | Python Libraries |
 |-----------------------|----------------------------|---------------------------|------------------|------------------|
