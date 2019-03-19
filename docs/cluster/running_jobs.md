@@ -57,8 +57,19 @@ To submit this script to the job queue, run
 
 To check the progress of the jobs, use the `squeue` command or check the `logs` directory...
 
+## 3. Interactive Sessions
 
-## 3. Openstack Cloud Dashboard
+No software or process should be run on the slurm headnode. For an interative session on the slurm cluster, without the use of a Jupyter notebook, the `srun` command can be used as follows:
+
+	srun -N 1 --pty bash
+
+This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you onto one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow. 
+
+Please exit the worker node once you have finished the interactive session in order to return the resources to the slurm pool.
+
+**NOTE**: `X11` is currently not functioning correctly on the slurm worker nodes. If an interactive session is required with `X11`, such as using the `plotms()` CASA task, one of the fat nodes should be used.
+
+## 4. Openstack Cloud Dashboard
 
 The Openstack dashboard is available for certain users at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters. 
 
