@@ -359,7 +359,7 @@ This command will build a container using the `pink.def` file and will name the 
 
 You can use a custom container as a python Jupyter kernel. The kernel will then appear with the system defined kernels that already exist in JupyterHub. If you launch a notebook using the custom kernel you will have access to all the python packages included in the container and would be able to access the container environment from inside the notebook, for example, issuing terminal commands using `!`.
 
-In order to achieve this, the `ipykernel` python package must be installed in the container for the version of python that you wish to use as the Jupyter kernel. Outside the container, in your /users/ directory, create a folder in `$HOME/.local/share/jupyter/kernels/` and create a `kernel.json` inside this new folder. The path for the `kernel.json` file should look something like `$HOME/.local/share/jupyter/kernels/example_kernel/kernel.json`. Inside the 'kernel.json' include the following:
+In order to achieve this, the `ipykernel` python package must be installed in the container for the version of python that you wish to use as the Jupyter kernel. Outside the container, in your /users/ directory, create a folder in `$HOME/.local/share/jupyter/kernels/` and create a `kernel.json` file inside this new folder. The path for the `kernel.json` file should look something like `$HOME/.local/share/jupyter/kernels/example_kernel/kernel.json`. Inside the 'kernel.json' include the following:
 
 	{
 		"display_name": "<kernel_name>", 
@@ -373,5 +373,5 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 			]
 	}
 
-where '<kernel_name>' is the name that will appear in the JupyterHub kernel menu, <path/to/container/container.simg> is the path to the container you wish to use as a kernel, and the <path/to/python_executable> is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, <path/to/container/container.simg> is the path to the container you wish to use as a kernel, and the <path/to/python_executable> is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
 
