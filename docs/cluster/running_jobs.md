@@ -63,11 +63,24 @@ No software or process should be run on the slurm headnode. For an interative se
 
 	srun -N 1 --pty bash
 
-This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you onto one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow. 
+This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you into one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow. 
+
+For an interactive session with X11 forwarding, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into slurm with the `-XY` parameters which sets your DISPLAY variable for X11 forwarding, for example:
+
+	ssh -XY <username>@slurm.ilifu.ac.za
+	
+From there, you can use `salloc` to allocate a slurm worker node to yourself, or you can use the above `srun` command to allocate a slurm worker node. In both cases, you can check the name of the worker node that has been allocated to you by running:
+
+	squeue
+	
+Once you have deteremined the correct name of the worker node, you must ssh into the worker node with the `-XY` parameters, for example:
+
+	ssh -XY slwrk-020
+	
+You are then able to run a Singularity container and run an interactive CASA session with access to the GUIs. The `casa-stable` and `casameer` Singularity container images contain the X11 tools required for X11 forwarding.
 
 Please exit the worker node once you have finished the interactive session in order to return the resources to the slurm pool.
 
-**NOTE**: `X11` is currently not functioning correctly on the slurm worker nodes. If an interactive session is required with `X11`, such as using the `plotms()` CASA task, one of the fat nodes should be used.
 
 ## 4. Openstack Cloud Dashboard
 
