@@ -14,7 +14,7 @@ There are several ways one can use a Singularity container.
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. 
 
-    user:~$ singularity shell /data/exp_soft/containers/casa-stable.img
+    $ singularity shell /data/exp_soft/containers/casa-stable.img
 
 This command will spawn a new shell inside the container, in this case the `casa-stable` container, allowing the user to interact with the container environment. The user can then run software or develop workflows interactively.
 
@@ -22,19 +22,19 @@ This command will spawn a new shell inside the container, in this case the `casa
 
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
-    user:~$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
+    $ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
 
 This command will execute the script, `myscript.py`, using Python within the `sourcefinding_py3` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary,
 
-    user:~$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
+    $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
 
 will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container.
 
 The `exec` command can also be used to initiate an interative session. For example:
 
-    user:~$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
+    $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
     
 The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the SLURM cluster.
 
@@ -42,7 +42,7 @@ The above command will run the CASA software within the `casa-stable` container 
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
-    user:~$ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
+    $ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
     
 The runscript for this container is:
 
@@ -56,7 +56,7 @@ A number of the containers that are supported by Ilifu do not include runscripts
 
 ### Available containers
 
-Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for container details**):
+Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
 <summary>Jupter-Casa container</summary>
@@ -329,29 +329,29 @@ Here is an example of the PINK container recipe, the recipe file is called `pink
         cp pink-latest.tar $SINGULARITY_ROOTFS
 
     %post 
-	      apt-get update -y
-	      apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
-	      mkdir /install /software 
-	      mv /pink-latest.tar /install 
-	      cd /install 
-	      tar xfv pink-latest.tar
+	apt-get update -y
+	apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
+	mkdir /install /software 
+	mv /pink-latest.tar /install 
+	cd /install 
+	tar xfv pink-latest.tar
 	
-	    # Create /users to bind home directories into the container.
+	# Create /users to bind home directories into the container.
         mkdir -p /users /scratch /data
 
-	    # Installation of PINK
+	# Installation of PINK
         cd pink-latest
-	      mkdir build
-          cd build
-          cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
-          make -j 2
-	      make install 
+	mkdir build
+        cd build
+        cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
+        make -j 2
+	make install 
 
 In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
 
 In order to build the container from the recipe, the following command can be used:
 
-    root:~$ singularity build pink.simg pink.def
+    $ singularity build pink.simg pink.def
     
 This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the Ilifu cloud and run using the `shell` or `exec` command.
 
