@@ -8,7 +8,7 @@ Containers are unit software packages that contain all the software, files, libr
 
 ### Using a container
 
-There are several ways one can use a Singularity container.
+The container images that are maintained by the support team can be found at `/data/exp_soft/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
 
 #### 1. Interactive shell command
 
@@ -59,7 +59,7 @@ A number of the containers that are supported by Ilifu do not include runscripts
 Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
-<summary>Jupter-Casa container</summary>
+<summary>jupter-casa container</summary>
 
 | Name                     | Recipe File            | URL                                                   | OSVersion |
 |--------------------------|------------------------|-------------------------------------------------------|-----------|
@@ -101,6 +101,41 @@ Several containers have been developed and are currently maintained. These conta
 | libboost-system1.58.0          | libqwt6abi1        | wcslib-dev                 |                   |
 | libboost-thread-dev            | libreadline-dev    | wget                       |                   |
 | libcfitsio2                    | libsakura          | xvfb                       |                   |
+
+</details>
+
+<details>
+<summary>casa-stable container</summary>
+
+| Name        | Def file        | URL                                        | OSVersion |
+|-------------|-----------------|--------------------------------------------|-----------|
+| casa-stable | casa-stable.def | idia-container-casa-stable/casa-stable.def | CentOS    |
+
+| Packages and Libraries |                    |                  |                 |
+|------------------------|--------------------|------------------|-----------------|
+| casa                   | libfontconfig      | libXcursor-dev*  | libXrender-dev* |
+| cmake                  | libfontconfig-dev* | libXext-dev*     | python          |
+| fontconfig-dev         | libGL-dev*         | libXft*          | svn             |
+| fontconfig-dev*        | libGL*             | libXi-dev*       | vim             |
+| gcc                    | libSM-dev*         | libXinerama-dev* | wget            |
+| git                    | libX11-dev*        | libXrandr-dev*   |                 |
+
+</details>
+
+<details>
+<summary>casameer container</summary>
+
+Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and is appropriate for use with MPI.
+
+| Name        | Def file        | URL                                        | OSVersion |
+|-------------|-----------------|--------------------------------------------|-----------|
+| casameer    |                 |                                            | CentOS    |
+
+| Packages and Libraries |
+|------------------------|
+| casa-5.4.1             |
+| ghostscript            |
+| xvfb-run               |
 
 </details>
 
@@ -328,24 +363,24 @@ Here is an example of the PINK container recipe, the recipe file is called `pink
     %setup 
         cp pink-latest.tar $SINGULARITY_ROOTFS
 
-    %post 
-	apt-get update -y
-	apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
-	mkdir /install /software 
-	mv /pink-latest.tar /install 
-	cd /install 
-	tar xfv pink-latest.tar
+    %post
+        apt-get update -y
+        apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
+        mkdir /install /software 
+        mv /pink-latest.tar /install 
+        cd /install 
+        tar xfv pink-latest.tar
 	
-	# Create /users to bind home directories into the container.
+        # Create /users to bind home directories into the container.
         mkdir -p /users /scratch /data
 
-	# Installation of PINK
+        # Installation of PINK
         cd pink-latest
-	mkdir build
+        mkdir build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
-        make -j 2
-	make install 
+        make -j 2        
+        make install 
 
 In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
 
