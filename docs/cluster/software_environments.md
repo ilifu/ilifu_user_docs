@@ -1,6 +1,26 @@
 # Supported Software Environments
 
-For Astronomy, IDIA provides a number of supported software environments on Ilifu. These are provided principally through Singularity containers. More details of the bioinformatics suite of supported software will be added here later.
+For Astronomy, IDIA provides a number of supported software environments on Ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
+
+## Index
+* [Singularity Containers](#singularity-containers)
+  * [Using a container](#using-a-container)
+    * [Interactive shell command](#interactive-shell-command)
+    * [Exec command](#exec-command)
+    * [Run command](#run-command)
+  * [Available containers](#available-containers)
+    1. [Jupyter-casa container](#jupyter-casa-container)
+    2. [Casa-stable container](#casa-stable-container)
+    3. [Casameer container](#casameer-container)
+    4. [kern-2 container](#kern-2-container)
+    5. [kern-4 container](#kern-4-container)
+    6. [meerlicht container](#meerlicht-container)
+    7. [pink container](#pink-container)
+    8. [sourcefinding-py3 container](#sourcefinding-py3-container)
+  * [Building you own container](#building-your-own-container)
+  * [Using a custom container as a Jupyter kernel](#using-a-custom-container-as-a-jupyter-kernel)	
+
+* [Environment Modules](#environment-modules)
 
 ## Singularity Containers
 
@@ -54,12 +74,13 @@ Running this container using the `run` command will initialize a container sessi
 
 A number of the containers that are supported by Ilifu do not include runscripts and therefore cannot be used using the `run` command.
 
+[Go to Index](#index)
 ### Available containers
 
 Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
-<summary>jupter-casa container</summary>
+<summary id="jupyter-casa-container">jupter-casa container</summary>
 
 | Name                     | Recipe File            | URL                                                   | OSVersion |
 |--------------------------|------------------------|-------------------------------------------------------|-----------|
@@ -105,7 +126,7 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary>casa-stable container</summary>
+<summary id="casa-stable-container">casa-stable container</summary>
 
 | Name        | Def file        | URL                                        | OSVersion |
 |-------------|-----------------|--------------------------------------------|-----------|
@@ -123,7 +144,7 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary>casameer container</summary>
+<summary id="casameer-container">casameer container</summary>
 
 Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and is appropriate for use with MPI.
 
@@ -140,7 +161,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 </details>
 
 <details>
-<summary>kern-2 container</summary>
+<summary id="kern-2-container">kern-2 container</summary>
 
 | Name   | Def file   | URL                            | OSVersion |
 |--------|------------|--------------------------------|-----------|
@@ -196,7 +217,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 </details>
 
 <details>
-<summary>kern-4 container</summary>
+<summary id="kern-4-container">kern-4 container</summary>
 
 | Name  | Def file  | URL                             | OSVersion |
 |-------|-----------|---------------------------------|-----------|
@@ -228,7 +249,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 </details>
   
 <details>
-<summary>meerlicht container</summary>
+<summary id="meerlicht-container">meerlicht container</summary>
   
 | Name      | Def file      | URL                                    | OSVersion |
 |-----------|---------------|----------------------------------------|-----------|
@@ -255,7 +276,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 </details>
   
 <details>
-<summary>pink container</summary>
+<summary id="pink-container">pink container</summary>
   
 | Name | Def file | URL                          | OSVersion |
 |------|----------|------------------------------|-----------|
@@ -270,7 +291,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 </details>
   
 <details>
-<summary>sourcefinding_py3 container</summary>
+<summary id="sourcefinding-py3-container">sourcefinding_py3 container</summary>
 
 | Name              | Def file                     | URL                                                           | OSVersion |
 |-------------------|------------------------------|---------------------------------------------------------------|-----------|
@@ -342,6 +363,7 @@ Packages installed in during the update:
 
 </details>
 
+[Go to Index](#index)
 ### Building your own container
 
 In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the Ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the Ilifu system where it can be utilized.
@@ -390,6 +412,7 @@ In order to build the container from the recipe, the following command can be us
     
 This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the Ilifu cloud and run using the `shell` or `exec` command.
 
+[Go to Index](#index)
 ### Using a custom container as a Jupyter kernel
 
 You can use a custom container as a python Jupyter kernel. The kernel will then appear with the system defined kernels that already exist in JupyterHub. If you launch a notebook using the custom kernel you will have access to all the python packages included in the container and would be able to access the container environment from inside the notebook, for example, issuing terminal commands using `!`.
@@ -409,4 +432,7 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 	}
 
 where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, <path/to/container/container.simg> is the path to the container you wish to use as a kernel, and the <path/to/python_executable> is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+
+[Go to Index](#index)
+## Environment Modules
 
