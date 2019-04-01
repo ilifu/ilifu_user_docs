@@ -13,9 +13,9 @@ The container images that are maintained by the support team can be found at `/d
 #### 1. Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. 
-
+```console
     $ singularity shell /data/exp_soft/containers/casa-stable.img
-
+```
 This command will spawn a new shell inside the container, in this case the `casa-stable` container, allowing the user to interact with the container environment. The user can then run software or develop workflows interactively.
 
 #### 2. Exec command
