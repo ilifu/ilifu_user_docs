@@ -12,43 +12,97 @@ The container images that are maintained by the support team can be found at `/d
 
 #### 1. Interactive shell command
 
-A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. 
-```bash session
-    $ singularity shell /data/exp_soft/containers/casa-stable.img
+A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
+
+```console
+$ singularity shell /data/exp_soft/containers/casa-stable.img
+Singularity: Invoking an interactive shell within container...
+
+Singularity casa-stable-5.1.1.img:~>
 ```
+
 This command will spawn a new shell inside the container, in this case the `casa-stable` container, allowing the user to interact with the container environment. The user can then run software or develop workflows interactively.
 
 #### 2. Exec command
 
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
-    $ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
+```console
+$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg ~/hello_world.py
+hello world!
+$
+```
 
 This command will execute the script, `myscript.py`, using Python within the `sourcefinding_py3` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary,
 
-    $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
+```console
+$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
+
+=========================================
+The start-up time of CASA may vary
+depending on whether the shared libraries
+are cached or not.
+=========================================
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+
+CASA 5.1.1-5   -- Common Astronomy Software Applications
+
+2019-04-01 13:49:49     INFO    ::casa  CASA Version 5.1.1-5
+--> CrashReporter initialized.
+hello world
+$
+```
 
 will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container.
 
 The `exec` command can also be used to initiate an interative session. For example:
 
-    $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
-    
+```console
+$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
+
+=========================================
+The start-up time of CASA may vary
+depending on whether the shared libraries
+are cached or not.
+=========================================
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+
+CASA 5.1.1-5   -- Common Astronomy Software Applications
+
+2019-04-01 13:51:39     INFO    ::casa  CASA Version 5.1.1-5
+--> CrashReporter initialized.
+Enter doc('start') for help getting started with CASA...
+Using matplotlib backend: TkAgg
+
+CASA <1>:
+
+```
+
 The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the SLURM cluster.
 
 #### 3. Run command
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
-    $ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
-    
+```console
+$ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
+Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
+[GCC 7.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
 The runscript for this container is:
 
-    %runscript
+```
+%runscript
 
-        /anaconda3/bin/python "$@"
+    /anaconda3/bin/python "$@"
+```
 
 Running this container using the `run` command will initialize a container session and open the Python package (from Anaconda3 in this case) contained within the container, allowing the user to run python commands interactively. However, as soon as the Python command line is exited the container session is closed.
 
@@ -226,10 +280,10 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 | heimdall-astero      | psrdada        | turbo-seti            |                  |
 
 </details>
-  
+
 <details>
 <summary id="meerlicht-container">meerlicht container</summary>
-  
+
 | Name      | Def file      | URL                                    | OSVersion |
 |-----------|---------------|----------------------------------------|-----------|
 | meerlicht | meerlicht.def | idia-container-meerlicht/meerlicht.def | xenial    |
@@ -253,10 +307,10 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 | conda-forge-sphinx   | openastronomy-sep | zlib1g-dev        |                  |
 
 </details>
-  
+
 <details>
 <summary id="pink-container">pink container</summary>
-  
+
 | Name | Def file | URL                          | OSVersion |
 |------|----------|------------------------------|-----------|
 | pink | pink.def | idia-container-pink/pink.def | xenial    |
@@ -268,7 +322,7 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 | cmake                | make    | wget |                  |
 
 </details>
-  
+
 <details>
 <summary id="sourcefinding-py3-container">sourcefinding_py3 container</summary>
 
@@ -352,42 +406,62 @@ The recommended way to build a container for the Ilifu system is through using a
 
 Here is an example of the PINK container recipe, the recipe file is called `pink.def`:
 
-    Bootstrap: debootstrap
-    MirrorURL: http://archive.ubuntu.com/ubuntu/
-    OSVersion: xenial
-    Include: software-properties-common
-    
-    %environment
-        export PATH=/software/pink/bin:$PATH
-        
-    %setup 
-        cp pink-latest.tar $SINGULARITY_ROOTFS
+```
+Bootstrap: debootstrap
+MirrorURL: http://archive.ubuntu.com/ubuntu/
+OSVersion: xenial
+Include: software-properties-common
 
-    %post
-        apt-get update -y
-        apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
-        mkdir /install /software 
-        mv /pink-latest.tar /install 
-        cd /install 
-        tar xfv pink-latest.tar
-	
-        # Create /users to bind home directories into the container.
-        mkdir -p /users /scratch /data
+%environment
+    export PATH=/software/pink/bin:$PATH
 
-        # Installation of PINK
-        cd pink-latest
-        mkdir build
-        cd build
-        cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
-        make -j 2        
-        make install 
+%setup
+    cp pink-latest.tar $SINGULARITY_ROOTFS
+
+%post
+    apt-get update -y
+    apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
+    mkdir /install /software
+    mv /pink-latest.tar /install
+    cd /install
+    tar xfv pink-latest.tar
+
+    # Create /users to bind home directories into the container.
+    mkdir -p /users /scratch /data
+
+    # Installation of PINK
+    cd pink-latest
+    mkdir build
+    cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
+    make -j 2
+    make install
+```
 
 In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
 
 In order to build the container from the recipe, the following command can be used:
 
-    $ singularity build pink.simg pink.def
-    
+```console
+# singularity build pink.simg pink.def
+Using container recipe deffile: pink.def
+Sanitizing environment
+Adding base Singularity environment to container
+I: Retrieving InRelease
+I: Checking Release signature
+I: Valid Release signature (key id 790BC7277767219C42C86F933B4FE6ACC0B21F32)
+I: Retrieving Packages
+I: Validating Packages
+I: Resolving dependencies of required packages...
+I: Resolving dependencies of base packages...
+I: Checking component main on http://archive.ubuntu.com/ubuntu...
+I: Retrieving adduser 3.113+nmu3ubuntu4
+I: Validating adduser 3.113+nmu3ubuntu4
+I: Retrieving apt 1.2.10ubuntu1
+I: Validating apt 1.2.10ubuntu1
+...
+```
+
 This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the Ilifu cloud and run using the `shell` or `exec` command.
 
 ### Using a custom container as a Jupyter kernel
@@ -396,19 +470,22 @@ You can use a custom container as a python Jupyter kernel. The kernel will then 
 
 In order to achieve this, the `ipykernel` python package must be installed in the container for the version of python that you wish to use as the Jupyter kernel. Outside the container, in your /users/ directory, create a folder in `$HOME/.local/share/jupyter/kernels/` and create a `kernel.json` file inside this new folder. The path for the `kernel.json` file should look something like `$HOME/.local/share/jupyter/kernels/example_kernel/kernel.json`. Inside the 'kernel.json' include the following:
 
-	{
-		"display_name": "<kernel_name>", 
-		"language": "python", 
-		"argv": [
-			"singularity", "exec", "<path/to/container/container.simg>", "<path/to/python_executable>", 
-			"-m", 
-			"IPython.kernel", 
-			"-f", 
-			"{connection_file}"
-			]
-	}
+```json
+{
+    "display_name": "<kernel_name>",
+    "language": "python",
+    "argv": [
+        "singularity", "exec", "<path/to/container/container.simg>", "<path/to/python_executable>",
+        "-m",
+        "IPython.kernel",
+        "-f",
+        "{connection_file}"
+        ]
+}
+```
 
-where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, <path/to/container/container.simg> is the path to the container you wish to use as a kernel, and the <path/to/python_executable> is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.simg>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
 
 ## Environment Modules
 
+Coming soon.
