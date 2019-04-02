@@ -98,7 +98,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 The runscript for this container is:
 
-```
+```text
 %runscript
 
     /anaconda3/bin/python "$@"
@@ -406,7 +406,7 @@ The recommended way to build a container for the Ilifu system is through using a
 
 Here is an example of the PINK container recipe, the recipe file is called `pink.def`:
 
-```
+```text
 Bootstrap: debootstrap
 MirrorURL: http://archive.ubuntu.com/ubuntu/
 OSVersion: xenial
