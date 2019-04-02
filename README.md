@@ -26,10 +26,10 @@ docsify serve ilifu_user_docs/docs
 
 By default this serves the pages to [http://localhost:3000](http://localhost:3000) in your web browser.
 
-If you wish to do some code linting you can install [markdown linter](https://github.com/markdownlint/markdownlint). Then run the command `mdl -s ./mdl.config docs` to check you code.
+If you wish to do some code linting you can install [markdown linter](https://github.com/markdownlint/markdownlint). Then run the command `mdl -s ./mdl.style docs` to check you code.
 
 ```console
-$ mdl -s ./mdl.config docs
+$ mdl -s ./mdl.style docs
 docs/_coverpage.md:1: MD041 First line in file should be a top level header
 docs/_sidebar.md:2: MD007 Unordered list indentation
 docs/_sidebar.md:1: MD041 First line in file should be a top level header
