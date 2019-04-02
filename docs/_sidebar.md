@@ -1,12 +1,12 @@
 - **About**
-    - [What is Ilifu?](about/what_is.md)
+  - [What is Ilifu?](about/what_is.md)
 - **Access**
-    - [Requesting time on the Ilifu Cluster](access/request_time.md)
+  - [Requesting time on the Ilifu Cluster](access/request_time.md)
 - **Cluster**
-    - [Running jobs on the cluster](cluster/running_jobs.md)
-    - [Supported software environments](cluster/software_environments.md)
-    - [Openstack flavours](openstack/flavours.md)
+  - [Running jobs on the cluster](cluster/running_jobs.md)
+  - [Supported software environments](cluster/software_environments.md)
+  - [Openstack flavours](openstack/flavours.md)
 - **Help and Info**
-    - [FAQ](help/faq.md)
-    - [Contact and Communication](help/contact.md)
-    - [Requesting Help](help/requesting_help.md)
+  - [FAQ](help/faq.md)
+  - [Contact and Communication](help/contact.md)
+  - [Requesting Help](help/requesting_help.md)
