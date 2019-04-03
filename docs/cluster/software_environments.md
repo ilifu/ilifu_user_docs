@@ -14,7 +14,7 @@ The container images that are maintained by the support team can be found at `/d
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
 
-```console
+```shell
 $ singularity shell /data/exp_soft/containers/casa-stable.img
 Singularity: Invoking an interactive shell within container...
 
@@ -27,7 +27,7 @@ This command will spawn a new shell inside the container, in this case the `casa
 
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
-```console
+```shell
 $ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg ~/hello_world.py
 hello world!
 $
@@ -37,7 +37,7 @@ This command will execute the script, `myscript.py`, using Python within the `so
 
 Similary,
 
-```console
+```shell
 $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
 
 =========================================
@@ -60,7 +60,7 @@ will execute `print 'hello world'` using the CASA software package that is conta
 
 The `exec` command can also be used to initiate an interative session. For example:
 
-```console
+```shell
 $ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
 
 =========================================
@@ -88,7 +88,7 @@ The above command will run the CASA software within the `casa-stable` container 
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
-```console
+```shell
 $ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
 Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
 [GCC 7.2.0] on linux
@@ -100,7 +100,6 @@ The runscript for this container is:
 
 ```text
 %runscript
-
     /anaconda3/bin/python "$@"
 ```
 
@@ -442,7 +441,7 @@ In the example above the operating system that is abstracted or seen from within
 
 In order to build the container from the recipe, the following command can be used:
 
-```console
+```shell
 # singularity build pink.simg pink.def
 Using container recipe deffile: pink.def
 Sanitizing environment
