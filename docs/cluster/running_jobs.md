@@ -33,8 +33,8 @@ The SLURM batch system can be accessed via `ssh` with private key to `slurm.ilif
 
 To do so, we must create a submit script.  In this example we will assume that the user is executing their analysis or data processing code using python.  We thus create a python script for each compute job called `casa_job_N.py`, where N represents the job number.  If you were working directly on your laptop you could run this script by running `python -c casa_job_N.py`.  However, since our script will be run on a worker node, we use a singularity container to encapsulate our environment and requisite software.  The simplest way to execute our python script is by prepending the `singularity exec` command:
 
-```console
-singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
+```shell
+$ singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
 ```
 
 To execute our (set of) scripts using the SLURM batch scheduler, you must create an additional SLURM submit script. This is a bash script that contains the above command, along with a set of parameters that instruct SLURM how to run the jobs:
@@ -56,7 +56,7 @@ The commented lines beginning with _#SBATCH_ are parsed by the SLURM to determin
 
 To submit this script to the job queue, run
 
-```console
+```bash
 sbatch casaslurm_N.sh
 ```
 
@@ -66,27 +66,28 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 No software or process should be run on the slurm headnode. For an interative session on the slurm cluster, without the use of a Jupyter notebook, the `srun` command can be used as follows:
 
-```console
-srun -N 1 --pty bash
+```shell
+username@lifu-slurm-login:~$ srun -N 1 --pty bash
+username@slwrk-027:~$
 ```
 
 This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you into one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
 
 For an interactive session with X11 forwarding, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into slurm with the `-XY` parameters which sets your DISPLAY variable for X11 forwarding, for example:
 
-```console
+```bash
 ssh -XY <username>@slurm.ilifu.ac.za
 ```
 
 From there, you can use `salloc` to allocate a slurm worker node to yourself, or you can use the above `srun` command to allocate a slurm worker node. In both cases, you can check the name of the worker node that has been allocated to you by running:
 
-```console
+```bash
 squeue
 ```
 
 Once you have deteremined the correct name of the worker node, you must ssh into the worker node with the `-XY` parameters, for example:
 
-```console
+```bash
 ssh -XY slwrk-020
 ```
 
