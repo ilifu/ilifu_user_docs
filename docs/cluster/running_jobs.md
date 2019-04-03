@@ -33,8 +33,8 @@ The SLURM batch system can be accessed via `ssh` with private key to `slurm.ilif
 
 To do so, we must create a submit script.  In this example we will assume that the user is executing their analysis or data processing code using python.  We thus create a python script for each compute job called `casa_job_N.py`, where N represents the job number.  If you were working directly on your laptop you could run this script by running `python -c casa_job_N.py`.  However, since our script will be run on a worker node, we use a singularity container to encapsulate our environment and requisite software.  The simplest way to execute our python script is by prepending the `singularity exec` command:
 
-```shell
-$ singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
+```bash
+singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
 ```
 
 To execute our (set of) scripts using the SLURM batch scheduler, you must create an additional SLURM submit script. This is a bash script that contains the above command, along with a set of parameters that instruct SLURM how to run the jobs:
