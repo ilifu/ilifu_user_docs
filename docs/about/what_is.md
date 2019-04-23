@@ -1,4 +1,4 @@
-## What is Ilifu?
+# What is Ilifu?
 
 Ilifu is a research computing facility focused on astronomy and bioinformatics
 which is managed by a consortium of institutions: **University of Cape Town (UCT)** (lead),
