@@ -6,7 +6,7 @@
   * `/data/projects/cbio/projects` - project spaces will be created in here
   * `/data/projects/cbio/dbs` - annotation and reference databases will go in here
   * `/data/projects/cbio/datasets` - mostly access controlled datasets will go in here e.g. SAHGP, Baylor, AGVP.
-  * `/ceph/cbio/soft` - some software that are needed to run workflows will be installed here, most over our other software will be encapsulated into images.
+  * `/ceph/cbio/soft` - some software that are needed to run workflows will be installed here, most of our other software will be encapsulated into singularity images.
   * `/data/projects/cbio/images` - singularity images that need to be shared would be stored here.
 
 Some things to note
