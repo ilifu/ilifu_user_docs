@@ -18,4 +18,5 @@ Some things to note
 Examples
 * [Running a Nextflow pipeline on the Ilifu standard SLURM setup](https://github.com/grbot/run-fastqc/tree/ilifu).
 
-[Future work and data requirements](http://web.cbio.uct.ac.za/~gerrit/slides/CBIO-Ilifu-compute-storage-and-transfer-setup.pdf)
+## Future work and data requirements
+* [CBIO/Ilifu compute, storage and transfer setup requirements](http://web.cbio.uct.ac.za/~gerrit/slides/CBIO-Ilifu-compute-storage-and-transfer-setup.pdf)
