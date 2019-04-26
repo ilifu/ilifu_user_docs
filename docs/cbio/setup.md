@@ -9,7 +9,7 @@
   * `/ceph/cbio/soft` - some software that are needed to run workflows will be installed here, most of our other software will be encapsulated into singularity images.
   * `/data/projects/cbio/images` - singularity images that need to be shared would be stored here.
 
-Some things to note
+Some things to note:
 * CBIO is allowed to use 400TB on the CephFS partition. There are no user, group or project restrictions in place currently.
 * Compute resource restrictions are not in place. There are plans to use [SLURM's fair-share factor](https://slurm.schedmd.com/priority_multifactor.html#fairshare)  to share resources according to initial funding been provided by astronomy, CBIO and DST respectively.
 * Currently there are only 1216 cores available on the standard SLURM cluster. This will probably be increased after the pilot phase.
