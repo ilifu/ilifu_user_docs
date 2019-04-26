@@ -2,7 +2,7 @@
 
 * User homes are in `/users/`. Not sure if this is being backed up, assume not.
 * CBIO users will be using the CephFS parallel file partition. The BeeGFS partitions are for the astronomer users. Our space is in `/ceph/cbio/`. Directories that have been setup
-  * `/ceph/cbio/users` - a user's private scratch space
+  * `/data/projects/cbio/users` - a user's private scratch space
   * `/data/projects/cbio/projects` - project spaces will be created in here
   * `/data/projects/cbio/dbs` - annotation and reference databases will go in here
   * `/data/projects/cbio/datasets` - mostly access controlled datasets will go in here e.g. SAHGP, Baylor, AGVP.
