@@ -7,7 +7,7 @@
   * `/ceph/cbio/dbs` - annotation and reference databases will go in here
   * `/ceph/cbio/datasets` - mostly access controlled datasets will go in here e.g. SAHGP, Baylor, AGVP.
   * `/ceph/cbio/soft` - some software that are needed to run workflows will be installed here, most over our other software will be encapsulated into images.
-  * `/ceph/cbio/images` - singularity images that need to be shared would be stored here.
+  * `/data/projects/cbio/images` - singularity images that need to be shared would be stored here.
 
 Some things to note
 * CBIO are allowed to use 400TB on the CephFS partition. There is no user, group or project restrictions in place currently.
