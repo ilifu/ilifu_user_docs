@@ -15,7 +15,7 @@ Some things to note
 * Currently there are only 1216 cores available on the standard SLURM cluster. This will probably be increased after the pilot phase.
 * CBIO can access an additional 320 cores on the OpenStack environment.
 
-Examples
+## Examples
 * [Running a Nextflow pipeline on the Ilifu standard SLURM setup](https://github.com/grbot/run-fastqc/tree/ilifu).
 
 ## Future work and data requirements
