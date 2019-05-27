@@ -2,7 +2,7 @@
 
 Please take note of the following best practices while using the ILIFU cloud computing services.
 
-## Do no run software on the SLURM head node.
+## Do not run software on the SLURM head node.
 
 When you ssh in to the SLURM cluster you will be on the SLURM head node. The purpose of the head node is to manage job submissions. Please do not run any software on the SLURM head node as this can reduce performance of the SLURM service and affect performance for other users. 
 
