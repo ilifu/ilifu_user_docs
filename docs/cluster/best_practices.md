@@ -2,6 +2,11 @@
 
 Please take note of the following best practices while using the ILIFU cloud computing services.
 
+1. The head node must only be used for submitting jobs to SLURM.
+2. Help the SLURM job scheduler by accurately identifying your job's resource requirements.
+3. Use job arrays where possible.
+4. Use Singularity containers on shared storage for your software.
+
 ## Do not run software on the SLURM head node.
 
 When you ssh in to the SLURM cluster you will be on the SLURM head node. The purpose of the head node is to manage job submissions. Please do not run any software on the SLURM head node as this can reduce performance of the SLURM service and affect performance for other users. 
