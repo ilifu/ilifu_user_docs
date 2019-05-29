@@ -15,6 +15,9 @@ The SLURM resource pool consists of a finite number of CPUs and memory. Please m
 
 ## When submitting multiples of the same job, consider using a SLURM job array
 
+A SLURM job array is useful if you are submitting multiple jobs at a time and the initial input for each job is the same, or can be indexed in some manner (such as a series of files like file_001, file_002, etc). Using an sbatch script, the `#SBATCH --array 0-100%10` parameter can be used. This creates an array of 100 jobs and submits the jobs in batches of 10. The environmental variable `{SLURM_ARRAY_TASK_ID}` can be used as an index in your script to differentiate between job inputs.
+
+The main benefit of using a job array is that once resources have been allocated to the job array the resources will remain dedicated until all the jobs are complete. This will remove the overhead of waiting in the SLURM queue for resources.
 
 ## You cannot install software on the nodes
 
