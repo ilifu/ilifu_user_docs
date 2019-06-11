@@ -1,7 +1,7 @@
 
-# Data management
+# Data Policies
 
-The following describes the directory structure and data migration process as related to the ILIFU data management policies.
+The following describes the directory structure as related to the ilifu data policies.
 
 ## Directory structure
 
@@ -13,7 +13,7 @@ Users' home directories are located in `/users/`. This directory is for users' s
 
 `/scratch/projects/<project_name>` is for data processing related to a project where multiple users will be involved in the data processing. `/scratch/projects/` directories are created on request.
 
-There are a number of groups within the ILIFU cloud computing community, including IDIA, CBIO and SANBI among others. For **medium- and long-term storage**, the directory structure has been broken down by group.
+There are a number of groups within the ilifu cloud computing community, including IDIA, CBIO and SANBI among others. For **medium- and long-term storage**, the directory structure has been broken down by group.
 
 Information relating to the CBIO group directory structure can be found [here](https://docs.ilifu.ac.za/#/cbio/setup).
 
@@ -29,5 +29,4 @@ Information relating to the CBIO group directory structure can be found [here](h
 
 `/idia/public` - data and data products available to all users are stored here.
 
-## Data migration
 
