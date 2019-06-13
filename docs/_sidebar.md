@@ -4,6 +4,7 @@
   - [Requesting time on the Ilifu Cluster](access/request_time.md)
 - **Cluster**
   - [Best practices](cluster/best_practices.md)
+  - [Data Policy & Directory Structure](data/data_management.md)
   - [Running jobs on the cluster](cluster/running_jobs.md)
   - [Supported software environments](cluster/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
