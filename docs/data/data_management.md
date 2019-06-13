@@ -21,7 +21,7 @@ Information relating to the CBIO group directory structure can be found [here](h
 
 `/idia/` - the base directory for all IDIA related projects.
 
-`/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
+`/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
 
 `/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures.
 
