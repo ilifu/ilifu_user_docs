@@ -19,6 +19,8 @@ Information relating to the CBIO group directory structure can be found [here](h
 
 ### IDIA directory structure
 
+**NOTE: we're in the process of moving to the following directory structure. During this process some directories will still exist at /data/. We will contact project groups directly as project folders are moved to the new directory structure.**
+
 `/idia/` - the base directory for all IDIA related projects.
 
 `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
