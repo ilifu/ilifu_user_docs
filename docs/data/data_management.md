@@ -31,4 +31,18 @@ Information relating to the CBIO group directory structure can be found [here](h
 
 `/idia/public` - data and data products available to all users are stored here.
 
+### CBIO directory structure
+
+User homes are in `/users/`. This is not currently backed up
+
+CBIO users will be using the CephFS parallel file partition — our space is in `/cbio/`. Directories that have been setup:
+* `/cbio/users` - a user's private scratch space. Limited to 5TB. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/cbio/setup#data-management-plan-for-projects) in regard to data management plan for projects. 
+* `/cbio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as scripts , are stored here. 
+* `/cbio/dbs` - general-purpose annotation and reference databases are stored here. Most `dbs` will be open but some may be accessed controlled e.g in `/cbio/dbs/refpanels/`.
+* `/cbio/datasets` - Access controlled datasets are stored here e.g. SAHGP, Baylor, AGVP.
+* `/cbio/soft` - Software that is needed to run workflows is installed here; most of our other software will be encapsulated into singularity images.
+* `/cbio/images` - shared singularity images are stored here.
+
+Please note the [restrictions](/cbio/setup#restrictions).
+
 
