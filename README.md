@@ -11,7 +11,7 @@ available here over time.
 If you want to contribute to the documentation, follow the steps below:
 
 1. Fork/clone the repository.
-2. Create a branch for your changes
+2. Create a branch for your changes.
 3. Navigate to the `docs` directory
 4. If you want to make a new category, create a directory with it's name, otherwise create a new file such as `<topic_name_here>.md` under the directory which is most appropriate for it.
    - You can fill this `.md` page with the content of the documentation you want to write.
