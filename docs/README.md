@@ -3,7 +3,6 @@ Ilifu User Documentation
 
 Welcome to the Ilifu user documentation repository.
 
-This site will become the top node of the knowledge base relating to the technical use of the Ilifu facility with information on systems and services.
+This user documentation site guides users on technical and procedural aspects relating to the use of the Ilifu cloud computing facility.
 
-The information on this site is sparse currently as the site is **UNDER CONSTRUCTION**.
-
+The Ilifu project website may be found at https://www.ilifu.ac.za
