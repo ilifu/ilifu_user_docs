@@ -1,7 +1,10 @@
 - **About**
   - [What is Ilifu?](about/what_is.md)
 - **Getting Started**
-  - [Requesting time on the Ilifu Cluster](getting_started/request_time.md)
+  - [Request access](getting_started/request_access.md)
+  - [SSH keys](getting_started/ssh.md)
+  - [Accessing the ilifu services](getting_started/access_ilifu.md)
+  - [Change your password](getting_started/change_password.md)
 - **Technical Documentation**
   - [System Specifications](tech_docs/specifications.md)
   - [Best practices](tech_docs/best_practices.md)
