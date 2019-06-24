@@ -1,12 +1,13 @@
 - **About**
   - [What is Ilifu?](about/what_is.md)
-- **Access**
-  - [Requesting time on the Ilifu Cluster](access/request_time.md)
-- **Cluster**
-  - [Best practices](cluster/best_practices.md)
+- **Getting Started**
+  - [Requesting time on the Ilifu Cluster](getting_started/request_time.md)
+- **Technical Documentation**
+  - [System Specifications](tech_docs/specifications.md)
+  - [Best practices](tech_docs/best_practices.md)
   - [Data Policy & Directory Structure](data/data_management.md)
-  - [Running jobs on the cluster](cluster/running_jobs.md)
-  - [Supported software environments](cluster/software_environments.md)
+  - [Running jobs on the cluster](tech_docs/running_jobs.md)
+  - [Supported software environments](tech_docs/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
   - [CBIO](cbio/setup.md)
 - **Help and Info**
