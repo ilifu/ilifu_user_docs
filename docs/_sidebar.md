@@ -1,5 +1,3 @@
-- **About**
-  - [What is Ilifu?](about/what_is.md)
 - **Getting Started**
   - [Request access](getting_started/request_access.md)
   - [SSH keys](getting_started/ssh.md)
@@ -17,3 +15,5 @@
   - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
   - [Requesting Help](help/requesting_help.md)
+- **About**
+  - [What is Ilifu?](about/what_is.md)
