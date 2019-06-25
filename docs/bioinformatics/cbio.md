@@ -1,10 +1,10 @@
 ## CBIO setup
 
-## Directory Structure
+### Directory Structure
 
 Please read [CBIO Directory Structure](/data/data_management#CBIO-directory-structure) to see how your data should be organised.
 
-## Restrictions
+### Restrictions
 
 Some things to note:
 * CBIO is allowed to use 400TB on the CephFS partition. There are currently no user, group or project restrictions in place.
