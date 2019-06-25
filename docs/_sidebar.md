@@ -10,7 +10,7 @@
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
-  - [CBIO](cbio/setup.md)
+  - [Bioinformatics](bioinformatics/cbio.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
