@@ -15,8 +15,6 @@ Users' home directories are located in `/users/`. This directory is for users' s
 
 There are a number of groups within the ilifu cloud computing community, including IDIA, CBIO and SANBI among others. For **medium- and long-term storage**, the directory structure has been broken down by group.
 
-Information relating to the CBIO group directory structure can be found [here](https://docs.ilifu.ac.za/#/cbio/setup).
-
 ### IDIA directory structure
 
 **NOTE: we're in the process of moving to the following directory structure. During this process some directories will still exist at /data/. We will contact project groups directly as project folders are moved to the new directory structure.**
