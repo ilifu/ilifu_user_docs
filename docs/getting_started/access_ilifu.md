@@ -1,8 +1,8 @@
 # Logging in to ilifu services
 
-There are two main ilifu service platforms, including the SLURM batch schedular and JupyterLab.
+There are two main ilifu service platforms, including the SLURM batch scheduler and JupyterLab.
 
-## SLURM batch schedular
+## SLURM batch scheduler
 
 SLURM is a job scheduling system. It consists of a single head node and many worker nodes. The head node is likened to a controller and manages the cluster resources and job submissions. 
 

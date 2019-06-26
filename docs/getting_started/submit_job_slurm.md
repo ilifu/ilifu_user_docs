@@ -4,7 +4,7 @@ Two common ways to run jobs on SLURM include submitting jobs using a batch scrip
 
 ## Submitting a job using a batch script.
 
-After `sshing` in to `slurm.ilifu.ac.za`, you can submit a job using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
+After `ssh'ing` in to `slurm.ilifu.ac.za`, you can submit a job using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
 
 Let us assume that you are trying to run a python script, `myscript.py` with the following contents:
 
