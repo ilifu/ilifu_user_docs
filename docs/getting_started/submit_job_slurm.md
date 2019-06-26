@@ -29,16 +29,12 @@ singularity exec /data/exp_soft/containers/SF-PY3-bionic.simg python myscript.py
 
 The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. Other useful parameters include (see **man sbatch** for further information):
 
-<details>
-
 | Syntax                      | Meaning                                   | 
 |-----------------------------|-------------------------------------------|
 | --ntasks=<number>           | Number of processes to run (default is 1) | 
 | --mem=<number>              | Total memory per node                     | 
 | --mem-per-cpu=<number>      | Memory per processor core                 | 
 | --partition=<partition_name>| Request specific partition/queue          | 
-
-</details>
 
 In the shell script, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/SF-PY3-bionc.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `SF-PY3-bionic.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
 
@@ -93,14 +89,12 @@ Please only use this method for viewing GUI and visualization tools, and do not 
 
 Note that when using an interactive shell in SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose your network connection. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. However, when using `tmux`, please make sure to exit the `tmux` session in order to release the resources back to the SLURM pool. Basic `tmux` commands include: 
 
-<details>
-
 | Syntax/keyboard shortcut      | Action                                    | 
 |-------------------------------|-------------------------------------------|
 | tmux                          | start new tmux session                    | 
 | tmux ls                       | list currently active tmux sessions       | 
 | tmux attach -t <session_name> | attach to an active tmux session          | 
 | ctrl/cmd-b + d                | detach from current tmux session          | 
-| ctrl/cmb-b + [                | scroll current terminal                   |
+| ctrl/cmd-b + [                | scroll current terminal                   |
 
-</details>
+
