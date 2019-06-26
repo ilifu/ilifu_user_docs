@@ -1,4 +1,4 @@
-# Submitting jobs to be run on the Ilifu cluster
+# Submitting jobs to be run on the ilifu cluster
 
 There are several methods to run jobs on Ilifu.
 

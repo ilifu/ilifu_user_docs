@@ -3,6 +3,11 @@
   - [SSH keys](getting_started/ssh.md)
   - [Accessing the ilifu services](getting_started/access_ilifu.md)
   - [Change your password](getting_started/change_password.md)
+  - [Software containers](getting_started/container_environments.md)
+  - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
+  - [Getting help](getting_started/getting_help.md)
+  - [Best Practices](tech_docs/best_practices.md)
+  - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
   - [System Specifications](tech_docs/specifications.md)
   - [Best practices](tech_docs/best_practices.md)

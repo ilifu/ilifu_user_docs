@@ -1,6 +1,6 @@
 # Supported Software Environments
 
-For Astronomy, IDIA provides a number of supported software environments on Ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
+For Astronomy, IDIA provides a number of supported software environments on ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
 
 ## Singularity Containers
 
@@ -28,7 +28,7 @@ This command will spawn a new shell inside the container, in this case the `casa
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
 ```shell
-$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg ~/hello_world.py
+$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
 hello world!
 $
 ```
