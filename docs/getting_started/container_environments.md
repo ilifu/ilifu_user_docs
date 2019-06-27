@@ -52,7 +52,7 @@ hello world
 $
 ```
 
-will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container.
+will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is widely used to submit jobs on SLURM. 
 
 The `exec` command can also be used to initiate an interative session. For example:
 
