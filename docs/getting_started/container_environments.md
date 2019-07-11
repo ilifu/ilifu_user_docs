@@ -2,7 +2,7 @@
 
 Containers are unit software packages that contain all the software, files, libraries, dependencies and environmental variables necessary to run a particular task or workflow. Containers are encapsulated software environments and abstract the software and applications from the underlying operating system. This allows users to run workflows in customized environments, switch between environments, and to share these environments with colleagues and research teams.
 
-The container images that are maintained by the support team can be found at `/data/exp_soft/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
+The container images that are maintained by the support team can be found at `/idia/software/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
 
 **Note:** singularity is not installed on the SLURM headnode and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `srun` command for interactively running a job on a worker node.
 
@@ -11,7 +11,7 @@ The container images that are maintained by the support team can be found at `/d
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
 
 ```shell
-$ singularity shell /data/exp_soft/containers/casa-stable.img
+$ singularity shell /idia/software/containers/casa-stable.img
 Singularity: Invoking an interactive shell within container...
 
 Singularity casa-stable-5.1.1.img:~>
@@ -24,7 +24,7 @@ This command will spawn a new shell inside the container, in this case the `casa
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
 ```shell
-$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
+$ singularity exec /idia/software/containers/sourcefinding_py3.simg python myscript.py
 hello world!
 $
 ```
@@ -34,7 +34,7 @@ This command will execute the script, `myscript.py`, using Python within the `so
 Similary,
 
 ```shell
-$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
+$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
 
 =========================================
 The start-up time of CASA may vary
@@ -57,7 +57,7 @@ will execute `print 'hello world'` using the CASA software package that is conta
 The `exec` command can also be used to initiate an interative session. For example:
 
 ```shell
-$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
+$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 
 =========================================
 The start-up time of CASA may vary

@@ -8,14 +8,14 @@ Containers are unit software packages that contain all the software, files, libr
 
 ### Using a container
 
-The container images that are maintained by the support team can be found at `/data/exp_soft/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
+The container images that are maintained by the support team can be found at `/idia/software/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
 
 #### 1. Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
 
 ```shell
-$ singularity shell /data/exp_soft/containers/casa-stable.img
+$ singularity shell /idia/software/containers/casa-stable.img
 Singularity: Invoking an interactive shell within container...
 
 Singularity casa-stable-5.1.1.img:~>
@@ -28,7 +28,7 @@ This command will spawn a new shell inside the container, in this case the `casa
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
 ```shell
-$ singularity exec /data/exp_soft/containers/sourcefinding_py3.simg python myscript.py
+$ singularity exec /idia/software/containers/sourcefinding_py3.simg python myscript.py
 hello world!
 $
 ```
@@ -38,7 +38,7 @@ This command will execute the script, `myscript.py`, using Python within the `so
 Similary,
 
 ```shell
-$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
+$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
 
 =========================================
 The start-up time of CASA may vary
@@ -61,7 +61,7 @@ will execute `print 'hello world'` using the CASA software package that is conta
 The `exec` command can also be used to initiate an interative session. For example:
 
 ```shell
-$ singularity exec /data/exp_soft/containers/casa-stable.img casa --log2term --nologger
+$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 
 =========================================
 The start-up time of CASA may vary
@@ -89,7 +89,7 @@ The above command will run the CASA software within the `casa-stable` container 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
 ```shell
-$ singularity run /data/exp_soft/containers/sourcefinding_py3.simg
+$ singularity run /idia/software/containers/SF-PY3-bionic.simg
 Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
 [GCC 7.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -105,7 +105,7 @@ The runscript for this container is:
 
 Running this container using the `run` command will initialize a container session and open the Python package (from Anaconda3 in this case) contained within the container, allowing the user to run python commands interactively. However, as soon as the Python command line is exited the container session is closed.
 
-A number of the containers that are supported by Ilifu do not include runscripts and therefore cannot be used using the `run` command.
+A number of the containers that are supported by ilifu do not include runscripts and therefore cannot be used using the `run` command.
 
 ### Available containers
 
@@ -397,11 +397,11 @@ Packages installed in during the update:
 
 ### Building your own container
 
-In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the Ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the Ilifu system where it can be utilized.
+In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized.
 
 There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#).
 
-The recommended way to build a container for the Ilifu system is through using a recipe. A recipe allows for reproducability of the container environment and allows for containers to be more easily referenced in research publications. Recipes define the way a container is built, which OS system is abstracted from within the container, and what files, libraries, packages and environmental variables and dependencies are included in the container.
+The recommended way to build a container for the ilifu system is through using a recipe. A recipe allows for reproducability of the container environment and allows for containers to be more easily referenced in research publications. Recipes define the way a container is built, which OS system is abstracted from within the container, and what files, libraries, packages and environmental variables and dependencies are included in the container.
 
 Here is an example of the PINK container recipe, the recipe file is called `pink.def`:
 
@@ -461,7 +461,7 @@ I: Validating apt 1.2.10ubuntu1
 ...
 ```
 
-This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the Ilifu cloud and run using the `shell` or `exec` command.
+This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the ilifu cloud and run using the `shell` or `exec` command.
 
 ### Using a custom container as a Jupyter kernel
 

@@ -1,9 +1,6 @@
-
-# Data Policies
+# Directory structure
 
 The following describes the directory structure as related to the ilifu data policies.
-
-## Directory structure
 
 Users' home directories are located in `/users/`. This directory is for users' scripts. No large files should be stored in `/users/`. It is recommended that users make use of a repository such as Github to backup scripts and files.
 
@@ -27,7 +24,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/cluster/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
 
-`/idia/public` - data and data products available to all users are stored here.
+`/idia/data/public` - public data and data products available to all users are stored here.
 
 ### CBIO directory structure
 

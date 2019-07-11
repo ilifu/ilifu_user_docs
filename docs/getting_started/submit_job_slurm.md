@@ -61,9 +61,9 @@ No software or process should be run on the SLURM headnode. Interactive jobs can
 	username@slwrk-027:~$
 ```
 
-This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will ssh you into one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
+This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will place you on one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
 
-For an interactive session with X11 forwarding, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into SLURM with the `-Y` parameter which sets your DISPLAY variable for trusted X11 forwarding, and the `-A` parameter for forwarding the authentication agent connection, for example:
+For an interactive session with `X11 forwarding`, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into SLURM with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, and the `-A` parameter for forwarding the authentication agent connection, for example:
 
 ```bash
 	$ ssh -AY <username>@slurm.ilifu.ac.za
@@ -75,7 +75,7 @@ From there, you can use `salloc` to allocate a SLURM worker node to yourself, or
 	$ squeue
 ```
 
-Once you have determined the correct name of the worker node, you must ssh into the worker node with the `-Y` parameter, for example:
+This will show a list of the current jobs running. You should be able to see the name of the SLURM worker node that has been allocated to your username. Once you have determined the correct name of the worker node, you must ssh into the worker node with the `-Y` parameter to carry the X11 forwarding to the SLURM worker node, for example:
 
 ```bash
 	$ ssh -Y slwrk-020

@@ -3,6 +3,7 @@
   - [SSH keys](getting_started/ssh.md)
   - [Accessing the ilifu services](getting_started/access_ilifu.md)
   - [Change your password](getting_started/change_password.md)
+  - [Directory structure](data/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
   - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
   - [Getting help](getting_started/getting_help.md)
@@ -11,7 +12,7 @@
 - **Technical Documentation**
   - [System Specifications](tech_docs/specifications.md)
   - [Best practices](tech_docs/best_practices.md)
-  - [Data Policy & Directory Structure](data/data_management.md)
+  - [Directory Structure](data/directory_structure.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
@@ -21,4 +22,4 @@
   - [Contact and Communication](help/contact.md)
   - [Requesting Help](help/requesting_help.md)
 - **About**
-  - [What is Ilifu?](about/what_is.md)
+  - [What is ilifu?](about/what_is.md)
