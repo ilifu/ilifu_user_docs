@@ -4,7 +4,7 @@ Two common ways to run jobs on SLURM include submitting jobs using a batch scrip
 
 ## Submitting a job using a batch script.
 
-After `ssh'ing` in to `slurm.ilifu.ac.za`, you can submit a job using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
+After `sshing` in to `slurm.ilifu.ac.za`, you can submit a job to SLURM using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
 
 Let us assume that you are trying to run a python script, `myscript.py` with the following contents:
 
@@ -27,7 +27,7 @@ echo "Submitting SLURM job"
 singularity exec /data/exp_soft/containers/SF-PY3-bionic.simg python myscript.py
 ```
 
-The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. Other useful parameters include (see **man sbatch** for further information):
+The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. Other useful parameters include (run the  **man sbatch** command to see additional parameters):
 
 | Syntax                      | Meaning                                   | 
 |-----------------------------|-------------------------------------------|
@@ -36,7 +36,7 @@ The parameters that follow `#SBATCH` indicate the requested resources and other 
 | --mem-per-cpu=<number>      | Memory per processor core                 | 
 | --partition=<partition_name>| Request specific partition/queue          | 
 
-In the shell script, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/SF-PY3-bionc.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `SF-PY3-bionic.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
+In the shell script above, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/SF-PY3-bionc.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `SF-PY3-bionic.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
 
 The next step is to run the shell script using the SLURM `sbatch` command:
 
@@ -50,18 +50,22 @@ This will submit the job to the SLURM queue. If the requested resources are avai
 	$ squeue
 ```
 
-If any errors occur while running the job, you can view the logs in the `logs/testjob.log`, indicated by the shell script, to debug.
+If any errors occur while running the job, you can view the logs in the `logs/testjob.log`, as described by the shell script, to debug.
 
 ## Interactive SLURM session
 
-No software or process should be run on the SLURM headnode. Interactive jobs can be used for testing and developing code. For an interative session on the SLURM cluster the `srun` command can be used as follows:
+No software or process should be run on the SLURM headnode. Interactive jobs are useful for testing and developing code. For an interative session on the SLURM cluster the `srun` command can be used as follows:
 
 ```shell
 	username@slurm-login:~$ srun -N 1 --pty bash
 	username@slwrk-027:~$
 ```
 
+<<<<<<< HEAD
 This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will place you on one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
+=======
+This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will ssh you into one of the allocated worker nodes. Run the **man srun** command to see additional parameters.  A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
+>>>>>>> f8ac5714413e966b0935f357d002d736297027f3
 
 For an interactive session with `X11 forwarding`, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into SLURM with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, and the `-A` parameter for forwarding the authentication agent connection, for example:
 

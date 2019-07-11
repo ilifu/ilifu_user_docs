@@ -1,4 +1,4 @@
-# Logging in to ilifu services
+# Logging in to the ilifu services
 
 There are two main ilifu service platforms, including the SLURM batch scheduler and JupyterLab.
 
@@ -12,7 +12,7 @@ The SLURM system can be accessed via `ssh` at `slurm.ilifu.ac.za`.
 $ ssh <username>@slurm.ilifu.ac.za
 ```
 
-This will place the user on the head node. Note that this node should only be used to submit and manage jobs and not for running code or software directly. This node does not have significant resources and will likely crash under heavy usage.
+This will place the user on the head node. Note that this node should only be used to submit and manage jobs and not for running code or software directly. The worker nodes are where jobs are run, either through submitting a batch script that describes the job to be executed, or interactively running applications on a worker node. See [Submitting a job on SLURM](getting_started/submit_job_slurm.md) for more information on how to do this.
 
 
 ## JupyterLab
