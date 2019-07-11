@@ -1,1 +1,0 @@
-../bioinformatics/cbio.md
