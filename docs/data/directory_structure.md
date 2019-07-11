@@ -16,15 +16,15 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 **NOTE: we're in the process of moving to the following directory structure. During this process some directories will still exist at /data/. We will contact project groups directly as project folders are moved to the new directory structure.**
 
-`/idia/` - the base directory for all IDIA related projects.
+* `/idia/` - the base directory for all IDIA related projects.
 
-`/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
+* `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
 
-`/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures.
+* `/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures.
 
-`/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/cluster/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
+* `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/cluster/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
 
-`/idia/data/public` - public data and data products available to all users are stored here.
+* `/idia/data/public` - public data and data products available to all users are stored here.
 
 ### CBIO directory structure
 
