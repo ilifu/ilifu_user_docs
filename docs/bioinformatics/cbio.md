@@ -2,7 +2,7 @@
 
 ### Directory Structure
 
-Please read [CBIO Directory Structure](/data/data_management#CBIO-directory-structure) to see how your data should be organised.
+Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-structure) to see how your data should be organised.
 
 ### Restrictions
 
