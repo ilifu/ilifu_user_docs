@@ -4,7 +4,7 @@ There are several methods to run jobs on Ilifu.
 
 1. Users may get access to a Jupyter Lab spawner mechanism on the cluster. This provides a Jupyter lab environment where users select what size compute node they need to run. This is a good environment for users to experiment with code and visualise certain results. This environment will be made available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. Users can login to the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
+2. Users can log into the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 3. Selected users will be given access to the OpenStack dashboard in order to have full control over the setup of a computing environment. This is available at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za)
 
@@ -14,7 +14,7 @@ There are several methods to run jobs on Ilifu.
 
 The jupyter spawner can be accessed via web browser at `https://jupyter.ilifu.ac.za`.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.
 
-After logging in to the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
+After logging into the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
 ![dropdown](http://docs.ilifu.ac.za/_media/profile_dropdown_options.png)
 
 Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, so when a new jupyter server is spawned the workspace is recreated. Some data is also persisted in the notebook file. A user can terminate the server in order to free up resources on the cloud, or to choose a different node type.  This is done by choosing the 'hub' option from the top menu bar of JupyterLab,
