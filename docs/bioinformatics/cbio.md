@@ -20,6 +20,7 @@ Some things to note:
 
 ### Examples
 * [Running a Nextflow pipeline on the ilifu standard SLURM setup](https://github.com/grbot/run-fastqc/tree/ilifu).
+* [Launching RStudio in a SLURM job](/tech_docs/software_environments#rstudio-bio-container)
 
 ### Future work and data requirements
 * [CBIO/ilifu compute, storage and transfer setup requirements](http://web.cbio.uct.ac.za/~gerrit/slides/CBIO-Ilifu-compute-storage-and-transfer-setup.pdf).
