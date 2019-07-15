@@ -61,11 +61,7 @@ No software or process should be run on the SLURM headnode. Interactive jobs are
 	username@slwrk-027:~$
 ```
 
-<<<<<<< HEAD
-This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will place you on one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
-=======
 This will allocate a number of compute nodes specified by the `-N` parameter (default is 1), and will ssh you into one of the allocated worker nodes. Run the **man srun** command to see additional parameters.  A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
->>>>>>> f8ac5714413e966b0935f357d002d736297027f3
 
 For an interactive session with `X11 forwarding`, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into SLURM with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, and the `-A` parameter for forwarding the authentication agent connection, for example:
 
