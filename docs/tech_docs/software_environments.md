@@ -395,74 +395,6 @@ Packages installed in during the update:
 
 </details>
 
-<details>
-<summary id="rstudio-bio-container">R / RStudio containers</summary>
-
-The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
-the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg`. The examples below will be given for the bio container.
-
-
-#### Running R
-It is recommended that the following script be created `~/bin/R` (remember to `chmod u+x ~/bin/R`):
-```bash
-#!/bin/bash
-export R_INSTALL_STAGED=false
-singularity run --app R /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
-``` 
-<sup>* See the note below on installing packages</sup>
-
-This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
-
-#### Running Rscript
-Similarly you should create the script `~/bin/Rscript`:
-```bash
-#!/bin/bash
-export R_INSTALL_STAGED=false
-singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
-```
-<sup>* See the note below on installing packages</sup>
-
-#### Running RStudio Server
-Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
-```bash
-Host *.ilifu.ac.za
-    User USERNAME
-    ForwardAgent yes
-    ForwardX11   yes
-
-Host slwrk-*
-    Hostname %h
-    ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
-```
-One should substitute in your ilifu `USERNAME` in the above script.
-
-Next is the process of starting an interactive job and launching RStudio. To begin start an interactive job – below is an example of launching a single node / 4 core job with 32Gb of ram:
-```console
-USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
-USERNAME@slwrk-103:~$
-```
-Once the interactive session has begun on a specific node (in this case `slwrk-103`), RStudio can be launched as follows:
-```console
-USERNAME@slwrk-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg
-Running rserver on port 37543
-```
-This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
-```bash
-$ ssh slwrk-103 -L8082:localhost:37543
-```
-on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `slwrk-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
-```bash
-bind [127.0.0.1]:8000: Address already in use
-channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
-```
-Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
-
-*Note on installing packages
-The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
-
-
-</details>
-
 ### Building your own container
 
 In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized.
@@ -552,6 +484,70 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 ```
 
 where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.simg>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+
+### RStudio
+
+The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
+the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg`. The examples below will be given for the bio container.
+
+
+#### Running R
+It is recommended that the following script be created `~/bin/R` (remember to `chmod u+x ~/bin/R`):
+```bash
+#!/bin/bash
+export R_INSTALL_STAGED=false
+singularity run --app R /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
+``` 
+<sup>* See the note below on installing packages</sup>
+
+This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
+
+#### Running Rscript
+Similarly you should create the script `~/bin/Rscript`:
+```bash
+#!/bin/bash
+export R_INSTALL_STAGED=false
+singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
+```
+<sup>* See the note below on installing packages</sup>
+
+#### Running RStudio Server
+Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
+```bash
+Host *.ilifu.ac.za
+    User USERNAME
+    ForwardAgent yes
+    ForwardX11   yes
+
+Host slwrk-*
+    Hostname %h
+    ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
+```
+One should substitute in your ilifu `USERNAME` in the above script.
+
+Next is the process of starting an interactive job and launching RStudio. To begin start an interactive job – below is an example of launching a single node / 4 core job with 32Gb of ram:
+```console
+USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
+USERNAME@slwrk-103:~$
+```
+Once the interactive session has begun on a specific node (in this case `slwrk-103`), RStudio can be launched as follows:
+```console
+USERNAME@slwrk-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg
+Running rserver on port 37543
+```
+This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
+```bash
+$ ssh slwrk-103 -L8082:localhost:37543
+```
+on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `slwrk-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
+```bash
+bind [127.0.0.1]:8000: Address already in use
+channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
+```
+Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
+
+*Note on installing packages
+The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
 ## Environment Modules
 
