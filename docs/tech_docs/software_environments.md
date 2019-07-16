@@ -517,10 +517,11 @@ Should you wish to use RStudio Server the process is slightly more complicated â
 Host *.ilifu.ac.za
     User USERNAME
     ForwardAgent yes
-    ForwardX11   yes
 
 Host slwrk-*
     Hostname %h
+    User USERNAME
+    StrictHostKeyChecking no
     ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
 ```
 One should substitute in your ilifu `USERNAME` in the above script.
