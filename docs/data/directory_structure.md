@@ -22,7 +22,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 * `/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures.
 
-* `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/cluster/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
+* `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/tech_docs/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
 
 * `/idia/data/public` - public data and data products available to all users are stored here.
 

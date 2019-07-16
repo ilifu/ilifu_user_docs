@@ -11,7 +11,7 @@ Please take note of the following best practices while using the ILIFU cloud com
 
 When you ssh into the SLURM cluster you will be on the SLURM head node. The purpose of the head node is to manage job submissions. Please do not run any software on the SLURM head node as this can reduce performance of the SLURM service and affect performance for other users. 
 
-To submit jobs to the SLURM job queue use either [srun](https://docs.ilifu.ac.za/#/cluster/running_jobs?id=_3-interactive-sessions) or [sbatch](https://docs.ilifu.ac.za/#/cluster/running_jobs?id=_2-slurm-batch-scheduler) commands, or use the [srun](https://docs.ilifu.ac.za/#/cluster/running_jobs?id=_3-interactive-sessions) command to allocate a worker node for an interactive session.
+To submit jobs to the SLURM job queue use either [srun](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_3-interactive-sessions) or [sbatch](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_2-slurm-batch-scheduler) commands, or use the [srun](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_3-interactive-sessions) command to allocate a worker node for an interactive session.
 
 
 ## Identify the minimum resources that are required for your job
