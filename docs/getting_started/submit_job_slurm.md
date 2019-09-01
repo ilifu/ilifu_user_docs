@@ -99,7 +99,7 @@ Note that when using an interactive shell on SLURM by using the `srun` command, 
 |----------------------------------------|-------------------------------------------|
 | tmux                                   | start new tmux session                    | 
 | tmux ls                                | list currently active tmux sessions       | 
-| tmux attach -t &#60;<session_name>&#62;| attach to an active tmux session          | 
+| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          | 
 | ctrl/cmd-b + d                         | detach from current tmux session          | 
 | ctrl/cmd-b + [                         | scroll current terminal                   |
 
