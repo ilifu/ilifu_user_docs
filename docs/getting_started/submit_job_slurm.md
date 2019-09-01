@@ -95,13 +95,13 @@ This will run the Python script `myscript.py` using the SF-PY3-bionic container 
 
 Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include: 
 
-| Syntax/keyboard shortcut        | Action                                    | 
-|---------------------------------|-------------------------------------------|
-| tmux                            | start new tmux session                    | 
-| tmux ls                         | list currently active tmux sessions       | 
-| tmux attach -t \<session_name> | attach to an active tmux session          | 
-| ctrl/cmd-b + d                  | detach from current tmux session          | 
-| ctrl/cmd-b + [                  | scroll current terminal                   |
+| Syntax/keyboard shortcut                   | Action                                    | 
+|--------------------------------------------|-------------------------------------------|
+| tmux                                       | start new tmux session                    | 
+| tmux ls                                    | list currently active tmux sessions       | 
+| tmux attach -t <code><session_name></code> | attach to an active tmux session          | 
+| ctrl/cmd-b + d                             | detach from current tmux session          | 
+| ctrl/cmd-b + [                             | scroll current terminal                   |
 
 An example work flow for an interactive session can be described as follows:
 * login in to slurm login node
