@@ -2,7 +2,7 @@
 
 Two common ways to run jobs on SLURM include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. **Please note that no software should be run on the SLURM head node (login node).**
 
-## Submitting a job using a batch script.
+## Submitting a job using a batch script
 
 After `sshing` into `slurm.ilifu.ac.za`, you can submit a job to SLURM using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
 
@@ -99,7 +99,7 @@ Note that when using an interactive shell on SLURM by using the `srun` command, 
 |---------------------------------|-------------------------------------------|
 | tmux                            | start new tmux session                    | 
 | tmux ls                         | list currently active tmux sessions       | 
-| tmux attach -t \<session_name\> | attach to an active tmux session          | 
+| tmux attach -t \<session_name> | attach to an active tmux session          | 
 | ctrl/cmd-b + d                  | detach from current tmux session          | 
 | ctrl/cmd-b + [                  | scroll current terminal                   |
 
