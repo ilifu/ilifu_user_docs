@@ -93,38 +93,75 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 ## 3. Interactive Sessions
 
-No software or process should be run on the slurm headnode. For an interative session on the slurm cluster, without the use of a Jupyter notebook, the `srun` command can be used as follows:
+**No software should be run on the SLURM head node.** Interactive jobs are useful for testing and developing code. 
+
+### 3.1 Interactive session without X11 support
+
+For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM head node:
 
 ```shell
-username@lifu-slurm-login:~$ srun -N 1 --pty bash
-username@slwrk-027:~$
+	$ srun --pty bash
 ```
 
-This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you into one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
+This will place you in an interactive shell (bash) session on a compute node. The `--pty` parameter provides a psuedo-terminal which allows interactivity. The default resources allocated by the `srun` command are 1 task, 1 CPU and 8 GB RAM. Run the `srun --help` command to see additional parameters. Similar parameters to the sbatch script above can be used to define the resources allocated to your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session, or utilizing Nextflow.
 
-For an interactive session with X11 forwarding, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into slurm with the `-XY` parameters which sets your DISPLAY variable for trusted X11 forwarding, and the `-A` parameter for forwarding the authentication agent connection, for example:
+You are able to directly run Singularity containers or software within containers using the srun command, for example: 
+
+```shell
+	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
+```
+
+This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
+
+```shell
+	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
+```
+
+Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
+
+```shell
+	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
+```
+
+This will run the Python script `myscript.py` using the SF-PY3-bionic container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
+
+Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include: 
+
+| Syntax/keyboard shortcut               | Action                                    | 
+|----------------------------------------|-------------------------------------------|
+| tmux                                   | start new tmux session                    | 
+| tmux ls                                | list currently active tmux sessions       | 
+| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          | 
+| ctrl/cmd-b + d                         | detach from current tmux session          | 
+| ctrl/cmd-b + [                         | scroll current terminal                   |
+
+An example work flow for an interactive session can be described as follows:
+* login in to slurm login node
+* run tmux (or screen)
+* use the srun command to allocate yourself a compute node, describing your required resources
+* open a Singularity container and run your software.
+
+### 3.2 Interactive session with X11 support
+
+In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM head node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` for example:
 
 ```bash
-ssh -AXY <username>@slurm.ilifu.ac.za
+	$ ssh -Y <username>@slurm.ilifu.ac.za
 ```
 
-From there, you can use `salloc` to allocate a slurm worker node to yourself, or you can use the above `srun` command to allocate a slurm worker node. In both cases, you can check the name of the worker node that has been allocated to you by running:
+From there, you must use `salloc` to allocate a SLURM worker node to yourself using the `--qos qos-interactive` parameter, as follows:
 
 ```bash
-squeue
+	$ salloc --qos qos-interactive
 ```
 
-Once you have deteremined the correct name of the worker node, you must ssh into the worker node with the `-XY` parameters, for example:
+This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `salloc` command are 1 task, 1 CPU and 8 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
 
 ```bash
-ssh -XY slwrk-020
+	$ salloc --cpus-per-task=8 --mem=32GB --qos qos-interactive
 ```
 
-You are then able to run a Singularity container and run an interactive CASA session with access to the GUIs. The `casa-stable` and `casameer` Singularity container images contain the X11 tools required for X11 forwarding.
-
-Note that the forwarding of the authentication agent connection will not work from within the worker node when using the `srun` command as this breaks the agent forwarding pipe. You will need an alternative terminal to ssh into the worker node.
-
-Please only use this method for viewing GUI and visualization tools, and do not run any heavy processing within the ssh session on the worker node. Please exit the worker node once you have finished the interactive session in order to return the resources to the slurm pool.
+You are then able to run a Singularity container and run software that provides a GUI.
 
 ## 4. Openstack Cloud Dashboard
 

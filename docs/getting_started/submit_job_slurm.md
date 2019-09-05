@@ -37,6 +37,11 @@ The parameters that follow `#SBATCH` indicate the requested resources and other 
 | --mem-per-cpu=<number>      | Memory per processor core                 | 
 | --partition=<partition_name>| Request specific partition/queue          | 
 
+* a nodes refer to a single compute node or slurm worker, i.e. one node has 32 CPUs and 236 GB RAM
+* a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
+* CPUs refers to the the number of CPUs associated with your job.
+* default parameters, if not specified, include 1 node, 1 task, 1 CPU and 8GB RAM.
+
 In the shell script above, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/SF-PY3-bionc.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `SF-PY3-bionic.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
 
 The next step is to run the shell script using the SLURM `sbatch` command:

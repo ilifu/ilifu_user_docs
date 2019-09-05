@@ -11,13 +11,14 @@
   - [Best Practices](tech_docs/best_practices.md)
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
-  - [System Specifications](tech_docs/specifications.md)
   - [Best practices](tech_docs/best_practices.md)
   - [Directory Structure](data/directory_structure.md)
+  - [Astronomy](astronomy/astronomy_software.md)
+  - [Bioinformatics](bioinformatics/cbio.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
-  - [Bioinformatics](bioinformatics/cbio.md)
+  - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
