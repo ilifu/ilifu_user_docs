@@ -31,11 +31,11 @@ singularity exec /data/exp_soft/containers/SF-PY3-bionic.simg python myscript.py
 
 The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the  `sbatch --help` command from the terminal to see additional parameters. Other useful parameters include:
 
-| Syntax                      | Meaning                                   | 
-|-----------------------------|-------------------------------------------|
-| --ntasks=<number>           | Number of processes to run (default is 1) | 
-| --mem-per-cpu=<number>      | Memory per processor core                 | 
-| --partition=<partition_name>| Request specific partition/queue          | 
+| Syntax                               | Meaning                                   | 
+|--------------------------------------|-------------------------------------------|
+| --ntasks=&#60;number&#62;            | Number of processes to run (default is 1) | 
+| --mem-per-cpu=&#60;number&#62;       | Memory per processor core                 | 
+| --partition=&#60;partition_name&#62; | Request specific partition/queue          | 
 
 * a nodes refer to a single compute node or slurm worker, i.e. one node has 32 CPUs and 236 GB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
@@ -104,7 +104,7 @@ Note that when using an interactive shell on SLURM by using the `srun` command, 
 |----------------------------------------|-------------------------------------------|
 | tmux                                   | start new tmux session                    | 
 | tmux ls                                | list currently active tmux sessions       | 
-| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          | 
+| tmux attach -t &#60;session_name&#62;  | attach to an active tmux session          | 
 | ctrl/cmd-b + d                         | detach from current tmux session          | 
 | ctrl/cmd-b + [                         | scroll current terminal                   |
 
