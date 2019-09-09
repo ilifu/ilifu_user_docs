@@ -112,7 +112,30 @@ A number of the containers that are supported by ilifu do not include runscripts
 Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
-<summary id="jupyter-casa-container">jupter-casa container</summary>
+<summary id="astro-r-container">astro-r container</summary>
+
+**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook
+
+**JupyterLab Kernel:** ASTRO-R
+
+| Name                     | Recipe File            | Github repo     | OSVersion |
+|--------------------------|------------------------|-----------------|-----------|
+| ASTRO-R.simg             |                        |                 | bionic    |
+
+| Packages and Libraries | R Libraries |               |           |
+|------------------------|-------------|---------------|-----------|
+| fftw                   | akima       | fftwtools     | nnet      |
+| R                      | astro       | FITSio        | party     |
+| R-essentials           | astrodatR   | knitr         | ProFit    |
+|                        | BiocManager | lambda.r      | ProFound  |
+|                        | data.table  | LaplacesDemon | ProSpect  |
+|                        | devtools    | magicaxis     | rmarkdown |
+|                        | EBImage     | mice          |           |
+
+</details>
+
+<details>
+<summary id="casa-kernel-container">casa-kernel container</summary>
 
 **Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook
 
@@ -122,13 +145,13 @@ Several containers have been developed and are currently maintained. These conta
 |--------------------------|------------------------|-------------------------------|-----------|
 | jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel     | xenial    |
 
-| Software   | Python Libraries |            |            |
-|------------|------------------|------------|------------|
-| CASA 5.5   | bokeh            | matplotlib | psutil     |
-| Python 2.7 | Click            | mpi4py     | scipy      |
-|            | cloudpickle      | nose       | virtualenv |
-|            | cryptography     | numpy      |            |
-|            | dask             | pandas     |            |
+| Packages and Libraries | Python Libraries |            |            |
+|------------------------|------------------|------------|------------|
+| CASA 5.5               | bokeh            | matplotlib | psutil     |
+| Python 2.7             | Click            | mpi4py     | scipy      |
+|                        | cloudpickle      | nose       | virtualenv |
+|                        | cryptography     | numpy      |            |
+|                        | dask             | pandas     |            |
 
 </details>
 
@@ -202,7 +225,7 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary id="kern-4-container">kern-5 container</summary>
+<summary id="kern-5-container">kern-5 container</summary>
 
 **Description:** KERN is a bi-annually released set of radio astronomical software packages. It should contain most of the standard tools that a radio astronomer needs to work with radio telescope data. Package list available at from the [KERN-suite website](https://kernsuite.info/).
 
@@ -239,16 +262,15 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary id="SF-PY3-bionic">SF-PY3-bionic</summary>
+<summary id="SF-PY3-container">SF-PY3 container</summary>
 
-**Description:** A collection of Astronomy software, including sourcefinding, machine learning, visualization, SED- and fusion-related software.
+**Description:** A collection of Astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
 **JupyterLab Kernel:** SF-PY3, ASTRO-PY
 
 | Name               | Def file                     | Github repo                    | OSVersion |
 |--------------------|-------------        ---------|--------------------------------|-----------|
 | SF-PY3-bionic.simg |                              |                                | bionic    |
-
 
 | Packages & Libraries |                      | Python Libraries      |                  |
 |----------------------|----------------------|-----------------------|------------------|
