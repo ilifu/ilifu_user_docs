@@ -114,7 +114,7 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary id="astro-r-container">astro-r container</summary>
 
-**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook
+**Description:** an R container with collection of R astronomy packages, including ProFound, ProFit and ProSpect.
 
 **JupyterLab Kernel:** ASTRO-R
 
@@ -137,7 +137,7 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary id="casa-kernel-container">casa-kernel container</summary>
 
-**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook
+**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook.
 
 **JupyterLab Kernel:** CASA 5.5
 
@@ -264,7 +264,7 @@ Several containers have been developed and are currently maintained. These conta
 <details>
 <summary id="SF-PY3-container">SF-PY3 container</summary>
 
-**Description:** A collection of Astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
+**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
 **JupyterLab Kernel:** SF-PY3, ASTRO-PY
 
