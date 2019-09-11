@@ -116,10 +116,10 @@ An example work flow for an interactive session can be described as follows:
 
 ### Interactive session with X11 support
 
-In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM head node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` for example:
+In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM head node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM head node, for example:
 
 ```bash
-	$ ssh -Y <username>@slurm.ilifu.ac.za
+	$ ssh -YA <username>@slurm.ilifu.ac.za
 ```
 
 From there, you must use `salloc` to allocate a SLURM worker node to yourself using the `--qos qos-interactive` parameter, as follows:
