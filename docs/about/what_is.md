@@ -9,11 +9,5 @@ Hardware comprising the compute facility is contributed by [DIRISA](https://www.
 
 The system is hosted at UCT and is supported by technical staff from the partner institutions.
 
-## What is the Current Status of the Facility?
-
-The full Ilifu Computing Cluster comprises ~120 computing nodes (~4000 cores) and ~3 PB of storage (~2 PB usable) and is entering a phase of Early User Testing in order to explore user common workloads and system stability. This phase is expected to continue through to end Oct 2018 following which the system will enter a more stable configuration and more formal procedures will be adopted for time allocation.
-
-At present, the IDIA cluster of 40 compute nodes and the new (2018) ~80 nodes have not been fully integrated into a single system since the IDIA nodes continue to be in active use for astronomy research while the newly purchased nodes are being run in test mode. However, the plan is that all the nodes will be integrated into a single Ilifu system towards the end of the Early User Testing phase.
-
-Please see the FAQ for more information.
+The project website may be found at http://www.ilifu.ac.za
 

@@ -1,14 +1,27 @@
-- **About**
-  - [What is Ilifu?](about/what_is.md)
-- **Access**
-  - [Requesting time on the Ilifu Cluster](access/request_time.md)
-- **Cluster**
-  - [Best practices](cluster/best_practices.md)
-  - [Running jobs on the cluster](cluster/running_jobs.md)
-  - [Supported software environments](cluster/software_environments.md)
+- **Getting Started**
+  - [Request access](getting_started/request_access.md)
+  - [SSH keys](getting_started/ssh.md)
+  - [Accessing the ilifu services](getting_started/access_ilifu.md)
+  - [Change your password](getting_started/change_password.md)
+  - [Directory structure](data/directory_structure.md)
+  - [Software containers](getting_started/container_environments.md)
+  - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
+  - [Using JuypterLab](getting_started/using_jupyterlab.md)
+  - [Getting help](getting_started/getting_help.md)
+  - [Best Practices](tech_docs/best_practices.md)
+  - [Next Steps](getting_started/next_steps.md)
+- **Technical Documentation**
+  - [Best practices](tech_docs/best_practices.md)
+  - [Directory Structure](data/directory_structure.md)
+  - [Astronomy](astronomy/astronomy_software.md)
+  - [Bioinformatics](bioinformatics/cbio.md)
+  - [Running jobs on the cluster](tech_docs/running_jobs.md)
+  - [Supported software environments](tech_docs/software_environments.md)
   - [Openstack flavours](openstack/flavours.md)
-  - [CBIO](cbio/setup.md)
+  - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
   - [Requesting Help](help/requesting_help.md)
+- **About**
+  - [What is ilifu?](about/what_is.md)
