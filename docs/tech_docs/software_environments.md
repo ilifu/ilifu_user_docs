@@ -547,9 +547,48 @@ channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
 ```
 Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
 
-*Note on installing packages
+* Note on installing packages
 The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
 ## Environment Modules
 
-Coming soon.
+The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general. What follows here are some specifics to the module environment on ilifu.
+
+### Available modules
+The default set of modules is very sparse and initially simply provides the `lmod`-native modules, i.e.
+```bash
+$ lmod
+--------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
+   Core/lmod/6.6    Core/settarg/6.6
+```
+
+CBIO users should add the following to their `~/.bash_profile` file:
+```bash
+export MODULEPATH=/cbio/soft/lmod:${MODULEPATH}
+
+```
+After logging out and in again (or running `. ~/.bash_profile`) more modules will be available, e.g.
+```bash
+$ module avail
+
+------------------------------------------------ /cbio/soft/lmod ------------------------------------------------
+   R/3.6.1    README.md    bio/htslib/1.9    bio/svtoolkit/2.00.1918    jdk/11.0.2    slurm-drmaa/1.1.0
+
+--------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
+   Core/lmod/6.6    Core/settarg/6.6
+```
+
+Now the module can be loaded and used, e.g.
+```bash
+USERNAME@slwrk-101:~$ module load R/3.6.1
+USERNAME@slwrk-101:~$ R --version
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+https://www.gnu.org/licenses/.
+```
