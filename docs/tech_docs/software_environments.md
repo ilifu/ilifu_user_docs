@@ -575,7 +575,6 @@ The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is 
 
 ### Checking available modules
 
-The following is a list of modules available to CBIO users:
 Use the `module avail` command, e.g.
 
 ```bash
@@ -587,6 +586,8 @@ $ module avail
 --------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
    Core/lmod/6.6    Core/settarg/6.6
 ```
+
+*Note that the `/cbio/soft/lmod` modules are only available to CBIO users.*
 
 ### Loading and Using modules
 
