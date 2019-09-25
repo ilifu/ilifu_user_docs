@@ -18,11 +18,13 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 * `/idia/` - the base directory for all IDIA related projects.
 
-* `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. 
+* `/idia/users` - user's directory for storing long-term data and data products that are not project specific.
 
-* `/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures.
+* `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
 
-* `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/cluster/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
+* `/idia/raw/` - raw data (read-only data) is stored here. Raw data, from SARAO is moved into access controlled project directories within `/idia/raw/`. This data is retrievable from SARAO and therefore will not be included in backup procedures. Symbolic links to the raw data will be accessible from the project directory.
+
+* `/idia/software/` - [software containers](https://docs.ilifu.ac.za/#/tech_docs/software_environments?id=singularity-containers) and the [IDIA Pipelines](https://idia-pipelines.github.io/) software is stored here.
 
 * `/idia/data/public` - public data and data products available to all users are stored here.
 

@@ -112,81 +112,77 @@ A number of the containers that are supported by ilifu do not include runscripts
 Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
-<summary id="jupyter-casa-container">jupter-casa container</summary>
+<summary id="astro-r-container">astro-r container</summary>
 
-| Name                     | Recipe File            | URL                                                   | OSVersion |
-|--------------------------|------------------------|-------------------------------------------------------|-----------|
-| jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel/jupyter-casa-build.def      | xenial    |
+**Description:** an R container with collection of R astronomy packages, including ProFound, ProFit and ProSpect.
 
-| Packages & Libraries           |                    |                            | Python Libraries  |
-|--------------------------------|--------------------|----------------------------|-------------------|
-| ant                            | libcfitsio3-dev    | libsqlite3-0               | foolscap          |
-| antlr                          | libdbus-1-dev      | libsqlite3-dev             | matplotlib        |
-| apt-utils                      | libdbus-c++-1-0v5  | libwcs5                    | nose              |
-| ASAP                           | libdbus-c++-dev    | libxerces-c-dev            | numpy             |
-| bison                          | libdbus-cpp-dev    | libxerces-c3.1             | scipy             |
-| CasaCORE                       | libdbus-glib-1-2   | libxml2-dev                |                   |
-| cmake                          | libdbusmenu-glib4  | libxslt1-dev               |                   |
-| dbus-x11                       | libeigen3-dev      | libxslt1.1                 |                   |
-| doxygen                        | libfftw3-dev       | pgplot5                    |                   |
-| flex                           | libfftw3-dev       | python-dbus                |                   |
-| g++-6                          | libfftw3-doc       | python-dev                 |                   |
-| gcc-6                          | libfftw3-double3   | python-foolscap            |                   |
-| GCWrap                         | libfftw3-single3   | python-matplotlib          |                   |
-| gfortran                       | libgsl-dev         | python-nose                |                   |
-| ipython                        | libgsl2            | python-numpy               |                   |
-| juptyer                        | libhdf5-serial-dev | python-numpy-dev           |                   |
-| libantlr-dev                   | libjdom1-java      | python-pip                 |                   |
-| libantlr-java                  | libjfreechart-java | python-scipy               |                   |
-| libblas-dev                    | liblapack-dev      | python2.7                  |                   |
-| libboost-all-dev               | liblapack3         | qt4-dev-tools              |                   |
-| libboost-dev                   | liblapacke         | refits                     |                   |
-| libboost-filesystem-dev        | liblapacke-dev     | scons                      |                   |
-| libboost-filesystem1.58.0      | liblog4cxx-dev     | software-properties-common |                   |
-| libboost-program-options-dev   | libncurses5-dev    | sqlite3                    |                   |
-| libboost-program-options1.58.0 | libpgsbox-dev      | sqlite3-doc                |                   |
-| libboost-python-dev            | libpgsbox-dev      | subversion                 |                   |
-| libboost-python1.58.0          | libpgsbox5         | swig                       |                   |
-| libboost-regex-dev             | libqt4-dbus        | tix                        |                   |
-| libboost-regex1.58.0           | libqt4-dev         | tix-dev                    |                   |
-| libboost-serialization-dev     | libqwt-dev         | unzip                      |                   |
-| libboost-system-dev            | libqwt5-qt4-dev    | vim                        |                   |
-| libboost-system1.58.0          | libqwt6abi1        | wcslib-dev                 |                   |
-| libboost-thread-dev            | libreadline-dev    | wget                       |                   |
-| libcfitsio2                    | libsakura          | xvfb                       |                   |
+**JupyterLab Kernel:** ASTRO-R
+
+| Name                     | Recipe File            | Github repo     | OSVersion |
+|--------------------------|------------------------|-----------------|-----------|
+| ASTRO-R.simg             |                        |                 | bionic    |
+
+| Packages and Libraries | R Libraries |               |           |
+|------------------------|-------------|---------------|-----------|
+| fftw                   | akima       | fftwtools     | nnet      |
+| R                      | astro       | FITSio        | party     |
+| R-essentials           | astrodatR   | knitr         | ProFit    |
+|                        | BiocManager | lambda.r      | ProFound  |
+|                        | data.table  | LaplacesDemon | ProSpect  |
+|                        | devtools    | magicaxis     | rmarkdown |
+|                        | EBImage     | mice          |           |
+
+</details>
+
+<details>
+<summary id="casa-kernel-container">casa-kernel container</summary>
+
+**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook.
+
+**JupyterLab Kernel:** CASA 5.5
+
+| Name                     | Recipe File            | Github repo                   | OSVersion |
+|--------------------------|------------------------|-------------------------------|-----------|
+| jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel     | xenial    |
+
+| Packages and Libraries | Python Libraries |            |            |
+|------------------------|------------------|------------|------------|
+| CASA 5.5               | bokeh            | matplotlib | psutil     |
+| Python 2.7             | Click            | mpi4py     | scipy      |
+|                        | cloudpickle      | nose       | virtualenv |
+|                        | cryptography     | numpy      |            |
+|                        | dask             | pandas     |            |
 
 </details>
 
 <details>
 <summary id="casa-stable-container">casa-stable container</summary>
 
-| Name        | Def file        | URL                                        | OSVersion |
-|-------------|-----------------|--------------------------------------------|-----------|
-| casa-stable | casa-stable.def | idia-container-casa-stable/casa-stable.def | CentOS    |
+**Description:** the latest stable release of CASA from [NRAO CASA website](https://casa.nrao.edu).
 
-| Packages and Libraries |                    |                  |                 |
-|------------------------|--------------------|------------------|-----------------|
-| casa                   | libfontconfig      | libXcursor-dev*  | libXrender-dev* |
-| cmake                  | libfontconfig-dev* | libXext-dev*     | python          |
-| fontconfig-dev         | libGL-dev*         | libXft*          | svn             |
-| fontconfig-dev*        | libGL*             | libXi-dev*       | vim             |
-| gcc                    | libSM-dev*         | libXinerama-dev* | wget            |
-| git                    | libX11-dev*        | libXrandr-dev*   |                 |
+| Name                               | Def file        | Github repo                | OSVersion |
+|------------------------------------|-----------------|----------------------------|-----------|
+| casa-stable-&#60;version&#62;.simg | casa-stable.def | idia-container-casa-stable | CentOS    |
+
+| Packages and Libraries |
+|------------------------|
+| CASA                   |
+
 
 </details>
 
 <details>
 <summary id="casameer-container">casameer container</summary>
 
-Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and is appropriate for use with MPI.
+**Description:** casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and is appropriate for use with MPI.
 
-| Name        | Def file        | URL                                        | OSVersion |
-|-------------|-----------------|--------------------------------------------|-----------|
-| casameer    |                 |                                            | CentOS    |
+| Name                            | Def file        | Github repo             | OSVersion |
+|---------------------------------|-----------------|-------------------------|-----------|
+| casameer-&#60;version&#62;.simg |                 |                         | CentOS    |
 
 | Packages and Libraries |
 |------------------------|
-| casa-5.4.1             |
+| CASA                   |
 | ghostscript            |
 | xvfb-run               |
 
@@ -195,65 +191,49 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 <details>
 <summary id="kern-2-container">kern-2 container</summary>
 
-| Name   | Def file   | URL                            | OSVersion |
-|--------|------------|--------------------------------|-----------|
-| kern-2 | kern-2.def | idia-container-kern/kern-2.def | xenial    |
+**Description:** KERN is a bi-annually released set of radio astronomical software packages. It should contain most of the standard tools that a radio astronomer needs to work with radio telescope data. Package list available at from the [KERN-suite website](https://kernsuite.info/).
 
-| Packages & Libraries  |                            |                           | Python Libraries |
-|-----------------------|----------------------------|---------------------------|------------------|
-| 21cmfast              | libcasasynthesis1          | python-attrdict           | atpy             |
-| aips                  | libcommon                  | python-casacore           | psutils          |
-| aoflagger             | libdocker                  | python-galsim             | attrdict         |
-| aoflagger-dev         | libdppp                    | python-katdal             | casacore         |
-| casacore-data         | libdppp-aoflag             | python-katpoint           | galsim           |
-| casacore-dev          | libelementresponse         | python-katversion         | katdal           |
-| casacore-doc          | liblmwcommon               | python-kittens            | katpoint         |
-| casacore-tools        | liblofar-pyparameterset    | python-lofar              | katversion       |
-| casalite              | liblofar-pyparmdb          | python-meqtrees-cattery   | kittens          |
-| casarest              | liblofar-pystationresponse | python-meqtrees-timba     | lofar            |
-| cassbeam              | liblofar-pytools           | python-montblanc          | meqtrees-cattery |
-| chgcentre             | liblofarft                 | python-owlcat             | meqtrees-timba   |
-| cub-dev               | liblofarstman              | python-presto             | montblanc        |
-| dialog                | libmeqtrees-timba0         | python-purr               | owlcat           |
-| drive-casa            | libmessagebus              | python-pymoresane         | presto           |
-| dspsr                 | libms                      | python-pyxis              | purr             |
-| dysco                 | libmslofar                 | python-qwt5-doc           | pymoresane       |
-| galsim                | libparmdb                  | python-qwt5-qt4           | pyxis            |
-| galsim-dev            | libplc                     | python-rfimasker          | qwt5-doc         |
-| galsim0               | libpurify-dev              | python-scatterbrane       | qwt5-qt4         |
-| karma                 | libpurify2.0               | python-sourcery           | rfimasker        |
-| libaoflagger0         | libpythondppp              | python-tigger             | scatterbrane     |
-| libapplcommon         | libsopt-dev                | python-tkp                | sourcery         |
-| libawimager2lib       | libsopt2.0                 | python-pip                | tigger           |
-| libbbscontrol         | libspdlog-dev              | python-transitions        | tkp              |
-| libbbskernel          | libspwcombine              | python3-casacore          | transitions      |
-| libblob               | libstationresponse         | python3-transitions       |                  |
-| libcasa-casa2         | libtransport               | rpfits                    |                  |
-| libcasa-coordinates2  | libwsclean0                | sagecal                   |                  |
-| libcasa-derivedmscal2 | lofar-dev                  | sigproc                   |                  |
-| libcasa-fits2         | lofar-doc                  | sigpyproc                 |                  |
-| libcasa-images2       | meqtrees                   | simfast21                 |                  |
-| libcasa-lattices2     | Meqtrees-timba             | simms                     |                  |
-| libcasa-meas2         | Montage                    | singularity-container     |                  |
-| libcasa-measures2     | msutils                    | stimela                   |                  |
-| libcasa-mirlib2       | mt-imager                  | tempo                     |                  |
-| libcasa-ms2           | multinest                  | tempo2                    |                  |
-| libcasa-msfits2       | obit                       | texlive-fonts-recommended |                  |
-| libcasa-python2       | oskar                      | tirific                   |                  |
-| libcasa-python3-2     | parseltongue               | tmv-dev                   |                  |
-| libcasa-scimath-f2    | presto                     | tmv0                      |                  |
-| libcasa-scimath2      | psrcat                     | wsclean                   |                  |
-| libcasa-tables2       | psrchive                   | wsclean-dev               |                  |
-| libcasasynthesis-dev  | purify                     |                           |                  |
+**JupyterLab Kernel:** KERN-2
+
+| Name       | Def file   | Github repo                    | OSVersion |
+|------------|------------|--------------------------------|-----------|
+| kern-2.img | kern-2.def | idia-container-kern            | xenial    |
+
+| Packages & Libraries |              | Python Libraries |                   |
+|----------------------|--------------|------------------|-------------------|
+| 21cmfast             | multinest    | atpy             | owlcat            |
+| aips                 | obit         | psutils          | presto            |
+| aoflagger            | oskar        | attrdict         | purr              |
+| aoflagger-dev        | parseltongue | casacore         | pymoresane        |
+| casacore             | presto       | galsim           | pyxis             |
+| casalite             | psrcat       | katdal           | qwt5-doc          |
+| casarest             | psrchive     | katpoint         | qwt5-qt4          |
+| cassbeam             | purify       | katversion       | rfimasker         |
+| chgcentre            | rpfits       | kittens          | scatterbrane      |
+| cub-dev              | sagecal      | lofar            | sourcery          |
+| dialog               | sigproc      | meqtrees-cattery | tigger            |
+| drive-casa           | sigpyproc    | meqtrees-timba   | tkp               |
+| dspsr                | simfast21    | montblanc        | transitions       |
+| dysco                | simms        |                  |                   |
+| galsim               | stimela      |                  |                   |
+| karma                | tempo        |                  |                   |
+| lofar                | tempo2       |                  |                   |
+| meqtrees             | tirific      |                  |                   |
+| Montage              | tmv          |                  |                   |
+| msutils              | wsclean      |                  |                   |
 
 </details>
 
 <details>
-<summary id="kern-4-container">kern-4 container</summary>
+<summary id="kern-5-container">kern-5 container</summary>
 
-| Name  | Def file  | URL                             | OSVersion |
-|-------|-----------|---------------------------------|-----------|
-| kern4 | kern4.def | idia-container-kern-4/kern4.def | bionic    |
+**Description:** KERN is a bi-annually released set of radio astronomical software packages. It should contain most of the standard tools that a radio astronomer needs to work with radio telescope data. Package list available at from the [KERN-suite website](https://kernsuite.info/).
+
+**JupyterLab Kernel:** KERN-5
+
+| Name       | Def file  | Github repo           | OSVersion |
+|------------|-----------|-----------------------|-----------|
+| kern5.simg | kern5.def | idia-container-kern-5 | bionic    |
 
 | Packages & Libraries |                |                       | Python Libraries |
 |----------------------|----------------|-----------------------|------------------|
@@ -264,134 +244,69 @@ Casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and i
 | attrdict             | losoto         | python-typing         | pyfits           |
 | bl-sigproc           | meqtrees-timba | pyxis                 | typing           |
 | blimpy               | Montage        | PyBDSF                | pywcs            |
-| blitz                | msutils        | rfimasker             |                  |
+| blitz                | msutils        | rfimasker             | virtualenv       |
 | casalite             | multinest      | rmextract             |                  |
 | casarest             | obit           | rpfits                |                  |
 | chgcentre            | owlcat         | sagecal               |                  |
 | ctypesgen            | parseltongue   | sched                 |                  |
-| cub                  | peasoup        | sigpyproc             |                  |
-| ddfacet              | polygon2       | simfast21             |                  |
-| difmap               | ppgplot        | simms                 |                  |
-| drive-casa           | prefactor      | singularity-container |                  |
-| dysco galsim         | presto         | tempo                 |                  |
-| gbt-seti             | psrcat         | tigger                |                  |
-| gsm                  | psrchive       | tirific               |                  |
-| heimdall-astero      | psrdada        | turbo-seti            |                  |
+| cubical              | peasoup        | sigpyproc             |                  |
+| cub                  | polygon2       | simfast21             |                  |
+| ddfacet              | ppgplot        | simms                 |                  |
+| difmap               | prefactor      | singularity-container |                  |
+| drive-casa           | presto         | tempo                 |                  |
+| dysco galsim         | psrcat         | tigger                |                  |
+| gbt-seti             | psrchive       | tirific               |                  |
+| gsm                  | psrdada        | turbo-seti            |                  |
+| heimdall-astero      |                |                       |                  |
 
 </details>
 
 <details>
-<summary id="meerlicht-container">meerlicht container</summary>
+<summary id="SF-PY3-container">SF-PY3 container</summary>
 
-| Name      | Def file      | URL                                    | OSVersion |
-|-----------|---------------|----------------------------------------|-----------|
-| meerlicht | meerlicht.def | idia-container-meerlicht/meerlicht.def | xenial    |
+**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-| Packages & Libraries |                   |                   | Python Libraries |
-|----------------------|-------------------|-------------------|------------------|
-| Anaconda             | dgursoy-pyfftw    | psfex             | astropy          |
-| anaconda-ephem       | ecpy-watchdog     | rclone            | psycopg2         |
-| anaconda-psycopg2    | fitsio            | sextractor        | pyephem          |
-| anaconda-pyqt        | gcc               | sip_tpv           | pyqt             |
-| apt-utils            | git               | slackclient       |                  |
-| astrometry           | libbz2-dev        | sphinx-automodapi |                  |
-| astropy-ccdproc      | libcairo2-dev     | swarp             |                  |
-| astropy-lmfit        | libjpeg-dev       | swig              |                  |
-| astropy-photutils    | libnetpbm10-dev   | vim               |                  |
-| atlas                | libplplot-dev     | wcstools          |                  |
-| auto-ushlex          | libpng12-dev      | wget              |                  |
-| build-essential      | milk              | wwwget            |                  |
-| bzip2                | netlib-lapack     | Z0GY              |                  |
-| cdsclient            | netpbm            | zip               |                  |
-| conda-forge-sphinx   | openastronomy-sep | zlib1g-dev        |                  |
+**JupyterLab Kernel:** SF-PY3, ASTRO-PY
 
-</details>
+| Name               | Def file                     | Github repo                    | OSVersion |
+|--------------------|-------------        ---------|--------------------------------|-----------|
+| SF-PY3-bionic.simg |                              |                                | bionic    |
 
-<details>
-<summary id="pink-container">pink container</summary>
-
-| Name | Def file | URL                          | OSVersion |
-|------|----------|------------------------------|-----------|
-| pink | pink.def | idia-container-pink/pink.def | xenial    |
-
-| Packages & Libraries |         |      | Python Libraries |
-|----------------------|---------|------|------------------|
-| apt-utils            | doxygen | Pink |                  |
-| build-essential      | gcc     | vim  |                  |
-| cmake                | make    | wget |                  |
-
-</details>
-
-<details>
-<summary id="sourcefinding-py3-container">sourcefinding_py3 container</summary>
-
-| Name              | Def file                     | URL                                                           | OSVersion |
-|-------------------|------------------------------|---------------------------------------------------------------|-----------|
-| Source Finding P3 | sourcefinding_py3.def        | idia-container-sourcefinding-py3/sourcefinding_py3.def        | xenial    |
-| Source Finding P3 | sourcefinding_py3_update.def | idia-container-sourcefinding-py3/sourcefinding_py3_update.def | xenial    |
-
-| Packages & Libraries  |                            |                           | Python Libraries | Python Libraries |
-|-----------------------|----------------------------|---------------------------|------------------|------------------|
-| 21cmfast              | libcasa-python3-2          | python-casacore           | acor             | pyspark          |
-| aips                  | libcasa-scimath-f2         | python-galsim             | aplpy            | pyvo             |
-| Anaconda              | libcasa-scimath2           | python-katdal             | astroml          | pyxis            |
-| Aegean                | libcasa-tables2            | python-katpoint           | astroML          | qwt5-doc         |
-| AGNfitter             | libcasasynthesis-dev       | python-katversion         | astroML_addons   | qwt5-qt4         |
-| aoflagger             | libcasasynthesis1          | python-kittens            | astroplan        | regions          |
-| aoflagger-dev         | libcommon                  | python-lofar              | astropy          | reproject        |
-| Astrometry            | libdocker                  | python-meqtrees-cattery   | astroquery       | rfimasker        |
-| casacore-data         | libdppp                    | python-meqtrees-timba     | atpy             | scatterbrane     |
-| casacore-dev          | libdppp-aoflag             | python-montblanc          | attrdict         | scikit-image     |
-| casacore-doc          | libelementresponse         | python-owlcat             | casacore         | scikit-learn     |
-| casacore-tools        | liblmwcommon               | python-presto             | ccdproc          | scikit-plot      |
-| casalite              | liblofar-pyparameterset    | python-purr               | configobj        | scipy            |
-| casarest              | liblofar-pyparmdb          | python-pymoresane         | corner           | sciserver        |
-| cassbeam              | liblofar-pystationresponse | python-pyxis              | docopt           | seaborn          |
-| chgcentre             | liblofar-pytools           | python-qwt5-doc           | easydict         | sep              |
-| cigale                | liblofarft                 | python-qwt5-qt4           | emcee            | sourcery         |
-| cub-dev               | liblofarstman              | python-rfimasker          | galsim           | sourcery         |
-| dialog                | libmeqtrees-timba0         | python-scatterbrane       | ginga            | specutils        |
-| drive-casa            | libmessagebus              | python-sourcery           | glue             | sqlalchemy       |
-| DS9                   | libms                      | python-tigger             | glueviz          | statsmodels      |
-| dspsr                 | libmslofar                 | python-tkp                | h5py             | tensorflow       |
-| dvipng                | libparmdb                  | python-transitions        | healpy           | theano           |
-| dysco                 | libplc                     | python3-casacore          | hips             | tigger           |
-| eazy-photoz           | libpurify-dev              | python3-transitions       | Ipykernel        | tkp              |
-| emacs                 | libpurify2.0               | python3.6                 | IPython          | tqdm             |
-| galfit                | libpythondppp              | qt5-default               | kapteyn          | transitions      |
-| galsim                | libsopt-dev                | rpfits                    | katdal           | WCSAxes          |
-| galsim-dev            | libsopt2.0                 | sagecal                   | katpoint         |                  |
-| galsim0               | libspdlog-dev              | scamp                     | katversion       |                  |
-| ginga                 | libspwcombine              | screen                    | keras            |                  |
-| GPz                   | libstationresponse         | sed3fit                   | kittens          |                  |
-| karma                 | libtransport               | sextractor                | lofar            |                  |
-| Java8                 | libwsclean0                | sigproc                   | meqtrees-cattery |                  |
-| lftp                  | lofar-dev                  | sigpyproc                 | meqtrees-timba   |                  |
-| libaoflagger0         | lofar-doc                  | simfast21                 | montblanc        |                  |
-| libapplcommon         | meqtrees                   | simms                     | Mpld3            |                  |
-| libawimager2lib       | meqtrees-timba             | singularity-container     | nbconvert        |                  |
-| libbbscontrol         | Montage                    | SoFiA                     | nbdime           |                  |
-| libbbskernel          | msutils                    | stimela                   | numba            |                  |
-| libblob               | mt-imager                  | swarp                     | numpy            |                  |
-| libcasa-casa2         | multinest                  | tcsh                      | nway             |                  |
-| libcasa-coordinates2  | nano                       | tempo                     | opencv-python    |                  |
-| libcasa-derivedmscal2 | obit                       | tempo2                    | owlcat           |                  |
-| libcasa-fits2         | oskar                      | texlive-fonts-recommended | pandas           |                  |
-| libcasa-images2       | parseltongue               | texlive-latex-extra       | pandas           |                  |
-| libcasa-lattices2     | presto                     | tirific                   | photutils        |                  |
-| libcasa-meas2         | psrcat                     | tmv-dev                   | presto           |                  |
-| libcasa-measures2     | psrchive                   | tmv0                      | purr             |                  |
-| libcasa-mirlib2       | PUMA                       | Tractor                   | pydl             |                  |
-| libcasa-ms2           | purify                     | wsclean                   | pymoc            |                  |
-| libcasa-msfits2       | PyBDSF                     | wsclean-dev               | pymoresane       |                  |
-| libcasa-python2       | python-attrdict            |                           | pyregion         |                  |
-
-Packages installed in during the update:
-
-| Packages & Libraries |          |       | Python Libraries | Python Libraries |
-|----------------------|----------|-------|------------------|------------------|
-| Astromatic           | eog      | PASTA | datalab-client   | pywcsgrid2       |
-| Blobcat              | fits2hdf |       | pywcs            | tensorflow       |
+| Packages & Libraries |                      | Python Libraries      |                  |
+|----------------------|----------------------|-----------------------|------------------|
+| AEGEAN               | PINK                 | altair                | opencv           |
+| AGNFitter            | PSEx                 | aplpy                 | pandas           |
+| Aladin               | PUMA                 | astroML               | photutils        |
+| ANNZ                 | PyBDSF               | astroplan             | psycopg2         |
+| Astromatic           | SCAMP                | astropy               | pydl             |
+| Astrometry           | SED3FIT              | astroquery            | pymc             |
+| BlobCat              | Sextractor           | autokeras             | pymoc            |
+| CIGALE               | SkyMaker             | bohek                 | PyMultiNest      |
+| datalab              | SoFiA                | ccdproc               | pyregion         |
+| DS9                  | sofia2               | corner                | pyregion         |
+| EASZY                | Sourcery             | dask                  | pyspark          |
+| EAZY-PIPE            | STIFF                | datalab               | pystan           |
+| EyE                  | stilts               | datashader            | pytorch          |
+| GALFIT               | Stuff                | easydict              | pyvo             |
+| GalFitM              | Swarp                | emcee                 | regions          |
+| GalSim               | Topcat               | fits2hdf              | reproject        |
+| GPz                  | Tractor              | ginga                 | scikit-bootstrap |
+| LFTools              | VAEX                 | glueviz               | scikit-image     |
+| MissFITS             | VisiOmatic           | gwcs                  | scikit-learn     |
+| Montage              | VIZIC                | h5py                  | scikit-plot      |
+| PASTA                | WeightWatcher        | healpy                | scipy            |
+|                      |                      | herschelhelp_internal | sciserver        |
+|                      |                      | herschelhelp_python   | seaborn          |
+|                      |                      | hfpy                  | somoclu          |
+|                      |                      | hips                  | specutils        |
+|                      |                      | holoviews             | squarify         |
+|                      |                      | keras                 | statsmodels      |
+|                      |                      | lifelines             | tensorflow       |
+|                      |                      | matplotlib            | tensorpack       |
+|                      |                      | nbconvert             | theano           |
+|                      |                      | nbdime                | tqdm             |
+|                      |                      | numba                 | XID_plus         |
+|                      |                      | numpy                 | yt               |
 
 </details>
 
@@ -399,7 +314,7 @@ Packages installed in during the update:
 
 In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized.
 
-There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#).
+There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://www.sylabs.io/guides/2.6/user-guide/build_a_container.html#).
 
 The recommended way to build a container for the ilifu system is through using a recipe. A recipe allows for reproducability of the container environment and allows for containers to be more easily referenced in research publications. Recipes define the way a container is built, which OS system is abstracted from within the container, and what files, libraries, packages and environmental variables and dependencies are included in the container.
 
@@ -437,7 +352,7 @@ Include: software-properties-common
     make install
 ```
 
-In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/3.0/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
+In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/2.6/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
 
 In order to build the container from the recipe, the following command can be used:
 

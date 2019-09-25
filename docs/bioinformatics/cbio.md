@@ -13,9 +13,10 @@ Some things to note:
 * Currently there are only 1184 cores available on the standard SLURM cluster. This will probably be increased after the pilot phase.
 * CBIO can access an additional 320 cores on the OpenStack environment.
 
-## Data transfer node
 
-* The current node to use for data transfers is `dtn02.ilifu.ac.za`. For now use `scp` or `rsync` to move data.
+## Data transfer nodes
+* For `scp`, `cp` or `rsync` use `transfer.ilifu.ac.za`.
+* For Globus Online (gridftp) transfers use `dtn01.ilifu.ac.za`.
 
 ## Data management plan for projects
 

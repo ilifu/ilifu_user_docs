@@ -10,6 +10,13 @@ The container images that are maintained by the support team can be found at `/i
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
 
+From the SLURM login node, first allocate a compute node to yourself using the following:
+```shell
+$ srun --pty bash
+```
+
+Singularity is then available from the compute node. You can open a session within an available container using the following:
+
 ```shell
 $ singularity shell /idia/software/containers/casa-stable.img
 Singularity: Invoking an interactive shell within container...

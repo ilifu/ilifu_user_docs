@@ -4,7 +4,7 @@ There are several methods to run jobs on Ilifu.
 
 1. Users may get access to a Jupyter Lab spawner mechanism on the cluster. This provides a Jupyter lab environment where users select what size compute node they need to run. This is a good environment for users to experiment with code and visualise certain results. This environment will be made available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. Users can login to the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
+2. Users can log into the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 3. Selected users will be given access to the OpenStack dashboard in order to have full control over the setup of a computing environment. This is available at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za)
 
@@ -14,16 +14,45 @@ There are several methods to run jobs on Ilifu.
 
 The jupyter spawner can be accessed via web browser at `https://jupyter.ilifu.ac.za`.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.
 
-After logging in to the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
+After logging into the jupyter node, one must select the type of node on which to run jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
 ![dropdown](http://docs.ilifu.ac.za/_media/profile_dropdown_options.png)
 
 Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, so when a new jupyter server is spawned the workspace is recreated. Some data is also persisted in the notebook file. A user can terminate the server in order to free up resources on the cloud, or to choose a different node type.  This is done by choosing the 'hub' option from the top menu bar of JupyterLab,
 
 <img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt="menu bar options" width=500 />
 
-Choose the 'control panel' option to view or stop your server,
+This will bring you to the page with the `Stop My Server` option, where you can stop your current session, freeing up the resources that have been allocated to your Jupyter session. You are also able to use this process to change the size of the resources allocated to you. Once you have stopped your session you are able to choose a smaller or larger node size.
 
 <img src="http://docs.ilifu.ac.za/_media/stop_server_button.png" alt="stop server button" width=600 />
+
+Once you have logged into Jupyterlab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run. 
+
+There are kernels for both Python and R languages. The different kernels include different software stacks, such as the `CASA-#` kernels that contain Python wrapped CASA tasks which can be executed within the notebook, or the `ASTRO-PY3` kernel which contains an assortment of astronomy related software and Python packages. Once you have selected a kernel a notebook will be created. You can change the kernel from within the notebook by going `Kernel > Change Kernel...` from the top menu bar, or by clicking the kernel name on the top right side of the notebook panel, next to the kernel indicator circle.
+
+The kernels themselves are in fact Singularity software containers. All the additional software packages installed in the container, beyond the Python packages, are also available to use from within the Jupyter notebook. You can make calls to these other software packages or to the underlying operating system by prefixing the relevant command with `!` in the Jupyter notebook, for example:
+
+```
+[ ]: !pwd
+```
+will provide you with the path of your current work directory.
+
+The following table lists the available kernels and their related Singularity containers:
+
+| Kernel name                 | Container                                 | 
+|-----------------------------|-------------------------------------------|
+| ASTRO-PY3                   | SF-PY3-bionic.simg                        |
+| ASTRO-R                     | ASTRO-R.simg                              |
+| CASA-5                      | jupyter-casa-latest.simg                  |
+| CASA-6 Alpha                | casa-6-dev.simg                           | 
+| KERN-2                      | kern-2.img                                |
+| KERN-5                      | kern5.simg                                |
+| PY2                         | python-2.7.img                            | 
+| PY3                         | python-3.6.img                            |
+| Python 3                    | System Python (not a container)           | 
+| SF-PY2                      | source-finding.img                        |
+| SF-PY3                      | SF-PY3-bionic.simg                        |
+
+Details of the python libraries, software and other libraries available within the different containers can be found in the [Available containers](https://docs.ilifu.ac.za/#/tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](https://docs.ilifu.ac.za/#/tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
 
 ## 2. Slurm Batch Scheduler
 
@@ -64,38 +93,75 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 ## 3. Interactive Sessions
 
-No software or process should be run on the slurm headnode. For an interative session on the slurm cluster, without the use of a Jupyter notebook, the `srun` command can be used as follows:
+**No software should be run on the SLURM head node.** Interactive jobs are useful for testing and developing code. 
+
+### 3.1 Interactive session without X11 support
+
+For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM head node:
 
 ```shell
-username@lifu-slurm-login:~$ srun -N 1 --pty bash
-username@slwrk-027:~$
+	$ srun --pty bash
 ```
 
-This will allocate a number of compute nodes specified by the `-N` parameter, and will ssh you into one of the allocated worker nodes. A bash terminal session will be loaded from where you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session or utilizing Nextflow.
+This will place you in an interactive shell (bash) session on a compute node. The `--pty` parameter provides a psuedo-terminal which allows interactivity. The default resources allocated by the `srun` command are 1 task, 1 CPU and 8 GB RAM. Run the `srun --help` command to see additional parameters. Similar parameters to the sbatch script above can be used to define the resources allocated to your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session, or utilizing Nextflow.
 
-For an interactive session with X11 forwarding, in the event you wish to use CASA tasks with their GUIs, you must `ssh` into slurm with the `-XY` parameters which sets your DISPLAY variable for trusted X11 forwarding, and the `-A` parameter for forwarding the authentication agent connection, for example:
+You are able to directly run Singularity containers or software within containers using the srun command, for example: 
+
+```shell
+	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
+```
+
+This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
+
+```shell
+	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
+```
+
+Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
+
+```shell
+	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
+```
+
+This will run the Python script `myscript.py` using the SF-PY3-bionic container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
+
+Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include: 
+
+| Syntax/keyboard shortcut               | Action                                    | 
+|----------------------------------------|-------------------------------------------|
+| tmux                                   | start new tmux session                    | 
+| tmux ls                                | list currently active tmux sessions       | 
+| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          | 
+| ctrl/cmd-b + d                         | detach from current tmux session          | 
+| ctrl/cmd-b + [                         | scroll current terminal                   |
+
+An example work flow for an interactive session can be described as follows:
+* login in to slurm login node
+* run tmux (or screen)
+* use the srun command to allocate yourself a compute node, describing your required resources
+* open a Singularity container and run your software.
+
+### 3.2 Interactive session with X11 support
+
+In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM head node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM head node, for example:
 
 ```bash
-ssh -AXY <username>@slurm.ilifu.ac.za
+	$ ssh -YA <username>@slurm.ilifu.ac.za
 ```
 
-From there, you can use `salloc` to allocate a slurm worker node to yourself, or you can use the above `srun` command to allocate a slurm worker node. In both cases, you can check the name of the worker node that has been allocated to you by running:
+From there, you must use `salloc` to allocate a SLURM worker node to yourself using the `--qos qos-interactive` parameter, as follows:
 
 ```bash
-squeue
+	$ salloc --qos qos-interactive
 ```
 
-Once you have deteremined the correct name of the worker node, you must ssh into the worker node with the `-XY` parameters, for example:
+This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `salloc` command are 1 task, 1 CPU and 8 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
 
 ```bash
-ssh -XY slwrk-020
+	$ salloc --cpus-per-task=8 --mem=32GB --qos qos-interactive
 ```
 
-You are then able to run a Singularity container and run an interactive CASA session with access to the GUIs. The `casa-stable` and `casameer` Singularity container images contain the X11 tools required for X11 forwarding.
-
-Note that the forwarding of the authentication agent connection will not work from within the worker node when using the `srun` command as this breaks the agent forwarding pipe. You will need an alternative terminal to ssh into the worker node.
-
-Please only use this method for viewing GUI and visualization tools, and do not run any heavy processing within the ssh session on the worker node. Please exit the worker node once you have finished the interactive session in order to return the resources to the slurm pool.
+You are then able to run a Singularity container and run software that provides a GUI.
 
 ## 4. Openstack Cloud Dashboard
 
