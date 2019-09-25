@@ -22,5 +22,8 @@ Some things to note:
 * [Running a Nextflow pipeline on the ilifu standard SLURM setup](https://github.com/grbot/run-fastqc/tree/ilifu).
 * [Launching RStudio in a SLURM job](/tech_docs/software_environments#rstudio)
 
+#### Genome Strip
+Genome strip requires the use of environment modules to configure your software environment, so first follow the instructions to [update your MODULEPATH](/tech_docs/software_environments#environment-modules).
+
 ### Future work and data requirements
 * [CBIO/ilifu compute, storage and transfer setup requirements](http://web.cbio.uct.ac.za/~gerrit/slides/CBIO-Ilifu-compute-storage-and-transfer-setup.pdf).

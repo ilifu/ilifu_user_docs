@@ -552,35 +552,33 @@ The exported environmental variable `R_INSTALL_STAGED=false` in the above script
 
 ## Environment Modules
 
-The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general. What follows here are some specifics to the module environment on ilifu.
+The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general.
 
-### Available modules
-The default set of modules is very sparse and initially simply provides the `lmod`-native modules, i.e.
-```bash
-$ lmod
---------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
-   Core/lmod/6.6    Core/settarg/6.6
-```
+### Checking available modules
 
-CBIO users should add the following to their `~/.bash_profile` file:
-```bash
-export MODULEPATH=/cbio/soft/lmod:${MODULEPATH}
-
-```
-After logging out and in again (or running `. ~/.bash_profile`) more modules will be available, e.g.
+The following is a list of modules available to CBIO users:
+Use the `module avail` command, e.g.
 ```bash
 $ module avail
 
 ------------------------------------------------ /cbio/soft/lmod ------------------------------------------------
-   R/3.6.1    README.md    bio/htslib/1.9    bio/svtoolkit/2.00.1918    jdk/11.0.2    slurm-drmaa/1.1.0
+   R/3.6.1    bio/htslib/1.9    bio/svtoolkit/2.00.1918    jdk/11.0.2    slurm-drmaa/1.1.0
 
 --------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
    Core/lmod/6.6    Core/settarg/6.6
 ```
 
-Now the module can be loaded and used, e.g.
+### Loading and Using modules
+Use the `module add` command, e.g.
 ```bash
-USERNAME@slwrk-101:~$ module load R/3.6.1
+USERNAME@slwrk-101:~$ R --version
+
+Command 'R' not found, but can be installed with:
+
+apt install r-base-core
+Please ask your administrator.
+
+USERNAME@slwrk-101:~$ module add R/3.6.1
 USERNAME@slwrk-101:~$ R --version
 R version 3.6.1 (2019-07-05) -- "Action of the Toes"
 Copyright (C) 2019 The R Foundation for Statistical Computing
@@ -591,4 +589,16 @@ You are welcome to redistribute it under the terms of the
 GNU General Public License versions 2 or 3.
 For more information about these matters see
 https://www.gnu.org/licenses/.
+```
+
+### Checking which modules are loaded
+User the `module list` command, e.g.
+```bash
+USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+No modules loaded
+USERNAME@slwrk-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
+USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+
+Currently Loaded Modules:
+  1) jdk/11.0.2   2) slurm-drmaa/1.1.0   3) bio/htslib/1.9   4) R/3.6.1   5) bio/svtoolkit/2.00.1918
 ```
