@@ -24,11 +24,11 @@ converter can be found in `/carta_share/hdf_convert/run_hdf_converter`. Usage is
 follows:
 
 ```
-/carta_share/hdf_convert/run_hdf_converter {INPUT FITS file} {OUTPUT HDF5 file}
+srun /carta_share/hdf_convert/run_hdf_converter {INPUT FITS file} {OUTPUT HDF5 file}
 ```
 We suggest you perform this conversion with the output file copying straight into a
 carta_share subdirectory, to avoid additional copies, for example:
 ```
-/carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<username>/image.hdf5
+srun /carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<username>/image.hdf5
 
 ```
