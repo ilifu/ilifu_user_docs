@@ -32,3 +32,13 @@ carta_share subdirectory, to avoid additional copies, for example:
 srun /carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<username>/image.hdf5
 
 ```
+
+## Transfer data from the SARAO archive
+
+If you are a project lead or project member of one of the astronomy LSPs or other astronomy projects whose project proposal has been accepted by SARAO and are currently using the ilifu research cloud platform you may need to transfer your observation data from the SARAO archives to the ilifu cluster.
+
+In order to do this, please go to https://archive.sarao.ac.za and register yourself on the SARAO archive. Once you have registered, send an email to archive@ska.ac.za requesting access to your proposal.
+
+The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
+
+Before pushing your data, please make contact with the ilifu support team at support@ilifu.ac.za to notify us of your intention to transfer data. It is important to have an existing project on the ilifu cluster in order for us to make the data available to you and other project members.
