@@ -8,6 +8,8 @@ Transfering astronomy observation data from the SARAO archive is also detailed b
 
 A dedicated transfer node is available at `transfer.ilifu.ac.za` for transfering files using `scp` and `rsync` to and from the ilifu cluster. All users may ssh onto this transfer node.
 
+The `scp` and `rsync` tools are useful to transfer data up to 200 GB, or if you're not expecting to transfer data frequently. For files over 200 GB or for frequent transfer of large files it is recommended to use the Globus Online software below. **Please note that large files should not be copied into your `/users/` directory.**
+
 The following is an example of how to scp from your personal computer to the ilifu cluster. From the terminal on your personal computer:
 
 ```
