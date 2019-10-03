@@ -1,6 +1,8 @@
 # Data transfer to and from the Ilifu Cluster
 
-Transfering of data to and from the ilifu research cloud can be completed using `scp` or `rsync`. For large files the `Globus Online` (using gridftp) software is availabe. Please do not transfer data to and from the ilifu cluster using the SLURM head node as this will significantly diminish the performance of the head node for other users.
+Transfering of data to and from the ilifu research cloud can be completed using `scp` or `rsync`. For large files the `Globus Online` (using gridftp) software is availabe. **Please do not transfer data to and from the ilifu cluster using the SLURM head node as this will significantly diminish the performance of the head node for other users**.
+
+Transfering astronomy observation data from the SARAO archive is also detailed below.
 
 ## Transfer using scp and rsync
 
@@ -12,10 +14,10 @@ The following is an example of how to scp from your personal computer to the ili
 $ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
 ```
 
-This will place the file in your home directory on ilifu. You can also specify an alternative path in the destination, for example:
+The above command will copy the file to your home directory on ilifu. You can also specify an alternative path in the destination, for example:
 
 ```
-$ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts
+$ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts/
 ```
 
 For more information about the `scp` and `rysnc` tools please read the manual pages using `man scp` or `man rysnc` from the command line.
@@ -26,29 +28,29 @@ The `Globus Online` software is available at [https://app.globus.org](https://ap
 
 There are a number of different options for signing in. It may be possible to login using your institution's credentials by searching for your institution's name. Other login options are also available, if you don’t want to link your Globus account to another account, then select `Use Globus ID to sign in` and you’ll be able to create an account specific to Globus.
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_01.png" alt="globus online login" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_01.png" alt="globus online login" width=500 /></div>
 
 After logging in you will be redirected to the [Globus file manager](https://app.globus.org/file-manager).
 
 In the centre of the screen you should see a box labelled `Collection`:
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_02.png" alt="globus online collection" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_02.png" alt="globus online collection" width=500 /></div>
 
 Type in `ilifu` there and the resulting search should point you the the ilifu data transfer node (DTN):
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_03.png" alt="globus online collection ilifu" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_03.png" alt="globus online collection ilifu" width=400 /></div>>
 
 You will then be redirected to a login screen, where you can enter your ilifu credentials:
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_04.png" alt="globus online ilifu login" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_04.png" alt="globus online ilifu login" width=500 /></div>>
 
 You’ll then be redirected to a window where you’ll be able to browse through your home directory on the ilifu system. The ilifu system is only one endpoint of the transfer process. You will need to then set up the source or destination for the tranfer. In order to do this, click on the button in the upper right corner of the file list, and you’ll see a menu displayed:
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_05.png" alt="globus online options menu" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_05.png" alt="globus online options menu" width=200 /></div>
 
 Select `Transfer or Sync to...` to select the other endpoint in your file transfer. This will open up another panel where you’ll need to complete the login process on another node similar to how you logged into the ilifu DTN.
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_06.png" alt="globus online set endpoint" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_06.png" alt="globus online set endpoint" width=600 /></div>>
 
 You can also use Globus to transfer files between ilifu and your desktop using the `Globus Connect Personal`. This software can also be installed on computing clusters. However, for best support and reliability, if the destination you wish to transfer files operates an endpoint already registered with Globus it is highly recommended to use this endpoint instead. Just search for the endpoint in the collections box on the right as before and supply your credentials there.
 
@@ -56,9 +58,9 @@ If your institution does not already have a Globus endpoint, you can setup Globu
 
 Note that by default you may be unable to access paths outside your home directory using Globus Connect Personal for Linux.  Instructions on how to change the accessible paths can be found [here](https://docs.globus.org/faq/globus-connect-endpoints/#how_do_i_configure_accessible_directories_on_globus_connect_personal_for_linux).
 
-Once `Globus Connect Personal` is installed, head back to the `File Browser`, and select the box allowing you to specify the other collection to install.  On the resulting page you should then be able to select the `Your Collections` tab where you should find your `Globus Connect Personal` endpoint.  Select it by clicking on its name - in this case `Test Endpoint`.
+Once `Globus Connect Personal` is installed, head back to the `File Browser`, and select the box allowing you to specify the other collection to install.  On the resulting page you should then be able to select the `Your Collections` tab where you should find your `Globus Connect Personal` endpoint.  Select it by clicking on its name, in this case `Test Endpoint`.
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_07.png" alt="globus online your collections" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_07.png" alt="globus online your collections" width=350 /></div>
 
 You should then see a file browser where you can see your ilifu files on the left, and the files from your other endpoint on the right.
 
@@ -66,15 +68,16 @@ You’ll then be able to start making transfers. The interface here resembles a 
 
 Then shift focus to your other endpoint, by clicking on the greyed out file list. You can then browse around to select your destination, creating a `New Folder` if desired. In the example below we’ve selected the file named `foo` on ilifu to transfer to the `transfer test` folder in my home directory:
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_08.png" alt="globus online transfer example" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_08.png" alt="globus online transfer example" width=650 /></div>>
 
 Then click the **left** `Start` button at the bottom of the page to initiate a transfer to your system from ilifu (the **right** `Start` button will transfer to ilifu instead).
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_09.png" alt="globus online start" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_09.png" alt="globus online start" width=300 />
+</div>>
 
 You should then see a similar message appear on the page as the following:
 
-<img src="http://docs.ilifu.ac.za/_media/data_globus_10.png" alt="globus online activity notification" width=500 />
+<div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_10.png" alt="globus online activity notification" width=600 /></div>
 
 Globus will then inform your by email of the status of your transfer once it’s either failed or completed or you can click `Activity` in the sidebar to monitor its progress.
 
