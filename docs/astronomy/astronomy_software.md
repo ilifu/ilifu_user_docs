@@ -8,9 +8,9 @@ The IDIA Pipelines software has been developed as a tool for calibration and ima
 
 CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visualization and analysis tool designed for the ALMA, the VLA, and the SKA pathfinders. Please see the CARTA [website](https://cartavis.github.io/) and [documentation](https://carta.readthedocs.io/en/latest/) for additional information.
 
-A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za.
+A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za. Your login details are the same as those for Jupyter, which were emailed to you when your ilifu account was set up.
 
-Please contact support@ilifu.ac.za for access to the CARTA server.
+All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact support@ilifu.ac.za if you do not have access.
 
 By default, CARTA will start browsing files in the `/carta_share/users/<your_username>`
 directory, but you can access any files or folders in the /carta_share directory that your ilifu
