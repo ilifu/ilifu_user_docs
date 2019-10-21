@@ -3,7 +3,7 @@
   - [SSH keys](getting_started/ssh.md)
   - [Accessing the ilifu services](getting_started/access_ilifu.md)
   - [Change your password](getting_started/change_password.md)
-  - [Directory structure](data/directory_structure.md)
+  - [Directory structure](getting_started/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
   - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
   - [Using JuypterLab](getting_started/using_jupyterlab.md)
