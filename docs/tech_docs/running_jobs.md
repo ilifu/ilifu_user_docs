@@ -163,7 +163,46 @@ This will place you in an interactive shell (bash) session on a compute node wit
 
 You are then able to run a Singularity container and run software that provides a GUI.
 
-## 4. Openstack Cloud Dashboard
+When attempting to run `salloc` for an interactive session, you may experience a **Permission denied (publickey)** error. This suggests that that authentication-forwarding is not working correctly. If this is the case, you may need to add your ssh key to your authentication profile on your personal computer. To do this, run the following command from the terminal (not logged onto ilifu), for Ubuntu/Linux operating systems:
+
+```bash
+	$ ssh-add -k
+```
+
+or for Mac OS:
+
+```bash
+	$ ssh-add -K
+```
+
+## 4. Specifying Resources when running jobs on SLURM
+
+When running a job using an `sbatch` script or using `srun` or `salloc` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `236 GB RAM`. These are the maximum number of resources that can be requested per node.
+
+If you are running a normal job on SLURM, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job.
+
+If you are running a job with software that utilizes `OpenMP` on SLURM, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS` to specify the number of threads the software will utilize.
+
+If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `236 GB RAM`. 
+
+The following table lists the parameters that can be used to decribe the required resources for your job:
+
+| Syntax                               | Meaning                                        | 
+|--------------------------------------|------------------------------------------------|
+| --mem=&#60;number&#62;               | Minimum amount of memory (default is 8GB)      |
+| --mem-per-cpu=&#60;number&#62;       | Memory per processor core                      | 
+| --cpus-per-task=&#60;number&#62;     | Number of CPUs per task (default is 1)         |
+| --ntasks=&#60;number&#62;            | Number of processes to run (default is 1)      |
+| --nodes=&#60;number&#62;             | Number of nodes on which to run (default is 1) |
+| --ntasks-per-node=&#60;number&#62;   | Number of tasks to invoke on each node         |
+| --partition=&#60;partition_name&#62; | Request specific partition/queue               | 
+
+* a nodes refer to a single compute node or slurm worker, i.e. one node has 32 CPUs and 236 GB RAM
+* a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
+* CPUs refers to the the number of CPUs associated with your job.
+* default parameters, if not specified, include 1 node, 1 task, 1 CPU and 8GB RAM.
+
+## 5. Openstack Cloud Dashboard
 
 The Openstack dashboard is available for certain users at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters.
 
