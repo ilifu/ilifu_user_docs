@@ -1,3 +1,6 @@
+- **News**
+  - [Updates](news/updates.md)
+  - [Alerts](news/alerts.md)
 - **Getting Started**
   - [Request access](getting_started/request_access.md)
   - [SSH keys](getting_started/ssh.md)
