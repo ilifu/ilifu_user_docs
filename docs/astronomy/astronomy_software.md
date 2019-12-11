@@ -43,7 +43,7 @@ Installing a stable version of MeerKATHI on ilifu is a work in progress, as capt
 
 #### Running MeerKATHI on ilifu
 
-Please don't run MeerKATHI on the ilifu login node, but on a compute node, using `sbatch`, `srun`, or `salloc`, as documented [here](/getting_started/submit_job_slurm). If you encouter issues with running MeerKATHI, please consider commenting on the [GitHub issue](https://github.com/ska-sa/meerkathi/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+Please don't run MeerKATHI on the ilifu login node, but on a compute node, using `sbatch`, `srun`, or `salloc`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running MeerKATHI, please consider commenting on the [GitHub issue](https://github.com/ska-sa/meerkathi/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
 
 ## Transfer data from the SARAO archive
