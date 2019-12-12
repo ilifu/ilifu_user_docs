@@ -1,8 +1,8 @@
 ## Astronomy Software
 
-### IDIA Pipelines
+### IDIA Pipeline
 
-The IDIA Pipelines software has been developed as a tool for calibration and imaging of radio data using the ilifu system. Please visit the IDIA Pipeline [website](https://idia-pipelines.github.io/) for additional information, including documentation and tutorials.
+The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration and imaging of radio data using the ilifu system. It is currently a 1GC (cross-calibration) pipeline that runs on ilifu using CASA and SLURM, which is actively being extended to 2GC (self-calibration), as well as being optimised to run more than an order of magnitude faster, with good success so far. Please visit the IDIA Pipeline [website](https://idia-pipelines.github.io/) for additional information, including documentation and tutorials. We strongly encourage you to engage with the developers by reporting any bugs or enhancements to the [GitHub issues page](https://github.com/idia-astro/pipelines/issues).
 
 ### CARTA
 
@@ -32,6 +32,19 @@ carta_share subdirectory, to avoid additional copies, for example:
 srun /carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<username>/image.hdf5
 
 ```
+
+### MeerKATHI
+
+The MeerKAT HI (MeerKATHI) Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments). Please read the documentation [here](https://meerkathi.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/ska-sa/meerkathi).
+
+#### Installing MeerKATHI on ilifu
+
+Installing a stable version of MeerKATHI on ilifu is a work in progress, as captured in [this](https://github.com/ska-sa/meerkathi/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install MeerKATHI in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers.
+
+#### Running MeerKATHI on ilifu
+
+Please don't run MeerKATHI on the ilifu login node, but on a compute node, using `sbatch`, `srun`, or `salloc`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running MeerKATHI, please consider commenting on the [GitHub issue](https://github.com/ska-sa/meerkathi/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+
 
 ## Transfer data from the SARAO archive
 
