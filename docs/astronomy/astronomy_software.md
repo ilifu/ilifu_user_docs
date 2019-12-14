@@ -35,7 +35,7 @@ srun /carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<u
 
 ### MeerKATHI
 
-The MeerKAT HI (MeerKATHI) Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments). Please read the documentation [here](https://meerkathi.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/ska-sa/meerkathi).
+The MeerKAT HI (MeerKATHI) Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments). Please read the documentation [here](https://meerkathi.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/ska-sa/meerkathi). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
 
 #### Installing MeerKATHI on ilifu
 
