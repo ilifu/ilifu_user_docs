@@ -26,7 +26,7 @@ Create a shell script, `my_slurm_script.sh` with the following:
 #SBATCH --error=testjob-%j-stderr.log
 
 echo "Submitting SLURM job"
-singularity exec /data/exp_soft/containers/SF-PY3-bionic.simg python myscript.py
+singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
 ```
 
 The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the  `sbatch --help` command from the terminal to see additional parameters. Other useful parameters include:
