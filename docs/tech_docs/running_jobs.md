@@ -93,7 +93,9 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 ## 3. Interactive Sessions
 
-**No software should be run on the SLURM head node.** Interactive jobs are useful for testing and developing code. 
+**No software should be run on the SLURM head node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
+
+**NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
 
 ### 3.1 Interactive session without X11 support
 
