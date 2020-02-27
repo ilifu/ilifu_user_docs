@@ -42,4 +42,16 @@ CBIO users will be using the CephFS parallel file partition — our space is in 
 
 Please note the [restrictions](/bioinformatics/cbio#restrictions).
 
+### Ilifu directory structure (excluding IDIA and CBIO projects)
+
+* `/ilifu/` - the base directory for all Ilifu related projects.
+
+* `/ilifu/users` - user's directory for storing long-term data and data products that are not project specific.
+
+* `/ilifu/astro/projects/` and `ilifu/bio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
+
+* `/ilifu/software/` - Software not in containers can be installed here.
+
+* `/ilifu/software/containers` - [software containers](https://docs.ilifu.ac.za/#/tech_docs/software_environments?id=singularity-containers) can be stored here. Note there is a sym-link here to the IDIA astronomy containers in `/idia/software/containers`.
+
 
