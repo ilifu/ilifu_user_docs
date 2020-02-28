@@ -5,10 +5,12 @@ Please take note of the following best practices while using the ILIFU cloud com
 1. The head node must only be used for submitting jobs to SLURM.
 2. Do not store large files in your $HOME directory
 3. The /scratch mount is for data processing only. Files must be removed from your /scratch folder once data processing is complete.
-4. Help the SLURM job scheduler by accurately identifying your job's resource requirements.
-5. Help the SLURM job scheduler by accurately determining you job's wall-time.
-6. Use job arrays where possible.
-7. Use Singularity containers on shared storage for your software.
+4. Help the SLURM job scheduler by accurately identifying your job's resource requirements including:
+  a) Total number of nodes and cores required
+  b) Total amount of RAM required
+  c) Total Wall-time required
+5. Use job arrays where possible.
+6. Use Singularity containers on shared storage for your software.
 
 ## Do not run software on the SLURM head node.
 
