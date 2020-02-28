@@ -30,7 +30,7 @@ The SLURM resource pool consists of a finite number of CPUs and memory. Please m
 
 ## Identify the minimum wall-time that is required for your job
 
-When submitting a job, the default wall-time is set to 3 days. It is important to assign a wall-time for your job that is accurate to the length of time you expect your job to run. Setting an accurate wall-time will improve the performance of the cluster scheduler and will reduce overall wait time for jobs. Wall-time for a job can be setting using the `-t` parameter (units in minutes).
+When submitting a job, the default wall-time is set to 3 days. It is important to assign a wall-time for your job that is accurate to the length of time you expect your job to run. Setting an accurate wall-time will improve the performance of the cluster scheduler and will reduce overall wait time for jobs. Wall-time for a job can be set using the `-t` parameter (units in minutes or hours:minutes:seconds or days-hours:minutes:seconds).
 
 ## When submitting multiples of the same job, consider using a SLURM job array
 
