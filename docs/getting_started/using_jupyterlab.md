@@ -18,7 +18,7 @@ The following table lists the available kernels and their related Singularity co
 | ASTRO-PY3                   | SF-PY3-bionic.simg                        |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
-| CASA-6 Alpha                | casa-6-dev.simg                           | 
+| CASA-6                      | casa-6.simg                               | 
 | KERN-2                      | kern-2.img                                |
 | KERN-5                      | kern5.simg                                |
 | PY2                         | python-2.7.img                            | 
