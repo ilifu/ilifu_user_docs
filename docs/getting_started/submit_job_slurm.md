@@ -164,15 +164,20 @@ The following table lists the parameters that can be used to decribe the require
 
 | Syntax                               | Meaning                                        | 
 |--------------------------------------|------------------------------------------------|
-| --mem=&#60;number&#62;*              | Minimum amount of memory (default is 8 GB)      |
+| --mem=&#60;number&#62;*              | Minimum amount of memory (default is 8 GB)     |
 | --mem-per-cpu=&#60;number&#62;*      | Memory per processor core                      | 
 | --cpus-per-task=&#60;number&#62;     | Number of CPUs per task (default is 1)         |
 | --ntasks=&#60;number&#62;            | Number of processes to run (default is 1)      |
 | --nodes=&#60;number&#62;             | Number of nodes on which to run (default is 1) |
 | --ntasks-per-node=&#60;number&#62;   | Number of tasks to invoke on each node         |
-| --partition=&#60;partition_name&#62; | Request specific partition/queue               | 
+| --partition=&#60;partition_name&#62; | Request specific partition/queue               |
+| --time=&#60;minutes&#62;             | Walltime for job                               |
+| --account=&#60;account&#62;          | The account that will be charged for the job   |
 
-**Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
+**Notes**
+* default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
+* While the default for specifying the walltime for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`.
+* To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts.
 
 * a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 236 GB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
