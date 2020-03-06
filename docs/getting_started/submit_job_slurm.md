@@ -162,6 +162,8 @@ Parallelism on the cluster can also occur by distributing work over many tasks t
 
 The following table lists the parameters that can be used to decribe the required resources for your job:
 
+<summary id='slurm-job-parameters'></summary>
+
 | Syntax                                                                             | Meaning                                         | 
 |------------------------------------------------------------------------------------|-------------------------------------------------|
 | --time=&#60;minutes&#62;<sup>1</sup>                                               | Walltime for job                                |
