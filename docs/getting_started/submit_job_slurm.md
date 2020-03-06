@@ -156,7 +156,7 @@ The following table lists the parameters that can be used to decribe the require
 
 | Syntax                                                                             | Meaning                                         | 
 |------------------------------------------------------------------------------------|-------------------------------------------------|
-| --time=&#60;minutes&#62;<sup>1</sup>                                               | Walltime for job                                |
+| --time=&#60;minutes&#62;<sup>1</sup>                                               | Walltime for job (default is 3 days)            |
 | --mem=&#60;number&#62;<sup>2</sup>                                                 | Minimum amount of memory (default is 8 GB)      |
 | --mem-per-cpu=&#60;number&#62;<sup>2,3</sup>                                       | Memory per processor core                       | 
 | --cpus-per-task=&#60;number&#62;<sup>3,4</sup>                                     | Number of CPUs per task (default is 1)          |
@@ -167,7 +167,7 @@ The following table lists the parameters that can be used to decribe the require
 | --account=&#60;account_name&#62;<sup>7</sup>                                       | The account that will be charged for the job    |
 | --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup> | Specify type and number of generic resources    |
 
-*default parameters, if not specified, include 1 node, 1 task, 1 CPU and 8GB RAM, running on the Main partition.*
+*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and 8GB RAM; running on the Main partition for 3 days.*
 
 1. While the default for specifying the walltime for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`.
 2. default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
