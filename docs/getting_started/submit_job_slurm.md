@@ -155,19 +155,20 @@ The following table lists the parameters that can be used to decribe the require
 <summary id='slurm-job-parameters'></summary>
 
 | Syntax                                                                              | Meaning                                         | 
-|-------------------------------------------------------------------------------------|-------------------------------------------------|
-| --time=&#60;minutes&#62;<sup>1</sup>                                                | Walltime for job (default is 3 days)            |
-| --mem=&#60;number&#62;<sup>2,10</sup>                                                  | Minimum amount of memory (default is 8 GB)      |
-| --mem-per-cpu=&#60;number&#62;<sup>2,3,10</sup>                                        | Memory per processor core                       | 
-| --cpus-per-task=&#60;number&#62;<sup>3,4,10</sup>                                      | Number of CPUs per task (default is 1)          |
-| --ntasks=&#60;number&#62;<sup>4</sup>                                               | Number of processes to run (default is 1)       |
-| --nodes=&#60;number&#62;<sup>5,10</sup>                                                | Number of nodes on which to run (default is 1)  |
-| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                    | Number of tasks to invoke on each node          |
-| --partition=&#60;partition_name&#62;<sup>6</sup>                                    | Request specific partition/queue (default Main) |
-| --account=&#60;account_name&#62;<sup>7</sup>                                        | The account that will be charged for the job    |
-| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup> | Specify type and number of generic resources    |
-| --output=&#60;filename&#62;<sup>9</sup>                                             | File to write standard output to                |
-| --error=&#60;filename&#62;<sup>9</sup>                                              | File to write standard error output to          |
+|--------------------------------------------------------------------------------------|-------------------------------------------------|
+| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 days)            |
+| --mem=&#60;number&#62;<sup>2,10</sup>                                                | Minimum amount of memory (default is 8 GB)      |
+| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core                       | 
+| --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)          |
+| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)       |
+| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)  |
+| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node          |
+| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main) |
+| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job    |
+| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources    |
+| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                |
+| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to          |
+| --account=&#60;account_name&#62;<sup>10</sup>                                        | Account against which your jobs are charged     |
 
 *default parameters, if not specified, include: 1 node; 1 task; 1 CPU and 8GB RAM; running on the Main partition for 3 days.*
 
@@ -180,7 +181,8 @@ The following table lists the parameters that can be used to decribe the require
 7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
 9. The filename can include `%j` which will be substituted with the job's ID.
-10. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
+10. Most users can leave this parameter, however if you are working in more than one project you should set this to the appropriate account. To check your default account you can run the command `sacctmgr show users format=User,DefaultAccount -P | grep ${USER}`. If you wish to check all accounts associated with your username you can run the command `sacctmgr show association format=Account,User -P | grep ${USER}`.
+11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
 
 
 ### Notes for GPU jobs.
