@@ -155,31 +155,35 @@ The following table lists the parameters that can be used to decribe the require
 <summary id='slurm-job-parameters'></summary>
 
 | Syntax                                                                              | Meaning                                         | 
-|-------------------------------------------------------------------------------------|-------------------------------------------------|
-| --time=&#60;minutes&#62;<sup>1</sup>                                                | Walltime for job (default is 3 days)            |
-| --mem=&#60;number&#62;<sup>2</sup>                                                  | Minimum amount of memory (default is 8 GB)      |
-| --mem-per-cpu=&#60;number&#62;<sup>2,3</sup>                                        | Memory per processor core                       | 
-| --cpus-per-task=&#60;number&#62;<sup>3,4</sup>                                      | Number of CPUs per task (default is 1)          |
-| --ntasks=&#60;number&#62;<sup>4</sup>                                               | Number of processes to run (default is 1)       |
-| --nodes=&#60;number&#62;<sup>5</sup>                                                | Number of nodes on which to run (default is 1)  |
-| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                    | Number of tasks to invoke on each node          |
-| --partition=&#60;partition_name&#62;<sup>6</sup>                                    | Request specific partition/queue (default Main) |
-| --account=&#60;account_name&#62;<sup>7</sup>                                        | The account that will be charged for the job    |
-| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup> | Specify type and number of generic resources    |
-| --output=&#60;filename&#62;<sup>9</sup>                                             | File to write standard output to                |
-| --error=&#60;filename&#62;<sup>9</sup>                                              | File to write standard error output to          |
+|--------------------------------------------------------------------------------------|----------------------------------------------------|
+| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 days)               |
+| --mem=&#60;number&#62;<sup>2,10</sup>                                                | Minimum amount of memory (default is 8 GB)         |
+| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core                          | 
+| --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)             |
+| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)          |
+| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)     |
+| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node             |
+| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main)    |
+| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job       |
+| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources       |
+| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                   |
+| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to             |
+| --mail-user=&#60;email_address&#62;<sup>10</sup>                                     | email address where notifications should be sent   |
+| --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification |
 
 *default parameters, if not specified, include: 1 node; 1 task; 1 CPU and 8GB RAM; running on the Main partition for 3 days.*
 
-1. While the default for specifying the walltime for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`.
-2. default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
+1. While the default for specifying the wall-time for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`. Wall-time is the estimated amount of time that you expect your job to run. It is important for the scheduler to know this parameter so that it can make realistic estimates on when jobs are due to start and end. This is especially critical for your short jobs as it can allow them to run earlier when a node would otherwise be idle waiting for a large job to start. Note, however, that underestimating wall-time means that once your job has exceeded its limit, it will be killed. So it’s better to slightly overestimate the amount of time, especially taking into account that the runtime of jobs can vary a bit due to overall system load.
+2. The default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`. This parameter is especially important in jobs where you are not using the whole node, i.e. jobs using fewer than 32 cores, as this allows other jobs to run alongside yours and make more efficient use of the resources. 
 3. CPUs refers to the the number of CPUs associated with your job.
 4. a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
 5. nodes refers to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 236 GB RAM
 6. The partition is the specific part of the cluster your job will run. You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
-7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts.
+7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
 9. The filename can include `%j` which will be substituted with the job's ID.
+10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
+11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
 
 
 ### Notes for GPU jobs.
