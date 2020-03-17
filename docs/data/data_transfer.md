@@ -1,6 +1,6 @@
 # Data transfer to and from the ilifu Cluster
 
-Transferring of data to and from the ilifu research cloud can be completed using `Globus`, `scp` or `rsync`. For large files the `Globus Online` software is recommended, which uses efficient GridFTP transfer protocols. **Please do not transfer data to and from the ilifu cluster using the SLURM head node, as this will significantly diminish the performance of the head node for other users**.
+Transferring of data to and from the ilifu research cloud can be completed using `Globus`, `scp` or `rsync`. For large files the `Globus Online` software is recommended, which uses efficient GridFTP transfer protocols. **Please do not transfer data to and from the ilifu cluster using the SLURM login node, as this will significantly diminish the performance of the login node for other users**.
 
 Transferring astronomy observation data from the SARAO archive is also detailed [below](#transfer-data-from-the-sarao-archive).
 
@@ -102,3 +102,21 @@ Before pushing your data, it is important to have an existing project on the ili
 In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to https://archive.sarao.ac.za and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
 
 The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
+
+#### MVF to MS configuration
+
+In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. It is important to note that currently (March 2020):
+
+1. Only a single transfer is allowed per MS<sup>1</sup>
+2. Newer transfers (manually done following instructions below) overwrite older data<sup>1</sup>
+3. Transfers are MS by default<sup>2</sup>
+
+Discussions to optimise this process are ongoing. For now, we suggest that users transfer only a single MS per dataset, and set `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Using `--quack=1` (to discard the first dump) may also be desirable. Conversion options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and flagging options [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
+
+<sup>1</sup> After a dataset has been transferred, the SARAO archive sets a flag that prevents that same dataset from being downloaded to the same destination. If you must re-transfer your data, and the archive disallows another transfer (orange arrow labelled 'IDIA'), firstly contact [ilifu support](mailto:support@ilifu.ac.za) to rename (or remove) your data, and then contact the [SARAO archive](mailto:archive@ska.ac.za) to reset the flag.
+
+<sup>2</sup>Transfers of data in the native MeerKAT format (MFV / MKV4) can also be arranged by contacting the [SARAO archive](mailto:archive@ska.ac.za).
+
+#### Changes to flagging
+
+On 26 November 2019, the default [flags](https://archive.sarao.ac.za/statics/sdp_flags.pdf) were updated to `cam,data_lost,ingest_rfi`, whereas previously, particularly for MeerKAT Open Time Projects (OTPs), they included the full set of flags, with ~30% of the raw target data typically being flagged, or sometimes up to ~90%. Users affected by this can re-transfer the data following the instructions in the [section above](#mvf-to-ms-configuration). Data older than the OTPs may be affected in different ways, as the archive and its functionality were still being built. Newer transfers can configure these flags using the SARAO archive functionality described in the [section above](#mvf-to-ms-configuration).

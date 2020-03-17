@@ -4,7 +4,7 @@ There are two main ilifu service platforms, including the SLURM batch scheduler 
 
 ## SLURM batch scheduler
 
-SLURM is a job scheduling system. It consists of a single head node and many worker nodes. The head node is likened to a controller and manages the cluster resources and job submissions. 
+SLURM is a job scheduling system. It consists of a single login node and many worker nodes. The login node is likened to a controller and manages the cluster resources and job submissions. 
 
 The SLURM system can be accessed via `ssh` at `slurm.ilifu.ac.za`. 
 
@@ -12,7 +12,7 @@ The SLURM system can be accessed via `ssh` at `slurm.ilifu.ac.za`.
 $ ssh <username>@slurm.ilifu.ac.za
 ```
 
-This will place the user on the head node. Note that this node should only be used to submit and manage jobs and not for running code or software directly. The worker nodes are where jobs are run, either through submitting a batch script that describes the job to be executed, or interactively running applications on a worker node. See [Submitting a job on SLURM](getting_started/submit_job_slurm.md) for more information on how to do this.
+This will place the user on the login node. Note that this node should only be used to submit and manage jobs and not for running code or software directly. The worker nodes are where jobs are run, either through submitting a batch script that describes the job to be executed, or interactively running applications on a worker node. See [Submitting a job on SLURM](getting_started/submit_job_slurm.md) for more information on how to do this.
 
 
 ## JupyterLab

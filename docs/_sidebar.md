@@ -8,7 +8,7 @@
   - [Directory structure](getting_started/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
   - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
-  - [Using JuypterLab](getting_started/using_jupyterlab.md)
+  - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
   - [Best Practices](getting_started/best_practices.md)
   - [Next Steps](getting_started/next_steps.md)

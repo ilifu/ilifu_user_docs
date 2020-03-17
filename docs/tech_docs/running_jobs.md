@@ -93,13 +93,13 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 ## 3. Interactive Sessions
 
-**No software should be run on the SLURM head node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
+**No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
 
 **NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
 
 ### 3.1 Interactive session without X11 support
 
-For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM head node:
+For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
 
 ```shell
 	$ srun --pty bash
@@ -145,7 +145,7 @@ An example work flow for an interactive session can be described as follows:
 
 ### 3.2 Interactive session with X11 support
 
-In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM head node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM head node, for example:
+In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM login node, for example:
 
 ```bash
 	$ ssh -YA <username>@slurm.ilifu.ac.za

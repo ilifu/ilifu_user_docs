@@ -2,7 +2,7 @@
 
 Please take note of the following best practices while using the ILIFU cloud computing services.
 
-1. The head node must only be used for submitting jobs to SLURM.
+1. The login node must only be used for submitting jobs to SLURM.
 2. Do not store large files in your $HOME directory
 3. The /scratch mount is for data processing only. Files must be removed from your /scratch folder once data processing is complete.
 4. Help the SLURM job scheduler by accurately identifying your job's resource requirements.
@@ -10,9 +10,9 @@ Please take note of the following best practices while using the ILIFU cloud com
 3. Use job arrays where possible.
 4. Use Singularity containers on shared storage for your software.
 
-## Do not run software on the SLURM head node.
+## Do not run software on the SLURM login node.
 
-When you ssh into the SLURM cluster you will be on the SLURM head node. The purpose of the head node is to manage job submissions. Please do not run any software on the SLURM head node as this can reduce performance of the SLURM service and affect performance for other users. 
+When you ssh into the SLURM cluster you will be on the SLURM login node. The purpose of the login node is to manage job submissions. Please do not run any software on the SLURM login node as this can reduce performance of the SLURM service and affect performance for other users. 
 
 To submit jobs to the SLURM job queue use either [srun](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_3-interactive-sessions) or [sbatch](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_2-slurm-batch-scheduler) commands, or use the [srun](https://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=_3-interactive-sessions) command to allocate a worker node for an interactive session.
 
