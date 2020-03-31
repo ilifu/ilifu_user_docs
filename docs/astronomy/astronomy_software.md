@@ -10,7 +10,7 @@ CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visuali
 
 A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za. Your login details are the same as those for Jupyter, which were emailed to you when your ilifu account was set up.
 
-All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw​) or file an issue on [Github](​https://github.com/CARTAvis/carta/issues/).
+All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw) or file an issue on [Github](https://github.com/CARTAvis/carta/issues).
 
 By default, CARTA will start browsing files in the `/carta_share/users/<your_username>`
 directory, but you can access any files or folders in the /carta_share directory that your ilifu
@@ -52,7 +52,7 @@ If you are a principal investigator (PI) or member of one of the MeerKAT project
 
 Before pushing your data, it is important to have an existing project on the ilifu cluster in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data.
 
-In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to https://archive.sarao.ac.za and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
+In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
 
 The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
 
