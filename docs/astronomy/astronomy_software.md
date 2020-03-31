@@ -6,11 +6,11 @@ The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration 
 
 ### CARTA
 
-CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visualization and analysis tool designed for the ALMA, the VLA, and the SKA pathfinders. Please see the CARTA [website](https://cartavis.github.io/) and [documentation](https://carta.readthedocs.io/en/latest/) for additional information.
+CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visualization and analysis tool designed for ALMA, the VLA, and the SKA pathfinders. Please see the CARTA [website](https://cartavis.github.io/) and [documentation](https://carta.readthedocs.io/en/latest/) for additional information.
 
 A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za. Your login details are the same as those for Jupyter, which were emailed to you when your ilifu account was set up.
 
-All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact support@ilifu.ac.za if you do not have access.
+All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw​) or file an issue on [Github](​https://github.com/CARTAvis/carta/issues/).
 
 By default, CARTA will start browsing files in the `/carta_share/users/<your_username>`
 directory, but you can access any files or folders in the /carta_share directory that your ilifu
@@ -18,18 +18,18 @@ user can access. Unlike previous versions of CARTA, v1.2 relies on unix permissi
 want other users to have access to specific files, you can change the file permissions of
 those files or folders.
 
-While CARTA v1.2 supports `FITS`, `CASA`, and `Miriad` images as well, we strongly suggest
+While CARTA supports `FITS`, `CASA`, and `Miriad` images as well, we strongly suggest
 converting your files to `HDF5` (IDIA schema) files for improved performance. The HDF5
 converter can be found in `/carta_share/hdf_convert/run_hdf_converter`. Usage is as
 follows:
 
 ```
-srun /carta_share/hdf_convert/run_hdf_converter {INPUT FITS file} {OUTPUT HDF5 file}
+srun /carta_share/hdf_convert/run_hdf_converter -o {OUTPUT HDF5 file} {INPUT FITS file}
 ```
 We suggest you perform this conversion with the output file copying straight into a
 carta_share subdirectory, to avoid additional copies, for example:
 ```
-srun /carta_share/hdf_convert/run_hdf_converter image.fits /carta_share/users/<username>/image.hdf5
+srun /carta_share/hdf_convert/run_hdf_converter -o /carta_share/users/<username>/image.hdf5 image.fits
 
 ```
 
@@ -56,7 +56,7 @@ In order to push your data from SARAO to ilifu, a PI, or a representative that a
 
 The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
 
-#### MVF to MS configuration
+### MVF to MS configuration
 
 In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. It is important to note that currently (March 2020):
 
@@ -70,6 +70,6 @@ Discussions to optimise this process are ongoing. For now, we suggest that users
 
 <sup>2</sup>Transfers of data in the native MeerKAT format (MFV / MKV4) can also be arranged by contacting the [SARAO archive](mailto:archive@ska.ac.za).
 
-#### Changes to flagging
+### Changes to flagging
 
 On 26 November 2019, the default [flags](https://archive.sarao.ac.za/statics/sdp_flags.pdf) were updated to `cam,data_lost,ingest_rfi`, whereas previously, particularly for MeerKAT Open Time Projects (OTPs), they included the full set of flags, with ~30% of the raw target data typically being flagged, or sometimes up to ~90%. Users affected by this can re-transfer the data following the instructions in the [section above](#mvf-to-ms-configuration). Data older than the OTPs may be affected in different ways, as the archive and its functionality were still being built. Newer transfers can configure these flags using the SARAO archive functionality described in the [section above](#mvf-to-ms-configuration).

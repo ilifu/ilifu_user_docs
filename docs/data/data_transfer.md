@@ -103,7 +103,7 @@ In order to push your data from SARAO to ilifu, a PI, or a representative that a
 
 The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
 
-#### MVF to MS configuration
+### MVF to MS configuration
 
 In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. It is important to note that currently (March 2020):
 
@@ -117,6 +117,6 @@ Discussions to optimise this process are ongoing. For now, we suggest that users
 
 <sup>2</sup>Transfers of data in the native MeerKAT format (MFV / MKV4) can also be arranged by contacting the [SARAO archive](mailto:archive@ska.ac.za).
 
-#### Changes to flagging
+### Changes to flagging
 
 On 26 November 2019, the default [flags](https://archive.sarao.ac.za/statics/sdp_flags.pdf) were updated to `cam,data_lost,ingest_rfi`, whereas previously, particularly for MeerKAT Open Time Projects (OTPs), they included the full set of flags, with ~30% of the raw target data typically being flagged, or sometimes up to ~90%. Users affected by this can re-transfer the data following the instructions in the [section above](#mvf-to-ms-configuration). Data older than the OTPs may be affected in different ways, as the archive and its functionality were still being built. Newer transfers can configure these flags using the SARAO archive functionality described in the [section above](#mvf-to-ms-configuration).

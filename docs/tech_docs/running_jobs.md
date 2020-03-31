@@ -25,7 +25,7 @@ This will bring you to the page with the `Stop My Server` option, where you can 
 
 <img src="http://docs.ilifu.ac.za/_media/stop_server_button.png" alt="stop server button" width=600 />
 
-Once you have logged into JupyterLab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run. 
+Once you have logged into JupyterLab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run.
 
 There are kernels for both Python and R languages. The different kernels include different software stacks, such as the `CASA-#` kernels that contain Python wrapped CASA tasks which can be executed within the notebook, or the `ASTRO-PY3` kernel which contains an assortment of astronomy related software and Python packages. Once you have selected a kernel a notebook will be created. You can change the kernel from within the notebook by going `Kernel > Change Kernel...` from the top menu bar, or by clicking the kernel name on the top right side of the notebook panel, next to the kernel indicator circle.
 
@@ -38,17 +38,17 @@ will provide you with the path of your current work directory.
 
 The following table lists the available kernels and their related Singularity containers:
 
-| Kernel name                 | Container                                 | 
+| Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
 | ASTRO-PY3                   | SF-PY3-bionic.simg                        |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
-| CASA-6 Alpha                | casa-6-dev.simg                           | 
+| CASA-6 Alpha                | casa-6-dev.simg                           |
 | KERN-2                      | kern-2.img                                |
 | KERN-5                      | kern5.simg                                |
-| PY2                         | python-2.7.img                            | 
+| PY2                         | python-2.7.img                            |
 | PY3                         | python-3.6.img                            |
-| Python 3                    | System Python (not a container)           | 
+| Python 3                    | System Python (not a container)           |
 | SF-PY2                      | source-finding.img                        |
 | SF-PY3                      | SF-PY3-bionic.simg                        |
 
@@ -107,7 +107,7 @@ For an interative session on the SLURM cluster the `srun` command can be used as
 
 This will place you in an interactive shell (bash) session on a compute node. The `--pty` parameter provides a psuedo-terminal which allows interactivity. The default resources allocated by the `srun` command are 1 task, 1 CPU and 8 GB RAM. Run the `srun --help` command to see additional parameters. Similar parameters to the sbatch script above can be used to define the resources allocated to your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session, or utilizing Nextflow.
 
-You are able to directly run Singularity containers or software within containers using the srun command, for example: 
+You are able to directly run Singularity containers or software within containers using the srun command, for example:
 
 ```shell
 	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
@@ -127,14 +127,14 @@ Incidently, you can also submit non-interactive jobs to SLURM using the `srun` c
 
 This will run the Python script `myscript.py` using the SF-PY3-bionic container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
 
-Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include: 
+Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
 
-| Syntax/keyboard shortcut               | Action                                    | 
+| Syntax/keyboard shortcut               | Action                                    |
 |----------------------------------------|-------------------------------------------|
-| tmux                                   | start new tmux session                    | 
-| tmux ls                                | list currently active tmux sessions       | 
-| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          | 
-| ctrl/cmd-b + d                         | detach from current tmux session          | 
+| tmux                                   | start new tmux session                    |
+| tmux ls                                | list currently active tmux sessions       |
+| tmux attach -t &#60;session_name&#62;| attach to an active tmux session          |
+| ctrl/cmd-b + d                         | detach from current tmux session          |
 | ctrl/cmd-b + [                         | scroll current terminal                   |
 
 An example work flow for an interactive session can be described as follows:
@@ -177,7 +177,7 @@ or for Mac OS:
 	$ ssh-add -K
 ```
 
-## Specifying Resources when running jobs on SLURM
+## 4. Specifying Resources when running jobs on SLURM
 
 When running a job using an `sbatch` script or using `srun` or `salloc` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `236 GB RAM`. These are the maximum number of resources that can be requested per node.
 
@@ -185,19 +185,19 @@ If you are running a normal job on SLURM, **without** `MPI` or `OpenMP`, your jo
 
 Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on SLURM, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `236 GB RAM`. 
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `236 GB RAM`.
 
 The following table lists the parameters that can be used to decribe the required resources for your job:
 
-| Syntax                               | Meaning                                        | 
+| Syntax                               | Meaning                                        |
 |--------------------------------------|------------------------------------------------|
 | --mem=&#60;number&#62;*              | Minimum amount of memory (default is 8 GB)      |
-| --mem-per-cpu=&#60;number&#62;*      | Memory per processor core                      | 
+| --mem-per-cpu=&#60;number&#62;*      | Memory per processor core                      |
 | --cpus-per-task=&#60;number&#62;     | Number of CPUs per task (default is 1)         |
 | --ntasks=&#60;number&#62;            | Number of processes to run (default is 1)      |
 | --nodes=&#60;number&#62;             | Number of nodes on which to run (default is 1) |
 | --ntasks-per-node=&#60;number&#62;   | Number of tasks to invoke on each node         |
-| --partition=&#60;partition_name&#62; | Request specific partition/queue               | 
+| --partition=&#60;partition_name&#62; | Request specific partition/queue               |
 
 **Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
 
