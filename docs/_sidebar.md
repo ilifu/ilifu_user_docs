@@ -5,7 +5,7 @@
   - [SSH keys](getting_started/ssh.md)
   - [Accessing the ilifu services](getting_started/access_ilifu.md)
   - [Change your password](getting_started/change_password.md)
-  - [Directory structure](getting_started/directory_structure.md)
+  - [Directory structure](data/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
   - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
@@ -13,8 +13,6 @@
   - [Best Practices](getting_started/best_practices.md)
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
-  - [Best practices](tech_docs/best_practices.md)
-  - [Directory Structure](data/directory_structure.md)
   - [Astronomy](astronomy/astronomy_software.md)
   - [Bioinformatics](bioinformatics/cbio.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
