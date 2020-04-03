@@ -22,7 +22,7 @@ The JupyterLab service can be accessed via a web browser at `https://jupyter.ili
 After logging into the JupyterLab service, one must select the type of node on which to run Jupyter.  The user is presented with a drop-down list with various options, and should choose the smallest node that will provide sufficient resources for the task at hand:
 ![dropdown](http://docs.ilifu.ac.za/_media/profile_dropdown_options.png)
 
-Each node will be terminated after a preset interval of time (currently 3 days), however the users' Jupyter environment is saved in their home directory, so when a new Jupyter VM is spawned the workspace is recreated. Some data is also persisted in the notebook file. A user can terminate the VM in order to free up resources on the cloud, or to choose a different VM size.  This is done by choosing the `Hub > Control Panel` option from the top menu bar of JupyterLab:
+Each node will be terminated after a preset interval of time (currently 3 days), however the users' Jupyter environment is saved in their home directory, so when a new Jupyter VM is spawned the workspace is recreated. Some data is also persisted in the notebook file. A user can terminate the VM in order to free up resources on the cloud, or to choose a different VM size.  This is done by choosing the `File > Hub Control Panel` option from the top menu bar of JupyterLab:
 
 <img src="http://docs.ilifu.ac.za/_media/hub_selection.png" alt="menu bar options" width=500 />
 
