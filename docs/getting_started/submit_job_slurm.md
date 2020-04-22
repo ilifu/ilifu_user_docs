@@ -173,10 +173,13 @@ The following table lists the parameters that can be used to describe the requir
 
 ### Notes for GPU jobs.
 
-If you wish to run a job on the GPU node you need to specify both the `GPU` partition and you need to specify the number of GPU resources you require with the `--gres` option. i.e. your sbatch script will have something like the following lines in the header:
-```code bash
+If you wish to run a job on the GPU node you need to specify the `GPU` partition, <!-- and you need to specify the number of GPU resources you require with the `--gres` option. -->i.e. your sbatch script will have something like the following lines in the header:
+<!--```code bash
 #SBATCH --partition=GPU
 #SBATCH --gres=gpu:p100:1
+```-->
+```code bash
+#SBATCH --partition=GPU
 ```
 
 Note that the 3 GPU nodes only have 2 GPUs each, so you must use either `--gres=gpu:p100:1` or `--gres=gpu:p100:2`.
