@@ -183,5 +183,5 @@ If you wish to run a job on the GPU node you need to specify the `GPU` partition
 #SBATCH --partition=GPU
 ```
 
-Note that the 3 GPU nodes only have 2 GPUs each, so you must use either `--gres=gpu:p100:1` or `--gres=gpu:p100:2`.
+<!-- Note that the 3 GPU nodes only have 2 GPUs each, so you must use either `--gres=gpu:p100:1` or `--gres=gpu:p100:2`. -->
 
