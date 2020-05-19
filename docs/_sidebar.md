@@ -18,7 +18,7 @@
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
-  - [Openstack flavours](openstack/flavours.md)
+  - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
@@ -26,3 +26,4 @@
   - [Requesting Help](help/requesting_help.md)
 - **About**
   - [What is ilifu?](about/what_is.md)
+  - [Acknowledgement](about/acknowledgement.md)
