@@ -193,7 +193,7 @@ The following table lists the parameters that can be used to describe the requir
 
 | Syntax                                                                               | Meaning                                         			|
 |--------------------------------------------------------------------------------------|----------------------------------------------------	|
-| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 days)               	|
+| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)               	|
 | --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node (default is ~7 GB)	|
 | --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)											|
 | --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)             	|
@@ -209,7 +209,7 @@ The following table lists the parameters that can be used to describe the requir
 | --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification 	|
 <!-- also include row for array jobs -->
 
-*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.375 GB); running on the Main partition for 3 days.*
+*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.375 GB); running on the Main partition for 3 hrs.*
 
 1. While the default for specifying the wall-time for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`. Wall-time is the estimated amount of time that you expect your job to run. It is important for the scheduler to know this parameter so that it can make realistic estimates on when jobs are due to start and end. This is especially critical for your short jobs as it can allow them to run earlier when a node would otherwise be idle waiting for a large job to start. Note, however, that underestimating wall-time means that once your job has exceeded its limit, it will be killed. So it’s better to slightly overestimate the amount of time, especially taking into account that the runtime of jobs can vary a bit due to overall system load.
 2. The default units for memory is MB, but can be specified explicitly in GB, for example `--mem=16GB`. This parameter is especially important in jobs where you are not using the whole node, i.e. jobs using fewer than 32 cores, as this allows other jobs to run alongside yours and make more efficient use of the resources.
@@ -222,10 +222,3 @@ The following table lists the parameters that can be used to describe the requir
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
 11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
-
-
-## 5. Openstack Cloud Dashboard
-
-The Openstack dashboard is available for certain users at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters.
-
-<img src="http://docs.ilifu.ac.za/_media/dashboard_view.png" alt="openstack dashboard" width=600 />

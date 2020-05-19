@@ -26,9 +26,9 @@ Your home directory is located at `/users/`. This directory is part of a mount t
 
 The `/scratch` mount is used for data processing. Files should only be in your `/scratch/users` folder while you are processing data. Once you have finished processing data on the `/scratch` mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
 
-## Identify the minimum resources that are required for your job
+## Identify the approriate resources that are required for your job
 
-The SLURM resource pool consists of a finite number of CPUs and memory. Please make sure to use the minimum resources required to run your task or job. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the minimum resources required. For more information, see [how to specify job resources](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm).
+The SLURM resource pool consists of a finite number of CPUs and memory. Please make sure to use the appropriate quantity of resources required to run your task or job, i.e. do not request resources in excess of your requirements. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the appropriate resources required. For more information, see [how to specify job resources](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm).
 
 ## Identify the minimum wall-time that is required for your job
 

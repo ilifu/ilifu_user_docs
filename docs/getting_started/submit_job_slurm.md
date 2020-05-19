@@ -154,9 +154,9 @@ The following table lists the parameters that can be used to describe the requir
 
 | Syntax                               | Meaning                                        |
 |--------------------------------------|------------------------------------------------|
-| --time=&#60;minutes&#62;						 | Walltime for job (default is 3 days)           |
-| --mem=&#60;number&#62;*              | Maximum amount of memory (default is ~7 GB)		|
-| --mem-per-cpu=&#60;number&#62;*      | Memory per processor core (CPU)								|
+| --time=&#60;minutes&#62;             | Walltime for job (default is 3 hrs)            |
+| --mem=&#60;number&#62;*              | Maximum amount of memory (default is ~7 GB)    |
+| --mem-per-cpu=&#60;number&#62;*      | Memory per processor core (CPU)                |
 | --cpus-per-task=&#60;number&#62;     | Number of CPUs per task (default is 1)         |
 | --ntasks=&#60;number&#62;            | Number of processes to run (default is 1)      |
 | --nodes=&#60;number&#62;             | Number of nodes on which to run (default is 1) |
@@ -168,7 +168,7 @@ The following table lists the parameters that can be used to describe the requir
 * a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 236 GB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
-* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.375 GB); running on the Main partition for 3 days.
+* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.375 GB); running on the Main partition for 3 hrs.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
 
 ### Notes for GPU jobs.
