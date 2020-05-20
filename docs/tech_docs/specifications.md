@@ -1,4 +1,4 @@
-# Specifications
+# System Specifications
 
 The following resources are available within the ilifu cluster.
 
