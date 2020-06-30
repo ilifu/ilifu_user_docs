@@ -6,16 +6,14 @@ Please make use of the following acknowledgement statements where appropriate.
 
 ## ilifu Acknowledgement
 
-We acknowledge the use of the ilifu cloud computing facility - www.ilifu.ac.za. ilifu is hosted at the University of Cape Town (UCT) as a partnership between the University of Cape Town, the University of the Western Cape, the University of Stellenbosch, Sol Plaatje University, the Cape Peninsula University of Technology and the South African Radio Astronomy Observatory. The Ilifu facility is supported by contributions from the Inter-University Institute for Data Intensive Astronomy (IDIA - a partnership between the University of Cape Town, the University of Pretoria and the University of the Western Cape), the Computational Biology division at UCT and the Data Intensive Research Initiative of South Africa (DIRISA).
+We acknowledge the use of the ilifu cloud computing facility - www.ilifu.ac.za, a partnership between the University of Cape Town, the University of the Western Cape, the University of Stellenbosch, Sol Plaatje University, the Cape Peninsula University of Technology and the South African Radio Astronomy Observatory. The Ilifu facility is supported by contributions from the Inter-University Institute for Data Intensive Astronomy (IDIA - a partnership between the University of Cape Town, the University of Pretoria and the University of the Western Cape), the Computational Biology division at UCT and the Data Intensive Research Initiative of South Africa (DIRISA).
 
 ## Use of IDIA Software & Facilities
 
-This work was carried out [in part] using the data processing pipelines developed at the Inter-University Institute for Data Intensive Astronomy (IDIA). IDIA is a partnership of the Universities of Cape Town, the University of Pretoria and the University of the Western Cape.
+This work was carried out using the data processing pipelines developed at the Inter-University Institute for Data Intensive Astronomy (IDIA) and available at https://idia-pipelines.github.io. IDIA is a partnership of the University of Cape Town, the University of Pretoria and the University of the Western Cape.
 
-[Part of] This work made use of the Inter-University Institute for Data Intensive Astronomy (IDIA) visualization lab. IDIA is a partnership of the Universities of Cape Town, the University of Pretoria and the University of the Western Cape.
+This work made use of the Inter-University Institute for Data Intensive Astronomy (IDIA) visualization lab https://vislab.idia.ac.za. IDIA is a partnership of the University of Cape Town, the University of Pretoria and the University of the Western Cape.
 
 ## Use of CARTA software
 
-Please use the following DOI as a citation when using CARTA for publications.
-
-[DOI 10.5281/zenodo.3377984](https://doi.org/10.5281/zenodo.3377984)
+This work made use of the CARTA (Cube Analysis and Rendering Tool for Astronomy) software (DOI 10.5281/zenodo.3377984 - https://cartavis.github.io).
