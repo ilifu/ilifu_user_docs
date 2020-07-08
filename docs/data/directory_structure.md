@@ -18,7 +18,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 * `/idia/` - the base directory for all IDIA related projects.
 
-* `/idia/users` - user's directory for storing long-term data and data products that are not project specific.
+* `/idia/users` - user's personal workspace, for storing longer-term data and data products.
 
 * `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
 
@@ -46,7 +46,7 @@ Please note the [restrictions](/bioinformatics/cbio#restrictions).
 
 * `/ilifu/` - the base directory for all ilifu related projects.
 
-* `/ilifu/users` - user's private scratch space.
+* `/ilifu/users` - user's personal workspace.
 
 * `/ilifu/astro/projects/` and `ilifu/bio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project raw data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. It is recommended that raw data folders should always be read-only.
 
