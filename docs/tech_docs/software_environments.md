@@ -1,3 +1,23 @@
+- [Supported Software Environments](#supported-software-environments)
+  - [Singularity Containers](#singularity-containers)
+    - [Using a container](#using-a-container)
+      - [1. Interactive shell command](#1-interactive-shell-command)
+      - [2. Exec command](#2-exec-command)
+      - [3. Run command](#3-run-command)
+    - [Available containers](#available-containers)
+    - [Building your own container](#building-your-own-container)
+    - [Using a custom container as a Jupyter kernel](#using-a-custom-container-as-a-jupyter-kernel)
+    - [RStudio](#rstudio)
+      - [Running R](#running-r)
+      - [Running Rscript](#running-rscript)
+      - [Running RStudio Server](#running-rstudio-server)
+        - [How to launch RStudio Server](#how-to-launch-rstudio-server)
+        - [Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)](#old-way-of-launching-rstudio-server-you-may-need-this-if-youre-using-one-of-the-older-cbio-rstudio-images)
+  - [Environment Modules](#environment-modules)
+    - [Checking available modules](#checking-available-modules)
+    - [Loading and Using modules](#loading-and-using-modules)
+    - [Checking which modules are loaded](#checking-which-modules-are-loaded)
+
 # Supported Software Environments
 
 For Astronomy, IDIA provides a number of supported software environments on ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
@@ -433,6 +453,47 @@ singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.sim
 
 #### Running RStudio Server
 
+##### How to launch RStudio Server
+
+RStudio has been updated to be used simply via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
+
+The procedure is to start an interactive job, add the RStudio module and run the  `rstudio` as below:
+
+```bash
+USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
+USERNAME@slwrk-101:~$ module add R/RStudio1.2.5042-R4.0.0
+USERNAME@slwrk-101:~$ rstudio
+The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It is: lMoV0akqQu6V2lDGu1DUMyYZGpjmoL
+Running rserver on port 43627
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:43627
+then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "lMoV0akqQu6V2lDGu1DUMyYZGpjmoL"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser
+```
+
+Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on. Then once you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
+
+<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
+
+You will then be presented with an rstudio session:
+
+<img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
+
+
+
+If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
+```bash
+USERNAME@slwrk-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
+USERNAME@slwrk-101:~$ rstudio
+Running rserver on port 60407
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:60407
+then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
+```
+
+##### Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)
+
 Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
 
 ```bash
@@ -495,31 +556,48 @@ Use the `module avail` command, e.g.
 ```bash
 $ module avail
 
------------------------------------------------- /cbio/soft/lmod ------------------------------------------------
-   R/3.6.1    bio/htslib/1.9    bio/svtoolkit/2.00.1918    jdk/11.0.2    slurm-drmaa/1.1.0
+------------------------------ /software/modules/common -------------------------------
+   LAPACK/3.9.0                    java/openjdk-14.0.1 (D)    python/2.7.18
+   R/RStudio1.2.5042-R4.0.0        maven/3.6.3                python/3.7.7
+   R/3.6.3                         mono/6.8.0.123             python/3.8.2
+   R/4.0.0                  (D)    openBLAS/0.3.9             python/3.8.3  (D)
+   drmaa/1.1.1                     openmpi/3.1.6
+   java/jre-1.8.0_261              openmpi/4.0.3       (D)
 
---------------------------------------- /usr/share/lmod/lmod/modulefiles ----------------------------------------
+-------------------------------- /software/modules/bio --------------------------------
+   bcbio/1.2.3           genomestrip/2.00.1958    popgen/0.1
+   bcftools/1.10.2       htslib/1.10.2            prsice-2/2.3.1d
+   canvas/1.40.0.1613    plink/2.00a2.3           samtools/1.10
+
+-------------------------- /usr/share/lmod/lmod/modulefiles ---------------------------
    Core/lmod/6.6    Core/settarg/6.6
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of
+the "keys".
 ```
 
-*Note that the `/cbio/soft/lmod` modules are only available to CBIO users.*
+*Note: CBIO users will notice they have an additional section for modules found in `/cbio/soft/lmod`.*
 
 ### Loading and Using modules
 
 Use the `module add` command, e.g.
 
 ```bash
-USERNAME@slwrk-101:~$ R --version
+USERNAME@slwrk-101:~$ R --version  # this won't work until the module is added
 
 Command 'R' not found, but can be installed with:
 
 apt install r-base-core
 Please ask your administrator.
 
-USERNAME@slwrk-101:~$ module add R/3.6.1
+USERNAME@slwrk-101:~$ module add R/4.0.0
 USERNAME@slwrk-101:~$ R --version
-R version 3.6.1 (2019-07-05) -- "Action of the Toes"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.0.0 (2020-04-24) -- "Arbor Day"
+Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
