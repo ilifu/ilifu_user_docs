@@ -451,7 +451,7 @@ then vist http://localhost:8081 in your browser and use the username "USERNAME" 
 (You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser
 ```
 
-Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on. Then once you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
+Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
 
 <img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
 
