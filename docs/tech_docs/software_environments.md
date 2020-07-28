@@ -435,7 +435,7 @@ singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.sim
 
 ##### How to launch RStudio Server
 
-RStudio has been updated to be used simply via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
+RStudio has been updated to be launched via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
 
 The procedure is to start an interactive job, add the RStudio module and run the  `rstudio` as below:
 
@@ -458,8 +458,6 @@ Note the instructions on how to access the rstudio server now from your own mach
 You will then be presented with an rstudio session:
 
 <img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
-
-
 
 If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
 ```bash
