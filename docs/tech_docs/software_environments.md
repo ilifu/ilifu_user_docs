@@ -1,23 +1,3 @@
-- [Supported Software Environments](#supported-software-environments)
-  - [Singularity Containers](#singularity-containers)
-    - [Using a container](#using-a-container)
-      - [1. Interactive shell command](#1-interactive-shell-command)
-      - [2. Exec command](#2-exec-command)
-      - [3. Run command](#3-run-command)
-    - [Available containers](#available-containers)
-    - [Building your own container](#building-your-own-container)
-    - [Using a custom container as a Jupyter kernel](#using-a-custom-container-as-a-jupyter-kernel)
-    - [RStudio](#rstudio)
-      - [Running R](#running-r)
-      - [Running Rscript](#running-rscript)
-      - [Running RStudio Server](#running-rstudio-server)
-        - [How to launch RStudio Server](#how-to-launch-rstudio-server)
-        - [Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)](#old-way-of-launching-rstudio-server-you-may-need-this-if-youre-using-one-of-the-older-cbio-rstudio-images)
-  - [Environment Modules](#environment-modules)
-    - [Checking available modules](#checking-available-modules)
-    - [Loading and Using modules](#loading-and-using-modules)
-    - [Checking which modules are loaded](#checking-which-modules-are-loaded)
-
 # Supported Software Environments
 
 For Astronomy, IDIA provides a number of supported software environments on ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
