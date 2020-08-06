@@ -33,11 +33,11 @@ srun /carta_share/hdf_convert/run_hdf_converter -o /carta_share/users/<username>
 
 ```
 
-### MeerKATHI
+### CARACal
 
 The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/caracal-pipeline/caracal). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
 
-#### Installing MeerKATHI on ilifu
+#### Installing CARACal on ilifu
 
 Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
 

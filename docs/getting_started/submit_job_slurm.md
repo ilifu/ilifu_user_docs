@@ -183,7 +183,7 @@ The following table lists the parameters that can be used to describe the requir
 * a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 232 GB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
-* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.25 GB); running on the Main partition for 3 hrs.
+* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
 
 ### Notes for GPU jobs.
