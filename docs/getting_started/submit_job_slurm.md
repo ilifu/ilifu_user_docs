@@ -108,7 +108,30 @@ An example work flow for an interactive session can be described as follows:
 
 ### Interactive session with X11 support
 
-In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM login node, for example:
+In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
+
+```bash
+	$ ssh -Y <username>@slurm.ilifu.ac.za
+```
+
+From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` using the `--qos qos-interactive` parameter, as follows:
+
+```bash
+	$ srun --pty --qos qos-interactive --x11 bash
+```
+
+This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
+
+```bash
+	$ srun --pty --cpus-per-task=2 --mem=16GB --qos qos-interactive --x11 bash
+```
+
+You are then able to run a Singularity container and run software that provides a GUI.
+
+<!--
+### Interactive session with salloc
+
+You can directly SSH onto a node to start an interactive session using `salloc`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding` and the `-A` parameter for authentication-forwarding to the SLURM login node, for example:
 
 ```bash
 	$ ssh -YA <username>@slurm.ilifu.ac.za
@@ -120,14 +143,6 @@ From there, you must use `salloc` to allocate a SLURM worker node to yourself us
 	$ salloc --qos qos-interactive
 ```
 
-This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `salloc` command are 1 task, 1 CPU and ~7 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
-
-```bash
-	$ salloc --cpus-per-task=2 --mem=16GB --qos qos-interactive
-```
-
-You are then able to run a Singularity container and run software that provides a GUI.
-
 When attempting to run `salloc` for an interactive session, you may experience a **Permission denied (publickey)** error. This suggests that that authentication-forwarding is not working correctly. If this is the case, you may need to add your ssh key to your authentication profile on your personal computer. To do this, run the following command from the terminal (not logged onto ilifu), for Ubuntu/Linux operating systems:
 
 ```bash
@@ -138,17 +153,17 @@ or for Mac OS:
 
 ```bash
 	$ ssh-add -K
-```
+``` -->
 
 ## Specifying Resources when running jobs on SLURM
 
-When running a job using an `sbatch` script or using `srun` or `salloc` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `236 GB RAM`. These are the maximum number of resources that can be requested per node.
+When running a job using an `sbatch` script or using `srun` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `232 GB RAM`. These are the maximum number of resources that can be requested per node.
 
 If you are running a normal job on SLURM, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job using the `--mem` parameter.
 
 Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on SLURM, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `236 GB RAM`.
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
 
 The following table lists the parameters that can be used to describe the required resources for your job:
 
@@ -165,10 +180,10 @@ The following table lists the parameters that can be used to describe the requir
 
 **Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
 
-* a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 236 GB RAM
+* a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 232 GB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
-* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7552 MB or 7.375 GB); running on the Main partition for 3 hrs.
+* default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
 
 ### Notes for GPU jobs.

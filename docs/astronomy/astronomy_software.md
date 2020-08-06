@@ -33,18 +33,17 @@ srun /carta_share/hdf_convert/run_hdf_converter -o /carta_share/users/<username>
 
 ```
 
-### MeerKATHI
+### CARACal
 
-The MeerKAT HI (MeerKATHI) Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments). Please read the documentation [here](https://meerkathi.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/ska-sa/meerkathi). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
+The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/caracal-pipeline/caracal). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
 
-#### Installing MeerKATHI on ilifu
+#### Installing CARACal on ilifu
 
-Installing a stable version of MeerKATHI on ilifu is a work in progress, as captured in [this](https://github.com/ska-sa/meerkathi/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install MeerKATHI in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers.
+Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
 
-#### Running MeerKATHI on ilifu
+#### Running CARACal on ilifu
 
-Please don't run MeerKATHI on the ilifu login node, but on a compute node, using `sbatch`, `srun`, or `salloc`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running MeerKATHI, please consider commenting on the [GitHub issue](https://github.com/ska-sa/meerkathi/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
-
+Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider commenting on the [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
 ## Transfer data from the SARAO archive
 
