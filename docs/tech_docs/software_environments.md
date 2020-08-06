@@ -598,3 +598,23 @@ USERNAME@slwrk-101:/cbio/soft/lmod$ module list
 Currently Loaded Modules:
   1) jdk/11.0.2   2) slurm-drmaa/1.1.0   3) bio/htslib/1.9   4) R/3.6.1   5) bio/svtoolkit/2.00.1918
 ```
+
+### Anaconda
+
+`anaconda3` is available as a module, which can be accessed with
+
+```bash
+module load anaconda3
+```
+
+This changes `python` and `python3` to use
+
+```bash
+/software/common/anaconda3/2020.07/bin/python
+```
+
+This should generally only be used on compute nodes and not the login node. However, it is accessible from the login node with
+
+```bash
+module load anaconda3/login
+```
