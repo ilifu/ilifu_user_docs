@@ -18,7 +18,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 * `/idia/` - the base directory for all IDIA related projects.
 
-* `/idia/users` - user's personal workspace, for storing longer-term data and data products.
+* `/idia/users` - user's personal workspace. **Limited to 10TB**. For storing longer-term data and data products.
 
 * `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
 
@@ -33,7 +33,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 User homes are in `/users/`. This is not currently backed up
 
 CBIO users will be using the CephFS parallel file partition — our space is in `/cbio/`. Directories that have been setup:
-* `/cbio/users` - a user's private scratch space. Limited to 5TB. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
+* `/cbio/users` - user's personal workspace. **Limited to 10TB**. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
 * `/cbio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as scripts , are stored here.
 * `/cbio/dbs` - general-purpose annotation and reference databases are stored here. Most `dbs` will be open but some may be accessed controlled e.g in `/cbio/dbs/refpanels/`.
 * `/cbio/datasets` - Access controlled datasets are stored here e.g. SAHGP, Baylor, AGVP.
