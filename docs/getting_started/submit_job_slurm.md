@@ -16,7 +16,7 @@ time.sleep(20)
 
 Create a shell script, `my_slurm_script.sh` with the following:
 
-```shell
+```bash
 #!/bin/bash
 
 #SBATCH --job-name='testjob'
@@ -36,35 +36,37 @@ In the shell script above, the application you wish to run during the job is des
 
 The next step is to run the shell script using the SLURM `sbatch` command:
 
-```shell
+```bash
 	$ sbatch my_slurm_script.sh
 ```
 
 This will submit the job to the SLURM queue. If the requested resources are available the job will be initiated. You can see the status of all jobs in the SLURM queue by using the command:
 
-```shell
+```bash
 	$ squeue
 ```
 
 To see the status of the jobs in the SLURM queue associated with your account use:
 
-```shell
+```bash
 	$ squeue -u <username>
 ```
 
 If any errors occur while running the job, you can view the logs in the `testjob-<jobid>-stderr.log`, and any text output can be found in `testjob-<jobid>-stdout.log`, as described by the shell script. This is useful for debugging any issues with your job.
 
-## Interactive SLURM session
+## Interactive SLURM sessions
 
 **No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
 
 **NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
 
+**NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
+
 ### Interactive session without X11 support
 
 For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
 
-```shell
+```bash
 	$ srun --pty bash
 ```
 
@@ -72,19 +74,19 @@ This will place you in an interactive shell (bash) session on a compute node. Th
 
 You are able to directly run Singularity containers or software within containers using the srun command, for example:
 
-```shell
+```bash
 	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
 ```
 
 This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
-```shell
+```bash
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 ```
 
 Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
 
-```shell
+```bash
 	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
 ```
 
@@ -114,16 +116,16 @@ In the event that you wish to use software which provides a GUI, such as `CASA p
 	$ ssh -Y <username>@slurm.ilifu.ac.za
 ```
 
-From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` using the `--qos qos-interactive` parameter, as follows:
+From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` as follows:
 
 ```bash
-	$ srun --pty --qos qos-interactive --x11 bash
+	$ srun --x11 --pty bash
 ```
 
 This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
 
 ```bash
-	$ srun --pty --cpus-per-task=2 --mem=16GB --qos qos-interactive --x11 bash
+	$ srun --pty --cpus-per-task=2 --mem=16GB --x11 bash
 ```
 
 You are then able to run a Singularity container and run software that provides a GUI.
