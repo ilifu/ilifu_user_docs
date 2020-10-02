@@ -1,16 +1,16 @@
-# Data transfer to and from the ilifu Cluster
+# Data transfer to and from the ilifu Facility
 
-Transferring of data to and from the ilifu research cloud can be completed using `Globus`, `scp` or `rsync`. For large files the `Globus Online` software is recommended, which uses efficient GridFTP transfer protocols. **Please do not transfer data to and from the ilifu cluster using the SLURM login node, as this will significantly diminish the performance of the login node for other users**.
+Transferring of data to and from the ilifu research cloud can be completed using `Globus`, `scp` or `rsync`. For large files the `Globus Online` software is recommended, which uses efficient GridFTP transfer protocols. **Please do not transfer data to and from the ilifu facility using the SLURM login node, as this will significantly diminish the performance of the login node for other users**.
 
 Transferring astronomy observation data from the SARAO archive is also detailed [below](#transfer-data-from-the-sarao-archive).
 
 ## Transfer using scp and rsync
 
-A dedicated transfer node is available at `transfer.ilifu.ac.za` for transferring files using `scp` and `rsync` to and from the ilifu cluster. All users may ssh onto this transfer node.
+A dedicated transfer node is available at `transfer.ilifu.ac.za` for transferring files using `scp` and `rsync` to and from the ilifu facility. All users may ssh onto this transfer node.
 
 The `scp` and `rsync` tools are useful for transferring data up to 200 GB, or if you're not expecting to transfer data frequently. For files over 200 GB or for frequent transfers, it is recommended to use the Globus Online software below. **Please note that large files should not be copied into your `/users/` directory.**
 
-The following is an example of how to scp from your personal computer to the ilifu cluster. From the terminal on your personal computer:
+The following is an example of how to scp from your personal computer to the ilifu facility. From the terminal on your personal computer:
 
 ```
 $ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
@@ -109,9 +109,9 @@ Once a transfer is initiated, as long as the Globus platform can reach both ilif
 
 ## Transfer data from the SARAO archive
 
-If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project, you may want to transfer your observational data from the SARAO archive to the ilifu cluster.
+If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project, you may want to transfer your observational data from the SARAO archive to the ilifu facility.
 
-Before pushing your data, it is important to have an existing project on the ilifu cluster in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data. Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
+Before pushing your data, it is important to have an existing project on the ilifu facility in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data. Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
 
 In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
 
