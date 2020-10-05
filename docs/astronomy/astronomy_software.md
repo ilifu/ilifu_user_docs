@@ -51,11 +51,12 @@ The CARACal Pipeline is a pipeline in active development for radio interferometr
 
 #### Installing CARACal on ilifu
 
-Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
+<!-- Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress.  -->
+Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
 
 #### Running CARACal on ilifu
 
-Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider commenting on the [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider commenting on this [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
 ## Transfer data from the SARAO archive
 
