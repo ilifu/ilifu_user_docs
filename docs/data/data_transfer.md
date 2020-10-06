@@ -97,7 +97,7 @@ Globus will then inform your by email of the status of your transfer once it’s
 
 #### Using Globus for internal ilifu transfers
 
-Globus can be used to transfer files internal to ilifu (e.g. from one filesystem to another), by setting the two endpoints as the ilifu DTN. However, the performance (< 100 MB/s) is comparable to running `cp`, `mv`, `rsync` or `scp` on transfer@ilifu.ac.za. In the event that a user makes a transfer with Globus (e.g. under poor network conditions, or for long transfers), it is advised that the user [configure a transfer](#configuring-a-transfer) following the instructions above.
+Globus can be used to transfer files internal to ilifu (e.g. from one filesystem to another), by setting the two endpoints as the ilifu DTN. However, the performance (< 100 MB/s) is comparable to running `cp`, `mv`, `rsync` or `scp` on transfer.ilifu.ac.za. In the event that a user makes a transfer with Globus (e.g. under poor network conditions, or for long transfers), it is advised that the user [configure a transfer](#configuring-a-transfer) following the instructions above.
 
 #### Setting Up An Endpoint for Another Data Transfer Node
 
