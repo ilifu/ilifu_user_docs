@@ -47,7 +47,8 @@ The predicted memory usage for slow-mode conversion is reported when using both 
 
 ### CARACal
 
-The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/caracal-pipeline/caracal). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
+The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the repository [here](https://github.com/caracal-pipeline/caracal). 
+<!-- For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it). -->
 
 #### Installing CARACal on ilifu
 
@@ -56,7 +57,7 @@ Please do not install CARACal in your `/users/` directory (see directory structu
 
 #### Running CARACal on ilifu
 
-Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider commenting on this [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider logging a [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/), rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
 ## Transfer data from the SARAO archive
 
