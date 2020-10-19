@@ -10,7 +10,7 @@ CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visuali
 
 A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za. Your login details are the same as those for Jupyter, which were emailed to you when your ilifu account was set up.
 
-All astronomy users (i.e. those in `idia-group`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw) or file an issue on [Github](https://github.com/CARTAvis/carta/issues).
+All astronomy users (i.e. those in `idia-group` and `ilifu-astro-*`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw) or file an issue on [Github](https://github.com/CARTAvis/carta/issues).
 
 By default, CARTA will start browsing files in the `/carta_share/users/<your_username>`
 directory, but you can access any files or folders in the /carta_share directory that your ilifu
@@ -18,38 +18,52 @@ user can access. Unlike previous versions of CARTA, v1.2 relies on unix permissi
 want other users to have access to specific files, you can change the file permissions of
 those files or folders.
 
-While CARTA supports `FITS`, `CASA`, and `Miriad` images as well, we strongly suggest
-converting your files to `HDF5` (IDIA schema) files for improved performance. The HDF5
-converter can be found in `/carta_share/hdf_convert/run_hdf_converter`. Usage is as
-follows:
+#### HDF5 converter
 
-```
+While CARTA supports `FITS`, `CASA`, and `Miriad` images as well, we strongly suggest converting your files to `HDF5` (IDIA schema) files for improved performance. The HDF5 converter can be found in `/carta_share/hdf_convert/run_hdf_converter`. Usage is as follows:
+
+```bash
 srun /carta_share/hdf_convert/run_hdf_converter -o {OUTPUT HDF5 file} {INPUT FITS file}
 ```
-We suggest you perform this conversion with the output file copying straight into a
-carta_share subdirectory, to avoid additional copies, for example:
+We suggest you perform this conversion with the output file copying straight into a carta_share subdirectory, to avoid additional copies, for example:
 ```
-srun /carta_share/hdf_convert/run_hdf_converter -o /carta_share/users/<username>/image.hdf5 image.fits
+srun /carta_share/hdf_convert/run_hdf_converter -o /carta_share/users/${USER}/image.hdf5 image.fits
 
 ```
+
+For large images or cubes, a speed-up can be achieved by increasing the number of CPUs, and it may be necessary to increase the memory allocation, up to 232 GB for a node in the Main partition, and 480 GB for a node in the HighMem partition. For example:
+
+```bash
+srun --mem=100GB --time=5 --cpus-per-task=10 /carta_share/hdf_convert/run_hdf_converter -p -o /carta_share/users/${USER}/image.hdf5 image.fits
+```
+
+where `-p` shows a simple progress bar.  Some large FITS cubes will exceed these memory values and will not be able to convert to HDF5 in the default mode. Option `-m` can be used to report the predicted memory usage and exit. For cases where this exceeds 480 GB (or 232 GB if no HighMem nodes are available), option `-s` must be used, which uses a slower but less memory-intensive method, using a single CPU and iterating through a single channel at a time. Usage is as follows:
+
+```bash
+srun --mem=10GB --time=01:00:00 --cpus-per-task=1 /carta_share/hdf_convert/run_hdf_converter -s -p -o /carta_share/users/${USER}/image.hdf5 image.fits
+```
+
+The predicted memory usage for slow-mode conversion is reported when using both options `-s` and `-m`.
 
 ### CARACal
 
-The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the (private) repository [here](https://github.com/caracal-pipeline/caracal). For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it).
+The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the repository [here](https://github.com/caracal-pipeline/caracal).
+<!-- For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it). -->
 
 #### Installing CARACal on ilifu
 
-Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress. Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
+<!-- Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress.  -->
+Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
 
 #### Running CARACal on ilifu
 
-Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider commenting on the [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/625), or logging a new one, rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider logging a [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/), rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
 ## Transfer data from the SARAO archive
 
 If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project, you may want to transfer your observational data from the SARAO archive to the ilifu facility.
 
-Before pushing your data, it is important to have an existing project on the ilifu facility in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data.
+Before pushing your data, it is important to have an existing project on the ilifu facility in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data. Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
 
 In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
 

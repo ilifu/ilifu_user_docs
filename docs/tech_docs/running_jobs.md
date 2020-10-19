@@ -2,11 +2,9 @@
 
 There are several methods to run jobs on Ilifu.
 
-1. Users may get access to a Jupyter Lab spawner mechanism on the cluster. This provides a Jupyter lab environment where users select what size compute node they need to run. This is a good environment for users to experiment with code and visualise certain results. This environment will be made available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
+1. Users may access a JupyterLab environment on the cluster. This provides a JupyterLab environment where users select what size compute node they need to run. This is a good environment for users to experiment with code and visualise certain results. This environment is available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. Users can log into the SLURM headnode at and submit tasks to the SLURM queue. This environment will be made available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
-
-3. Selected users will be given access to the OpenStack dashboard in order to have full control over the setup of a computing environment. This is available at [dashboard.ilifu.ac.za](https://dashboard.ilifu.ac.za)
+2. Users may access the Ilifu SLURM cluster login-node and submit tasks to the SLURM queue. This environment is available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 ---
 
@@ -91,17 +89,19 @@ sbatch casaslurm_N.sh
 
 To check the progress of the jobs, use the `squeue` command or check the `logs` directory...
 
-## 3. Interactive Sessions
+## 3. Interactive SLURM sessions
 
 **No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
 
 **NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
 
+**NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
+
 ### 3.1 Interactive session without X11 support
 
 For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
 
-```shell
+```bash
 	$ srun --pty bash
 ```
 
@@ -109,19 +109,19 @@ This will place you in an interactive shell (bash) session on a compute node. Th
 
 You are able to directly run Singularity containers or software within containers using the srun command, for example:
 
-```shell
+```bash
 	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
 ```
 
 This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
-```shell
+```bash
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 ```
 
 Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
 
-```shell
+```bash
 	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
 ```
 
@@ -151,16 +151,16 @@ In the event that you wish to use software which provides a GUI, such as `CASA p
 	$ ssh -Y <username>@slurm.ilifu.ac.za
 ```
 
-From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` using the `--qos qos-interactive` parameter, as follows:
+From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` as follows:
 
 ```bash
-	$ srun --pty --qos qos-interactive --x11 bash
+	$ srun --x11 --pty bash
 ```
 
 This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
 
 ```bash
-	$ srun --pty --cpus-per-task=2 --mem=16GB --qos qos-interactive --x11 bash
+	$ srun --cpus-per-task=2 --mem=16GB --x11 --pty bash
 ```
 
 You are then able to run a Singularity container and run software that provides a GUI.
@@ -232,7 +232,7 @@ The following table lists the parameters that can be used to describe the requir
 4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), SLURM works with MPI to manage parallelised processing of data.
 5. nodes refers to a single compute node or SLURM worker, i.e. one node that has 32 CPUs and 232 GB RAM
 6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
-7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster.
+7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
