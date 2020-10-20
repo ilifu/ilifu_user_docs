@@ -109,7 +109,7 @@ It includes the following packages:
 - spectral-cube
 
 
-# Transferring data from the SARAO archive
+# Transfer data from the SARAO archive
 
 If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project, you may want to transfer your observational data from the SARAO archive to the ilifu facility.
 
