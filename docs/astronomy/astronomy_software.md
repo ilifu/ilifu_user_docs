@@ -12,11 +12,11 @@ A CARTA server is currently hosted on ilifu at https://carta.idia.ac.za. Your lo
 
 All astronomy users (i.e. those in `idia-group` and `ilifu-astro-*`) should have access to the CARTA server. Please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) if you do not have access. For CARTA-specific issues, please contact the [CARTA helpdesk](mailto:carta_helpdesk@asiaa.sinica.edu.tw) or file an issue on [Github](https://github.com/CARTAvis/carta/issues).
 
-By default, CARTA will start browsing files in the `/carta_share/users/<your_username>`
-directory, but you can access any files or folders in the /carta_share directory that your ilifu
-user can access. Unlike previous versions of CARTA, v1.2 relies on unix permissions. If you
-want other users to have access to specific files, you can change the file permissions of
-those files or folders.
+By default, CARTA will start browsing files in the `/carta_share/users/<your_username>` directory, but you can access any files or folders in the /carta_share directory that your ilifu user can access. Unlike previous versions of CARTA, v1.2 relies on unix permissions. If you want other users to have access to specific files, you can change the file permissions of those files or folders.
+
+### Restarting your backend
+
+If you experience any issues starting CARTA, or if your CARTA session crashes, you may need to restart your backend. To do this, go to  File -> Server -> Restart Service. Alternatively, go to [carta.idia.ac.za/dashboard](https://carta.idia.ac.za/dashboard) (also accessible via File -> Server -> Dashboard) and press the button to "Restart CARTA service". After this, refresh your CARTA page and log in again.
 
 ### HDF5 converter
 
