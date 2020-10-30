@@ -38,7 +38,7 @@ The following table lists the available kernels and their related Singularity co
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
-| ASTRO-PY3                   | SF-PY3-bionic.simg                        |
+| ASTRO-PY3                   | ASTRO-PY3.simg                            |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
 | CASA-6 Alpha                | casa-6-dev.simg                           |
@@ -48,7 +48,7 @@ The following table lists the available kernels and their related Singularity co
 | PY3                         | python-3.6.img                            |
 | Python 3                    | System Python (not a container)           |
 | SF-PY2                      | source-finding.img                        |
-| SF-PY3                      | SF-PY3-bionic.simg                        |
+| SF-PY3                      | ASTRO-PY3.simg                            |
 
 Details of the python libraries, software and other libraries available within the different containers can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
 
@@ -110,10 +110,10 @@ This will place you in an interactive shell (bash) session on a compute node. Th
 You are able to directly run Singularity containers or software within containers using the srun command, for example:
 
 ```bash
-	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
+	$ srun --pty singularity shell /idia/software/containers/ASTRO-PY3.simg
 ```
 
-This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
+This will open an interactive session on a compute node and open the ASTRO-PY3.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
 ```bash
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
@@ -122,10 +122,10 @@ This will open an interactive session on a compute node and open the SF-PY-bioni
 Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
 
 ```bash
-	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
+	$ srun singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 ```
 
-This will run the Python script `myscript.py` using the SF-PY3-bionic container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
+This will run the Python script `myscript.py` using the `ASTRO-PY3` container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
 
 Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
 
