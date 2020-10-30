@@ -31,12 +31,12 @@ This command will spawn a new shell inside the container, in this case the `casa
 A user is able to execute a script within the container environment using the singularity `exec` command.
 
 ```shell
-$ singularity exec /idia/software/containers/sourcefinding_py3.simg python myscript.py
+$ singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 hello world!
 $
 ```
 
-This command will execute the script, `myscript.py`, using Python within the `sourcefinding_py3` container. The script will have access to all the Python libraries that have been included in the container.
+This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary,
 

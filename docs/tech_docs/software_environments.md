@@ -89,7 +89,7 @@ The above command will run the CASA software within the `casa-stable` container 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
 ```shell
-$ singularity run /idia/software/containers/SF-PY3-bionic.simg
+$ singularity run /idia/software/containers/ASTRO-PY3.simg
 Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
 [GCC 7.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -262,15 +262,15 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary id="SF-PY3-container">SF-PY3 container</summary>
+<summary id="ASTRO-PY3-container">ASTRO-PY3 container</summary>
 
 **Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-**JupyterLab Kernel:** SF-PY3, ASTRO-PY
+**JupyterLab Kernel:** ASTRO-PY3, SF-PY3
 
 | Name               | Def file                     | Github repo                    | OSVersion |
 |--------------------|-------------        ---------|--------------------------------|-----------|
-| SF-PY3-bionic.simg |                              |                                | bionic    |
+| ASTRO-PY3.simg     |                              |                                | bionic    |
 
 | Packages & Libraries |                      | Python Libraries      |                  |
 |----------------------|----------------------|-----------------------|------------------|

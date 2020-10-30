@@ -27,12 +27,12 @@ Create a shell script, `my_slurm_script.sh` with the following:
 #SBATCH --time=00:05:00
 
 echo "Submitting SLURM job"
-singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
+singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 ```
 
 The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the  `sbatch --help` command from the terminal to see additional parameters or see the [table of parameters below](/getting_started/submit_job_slurm?id=slurm-job-parameters).
 
-In the shell script above, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/SF-PY3-bionc.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `SF-PY3-bionic.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
+In the shell script above, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/ASTRO-PY3.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `ASTRO-PY3.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
 
 The next step is to run the shell script using the SLURM `sbatch` command:
 
@@ -75,10 +75,10 @@ This will place you in an interactive shell (bash) session on a compute node. Th
 You are able to directly run Singularity containers or software within containers using the srun command, for example:
 
 ```bash
-	$ srun --pty singularity shell /idia/software/containers/SF-PY3-bionic.simg
+	$ srun --pty singularity shell /idia/software/containers/ASTRO-PY3.simg
 ```
 
-This will open an interactive session on a compute node and open the SF-PY-bionic.simg container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
+This will open an interactive session on a compute node and open the `ASTRO-PY3` container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
 ```bash
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
@@ -87,10 +87,10 @@ This will open an interactive session on a compute node and open the SF-PY-bioni
 Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
 
 ```bash
-	$ srun singularity exec /idia/software/containers/SF-PY3-bionic.simg python myscript.py
+	$ srun singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 ```
 
-This will run the Python script `myscript.py` using the SF-PY3-bionic container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
+This will run the Python script `myscript.py` using the ASTRO-PY3 container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
 
 Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
 

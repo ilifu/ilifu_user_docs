@@ -15,7 +15,7 @@ The following table lists the available kernels and their related Singularity co
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
-| ASTRO-PY3                   | SF-PY3-bionic.simg                        |
+| ASTRO-PY3                   | ASTRO-PY3.simg                            |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
 | CASA-6                      | casa-6.simg                               |
@@ -25,6 +25,6 @@ The following table lists the available kernels and their related Singularity co
 | PY3                         | python-3.6.img                            |
 | Python 3                    | System Python (not a container)           |
 | SF-PY2                      | source-finding.img                        |
-| SF-PY3                      | SF-PY3-bionic.simg                        |
+| SF-PY3                      | ASTRO-PY3.simg                            |
 
 Details of the python libraries, software and other libraries available within the different kernels can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
