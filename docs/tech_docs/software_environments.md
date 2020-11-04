@@ -89,7 +89,7 @@ The above command will run the CASA software within the `casa-stable` container 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
 ```shell
-$ singularity run /idia/software/containers/SF-PY3-bionic.simg
+$ singularity run /idia/software/containers/ASTRO-PY3.simg
 Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
 [GCC 7.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -262,15 +262,15 @@ Several containers have been developed and are currently maintained. These conta
 </details>
 
 <details>
-<summary id="SF-PY3-container">SF-PY3 container</summary>
+<summary id="ASTRO-PY3-container">ASTRO-PY3 container</summary>
 
 **Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-**JupyterLab Kernel:** SF-PY3, ASTRO-PY
+**JupyterLab Kernel:** ASTRO-PY3, SF-PY3
 
 | Name               | Def file                     | Github repo                    | OSVersion |
 |--------------------|-------------        ---------|--------------------------------|-----------|
-| SF-PY3-bionic.simg |                              |                                | bionic    |
+| ASTRO-PY3.simg     |                              |                                | bionic    |
 
 | Packages & Libraries |                      | Python Libraries      |                  |
 |----------------------|----------------------|-----------------------|------------------|
@@ -405,29 +405,75 @@ where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu
 The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
 the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg`. The examples below will be given for the bio container.
 
-
 #### Running R
+
 It is recommended that the following script be created `~/bin/R` (remember to `chmod u+x ~/bin/R`):
+
 ```bash
 #!/bin/bash
 export R_INSTALL_STAGED=false
 singularity run --app R /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
-``` 
+```
+
 <sup>* See the note below on installing packages</sup>
 
 This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
 
 #### Running Rscript
+
 Similarly you should create the script `~/bin/Rscript`:
+
 ```bash
 #!/bin/bash
 export R_INSTALL_STAGED=false
 singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
 ```
+
 <sup>* See the note below on installing packages</sup>
 
 #### Running RStudio Server
+
+##### How to launch RStudio Server
+
+RStudio has been updated to be launched via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
+
+The procedure is to start an interactive job, add the RStudio module and run the  `rstudio` as below:
+
+```bash
+USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
+USERNAME@slwrk-101:~$ module add R/RStudio1.2.5042-R4.0.0
+USERNAME@slwrk-101:~$ rstudio
+The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It is: lMoV0akqQu6V2lDGu1DUMyYZGpjmoL
+Running rserver on port 43627
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:43627
+then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "lMoV0akqQu6V2lDGu1DUMyYZGpjmoL"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser
+```
+
+Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
+
+<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
+
+You will then be presented with an rstudio session:
+
+<img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
+
+If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
+```bash
+USERNAME@slwrk-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
+USERNAME@slwrk-101:~$ rstudio
+Running rserver on port 60407
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:60407
+then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
+```
+
+##### Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)
+
 Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
+
 ```bash
 Host *.ilifu.ac.za
     User USERNAME
@@ -439,32 +485,136 @@ Host slwrk-*
     StrictHostKeyChecking no
     ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
 ```
+
 One should substitute in your ilifu `USERNAME` in the above script.
 
 Next is the process of starting an interactive job and launching RStudio. To begin start an interactive job – below is an example of launching a single node / 4 core job with 32Gb of ram:
+
 ```console
 USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
 USERNAME@slwrk-103:~$
 ```
+
 Once the interactive session has begun on a specific node (in this case `slwrk-103`), RStudio can be launched as follows:
+
 ```console
 USERNAME@slwrk-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg
 Running rserver on port 37543
 ```
+
 This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
+
 ```bash
 $ ssh slwrk-103 -L8082:localhost:37543
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
+...
 ```
+
 on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `slwrk-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
+
 ```bash
 bind [127.0.0.1]:8000: Address already in use
 channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
 ```
+
 Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
 
-*Note on installing packages
+*Note on installing packages:*
+
 The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
 ## Environment Modules
 
-Coming soon.
+The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general.
+
+### Checking available modules
+
+Use the `module avail` command, e.g.
+
+```bash
+$ module avail
+
+------------------------------ /software/modules/common -------------------------------
+   LAPACK/3.9.0                    java/openjdk-14.0.1 (D)    python/2.7.18
+   R/RStudio1.2.5042-R4.0.0        maven/3.6.3                python/3.7.7
+   R/3.6.3                         mono/6.8.0.123             python/3.8.2
+   R/4.0.0                  (D)    openBLAS/0.3.9             python/3.8.3  (D)
+   drmaa/1.1.1                     openmpi/3.1.6
+   java/jre-1.8.0_261              openmpi/4.0.3       (D)
+
+-------------------------------- /software/modules/bio --------------------------------
+   bcbio/1.2.3           genomestrip/2.00.1958    popgen/0.1
+   bcftools/1.10.2       htslib/1.10.2            prsice-2/2.3.1d
+   canvas/1.40.0.1613    plink/2.00a2.3           samtools/1.10
+
+-------------------------- /usr/share/lmod/lmod/modulefiles ---------------------------
+   Core/lmod/6.6    Core/settarg/6.6
+
+  Where:
+   D:  Default Module
+
+Use "module spider" to find all possible modules.
+Use "module keyword key1 key2 ..." to search for all possible modules matching any of
+the "keys".
+```
+
+*Note: CBIO users will notice they have an additional section for modules found in `/cbio/soft/lmod`.*
+
+### Loading and Using modules
+
+Use the `module add` command, e.g.
+
+```bash
+USERNAME@slwrk-101:~$ R --version  # this won't work until the module is added
+
+Command 'R' not found, but can be installed with:
+
+apt install r-base-core
+Please ask your administrator.
+
+USERNAME@slwrk-101:~$ module add R/4.0.0
+USERNAME@slwrk-101:~$ R --version
+R version 4.0.0 (2020-04-24) -- "Arbor Day"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+https://www.gnu.org/licenses/.
+```
+
+### Checking which modules are loaded
+
+User the `module list` command, e.g.
+
+```bash
+USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+No modules loaded
+USERNAME@slwrk-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
+USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+
+Currently Loaded Modules:
+  1) jdk/11.0.2   2) slurm-drmaa/1.1.0   3) bio/htslib/1.9   4) R/3.6.1   5) bio/svtoolkit/2.00.1918
+```
+
+### Anaconda
+
+`anaconda3` is available as a module, which can be accessed with
+
+```bash
+module load anaconda3
+```
+
+This changes `python` and `python3` to use
+
+```bash
+/software/common/anaconda3/2020.07/bin/python
+```
+
+This should generally only be used on compute nodes and not the login node. However, it is accessible from the login node with
+
+```bash
+module load anaconda3/login
+```

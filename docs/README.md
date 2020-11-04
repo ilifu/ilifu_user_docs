@@ -1,40 +1,53 @@
 Ilifu User Documentation
 ========================
 
-Welcome to the Ilifu user documentation repository.
+Welcome to the ilifu user documentation repository.
 
-This user documentation site guides users on technical and procedural aspects relating to the use of the Ilifu cloud computing facility.
+This user documentation site guides users on technical and procedural aspects relating to the use of the ilifu cloud computing facility.
 
-The Ilifu project website may be found at http://www.ilifu.ac.za
+The ilifu project website may be found at http://www.ilifu.ac.za
 
-### ilifu call for data intensive research projects in astronomy or bioinformatics (Deadline 1 Oct 2019)
+Please familiarise yourself with the list of recommendations below.
 
-The ilifu consortium invites proposals for data-intensive research projects that make use of DIRISA-supported resources on the ilifu cloud computing facility.
+#### DOs:
+* try to run jobs using [sbatch](getting_started/submit_job_slurm#submitting-a-job-using-a-batch-script) rather than interactive jobs
+* cleanup unused files when not needed
+* set --time, --mem, --account parameters when [submitting jobs](getting_started/submit_job_slurm#specifying-resources-when-running-jobs-on-slurm), as accurate job parameters improves the performance of the SLURM scheduler
 
-**Deadline : 1st October 2019**
+#### DON'Ts:
+* run software on the login-node
+* transfer large data on the login-node, use [transfer.ilifu.ac.za](data/data_transfer) (accessed via ssh) to do this
+* copy large files to /users directory
+* leave data in /scratch as this space is limited, after processing remove data that is not required and move files to your project directory
 
-The principal investigator / project lead must be a researcher at an ilifu partner institution (University of Cape Town, University of the Western Cape, Cape Peninsula University of Technology, Stellenbosch University, Sol Plaatje University and South African Radio Astronomy Observatory). Participation in projects and access to facilities is open to all collaborators regardless of affiliation.
+For more information, please see a list of [best practices](getting_started/best_practices.md). For any queries or if you need help please contact the support team at [support@ilifu.ac.za](mailto:support@ilifu.ac.za)
 
-Proposals in any area of data intensive astronomy and bioinformatics research are welcome.
-
-Collaborative proposals involving multi-disciplinary teams from multiple partners are allowed and encouraged.
-
-The call document is attached and available [here](http://www.ilifu.ac.za/sites/default/files/image_tool/images/492/calls/Ilifu_Call_Projects_2019.pdf).
-
-### ilifu user engagement workshop announcement (28 Aug 2019 @ UWC)
-
-The ilifu consortium would like to invite current and prospective users of the ilifu cloud computing facility to a user engagement workshop where we will present the current status of the ilifu cloud computing facility and opportunities to run new Astronomy and Bioinformatics projects on the facility. 
-
-This workshop aims to provide support and background information for the current call for projects (closing on 1st October 2019) to use the ilifu facilities.
-
-The workshop will include presentations, demos and a discussion with our current and prospective users over facility requirements and how to better prepare for the submission of new projects.
-
-**Date: 28 August 2019**
-
-**Venue: SANBI Seminar Rooms, 5th Floor, Life Sciences Building, University of the Western Cape.**
-
-**Directions :** https://goo.gl/maps/Netr7nAxZ4VVjF4Y7
-
-**Workshop Web Page :** http://www.ilifu.ac.za/il/upcoming-workshops
-
-**Registration Form :** https://forms.gle/Bd1nw8AAgyndaSnp8
+#### Table of Contents
+- **News**
+  - [Updates](news/updates.md)
+- **Getting Started**
+  - [Request access](getting_started/request_access.md)
+  - [SSH keys](getting_started/ssh.md)
+  - [Accessing the ilifu services](getting_started/access_ilifu.md)
+  - [Change your password](getting_started/change_password.md)
+  - [Directory structure](data/directory_structure.md)
+  - [Software containers](getting_started/container_environments.md)
+  - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
+  - [Using JupyterLab](getting_started/using_jupyterlab.md)
+  - [Getting help](getting_started/getting_help.md)
+  - [Best Practices](getting_started/best_practices.md)
+  - [Next Steps](getting_started/next_steps.md)
+- **Technical Documentation**
+  - [Astronomy](astronomy/astronomy_software.md)
+  - [Bioinformatics](bioinformatics/cbio.md)
+  - [Running jobs on the cluster](tech_docs/running_jobs.md)
+  - [Supported software environments](tech_docs/software_environments.md)
+  - [Data Transfer](data/data_transfer.md)
+  - [Openstack flavours](openstack/flavours.md)
+  - [System Specifications](tech_docs/specifications.md)
+- **Help and Info**
+  - [FAQ](help/faq.md)
+  - [Contact and Communication](help/contact.md)
+  - [Requesting Help](help/requesting_help.md)
+- **About**
+  - [What is ilifu?](about/what_is.md)
