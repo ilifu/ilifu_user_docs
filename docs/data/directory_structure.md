@@ -4,7 +4,7 @@ The following describes the directory structure as related to the ilifu data pol
 
 Users' home directories are located in `/users/`. This directory is for users' scripts. No large files should be stored in `/users/`. It is recommended that users make use of a repository such as Github to backup scripts and files.
 
-`/scratch` and `/scratch2` are the primary directories for data processing. These directories are for **short-term** storage only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
+`/scratch` and `/scratch3` are the primary directories for data processing. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
 
 `/scratch/users/<username>` is a users' specific directory for data processing.
 
@@ -34,10 +34,15 @@ Users' home directories are in `/users/`. This is not currently backed up.
 
 CBIO users will be using the CephFS parallel file partition — our space is in `/cbio/`. Directories that have been setup:
 * `/cbio/users` - user's personal workspace. **Limited to 10TB**. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
+
 * `/cbio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project archive data, data products, intermediate data and project specific resources, such as scripts , are stored here.
+
 * `/cbio/dbs` - general-purpose annotation and reference databases are stored here. Most `dbs` will be open but some may be accessed controlled e.g in `/cbio/dbs/refpanels/`.
+
 * `/cbio/datasets` - Access controlled datasets are stored here e.g. SAHGP, Baylor, AGVP.
+
 * `/cbio/soft` - Software that is needed to run workflows is installed here; most of our other software will be encapsulated into singularity images.
+
 * `/cbio/images` - shared singularity images are stored here.
 
 Please note the [restrictions](/bioinformatics/cbio#restrictions).
@@ -52,6 +57,4 @@ Please note the [restrictions](/bioinformatics/cbio#restrictions).
 
 * `/ilifu/software/` - Software not in containers can be installed here.
 
-* `/ilifu/software/containers` - [software containers](tech_docs/software_environments?id=singularity-containers) can be stored here. Note there is a symbolic link here to the IDIA astronomy containers in `/idia/software/containers`.
-
-
+* `/ilifu/software/containers` - [software containers](tech_docs/software_environments?id=singularity-containers) can be stored here.
