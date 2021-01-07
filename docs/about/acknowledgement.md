@@ -17,3 +17,9 @@ This work made use of the Inter-University Institute for Data Intensive Astronom
 ## Use of CARTA software
 
 This work made use of the CARTA (Cube Analysis and Rendering Tool for Astronomy) software (DOI 10.5281/zenodo.3377984 - https://cartavis.github.io).
+
+## MeerKAT 
+
+Please make sure to include the following acknowledgement in each paper which uses MeerKAT data:
+
+The MeerKAT telescope is operated by the South African Radio Astronomy Observatory, which is a facility of the National Research Foundation, an agency of the Department of Science and Innovation.
