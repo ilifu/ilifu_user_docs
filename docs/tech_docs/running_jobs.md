@@ -337,9 +337,9 @@ root
   b40-healy-a2626-ag          1
 ```
 
+**Note**: One can see the hierarchical nature of the shares here.
 </details>
 
-**Note**: One can see the hierarchical nature of the shares here.
 CBIO has chosen however to give a higher priority to their primary project:
 
 <details>
@@ -418,7 +418,7 @@ root
 </details>
 
 #### Usage
-Finally the actual usage by users/accounts is considered. Consider two of the projects running on the cluster:
+Once the shares have been allocated the actual usage by users/accounts is considered. take for example two of the projects running on the cluster:
 
 <details>
 <summary><code>sshare -a --format="Account,User,RawUsage,FairShare,LevelFS"</code></summary>
@@ -475,6 +475,23 @@ $ sshare --format="Account,RawShares,RawUsage,LevelFS" | grep -v "inf" | grep "S
  a02-cbio-ag                 20   578477684   0.922482 
  a03-dirisa-ag               42    37792325  29.652425 
  a04-cchem-ag                 5       27631 4.8281e+03
+```
+
+</details>
+
+And lastly we consider [PriorityDecayHalfLife](https://slurm.schedmd.com/priority_multifactor.html#config). This indicates how long past usage counts towards the fairshare calculation. On ilifu this is currently set to a half life of 14 days, i.e. every 14 days the accumulated usage is halved. This value can be checked in the configuration using:
+
+<details>
+<summary><code>scontrol show config | grep Decay</code></summary>
+
+```shell
+$ scontrol show config | grep Decay
+PriorityDecayHalfLife   = 14-00:00:00
+```
+This is calculated every 5 minutes.
+```shell
+$ scontrol show config | grep PriorityCalcPeriod
+PriorityCalcPeriod      = 00:05:00
 ```
 
 </details>
