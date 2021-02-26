@@ -1,0 +1,7 @@
+# MeerKAT processing
+
+Many Ilifu users process MeerKAT data as part of the data-intensive research in astronomy supported on the ilifu Cloud Computing Research Facility. This [includes](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/topic/bc9d6ad2-8321-4e13-a97a-d19d6d019a1c/article/349339747) MeerKAT Large Survey Projects (LSPs) and Open Time Projects (OTPs). Our support team includes members with vast experience with MeerKAT data, who have developed documentation outlining processing and storage strategies for MeerKAT projects.
+
+This includes our general <a href="/astronomy/Ilifu_Processing_and_Storage_for_MeerKAT_projects.pdf">processing and storage for MeerKAT projects</a>, relating to any MeerKAT project, and the <a href="/astronomy/Ilifu_MeerKAT_Open_Time_Project_Policies.pdf">Ilifu MeerKAT Open Time Project Policies</a> and <a href="/astronomy/Ilifu_MeerKAT_Open_Time_Project_Guidelines.pdf">Guidelines</a>, specific to OTPs, but with principles generally applicable to any MeerKAT project.
+
+Using these, we aim to ensure the successful support of the diverse research groups on the Ilifu facility. These policies and guidelines are not intended to hamper research efforts. However, the environment in which we conduct our research is shared and resource-limited, and therefore practices that make efficient use of those resources will further our ability to successfully support the diverse research teams on Ilifu.
