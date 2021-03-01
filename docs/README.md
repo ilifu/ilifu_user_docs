@@ -41,6 +41,7 @@ For more information, please see a list of [best practices](getting_started/best
   - [Astronomy](astronomy/astronomy_software.md)
   - [Bioinformatics](bioinformatics/cbio.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
+  - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
   - [Openstack flavours](openstack/flavours.md)
