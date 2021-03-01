@@ -1,2 +1,5 @@
 *.sublime-workspace
 *.sublime-project
+.idea
+node_modules
+*.json
