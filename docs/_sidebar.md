@@ -12,6 +12,7 @@
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
   - [Astronomy](astronomy/astronomy_software.md)
+  - [MeerKAT processing](astronomy/meerkat_processing.md)
   - [Bioinformatics](bioinformatics/cbio.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Supported software environments](tech_docs/software_environments.md)
