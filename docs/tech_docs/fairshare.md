@@ -50,7 +50,7 @@ The fairshare shares associated within the funder-level accounts is set to refle
 $ sshare --format="Account,RawShares" | grep " a\|Raw"
              Account  RawShares 
  a01-idia-ag                 33 
- a02-cbio-ag                 20 
+ a02-cbio-ag                 33 
  a03-dirisa-ag               42 
  a04-cchem-ag                 5
 ```
