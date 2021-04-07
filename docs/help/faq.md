@@ -11,3 +11,6 @@ The initial IDIA system makes use of BeeGFS storage volumes. The 2018 storage ha
 ## What kinds of research is performed on Ilifu?
 
 Astronomy and Bioinformatics
+
+## I submitted my job before _evildoer_ but their job started first. It's not fair, why is that happening?
+Please read through our documentation on [Priorities and fairshare](tech_docs/fairshare)

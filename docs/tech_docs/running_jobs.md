@@ -8,7 +8,7 @@ There are several methods to run jobs on Ilifu.
 
 ---
 
-## 1. Jupyter Spawner
+## Jupyter Spawner
 
 The jupyter spawner can be accessed via web browser at `https://jupyter.ilifu.ac.za`.  This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.
 
@@ -52,7 +52,7 @@ The following table lists the available kernels and their related Singularity co
 
 Details of the python libraries, software and other libraries available within the different containers can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
 
-## 2. Slurm Batch Scheduler
+## Slurm Batch Scheduler
 
 Slurm is a general purpose job scheduling system which is highly versatile.  There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs.  This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a SLURM batch job.
 
@@ -89,15 +89,15 @@ sbatch casaslurm_N.sh
 
 To check the progress of the jobs, use the `squeue` command or check the `logs` directory...
 
-## 3. Interactive SLURM sessions
+## Interactive SLURM sessions
 
 **No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
 
 **NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
 
-**NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
+**NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. **This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.**
 
-### 3.1 Interactive session without X11 support
+### Interactive session without X11 support
 
 For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
 
@@ -143,7 +143,7 @@ An example work flow for an interactive session can be described as follows:
 * use the srun command to allocate yourself a compute node, describing your required resources
 * open a Singularity container and run your software.
 
-### 3.2 Interactive session with X11 support
+### Interactive session with X11 support
 
 In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
 
@@ -192,7 +192,7 @@ or for Mac OS:
 	$ ssh-add -K
 ``` -->
 
-## 4. Specifying Resources when running jobs on SLURM
+## Specifying Resources when running jobs on SLURM
 
 When running a job using an `sbatch` script or using `srun` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `232 GB RAM`. These are the maximum number of resources that can be requested per node.
 
@@ -237,3 +237,8 @@ The following table lists the parameters that can be used to describe the requir
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
 11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
+
+
+
+
+
