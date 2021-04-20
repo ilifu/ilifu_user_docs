@@ -46,7 +46,7 @@ You will then be redirected to a login screen, where you can enter your ilifu cr
 
 <div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_04.png" alt="globus online ilifu login" width=500 /></div>>
 
-You’ll then be redirected to a window where you’ll be able to browse through your home directory on the ilifu system. The ilifu system is only one endpoint of the transfer process. You will need to then set up the source or destination for the transfer. In order to do this, click on the button in the upper right corner of the file list, and you’ll see a menu displayed:
+You will be asked to give consent for Globus to access your directories. You’ll then be redirected to a window where you’ll be able to browse through your home directory on the ilifu system. The ilifu system is only one endpoint of the transfer process. You will need to then set up the source or destination for the transfer. In order to do this, click on the button in the upper right corner of the file list, and you’ll see a menu displayed:
 
 <div style="text-align:center"><img src="http://docs.ilifu.ac.za/_media/data_globus_05.png" alt="globus online options menu" width=200 /></div>
 
