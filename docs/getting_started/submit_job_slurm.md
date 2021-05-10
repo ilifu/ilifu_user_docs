@@ -62,6 +62,21 @@ If any errors occur while running the job, you can view the logs in the `testjob
 
 **NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
 
+### Quick Interactive Session
+
+If you need to do interactive work and don't want to wait for a queue, the easiest and quickest way is via the `sinteractive` command. It is designed to minimize wait time, and provides an interactive job with X11 forwarding. It is useful for test scripts before submitting them to the queue, compiling or debugging code, or for other tasks that are difficult to accomplish with a batch queue.
+
+The following command will start an interactive session with four cores:
+
+```
+sinteractive --cpus-per-task=4
+```
+
+This start an interactive job in the `Devel` partition and automaticaly open an ssh terminal on the node where the job is running.
+
+Most resources that can be specified with `sbatch` or `srun` can also be passed with the `sinteractive` command. The `sinteractive` command allows for quick access to a compute node by sharing resources between all users on the partition. Memory is not tracked in jobs submitted via `sinteractive`. Please only request the resources that you need for the task at hand. For more sophisticated usage, please see the following sections. 
+
+
 ### Interactive session without X11 support
 
 For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
