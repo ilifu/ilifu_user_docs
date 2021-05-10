@@ -2,7 +2,7 @@
 
 Two common ways to run jobs on SLURM include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. **Please note that no software should be run on the SLURM login node (login node).**
 
-## Submitting a job using a batch script
+## Submitting a Job using a Batch Script
 
 After `sshing` into `slurm.ilifu.ac.za`, you can submit a job to SLURM using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
 
@@ -54,7 +54,7 @@ To see the status of the jobs in the SLURM queue associated with your account us
 
 If any errors occur while running the job, you can view the logs in the `testjob-<jobid>-stderr.log`, and any text output can be found in `testjob-<jobid>-stdout.log`, as described by the shell script. This is useful for debugging any issues with your job.
 
-## Interactive SLURM sessions
+## Interactive SLURM Sessions
 
 **No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
 
@@ -62,7 +62,24 @@ If any errors occur while running the job, you can view the logs in the `testjob
 
 **NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
 
-### Interactive session without X11 support
+### Quick Interactive Session
+
+If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command provides on-demand access to an allocation of resources in the `Devel` partition. It is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` command can often be used in cases where a dedicated server would otherwise be used. That is, when testing scripts, developing code, compiling, or for other tasks that are difficult to accomplish with a batch queue system and which cannot be done on the login node.
+
+The following command will launch a job in the `Devel` partition with four cores, X11 support, and will automatically open an virtual terminal on the appropriate node:
+
+```bash
+	$ sinteractive --x11 -c 4
+```
+
+Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for cpu (`-c` or `--cpus-per-core`) and for time (`--time=`), if you need more than the default time limit of three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a tool such as `tmux` or `GNU screen` in order to maintain a persistent connection. See the instructions for `tmux` in the following section.
+
+In order to provide immediate access for interactive tasks, resources are shared between all users on the `Devel` partition -- memory is not tracked and the cpus are oversubscribed. Please only request the number of cores that you need for the task at hand and be aware of your memory usage. 
+
+For more features of interactive jobs, refer to the following sections. 
+
+
+### Interactive Session without X11 Support
 
 For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
 
@@ -108,7 +125,7 @@ An example work flow for an interactive session can be described as follows:
 * use the srun command to allocate yourself a compute node, describing your required resources
 * open a Singularity container and run your software.
 
-### Interactive session with X11 support
+### Interactive Session with X11 Support
 
 In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
 
@@ -157,7 +174,7 @@ or for Mac OS:
 	$ ssh-add -K
 ``` -->
 
-## Specifying Resources when running jobs on SLURM
+## Specifying Resources when Running Jobs on SLURM
 
 When running a job using an `sbatch` script or using `srun` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `232 GB RAM`. These are the maximum number of resources that can be requested per node.
 
