@@ -1,6 +1,8 @@
 # Submitting a job on SLURM
 
-Two common ways to run jobs on SLURM include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. **Please note that no software should be run on the SLURM login node (login node).**
+Two common ways to run jobs on SLURM include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. 
+
+**Note: No software should be run on the SLURM login node.** The login node (slurm.ilifu.ac.za) should only be used to start and interact with Slurm jobs, or other low-resource tasks. For any other work, please start an interactive job as described below. 
 
 ## Submitting a Job using a Batch Script
 
@@ -56,52 +58,69 @@ If any errors occur while running the job, you can view the logs in the `testjob
 
 ## Interactive SLURM Sessions
 
-**No software should be run on the SLURM login node.** A shell terminal can be run on a compute node allowing for an interactive job on the cluster. Interactive jobs are useful for testing and developing code.
+An interactive session allows you to connect to a computing node and work on that node directly. There are several ways to use an interactive session on Ilifu. If you need to do work that you would normally do on a dedicated node, without waiting in the queue, the simplest option is to use the `sinteractive` command.  To use `sinteractive`, please see the Interactive Session Quick Start section below. 
 
-**NOTE:** interactive sessions are volatile and may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or `screen` may help to reduce this volatility, however, in the event that the SLURM login node is restarted, the persistent terminal sessions will be lost. We therefore recommend that users submit jobs using `sbatch`, particularly for jobs with run times of greater than 3 hrs.
+For more sophisticated interactive usage, the `srun` command accomodates a variety of modes and options. See the Interactive Session Features section below for  common features of the `srun` command.
 
-**NOTE:** interactive sessions make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory.
+Please note the following before starting an interactive job:
 
-### Quick Interactive Session
+**Note:** Interactive sessions may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or GNU `screen` can help to reduce volatility. See the section Persistent Terminals for instructions. 
 
-If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command provides on-demand access to an allocation of resources in the `Devel` partition. It is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` command can often be used in cases where a dedicated server would otherwise be used. That is, when testing scripts, developing code, compiling, or for other tasks that are difficult to accomplish with a batch queue system and which cannot be done on the login node.
+**Note:** In order is to ensure that resources are available in an optimal way for all users, interactive jobs are limited by time and compute resources. For work that uses significant compute resources, or that takes longer than three hours, we recommend that users submit jobs to the batch queue using `sbatch`. 
 
-The following command will launch a job in the `Devel` partition with four cores, X11 support, and will automatically open an virtual terminal on the appropriate node:
+**Note:** No software should be run on the SLURM login node (slurm.ilifu.ac.za). It should only be used to start, stop and monitor slurm jobs. 
+
+
+### Interactive Session Quick Start
+
+If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command aims to provide on-demand access to resources on the `Devel` partition. This partition is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` is a wrapper around the `srun` command that allows you to quickly start a job on the `Devel` partition, connect to the appropriate server, and work on that server directly with minimal configuration. 
+
+For example, run the following command on the login node to start an interactive session with four cores and X11 support:
 
 ```bash
 	$ sinteractive --x11 -c 4
 ```
 
-Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for cpu (`-c` or `--cpus-per-core`) and for time (`--time=`), if you need more than the default time limit of three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a tool such as `tmux` or `GNU screen` in order to maintain a persistent connection. See the instructions for `tmux` in the following section.
+After entering this command, you will be presented with a new prompt on a compute node where you can work directly.
 
-In order to provide immediate access for interactive tasks, resources are shared between all users on the `Devel` partition -- memory is not tracked and the cpus are oversubscribed. Please only request the number of cores that you need for the task at hand and be aware of your memory usage. 
+Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for the number of cpus (`-c` or `--cpus-per-core`) and for job time (`--time=`). The default time limit for the Devel partition is three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a persistent connection tool such as `tmux` or `GNU screen`. See the Persistent Terminals section below for instructions.
 
-For more features of interactive jobs, refer to the following sections. 
+In order to minimize wait time for interactive sessions, resources on the `Devel` partition are shared between all users -- memory is not tracked by slurm and the cpus are oversubscribed. Also, job time is limited to a maximum of twelve hours. Please only request the number of cores and time that you need for the task at hand and be aware of your memory usage. If you need an interactive job with additional features and options, with a dedicated allocation of compute resources, or that lasts longer than twelve hours, please use `srun` command, which is documented in the following section. 
 
 
-### Interactive Session without X11 Support
+### Interactive Session Features
 
-For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
+If you need an interative session with more time, resouces or options, the `srun` command can be used. From the SLURM login node, run the command:
 
 ```bash
 	$ srun --pty bash
 ```
 
-This will place you in an interactive shell (bash) session on a compute node. The `--pty` parameter provides a psuedo-terminal which allows interactivity. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. Run the `srun --help` command to see additional parameters. Similar parameters to the sbatch script above can be used to define the resources allocated to your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container and loading an interactive CASA session, or utilizing Nextflow.
+This will place you in an interactive (bash) shell on a compute node in the Main partition. The `--pty` parameter provides a psuedo-terminal that allows for interactivity. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. Run the `srun --help` command to see additional parameters. Similar parameters to the sbatch command can be used to define the resources and other options of your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container to load an interactive CASA session, or to utilizing Nextflow.
 
-You are able to directly run Singularity containers or software within containers using the srun command, for example:
+To start an interactive session without waiting in the queue, the `Devel` partition can be used for an on-demand session on a resource-shared node.
+
+```bash
+	$ srun -p Devel --pty bash -i
+```
+
+Note that, as memory is not tracked in the `Devel` partition, specifying any memory argument (e.g. the -m or --mem flags) with the `Devel` partition will yeild an error stating that "Memory required by task is not available".
+
+You can directly run a Singularity containers or other software using the srun command, for example:
 
 ```bash
 	$ srun --pty singularity shell /idia/software/containers/ASTRO-PY3.simg
 ```
 
-This will open an interactive session on a compute node and open the `ASTRO-PY3` container which includes a large suite of astronomy software. Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
+This will start an interactive session on a compute node and open a shell in the `ASTRO-PY3` container, which contains a large suite of astronomy software. 
+
+Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
 ```bash
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 ```
 
-Incidently, you can also submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
+Incidently, you can submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
 
 ```bash
 	$ srun singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
@@ -109,7 +128,13 @@ Incidently, you can also submit non-interactive jobs to SLURM using the `srun` c
 
 This will run the Python script `myscript.py` using the ASTRO-PY3 container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilize your current terminal.
 
-Note that when using an interactive shell on SLURM by using the `srun` command, your interactive session may be vulnerable to being killed if you lose network connectivity. To avoid this, you can use `tmux` for a persistent terminal that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
+**Note:** Interactive sessions using `srun` make use of the same resource pool as jobs submitted using `sbatch`. If you are experiencing delays acquiring an interactive session you can either try to reduce the number of resources (CPU, memory and run-time) that you are requesting, or use the parameter `--qos qos-interactive` when launching your interactive job. This parameter provides increased priority but is limited to 1 job, 4 CPUs and 28 GB memory. Alternatively, you can use the `Devel` partition (`srun -p Devel`) or the `sinteractive` command for on-demand access to a shared node.
+
+
+
+### Persistent Terminals
+
+As with any ssh connection, when using an interactive shell via the `srun` or `sinteractive` command, your session is vulnerable to being killed if you lose network connectivity. To avoid this, you can use a persistent terminal tool such as GNU's `screen` or `tmux` for an interactive session that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
 
 | Syntax/keyboard shortcut               | Action                                    |
 |----------------------------------------|-------------------------------------------|
@@ -122,12 +147,15 @@ Note that when using an interactive shell on SLURM by using the `srun` command, 
 An example work flow for an interactive session can be described as follows:
 * login in to slurm login node
 * run tmux (or screen)
-* use the srun command to allocate yourself a compute node, describing your required resources
+* use the srun or sinteractive command to allocate yourself a compute node, describing your required resources
 * open a Singularity container and run your software.
+
+Note: In the rare occasion that the SLURM login node is restarted, even persistent terminal sessions will be lost.
+
 
 ### Interactive Session with X11 Support
 
-In the event that you wish to use software which provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
+In the event that you wish to use software that provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter, which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
 
 ```bash
 	$ ssh -Y <username>@slurm.ilifu.ac.za
@@ -136,13 +164,19 @@ In the event that you wish to use software which provides a GUI, such as `CASA p
 From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` as follows:
 
 ```bash
+	$ sinteractive --x11
+```
+
+or,
+
+```bash
 	$ srun --x11 --pty bash
 ```
 
 This will place you in an interactive shell (bash) session on a compute node with `X11 forwarding` enabled. The default resources allocated by the `srun` command are 1 task, 1 CPU and ~7 GB RAM. You can again adjust what resources are allocated to your interactive session using the parameters such as `--cpus-per-task`, or `--mem`, for example:
 
 ```bash
-	$ srun --pty --cpus-per-task=2 --mem=16GB --x11 bash
+	$ srun --cpus-per-task=2 --mem=16GB --x11 --pty bash
 ```
 
 You are then able to run a Singularity container and run software that provides a GUI.
