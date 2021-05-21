@@ -66,22 +66,24 @@ If any errors occur while running the job, you can view the logs in the `testjob
 
 If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command provides on-demand access to an allocation of resources in the `Devel` partition. It is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` command can often be used in cases where a dedicated server would otherwise be used. That is, when testing scripts, developing code, compiling, or for other tasks that are difficult to accomplish with a batch queue system and which cannot be done on the login node.
 
-The following command will launch a job in the `Devel` partition with four cores, X11 support, and will automatically open an virtual terminal on the appropriate node:
+The following command will launch a job in the `Devel` partition with four cores, X11 support, and will automatically open a virtual terminal (`--pty` by default) on the appropriate node:
 
 ```bash
 	$ sinteractive --x11 -c 4
 ```
 
-Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for cpu (`-c` or `--cpus-per-core`) and for time (`--time=`), if you need more than the default time limit of three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a tool such as `tmux` or `GNU screen` in order to maintain a persistent connection. See the instructions for `tmux` in the following section.
+Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for CPU (`-c` or `--cpus-per-core`) and for time (`--time=`), if you need more than the default time limit of three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a tool such as `tmux` or `GNU screen` in order to maintain a persistent connection. See the instructions for `tmux` in the following section.
 
-In order to provide immediate access for interactive tasks, resources are shared between all users on the `Devel` partition -- memory is not tracked and the cpus are oversubscribed. Please only request the number of cores that you need for the task at hand and be aware of your memory usage. 
+In order to provide immediate access for interactive tasks, resources are shared between all users on the `Devel` partition -- memory is not tracked and the CPUs are oversubscribed. Please only request the number of cores that you need for the task at hand and be aware of your memory usage. 
 
 For more features of interactive jobs, refer to the following sections. 
 
 
 ### Interactive Session without X11 Support
 
-For an interative session on the SLURM cluster the `srun` command can be used as follows, from the SLURM login node:
+For an interative session on the SLURM cluster the `srun` command can be used. The difference between `srun` & `sinteractive` is that with `srun`, by default, the session will run on the `Main` partition and the resources allocated to the session will not be shared with other users, however, the session may be queued if the requested resources are not available.
+
+You can start a simple interactive session from the SLURM login node as follows:
 
 ```bash
 	$ srun --pty bash
@@ -186,16 +188,17 @@ Parallelism on the cluster can also occur by distributing work over many tasks t
 
 The following table lists the parameters that can be used to describe the required resources for your job:
 
-| Syntax                               | Meaning                                        |
-|--------------------------------------|------------------------------------------------|
-| --time=&#60;minutes&#62;             | Walltime for job (default is 3 hrs)            |
-| --mem=&#60;number&#62;*              | Maximum amount of memory (default is ~7 GB)    |
-| --mem-per-cpu=&#60;number&#62;*      | Memory per processor core (CPU)                |
-| --cpus-per-task=&#60;number&#62;     | Number of CPUs per task (default is 1)         |
-| --ntasks=&#60;number&#62;            | Number of processes to run (default is 1)      |
-| --nodes=&#60;number&#62;             | Number of nodes on which to run (default is 1) |
-| --ntasks-per-node=&#60;number&#62;   | Number of tasks to invoke on each node         |
-| --partition=&#60;partition_name&#62; | Request specific partition/queue               |
+| Syntax                                       | Meaning                                        |
+|----------------------------------------------|------------------------------------------------|
+| --time=&#60;minutes&#62;                     | Walltime for job (default is 3 hrs)            |
+| --mem=&#60;number&#62;*                      | Maximum amount of memory (default is ~7 GB)    |
+| --mem-per-cpu=&#60;number&#62;*              | Memory per processor core (CPU)                |
+| --cpus-per-task=&#60;number&#62;             | Number of CPUs per task (default is 1)         |
+| --ntasks=&#60;number&#62;                    | Number of processes to run (default is 1)      |
+| --nodes=&#60;number&#62;                     | Number of nodes on which to run (default is 1) |
+| --ntasks-per-node=&#60;number&#62;           | Number of tasks to invoke on each node         |
+| --partition=&#60;partition_name&#62;         | Request specific partition/queue               |
+| --account=&#60;account_name&#62;<sup>7</sup> | The account that will be charged for the job   |
 
 **Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
 
@@ -203,6 +206,7 @@ The following table lists the parameters that can be used to describe the requir
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
 * default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.
+* to find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} cluster=ilifu-slurm2021 -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
 
 ### Notes for GPU jobs.

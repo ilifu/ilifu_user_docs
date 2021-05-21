@@ -9,7 +9,7 @@ The Ilifu infrastructure includes the following compute and storage resources:
 
 ## Storage
     * 400 TB BeeGFS (fast storage mounted as /scratch)
-    * 2.9 PB CephFS.
+    * 4.2 PB CephFS.
 
 
 Of the 110 compute nodes, 88 nodes are included in the Ilifu SLURM cluster, with 76 nodes in the main partition and 12 nodes in the Jupyter partition. The number of nodes within the cluster and allocated to partitions is subject to change as the nodes are moved between partitions and other services as needs demand. Additional CephFS storage of approximately 2.8 PB will be available by October 2020. The CephFS storage values indicate usable storage and are calculated as 70% of raw available storage to allow for redundancy and file-system overheads. Usable storage is intended to operate at below 80% capacity for the storage to operate efficiently.
