@@ -1,12 +1,12 @@
-# Submitting a job on SLURM
+# Submitting a job on Slurm
 
-Two common ways to run jobs on SLURM include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. 
+Two common ways to run jobs on Slurm include submitting jobs using a batch script, and running jobs interactively. Submitting jobs using a batch script allows for multiple jobs to be submitted in parallel, or for a series of jobs to be submitted, where one job may depend on the output of a previous job. Interactive jobs are useful for developing workflows or scripts, or working with software interactively. 
 
-**Note: No software should be run on the SLURM login node.** The login node (slurm.ilifu.ac.za) should only be used to start and interact with Slurm jobs, or other low-resource tasks. For any other work, please start an interactive job as described below. 
+**Note: No software should be run on the Slurm login node.** The login node (slurm.ilifu.ac.za) should only be used to start and interact with Slurm jobs, or other low-resource tasks. For any other work, please start an interactive job as described below. 
 
 ## Submitting a Job using a Batch Script
 
-After `sshing` into `slurm.ilifu.ac.za`, you can submit a job to SLURM using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
+After `sshing` into `slurm.ilifu.ac.za`, you can submit a job to Slurm using a shell script. The script must describe the application/software you wish to run as well as the resources that you wish to allocate to the job.
 
 Let us assume that you are trying to run a python script, `myscript.py` with the following contents:
 
@@ -28,27 +28,27 @@ Create a shell script, `my_slurm_script.sh` with the following:
 #SBATCH --error=testjob-%j-stderr.log
 #SBATCH --time=00:05:00
 
-echo "Submitting SLURM job"
+echo "Submitting Slurm job"
 singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 ```
 
-The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the  `sbatch --help` command from the terminal to see additional parameters or see the [table of parameters below](/getting_started/submit_job_slurm?id=slurm-job-parameters).
+The parameters that follow `#SBATCH` indicate the requested resources and other job parameters such as the job name and logging information. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the `sbatch --help` command from the terminal to see additional parameters or see the [table of parameters below](/getting_started/submit_job_slurm?id=slurm-job-parameters).
 
 In the shell script above, the application you wish to run during the job is described by `singularity exec /data/exp_soft/containers/ASTRO-PY3.simg python myscript.py`. Here `python` is being used to run `myscript.py` using the python executable within the container `ASTRO-PY3.simg`. This is a `singularity` container that is called with the `exec` command to execute the script.
 
-The next step is to run the shell script using the SLURM `sbatch` command:
+The next step is to run the shell script using the Slurm `sbatch` command:
 
 ```bash
 	$ sbatch my_slurm_script.sh
 ```
 
-This will submit the job to the SLURM queue. If the requested resources are available the job will be initiated. You can see the status of all jobs in the SLURM queue by using the command:
+This will submit the job to the Slurm queue. If the requested resources are available the job will be initiated. You can see the status of all jobs in the Slurm queue by using the command:
 
 ```bash
 	$ squeue
 ```
 
-To see the status of the jobs in the SLURM queue associated with your account use:
+To see the status of the jobs in the Slurm queue associated with your account use:
 
 ```bash
 	$ squeue -u <username>
@@ -56,11 +56,11 @@ To see the status of the jobs in the SLURM queue associated with your account us
 
 If any errors occur while running the job, you can view the logs in the `testjob-<jobid>-stderr.log`, and any text output can be found in `testjob-<jobid>-stdout.log`, as described by the shell script. This is useful for debugging any issues with your job.
 
-## Interactive SLURM Sessions
+## Interactive Slurm Sessions
 
-An interactive session allows you to connect to a computing node and work on that node directly. There are several ways to use an interactive session on Ilifu. If you need to do work that you would normally do on a dedicated node, without waiting in the queue, the simplest option is to use the `sinteractive` command.  To use `sinteractive`, please see the Interactive Session Quick Start section below. 
+An interactive session allows you to connect to a computing node and work on that node directly. There are several ways to use an interactive session on Ilifu. If you need to do work that you would normally do on a dedicated node, without waiting in the queue, the simplest option is to use the `sinteractive` command. To use `sinteractive`, please see the Interactive Session Quick Start section below. 
 
-For more sophisticated interactive usage, the `srun` command accomodates a variety of modes and options. See the Interactive Session Features section below for  common features of the `srun` command.
+For more sophisticated interactive usage, the `srun` command accommodates a variety of modes and options. See the Interactive Session Features section below for common features of the `srun` command.
 
 Please note the following before starting an interactive job:
 
@@ -68,7 +68,7 @@ Please note the following before starting an interactive job:
 
 **Note:** In order is to ensure that resources are available in an optimal way for all users, interactive jobs are limited by time and compute resources. For work that uses significant compute resources, or that takes longer than three hours, we recommend that users submit jobs to the batch queue using `sbatch`. 
 
-**Note:** No software should be run on the SLURM login node (slurm.ilifu.ac.za). It should only be used to start, stop and monitor slurm jobs. 
+**Note:** No software should be run on the Slurm login node (slurm.ilifu.ac.za). The Slurm login node should only be used to start, stop and monitor Slurm jobs. 
 
 
 ### Interactive Session Quick Start
@@ -83,14 +83,14 @@ For example, run the following command on the login node to start an interactive
 
 After entering this command, you will be presented with a new prompt on a compute node where you can work directly.
 
-Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for the number of cpus (`-c` or `--cpus-per-core`) and for job time (`--time=`). The default time limit for the Devel partition is three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a persistent connection tool such as `tmux` or `GNU screen`. See the Persistent Terminals section below for instructions.
+Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for the number of CPUs (`-c` or `--cpus-per-core`) and for job time (`--time=`). The default time limit for the Devel partition is three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a persistent connection tool such as `tmux` or `GNU screen`. See the Persistent Terminals section below for instructions.
 
-In order to minimize wait time for interactive sessions, resources on the `Devel` partition are shared between all users -- memory is not tracked by slurm and the cpus are oversubscribed. Also, job time is limited to a maximum of twelve hours. Please only request the number of cores and time that you need for the task at hand and be aware of your memory usage. If you need an interactive job with additional features and options, with a dedicated allocation of compute resources, or that lasts longer than twelve hours, please use `srun` command, which is documented in the following section. 
+In order to minimize wait time for interactive sessions, resources on the `Devel` partition are shared between all users -- memory is not tracked by Slurm and the CPUs are oversubscribed. Also, job time is limited to a maximum of twelve hours. Please only request the number of cores and time that you need for the task at hand and be aware of your memory usage. If you need an interactive job with additional features and options, with a dedicated allocation of compute resources, or that lasts longer than twelve hours, please use `srun` command, which is documented in the following section. 
 
 
 ### Interactive Session Features
 
-If you need an interative session with more time, resouces or options, the `srun` command can be used. From the SLURM login node, run the command:
+If you need an interative session with more time, resources or options, the `srun` command can be used. From the Slurm login node, run the command:
 
 ```bash
 	$ srun --pty bash
@@ -120,7 +120,7 @@ Alternatively, the following command will open an interactive CASA session on a 
 	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
 ```
 
-Incidently, you can submit non-interactive jobs to SLURM using the `srun` command without the `--pty` parameter, for example:
+Incidently, you can submit non-interactive jobs to Slurm using the `srun` command without the `--pty` parameter, for example:
 
 ```bash
 	$ srun singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
@@ -134,7 +134,7 @@ This will run the Python script `myscript.py` using the ASTRO-PY3 container on a
 
 ### Persistent Terminals
 
-As with any ssh connection, when using an interactive shell via the `srun` or `sinteractive` command, your session is vulnerable to being killed if you lose network connectivity. To avoid this, you can use a persistent terminal tool such as GNU's `screen` or `tmux` for an interactive session that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the SLURM pool. Basic `tmux` commands include:
+As with any ssh connection, when using an interactive shell via the `srun` or `sinteractive` command, your session is vulnerable to being killed if you lose network connectivity. To avoid this, you can use a persistent terminal tool such as GNU's `screen` or `tmux` for an interactive session that can be reaccessed after the loss of the ssh session. In order to use this feature, `tmux` should be run from the login node before running `srun`. However, when using `tmux`, please make sure to exit the `tmux` session once your interactive session is complete in order to release the resources back to the Slurm pool. Basic `tmux` commands include:
 
 | Syntax/keyboard shortcut               | Action                                    |
 |----------------------------------------|-------------------------------------------|
@@ -145,23 +145,23 @@ As with any ssh connection, when using an interactive shell via the `srun` or `s
 | ctrl/cmd-b + [                         | scroll current terminal                   |
 
 An example work flow for an interactive session can be described as follows:
-* login in to slurm login node
+* login in to Slurm login node
 * run tmux (or screen)
 * use the srun or sinteractive command to allocate yourself a compute node, describing your required resources
 * open a Singularity container and run your software.
 
-Note: In the rare occasion that the SLURM login node is restarted, even persistent terminal sessions will be lost.
+Note: In the rare occasion that the Slurm login node is restarted, even persistent terminal sessions will be lost.
 
 
 ### Interactive Session with X11 Support
 
-In the event that you wish to use software that provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the SLURM login node with the `-Y` parameter, which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
+In the event that you wish to use software that provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the Slurm login node with the `-Y` parameter, which sets your DISPLAY variable for trusted `X11 forwarding`, for example:
 
 ```bash
 	$ ssh -Y <username>@slurm.ilifu.ac.za
 ```
 
-From there, you must use `--x11` to allocate a SLURM worker node to yourself with `X11 forwarding` as follows:
+From there, you must use `--x11` to allocate a Slurm compute node to yourself with `X11 forwarding` as follows:
 
 ```bash
 	$ sinteractive --x11
@@ -208,15 +208,15 @@ or for Mac OS:
 	$ ssh-add -K
 ``` -->
 
-## Specifying Resources when Running Jobs on SLURM
+## Specifying Resources when Running Jobs on Slurm
 
 When running a job using an `sbatch` script or using `srun` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `232 GB RAM`. These are the maximum number of resources that can be requested per node.
 
-If you are running a normal job on SLURM, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job using the `--mem` parameter.
+If you are running a normal job on Slurm, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job using the `--mem` parameter.
 
-Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on SLURM, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
+Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on Slurm, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
 
 The following table lists the parameters that can be used to describe the required resources for your job:
 
@@ -233,8 +233,8 @@ The following table lists the parameters that can be used to describe the requir
 
 **Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
 
-* a nodes refer to a single compute node or SLURM worker, i.e. one node has 32 CPUs and 232 GB RAM
-* a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), SLURM works with MPI to manage parallelised processing of data.
+* a nodes refer to a single compute node or Slurm worker, i.e. one node has 32 CPUs and 232 GB RAM
+* a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), Slurm works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
 * default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
