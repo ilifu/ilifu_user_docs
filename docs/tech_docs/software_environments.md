@@ -109,7 +109,7 @@ A number of the containers that are supported by ilifu do not include runscripts
 
 ### Available containers
 
-Several containers have been developed and are currently maintained. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
+Several containers have been developed for use on the ilifu cluster and are currently maintained by the support team. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
 
 <details>
 <summary id="astro-r-container">astro-r container</summary>
@@ -309,6 +309,12 @@ Several containers have been developed and are currently maintained. These conta
 |                      |                      | numpy                 | yt               |
 
 </details>
+
+A simply way to determine what Python packages a container includes is to run the command `pip freeze` within the container environment to list all the Python packages installed using `pip`. This can be achieved using the following command:
+
+```bash
+	$ srun singularity exec /path/to/container pip freeze
+```
 
 ### Building your own container
 
