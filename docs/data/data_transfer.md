@@ -113,7 +113,7 @@ If you are a principal investigator (PI) or member of one of the MeerKAT project
 
 Before pushing your data, it is important to have an existing project on the ilifu facility in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data. Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
 
-In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must send an email to archive@ska.ac.za requesting for this person to access the proposal.
+In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must request for this person to access the proposal via https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1.
 
 The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
 
@@ -127,9 +127,9 @@ In February 2020, new SARAO archive functionality was introduced to configure th
 
 Discussions to optimise this process are ongoing. For now, we suggest that users transfer only a single MS per dataset, and set `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Using `--quack=1` (to discard the first dump) may also be desirable. Conversion options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and flagging options [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
 
-<sup>1</sup> After a dataset has been transferred, the SARAO archive sets a flag that prevents that same dataset from being downloaded to the same destination. If you must re-transfer your data, and the archive disallows another transfer (orange arrow labelled 'IDIA'), firstly contact [ilifu support](mailto:support@ilifu.ac.za) to rename (or remove) your data, and then contact the [SARAO archive](mailto:archive@ska.ac.za) to reset the flag.
+<sup>1</sup> After a dataset has been transferred, the SARAO archive sets a flag that prevents that same dataset from being downloaded to the same destination. If you must re-transfer your data, and the archive disallows another transfer (orange arrow labelled 'IDIA'), firstly contact [ilifu support](mailto:support@ilifu.ac.za) to rename (or remove) your data, and then contact the [SARAO archive](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1) to reset the flag.
 
-<sup>2</sup>Transfers of data in the native MeerKAT format (MFV / MKV4) can also be arranged by contacting the [SARAO archive](mailto:archive@ska.ac.za).
+<sup>2</sup>Transfers of data in the native MeerKAT format (MFV / MKV4) can also be arranged by contacting the [SARAO archive](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1).
 
 ### Changes to flagging
 
