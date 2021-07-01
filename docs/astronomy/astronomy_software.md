@@ -18,6 +18,10 @@ By default, CARTA will start browsing files in the `/carta_share/users/<your_use
 
 If you experience any issues starting CARTA, or if your CARTA session crashes, you may need to restart your backend. To do this, go to  File -> Server -> Restart Service. Alternatively, go to [carta.idia.ac.za/dashboard](https://carta.idia.ac.za/dashboard) (also accessible via File -> Server -> Dashboard) and press the button to "Restart CARTA service". After this, refresh your CARTA page and log in again.
 
+### Hard-reload white screen
+
+If you visit one of the IDIA CARTA servers and are met with only a white screen, force reload (e.g. command-shift-R) the page to clear the cache.
+
 ### HDF5 converter
 
 While CARTA supports `FITS`, `CASA`, and `Miriad` images as well, we strongly suggest converting larges cubes/images to `HDF5` (IDIA schema) files for improved performance. The HDF5 converter can be used in the following way:
