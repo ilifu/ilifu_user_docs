@@ -4,7 +4,7 @@ The Ilifu facility has two main services for accessing compute resources:
 
 1. **Jupyter:** users may access a JupyterLab session on the cluster. The Ilifu Jupyter service allows users to select their desired compute resources and dynamically spawn a Jupyter session. This is a good environment to experiment with code and visualise results. This Jupyter service is available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. **Slurm:**Users may access the Ilifu Slurm cluster login-node and submit tasks to the Slurm queue. This environment is available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
+2. **Slurm:** users may access the Ilifu Slurm cluster login-node and submit tasks to the Slurm queue. This environment is available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 ---
 
@@ -296,9 +296,10 @@ mpirun -n <NUMBER_OF_RANKS> singularity exec <PATH/TO/MY/IMAGE> </PATH/TO/BINARY
 
 ### Customising your job using sbatch/srun parameters
 
-The following table lists the parameters that can be used to describe the required resources for your job:
+The following table lists the parameters that can be used to describe the required resources for your job. Additional parameters can be found by running `sbatch --help` or `srun --help`.
 
 <summary id='slurm-job-parameters'></summary>
+
 | Syntax                                                                               | Meaning                                         		      |
 |--------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)                          |
@@ -331,6 +332,17 @@ The following table lists the parameters that can be used to describe the requir
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
 11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
 
+### Notes for GPU jobs
+
+If you wish to run a job on the GPU node you need to specify the `GPU` or `GPUV100` partition, i.e. your sbatch script will have something like the following lines in the header:
+<!-- and you need to specify the number of GPU resources you require with the `--gres` option.
+```code bash
+#SBATCH --partition=GPU
+#SBATCH --gres=gpu:p100:1
+``` -->
+```code bash
+#SBATCH --partition=GPU
+```
 
 
 
