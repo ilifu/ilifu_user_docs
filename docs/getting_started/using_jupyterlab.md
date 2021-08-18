@@ -27,6 +27,8 @@ The following table lists the available kernels and their related Singularity co
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
+| ASTRO-GPU                   | ASTRO-GPU.simg                            |
+| ASTRO-PY3                   | ASTRO-PY3.simg                            |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
 | CASA-6                      | casa-6.simg                               |

@@ -4,13 +4,13 @@ Containers are unit software packages that contain all the software, files, libr
 
 The container images that are maintained by the support team can be found at `/idia/software/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
 
-**Note:** singularity is not installed on the SLURM headnode and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `srun` command for interactively running a job on a worker node.
+**Note:** singularity is not installed on the Slurm headnode and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `srun` command for interactively running a job on a worker node.
 
 ## Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
 
-From the SLURM login node, first allocate a compute node to yourself using the following:
+From the Slurm login node, first allocate a compute node to yourself using the following:
 ```shell
 $ srun --pty bash
 ```
@@ -59,7 +59,7 @@ hello world
 $
 ```
 
-will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is widely used to submit jobs on SLURM. 
+will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is widely used to submit jobs on Slurm. 
 
 The `exec` command can also be used to initiate an interative session. For example:
 
@@ -85,7 +85,7 @@ CASA <1>:
 
 ```
 
-The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the SLURM cluster.
+The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the Slurm cluster.
 
 For further information on the software environments available on ilifu, including modules and virtual environments, please see the [Supported software environments](tech_docs/software_environments.md) documents.
 

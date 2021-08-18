@@ -2,20 +2,23 @@
 
 The Ilifu facility has two main services for accessing compute resources:
 
-1. **Jupyter** Users may access a JupyterLab session on the cluster. The Ilifu Jupyter service allows users to select their desired compute resources and dynamically spawn a Jupyter session. This is a good environment to experiment with code and visualise results. This Jupyter service is available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
+1. **Jupyter:** users may access a JupyterLab session on the cluster. The Ilifu Jupyter service allows users to select their desired compute resources and dynamically spawn a Jupyter session. This is a good environment to experiment with code and visualise results. This Jupyter service is available at [jupyter.ilifu.ac.za](https://jupyter.ilifu.ac.za)
 
-2. Users may access the Ilifu Slurm cluster login-node and submit tasks to the Slurm queue. This environment is available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
+2. **Slurm:**Users may access the Ilifu Slurm cluster login-node and submit tasks to the Slurm queue. This environment is available at [slurm.ilifu.ac.za](https://slurm.ilifu.ac.za).
 
 ---
 
-## Jupyter Spawner
+## Jupyter
 
-The Jupyter spawner can be accessed via web browser at `https://jupyter.ilifu.ac.za`. This system allows the user to spawn a virtual machine on the Ilifu cloud running Jupyter Lab. Since the VM is launched for each user it allows for better management of resources, and provides a reliable environment for developing and running analyses, since users are not competing for resources on one or more shared nodes.
+The Jupyter service can be accessed via a web browser at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
 
-After logging into the Jupyter node, the user is presented with a drop-down menu with a list of options for compute resources. Please select the smallest node that will provide sufficient resources for the task at hand:
-![dropdown](http://docs.ilifu.ac.za/_media/profile_dropdown_options.png)
+After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. **Please select the smallest session size that will provide sufficient resources for the task at hand.**
 
-Each node will be terminated after a preset interval of time, however the user's jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the Slurm Batch Scheduler section below). A user can terminate the Jupyter session in order to free up resources on the cloud, or to choose a different node type. This is done by choosing `File > Hub Control Panel` option from the top menu bar of JupyterLab,
+![dropdown](http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png)
+
+Each node will be terminated after a preset interval of time, however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section). 
+
+**Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select "File" > "Hub Control Panel":
 
 <img src="/_media/hub_selection.png" alt="menu bar options" width=500 />
 
@@ -23,7 +26,21 @@ This will bring you to the page with the `Stop My Server` option, where you can 
 
 <img src="/_media/stop_server_button.png" alt="stop server button" width=600 />
 
+Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
+
 Once you have logged into JupyterLab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run.
+
+### Navigating to other directories
+
+The directory navigation panel will default to your `$HOME` directory when you first log in. In order to navigate to your personal workspace or scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
+
+```bash
+	$ ln -s /scratch/users/<username> $HOME/scratch
+```
+
+The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Remember to replace the `<username>` placeholder with your username. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
+
+### Jupyter kernels
 
 There are kernels for both Python and R languages. The different kernels include different software stacks, such as the `CASA-#` kernels that contain Python wrapped CASA tasks which can be executed within the notebook, or the `ASTRO-PY3` kernel which contains an assortment of astronomy related software and Python packages. Once you have selected a kernel a notebook will be created. You can change the kernel from within the notebook by going `Kernel > Change Kernel...` from the top menu bar, or by clicking the kernel name on the top right side of the notebook panel, next to the kernel indicator circle.
 
@@ -38,10 +55,12 @@ The following table lists the available kernels and their related Singularity co
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
+| ASTRO-GPU                   | ASTRO-GPU.simg                            |
 | ASTRO-PY3                   | ASTRO-PY3.simg                            |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
-| CASA-6 Alpha                | casa-6-dev.simg                           |
+| CASA-6                      | casa-6.simg                               |
+| katcal (public)             | katcal.sif                                |
 | KERN-2                      | kern-2.img                                |
 | KERN-5                      | kern5.simg                                |
 | PY2                         | python-2.7.img                            |
@@ -49,6 +68,7 @@ The following table lists the available kernels and their related Singularity co
 | Python 3                    | System Python (not a container)           |
 | SF-PY2                      | source-finding.img                        |
 | SF-PY3                      | ASTRO-PY3.simg                            |
+| Simba                       | SIMBA.simg                                |
 
 Details of the python libraries, software and other libraries available within the different containers can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
 
@@ -56,12 +76,12 @@ Details of the python libraries, software and other libraries available within t
 
 Slurm is a general purpose job scheduling system which is highly versatile. There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs. This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a Slurm batch job.
 
-The Slurm batch system can be accessed via `ssh` with private key to `slurm.ilifu.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly. The login node does not have significant resources and will likely crash under heavy usage. From this node you can submit jobs to a queue where it is subsequently allocated to the computing cluster such that it uses resources in an optimal manner.
+The Slurm batch system can be accessed via `ssh` with private key to `slurm.ilifu.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly. The login node does not have significant resources and will likely crash under heavy usage. From this node you can submit jobs to the Slurm queue, jobs will then be scheduled to run when resources become available.
 
-To do so, we must create a job submit script. In this example, we will assume that the user is executing their analysis or data processing code using python. We also assume that your code is contained in a set of python script called `casa_job_N.py`, where N represents the job number. If you were working directly on your laptop, you could run this script by running `python -c casa_job_N.py`. However, since our script will be run on a worker node, we need to use a singularity container to encapsulate our system environment and requisite software. To execute our python script on the Ilifu cluster using a singularity container, we prepend `singularity exec` to this command:
+To do so, we must create a job submit script. In this example, we will assume that the user is executing their analysis or data processing code using python. We also assume that your code is contained in a set of python script called `casa_job_N.py`, where N represents the job number. If you were working directly on your laptop, you could run this script by running `python -c casa_job_N.py`. However, since our script will be run on a compute node, we need to use a singularity container to encapsulate our system environment and requisite software. To execute our python script on the Ilifu cluster using a singularity container, we prepend `singularity exec` to this command:
 
 ```bash
-singularity exec /data/exp_soft/containers/casa-stable.img python -c casa_job_N.py
+singularity exec /idia/software/containers/casa-stable.img python -c casa_job_N.py
 ```
 
 To execute our (set of) scripts using the Slurm batch scheduler, you must create an additional Slurm submit script. This is a bash script that contains the above command, along with a set of parameters that instruct Slurm how to run the jobs:
@@ -75,11 +95,11 @@ To execute our (set of) scripts using the Slurm batch scheduler, you must create
 #SBATCH --output=logs/casalog_%J.log
 
 echo "Submitting Slurm job"
-singularity exec /data/exp_soft/containers/casa-stable.img casa -c casa_job_N.py
+singularity exec /idia/software/containers/casa-stable.img casa -c casa_job_N.py
 sleep 10
 ```
 
-The commented lines beginning with _#SBATCH_ are parsed by the Slurm to determine how to run the jobs. The above script creates a log file for each job, these scripts are located in the 'logs' directory, so make sure that such a directory exists relative to the location where you submit the script.
+The commented lines beginning with _#SBATCH_ are parsed by Slurm to determine how to run the jobs. The above script creates a log file for each job, these files are located in the 'logs' directory, so make sure that such a directory exists relative to the location where you submit the script.
 
 To submit this script to the job queue, run
 
@@ -237,45 +257,73 @@ or for Mac OS:
 	$ ssh-add -K
 ``` -->
 
-## Specifying Resources when Running Jobs on SLURM
+## Specifying Resources when Running Jobs on Slurm
 
-When running a job using an `sbatch` script or using `srun` for an interactive job, a user is able to specify the resources required for their job. A single node consists of `32 CPUs` and `232 GB RAM`. These are the maximum number of resources that can be requested per node.
+### Available resources
 
-If you are running a normal job on SLURM, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job using the `--mem` parameter.
+When running a job using `sbatch` or `srun`, a user is able to specify the resources required for their job. The following table lists the different node sizes in the cluster and indicates the maximum number of resources that can be requested for the different node types.
 
-Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on SLURM, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
+| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
+|-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
+| Main      | compute-[001-080] | 1           | 32      | 7.25                | 232             | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 7.25                | 232             | 3 hours           | 14 days       |
+| HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
+| Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on SLURM, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
+**Note** jobs submitted to the Devel partition cannot allocate memory.
+
+In addition to the above resources, 4 GPU (Tesla P100) nodes are 1 GPU (V100) are available in the GPU and GPUV100 partitions respectively.
+
+### Parallel computing on the cluster
+
+If you are running a normal job on Slurm, **without** `MPI` or `OpenMP`, your job will only require `1 CPU`, `1 task` and `1 node`. These values are default values when running a job, however you are able to specify additional memory for your job using the `--mem` parameter.
+
+Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on Slurm, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
+
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
+
+When using MPI, you must wrap your software call (including Singularity) in an MPI wrapper, such as mpirun, for example:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name='MPI-job-%J'
+#SBATCH --ntasks=16
+#SBATCH --cpus-per-task=1
+
+module load openmpi/4.1.0
+mpirun -n <NUMBER_OF_RANKS> singularity exec <PATH/TO/MY/IMAGE> </PATH/TO/BINARY/WITHIN/CONTAINER>
+```
+
+### Customising your job using sbatch/srun parameters
 
 The following table lists the parameters that can be used to describe the required resources for your job:
 
 <summary id='slurm-job-parameters'></summary>
-
-| Syntax                                                                               | Meaning                                         			|
-|--------------------------------------------------------------------------------------|----------------------------------------------------	|
-| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)               	|
-| --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node (default is ~7 GB)	|
-| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)											|
-| --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)             	|
-| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)          	|
-| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)     	|
-| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node            		|
-| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main)    	|
-| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job       	|
-| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources       	|
-| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                   	|
-| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to             	|
-| --mail-user=&#60;email_address&#62;<sup>10</sup>                                     | email address where notifications should be sent   	|
-| --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification 	|
+| Syntax                                                                               | Meaning                                         		      |
+|--------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)                          |
+| --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node (default is ~7 GB per CPU) |
+| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)						      |
+| --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)                       |
+| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)          	      |
+| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)     	      |
+| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node            		      |
+| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main)    	      |
+| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job       	      |
+| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources       	      |
+| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                   	      |
+| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to             	      |
+| --mail-user=&#60;email_address&#62;<sup>10</sup>                                     | email address where notifications should be sent   	      |
+| --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification 	      |
 <!-- also include row for array jobs -->
 
-*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.*
+*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs. Default memory scales with the number of CPUs specified*
 
 1. While the default for specifying the wall-time for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`. Wall-time is the estimated amount of time that you expect your job to run. It is important for the scheduler to know this parameter so that it can make realistic estimates on when jobs are due to start and end. This is especially critical for your short jobs as it can allow them to run earlier when a node would otherwise be idle waiting for a large job to start. Note, however, that underestimating wall-time means that once your job has exceeded its limit, it will be killed. So it’s better to slightly overestimate the amount of time, especially taking into account that the runtime of jobs can vary a bit due to overall system load.
 2. The default units for memory is MB, but can be specified explicitly in GB, for example `--mem=16GB`. This parameter is especially important in jobs where you are not using the whole node, i.e. jobs using fewer than 32 cores, as this allows other jobs to run alongside yours and make more efficient use of the resources.
 3. CPUs refers to the the number of CPUs associated with your job.
-4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), SLURM works with MPI to manage parallelised processing of data.
-5. nodes refers to a single compute node or SLURM worker, i.e. one node that has 32 CPUs and 232 GB RAM
+4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), Slurm works with MPI to manage parallelised processing of data.
+5. nodes refers to a single compute node or Slurm worker, i.e. one node that has 32 CPUs and 232 GB RAM
 6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
 7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).

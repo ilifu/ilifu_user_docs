@@ -90,7 +90,7 @@ In order to minimize wait time for interactive sessions, resources on the `Devel
 
 If you need an interative session with more time and dedicated resources, the `srun` command can be used. The difference between `srun` & `sinteractive` is that with `srun`, by default, the session will run on the `Main` partition and the resources allocated to the session will not be shared with other users, however, the session may be queued if the requested resources are not available.
 
-You can start a simple interactive session from the SLURM login node as follows:
+You can start a simple interactive session from the Slurm login node as follows:
 
 ```bash
 	$ srun --pty bash
