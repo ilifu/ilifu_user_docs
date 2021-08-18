@@ -24,13 +24,13 @@ This will place the user on the login node. Note that this node should only be u
 
 The Jupyter service can be accessed via a web browser at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
 
-After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. *Please select the smallest session size that will provide sufficient resources for the task at hand.*
+After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. **Please select the smallest session size that will provide sufficient resources for the task at hand.**
 
 ![dropdown](http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png)
 
 Each node will be terminated after a preset interval of time, however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section). 
 
-Please shut down your Jupyter server if you are not planning to use it for more than a few hours. We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select "File" > "Hub Control Panel":
+**Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select "File" > "Hub Control Panel":
 
 <img src="/_media/hub_selection.png" alt="menu bar options" width=500 />
 
@@ -38,4 +38,4 @@ This will bring you to the page with the `Stop My Server` option, where you can 
 
 <img src="/_media/stop_server_button.png" alt="stop server button" width=600 />
 
-Whenever possible, please submit your work via the Slurm batch queue rather than running it in a Jupyter session. Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
+Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
