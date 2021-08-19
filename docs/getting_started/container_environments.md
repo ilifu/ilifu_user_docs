@@ -4,7 +4,7 @@ Containers are unit software packages that contain all the software, files, libr
 
 The container images that are maintained by the support team can be found at `/idia/software/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
 
-**Note:** singularity is not installed on the Slurm headnode and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `srun` command for interactively running a job on a worker node.
+**Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `srun` command for interactively running a job on a worker node.
 
 ## Interactive shell command
 

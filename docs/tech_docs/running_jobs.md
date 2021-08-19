@@ -35,10 +35,10 @@ Once you have logged into JupyterLab and selected a node size you will be placed
 The directory navigation panel will default to your `$HOME` directory when you first log in. In order to navigate to your personal workspace or scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
 
 ```bash
-	$ ln -s /scratch/users/<username> $HOME/scratch
+	$ ln -s /scratch3/users/$USER $HOME/scratch3
 ```
 
-The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Remember to replace the `<username>` placeholder with your username. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
+The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
 
 ### Jupyter kernels
 
@@ -76,7 +76,7 @@ Details of the python libraries, software and other libraries available within t
 
 Slurm is a general purpose job scheduling system which is highly versatile. There are numerous resources available online as to how to submit batch jobs and how to control the execution, concurrency, and dependencies of jobs. This page provides instructions for connecting to the batch scheduler and a simple example to submit and run a Slurm batch job.
 
-The Slurm batch system can be accessed via `ssh` with private key to `slurm.ilifu.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly. The login node does not have significant resources and will likely crash under heavy usage. From this node you can submit jobs to the Slurm queue, jobs will then be scheduled to run when resources become available.
+The Slurm batch system can be accessed via `ssh` with private key to `slurm.ilifu.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly. The login node does not have significant resources and will likely crash under heavy usage. From this node you can submit jobs to the Slurm queue, which will then be scheduled to run when resources become available.
 
 To do so, we must create a job submit script. In this example, we will assume that the user is executing their analysis or data processing code using python. We also assume that your code is contained in a set of python script called `casa_job_N.py`, where N represents the job number. If you were working directly on your laptop, you could run this script by running `python -c casa_job_N.py`. However, since our script will be run on a compute node, we need to use a singularity container to encapsulate our system environment and requisite software. To execute our python script on the Ilifu cluster using a singularity container, we prepend `singularity exec` to this command:
 
@@ -99,7 +99,7 @@ singularity exec /idia/software/containers/casa-stable.img casa -c casa_job_N.py
 sleep 10
 ```
 
-The commented lines beginning with _#SBATCH_ are parsed by Slurm to determine how to run the jobs. The above script creates a log file for each job, these files are located in the 'logs' directory, so make sure that such a directory exists relative to the location where you submit the script.
+The commented lines beginning with _#SBATCH_ are parsed by Slurm to determine how to run the jobs. The above script creates a log file for each job. These files are located in the 'logs' directory, so make sure that such a directory exists relative to the location where you submit the script.
 
 To submit this script to the job queue, run
 
@@ -280,7 +280,7 @@ If you are running a normal job on Slurm, **without** `MPI` or `OpenMP`, your jo
 
 Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on Slurm, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than the maximum available resources on a single node.
 
 When using MPI, you must wrap your software call (including Singularity) in an MPI wrapper, such as mpirun, for example:
 
@@ -303,7 +303,7 @@ The following table lists the parameters that can be used to describe the requir
 | Syntax                                                                               | Meaning                                         		      |
 |--------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)                          |
-| --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node (default is ~7 GB per CPU) |
+| --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node                            |
 | --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)						      |
 | --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)                       |
 | --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)          	      |
@@ -318,7 +318,7 @@ The following table lists the parameters that can be used to describe the requir
 | --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification 	      |
 <!-- also include row for array jobs -->
 
-*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs. Default memory scales with the number of CPUs specified*
+*default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB) (15 GB on HighMem nodes); running on the Main partition for 3 hrs. Default memory scales with the number of CPUs specified*
 
 1. While the default for specifying the wall-time for a job is in minutes, it can also be specified as `mm:ss`, `hh:mm:ss` and even `days-hh:mm:ss`. Wall-time is the estimated amount of time that you expect your job to run. It is important for the scheduler to know this parameter so that it can make realistic estimates on when jobs are due to start and end. This is especially critical for your short jobs as it can allow them to run earlier when a node would otherwise be idle waiting for a large job to start. Note, however, that underestimating wall-time means that once your job has exceeded its limit, it will be killed. So it’s better to slightly overestimate the amount of time, especially taking into account that the runtime of jobs can vary a bit due to overall system load.
 2. The default units for memory is MB, but can be specified explicitly in GB, for example `--mem=16GB`. This parameter is especially important in jobs where you are not using the whole node, i.e. jobs using fewer than 32 cores, as this allows other jobs to run alongside yours and make more efficient use of the resources.

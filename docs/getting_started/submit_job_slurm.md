@@ -240,7 +240,7 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 #SBATCH --cpus-per-task=1
 
 module load openmpi/4.1.0
-mpirun -n <NUMBER_OF_RANKS> singularity exec <PATH/TO/MY/IMAGE> </PATH/TO/BINARY/WITHIN/CONTAINER>
+mpirun -n <n processes per node> singularity exec <path/to/container> </path/to/binary/within/container>
 ```
 ### Customising your job using sbatch/srun parameters
 
