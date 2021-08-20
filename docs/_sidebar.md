@@ -5,7 +5,7 @@
   - [Change your password](getting_started/change_password.md)
   - [Directory structure](data/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
-  - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
+  - [Submit a job on Slurm](getting_started/submit_job_slurm.md)
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
   - [Best Practices](getting_started/best_practices.md)
