@@ -219,9 +219,9 @@ When running a job using `sbatch` or `srun`, a user is able to specify the resou
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
 | Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
 
-**Note** jobs submitted to the Devel partition cannot allocate memory.
+*Note jobs submitted to the Devel partition cannot allocate memory.*
 
-In addition to the above resources, 4 GPU (Tesla P100) nodes are 1 GPU (V100) are available in the GPU and GPUV100 partitions respectively.
+In addition to the above resources, 4 GPU (Tesla P100) nodes and 1 GPU (V100) are available in the `GPU` and `GPUV100` partitions respectively.
 
 ### Parallel computing on the cluster
 
@@ -240,7 +240,7 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 #SBATCH --cpus-per-task=1
 
 module load openmpi/4.1.0
-mpirun -n <n processes per node> singularity exec <path/to/container> </path/to/binary/within/container>
+mpirun -n <number of processes to run> singularity exec <path/to/container> </path/to/binary/within/container>
 ```
 ### Customising your job using sbatch/srun parameters
 
@@ -266,18 +266,4 @@ The following table lists the parameters that can be used to describe the requir
 * default parameters, if not specified, include: 1 node; 1 task; 1 CPU and ~7 GB RAM (7424 MB or 7.25 GB); running on the Main partition for 3 hrs.
 * to find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} cluster=ilifu-slurm2021 -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
 * for more information, see [advanced usage](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm)
-
-### Notes for GPU jobs
-
-If you wish to run a job on the GPU node you need to specify the `GPU` or `GPUV100` partition, i.e. your sbatch script will have something like the following lines in the header:
-<!-- and you need to specify the number of GPU resources you require with the `--gres` option.
-```code bash
-#SBATCH --partition=GPU
-#SBATCH --gres=gpu:p100:1
-``` -->
-```code bash
-#SBATCH --partition=GPU
-```
-
-<!-- Note that the 3 GPU nodes only have 2 GPUs each, so you must use either `--gres=gpu:p100:1` or `--gres=gpu:p100:2`. -->
 

@@ -14,17 +14,17 @@ The Jupyter service can be accessed via a web browser at `https://jupyter.ilifu.
 
 After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. **Please select the smallest session size that will provide sufficient resources for the task at hand.**
 
-![dropdown](http://docs.ilifu.ac.za/_media/jupyter_spawner_dropdown.png)
+<div style="text-align:center"><img src="/_media/jupyter_spawner_dropdown.png" alt="drop-down menu" width=800 /></div>
 
 Each node will be terminated after a preset interval of time, however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section). 
 
 **Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select "File" > "Hub Control Panel":
 
-<img src="/_media/hub_selection.png" alt="menu bar options" width=500 />
+<div style="text-align:center"><img src="/_media/hub_selection.png" alt="menu bar options" width=500 /></div>
 
 This will bring you to the page with the `Stop My Server` option, where you can stop your current session, freeing up the resources that have been allocated to your Jupyter session. You are also able to use this process to change the size of the resources allocated to you. Once you have stopped your session you are able to choose a smaller or larger node size.
 
-<img src="/_media/stop_server_button.png" alt="stop server button" width=600 />
+<div style="text-align:center"><img src="/_media/stop_server_button.png" alt="stop server button" width=600 /></div>
 
 Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
 
@@ -270,9 +270,9 @@ When running a job using `sbatch` or `srun`, a user is able to specify the resou
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
 | Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
 
-**Note** jobs submitted to the Devel partition cannot allocate memory.
+*Note jobs submitted to the Devel partition cannot allocate memory.*
 
-In addition to the above resources, 4 GPU (Tesla P100) nodes are 1 GPU (V100) are available in the GPU and GPUV100 partitions respectively.
+In addition to the above resources, 4 GPU (Tesla P100) nodes and 1 GPU (V100) are available in the `GPU` and `GPUV100` partitions respectively.
 
 ### Parallel computing on the cluster
 
@@ -291,7 +291,7 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 #SBATCH --cpus-per-task=1
 
 module load openmpi/4.1.0
-mpirun -n <NUMBER_OF_RANKS> singularity exec <PATH/TO/MY/IMAGE> </PATH/TO/BINARY/WITHIN/CONTAINER>
+mpirun -n <number of processes to run> singularity exec <path/to/container> </path/to/binary/within/container>
 ```
 
 ### Customising your job using sbatch/srun parameters
