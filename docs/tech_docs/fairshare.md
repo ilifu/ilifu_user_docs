@@ -1,8 +1,8 @@
 # Understanding Priority and Fairshare
-The slurm documentation [on priority](https://slurm.schedmd.com/priority_multifactor.html) and [fairshare](https://slurm.schedmd.com/fair_tree.html) is very extensive; what follows here is a short summary of the principles behind priority and fairshare, and how to check what's going on with your jobs on ilifu.
+The Slurm documentation [on priority](https://slurm.schedmd.com/priority_multifactor.html) and [fairshare](https://slurm.schedmd.com/fair_tree.html) is very extensive; what follows here is a short summary of the principles behind priority and fairshare, and how to check what's going on with your jobs on ilifu.
 
 ## Multifactor Priority
-Our slurm is configured to use multifactor priority scheduling which uses a number of factors to determine a job's priority. For each job that's submitted to the cluster, these factors are used to calculate that job's priority. The weighting of these factors can change if they're found not to be giving a fair usage to all users of the cluster. At any time the weights of the factors can be checked as follows:
+Our Slurm is configured to use multifactor priority scheduling which uses a number of factors to determine a job's priority. For each job that's submitted to the cluster, these factors are used to calculate that job's priority. The weighting of these factors can change if they're found not to be giving a fair usage to all users of the cluster. At any time the weights of the factors can be checked as follows:
 ```shell
 $ scontrol show config | grep PriorityWeight
 PriorityWeightAge       = 500

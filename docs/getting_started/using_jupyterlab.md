@@ -7,10 +7,10 @@ Once you have logged into JupyterLab and selected a node size you will be placed
 The directory navigation panel will default to your `$HOME` directory when you first log in. In order to navigate to your personal workspace or scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
 
 ```bash
-	$ ln -s /scratch/users/<username> $HOME/scratch
+	$ ln -s /scratch3/users/$USER $HOME/scratch3
 ```
 
-The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Remember to replace the `<username>` placeholder with your username. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
+The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
 
 ## Jupyter kernels
 
@@ -27,6 +27,8 @@ The following table lists the available kernels and their related Singularity co
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
+| ASTRO-GPU                   | ASTRO-GPU.simg                            |
+| ASTRO-PY3                   | ASTRO-PY3.simg                            |
 | ASTRO-R                     | ASTRO-R.simg                              |
 | CASA-5                      | jupyter-casa-latest.simg                  |
 | CASA-6                      | casa-6.simg                               |
