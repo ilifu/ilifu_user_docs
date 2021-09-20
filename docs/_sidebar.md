@@ -18,6 +18,7 @@
   - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
+  - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
