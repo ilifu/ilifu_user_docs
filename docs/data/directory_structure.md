@@ -6,9 +6,9 @@ Users' home directories are located in `/users/`. This directory is for users' s
 
 The scratch mounts (`/scratch2` and `/scratch3`) are the primary directories for data processing. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
 
-`/scratch2/users/<username>` is a users' specific directory for data processing.
+`/scratch3/users/<username>` is a users' specific directory for data processing.
 
-`/scratch2/projects/<project_name>` is for data processing related to a project where multiple users will be involved in the data processing. `/scratch2/projects/` directories are created on request.
+`/scratch3/projects/<project_name>` is for data processing related to a project where multiple users will be involved in the data processing. `/scratch2/projects/` directories are created on request.
 
 `/software` contains common software packages needed for workflows, including containers and modules.
 
