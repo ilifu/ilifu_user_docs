@@ -59,7 +59,7 @@ Select `Transfer or Sync to...` to select the other endpoint in your file transf
 Globus does not transfer symbolic links, so data transferred that includes symlinks, such as Multi-MeasurementSets (MMS) for astronomy, will be incomplete. Therefore, it is advised that the user select "Transfer & Sync Options" --> "preserve source file modification times" from the file manager. This enables the symlinks to be later repaired with a quick and simple rsync command, such as:
 
 ```bash
-rsync -avhn --size-only --progress --stats <username>@transfer.ilifu.ac.za:/scratch/users/${USER}/my_data/ /${USER}/my_desktop/my_data
+rsync -avhn --size-only --progress --stats <username>@transfer.ilifu.ac.za:/scratch3/users/${USER}/my_data/ /${USER}/my_desktop/my_data
 ```
 
 This will perform a 'dry run', which will "perform a trial run with no changes made". After verifying the correct files (i.e. symlinks only) will be transferred, re-running the expression above with option `-n` removed will perform the transfer.
