@@ -4,7 +4,7 @@ Please take note of the following best practices while using the ILIFU cloud com
 
 1. The login node must only be used for submitting jobs to Slurm.
 2. Do not store large files in your $HOME directory
-3. The /scratch mount is for data processing only. Files must be removed from your /scratch folder once data processing is complete.
+3. The scratch mounts (/scratch2 and /scratch3) are for data processing only. Files must be removed from your scratch folders once data processing is complete.
 4. Help the Slurm job scheduler by accurately [identifying your job's resource requirements](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm), including:
   a) Total number of nodes and cores required
   b) Total amount of RAM required
@@ -24,7 +24,7 @@ Your home directory is located at `/users/`. This directory is part of a mount t
 
 ## Do not leave files in your /scratch folder
 
-The `/scratch` mount is used for data processing. Files should only be in your `/scratch/users` folder while you are processing data. Once you have finished processing data on the `/scratch` mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
+The scratch mounts are used for data processing. Files should only be in your `/scratch3/users` folder while you are processing data. Once you have finished processing data on the `/scratch3` mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
 
 ## Identify the approriate resources that are required for your job
 
