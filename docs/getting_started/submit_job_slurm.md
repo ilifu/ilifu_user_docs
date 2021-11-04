@@ -246,17 +246,17 @@ mpirun -n <number of processes to run> singularity exec <path/to/container> </pa
 
 The following table lists the parameters that can be used to describe the required resources for your job. Additional parameters can be found by running `sbatch --help` or `srun --help`.
 
-| Syntax                                       | Meaning                                                              |
-|----------------------------------------------|----------------------------------------------------------------------|
-| --time=&#60;minutes&#62;                     | Walltime for job (default is 3 hrs)                                  |
-| --mem=&#60;number&#62;*                      | Maximum amount of memory                                             |
-| --mem-per-cpu=&#60;number&#62;*              | Memory per processor core (CPU – default is 3GiB on Main partition ) |
-| --cpus-per-task=&#60;number&#62;             | Number of CPUs per task (default is 1)                               |
-| --ntasks=&#60;number&#62;                    | Number of processes to run (default is 1)                            |
-| --nodes=&#60;number&#62;                     | Number of nodes on which to run (default is 1)                       |
-| --ntasks-per-node=&#60;number&#62;           | Number of tasks to invoke on each node                               |
-| --partition=&#60;partition_name&#62;         | Request specific partition/queue                                     |
-| --account=&#60;account_name&#62;<sup>7</sup> | The account that will be charged for the job                         |
+| Syntax                                       | Meaning                                                               |
+|----------------------------------------------|-----------------------------------------------------------------------|
+| --time=&#60;minutes&#62;                     | Walltime for job (default is 3 hrs)                                   |
+| --mem=&#60;number&#62;*                      | Maximum amount of memory                                              |
+| --mem-per-cpu=&#60;number&#62;*              | Memory per processor core (CPU – default is 3 GiB on Main partition ) |
+| --cpus-per-task=&#60;number&#62;             | Number of CPUs per task (default is 1)                                |
+| --ntasks=&#60;number&#62;                    | Number of processes to run (default is 1)                             |
+| --nodes=&#60;number&#62;                     | Number of nodes on which to run (default is 1)                        |
+| --ntasks-per-node=&#60;number&#62;           | Number of tasks to invoke on each node                                |
+| --partition=&#60;partition_name&#62;         | Request specific partition/queue                                      |
+| --account=&#60;account_name&#62;<sup>7</sup> | The account that will be charged for the job                          |
 
 **Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
 
