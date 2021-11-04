@@ -212,12 +212,12 @@ or for Mac OS:
 
 When running a job using `sbatch` or `srun`, a user is able to specify the resources required for their job. The following table lists the different node sizes in the cluster and indicates the maximum number of resources that can be requested for the different node types.
 
-| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
-|-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
-| Main      | compute-[001-080] | 1           | 32      | 3                   | 232             | 3 hours           | 14 days       |
-| Main      | compute-[101-105] | 1           | 48      | 3                   | 232             | 3 hours           | 14 days       |
-| HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
-| Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
+| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GiB) | Max Memory (GiB) | Default wall-time | Max wall-time |
+|-----------|-------------------|-------------|---------|----------------------|------------------|-------------------|---------------|
+| Main      | compute-[001-080] | 1           | 32      | 3                    | 232              | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 3                    | 232              | 3 hours           | 14 days       |
+| HighMem   | highmem-[001-002] | 1           | 32      | 15                   | 480              | 3 hours           | 14 days       |
+| Devel     | compute-060       | 1           | 32      | -                    | -                | 3 hours           | 12 hours      |
 
 *Note jobs submitted to the Devel partition cannot allocate memory.*
 
@@ -229,7 +229,7 @@ If you are running a normal job on Slurm, **without** `MPI` or `OpenMP`, your jo
 
 Parallelism on the cluster can be achieved on a single node or over multiple nodes. Parallelism on a single node distributes work over multiple CPUs and is typically implemented using `OpenMP`. If you are running a job with software that utilizes `OpenMP` on Slurm, you can increase the number of CPUs for your job to > 1 CPU, while still using `1 task` and `1 node`. You may need to `export OMP_NUM_THREADS=<N>` to specify the number of threads the software will utilize.
 
-Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GB RAM`.
+Parallelism on the cluster can also occur by distributing work over many tasks that operate on 1 or more nodes. This type of parallelism is typically implemented using `MPI`. If you are running a job with software that utilizes `MPI` on Slurm, you can increase the number of `tasks` your job uses, `> 1 task`, while `nodes` and `CPUs` can be 1. The number of CPUs per task can be specified. You can increase the number of nodes if you want more than `32 CPUs` or `232 GiB RAM`.
 
 When using MPI, you must wrap your software call (including Singularity) in an MPI wrapper, such as mpirun, for example:
 
@@ -258,9 +258,9 @@ The following table lists the parameters that can be used to describe the requir
 | --partition=&#60;partition_name&#62;         | Request specific partition/queue                                      |
 | --account=&#60;account_name&#62;<sup>7</sup> | The account that will be charged for the job                          |
 
-**Note** default units for memory is MB, but can be specified explicitly in GB, example `--mem=16GB`.
+**Note** default units for memory is MiB, but can be specified explicitly in GiB, example `--mem=16G`.
 
-* a nodes refer to a single compute node or Slurm worker, i.e. one node has 32 CPUs and 232 GB RAM
+* a nodes refer to a single compute node or Slurm worker, i.e. one node has 32 CPUs and 232 GiB RAM
 * a task is an instance of a running program, generally you will only want one task, unless you use software with MPI support (for example CASA), Slurm works with MPI to manage parallelised processing of data.
 * CPUs refers to the the number of CPUs associated with your job.
 * default parameters, if not specified, include: 1 node; 1 task; 1 CPU and 3 GiB RAM; running on the Main partition for 3 hrs.
