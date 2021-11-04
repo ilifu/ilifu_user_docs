@@ -74,7 +74,7 @@ To determine CPU requirements, for running jobs, you can ssh onto the node(s) wh
 htop -u $USER
 ```
 
-This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (s`sh -A <username>@slurm.ilifu.ac.za`).
+This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (`ssh -A <username>@slurm.ilifu.ac.za`).
 
 Similar to sacct, for jobs that have been previous run, you can list the efficiency of your job’s use of compute resources with
 
