@@ -624,3 +624,69 @@ This should generally only be used on compute nodes and not the login node. Howe
 ```bash
 module load anaconda3/login
 ```
+
+## Python Virtual Environments
+
+Virtual envrionments provide isolated environments for python projects, in which you can customize the dependencies to suite your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
+
+### Creating a virtual environment
+
+`virtualenv` is the package available for creating environments and can be used with
+
+```bash
+$ virtualenv /path/to/virtualenv
+```
+
+This will create a virtual environment with the name *virtualenv* (any name can be used here) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
+
+The `virtualenv` command will create an environment using the version of python available on the current `$PATH` which by default is the system `python 3.8.10`. If you want to use a different version of python, you can load the corresponding module from those available
+
+```bash
+$ module load python/2.7.18
+$ which python
+/software/common/python/2.7.18/bin/python
+```
+
+A created virtual environment can then be activated with
+
+```bash
+$ source /path/to/virtualenv/bin/activate
+(virtualenv)$
+```
+The name of the virtual environment will show enclosed in brackets before the command prompt cursor to indicate the environment is activated.
+
+Specific python packages or a requirements list can then be installed using
+
+```bash
+(virtualenv)$ pip install python_package
+```
+```bash
+(virtualenv)$ pip install -r requirements.txt
+```
+
+More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/user_guide.html#introduction) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
+
+### A virtual environment as a Jupyter kernel
+
+Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
+
+Once a virtual environment is activated, you can run the following commmand to install the `IPython` kernel for it
+
+```bash
+(virtualenv)$ ipython kernel install --name ”my_python_kernel" --user
+
+Installed kernelspec my_python_kernel in /users/USERNAME/.local/share/
+jupyter/kernels/my_python_kernel
+```
+
+Note the kernel can be named anything, but it is recommended to use something descriptive of the environment's function. The kernel will then be available in the Jupyter Launcher. 
+
+### Installing niche packages
+
+If you require a single, less common package to use in conjunction with an existing kernel, you can install it for your user account with
+
+```bash
+$ pip install --user python_package
+```
+
+This command needs to be run from a worker node that has access to the `pip` command. This is most easily done through a command line terminal started from the Jupyter Launcher. Note that packages installed this way in a user space can conflict with the same packages in existing kernels, and as such this method should only be used for very use-case specific packages.
