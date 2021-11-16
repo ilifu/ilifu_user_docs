@@ -670,7 +670,7 @@ More information on `virtualenv` can be found in its [documentation](https://vir
 
 Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
 
-Once a virtual environment is activated, you must install the IPython package. You can run the following commmand to install the `IPython` kernel for it
+Once a virtual environment is activated, you must install the `IPython` package. You can then run the following commmand to install the `IPython` kernel for it
 
 ```bash
 (virtualenv)$ ipython kernel install --name "my_python_kernel" --user
