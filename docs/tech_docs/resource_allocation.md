@@ -24,8 +24,8 @@ scontrol show partition
 
 | Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
 |-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
-| Main      | compute-[001-080] | 1           | 32      | 7.25                | 232             | 3 hours           | 14 days       |
-| Main      | compute-[101-105] | 1           | 48      | 7.25                | 232             | 3 hours           | 14 days       |
+| Main      | compute-[001-080] | 1           | 32      | 3                   | 232             | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 3                   | 232             | 3 hours           | 14 days       |
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
 | Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
 
