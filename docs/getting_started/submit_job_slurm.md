@@ -242,6 +242,9 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 module load openmpi/4.1.0
 mpirun -n <number of processes to run> singularity exec <path/to/container> </path/to/binary/within/container>
 ```
+
+It is important to note that when running jobs in parallel using a container, the container must also have `MPI` installed in it and the version and implementation inside the container must be the same as the version used on the cluster. Please keep this in mind if building a new container intended for parallel jobs, and select an `MPI` implemtation this is supported on ilifu. There are a number of versions of `openmpi` supported, as well as a single version of `mpich`. View available versions by running `module avail`.
+
 ### Customising your job using sbatch/srun parameters
 
 The following table lists the parameters that can be used to describe the required resources for your job. Additional parameters can be found by running `sbatch --help` or `srun --help`.
