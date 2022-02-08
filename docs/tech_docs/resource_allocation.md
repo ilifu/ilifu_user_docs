@@ -24,8 +24,8 @@ scontrol show partition
 
 | Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
 |-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
-| Main      | compute-[001-080] | 1           | 32      | 7.25                | 232             | 3 hours           | 14 days       |
-| Main      | compute-[101-105] | 1           | 48      | 7.25                | 232             | 3 hours           | 14 days       |
+| Main      | compute-[001-080] | 1           | 32      | 3                   | 232             | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 3                   | 232             | 3 hours           | 14 days       |
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
 | Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
 
@@ -74,7 +74,7 @@ To determine CPU requirements, for running jobs, you can ssh onto the node(s) wh
 htop -u $USER
 ```
 
-This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (s`sh -A <username>@slurm.ilifu.ac.za`).
+This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (`ssh -A <username>@slurm.ilifu.ac.za`).
 
 Similar to sacct, for jobs that have been previous run, you can list the efficiency of your job’s use of compute resources with
 

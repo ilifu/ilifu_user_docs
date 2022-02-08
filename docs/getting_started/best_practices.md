@@ -5,7 +5,7 @@ Please take note of the following best practices while using the ILIFU cloud com
 1. The login node must only be used for submitting jobs to Slurm.
 2. Do not store large files in your $HOME directory
 3. The scratch mounts (/scratch2 and /scratch3) are for data processing only. Files must be removed from your scratch folders once data processing is complete.
-4. Help the Slurm job scheduler by accurately [identifying your job's resource requirements](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm), including:
+4. Help the Slurm job scheduler by accurately [identifying your job's resource requirements](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm), including:
   a) Total number of nodes and cores required
   b) Total amount of RAM required
   c) Total wall-time required
@@ -16,23 +16,23 @@ Please take note of the following best practices while using the ILIFU cloud com
 
 When you ssh into the Slurm cluster you will be on the Slurm login node. The purpose of the login node is to manage job submissions. Please do not run any software on the Slurm login node as this can reduce performance of the Slurm service and affect performance for other users.
 
-To submit jobs to the Slurm job queue use either [srun](tech_docs/running_jobs?id=_3-interactive-sessions) or [sbatch](tech_docs/running_jobs?id=_2-slurm-batch-scheduler) commands, or use the [srun](tech_docs/running_jobs?id=_3-interactive-sessions) command to allocate a worker node for an interactive session.
+To submit jobs to the Slurm job queue use either [srun](tech_docs/running_jobs?running_jobs?id=interactive-slurm-sessions) or [sbatch](tech_docs/running_jobs?id=slurm-batch-scheduler) commands, or use the [srun](tech_docs/running_jobs?id=interactive-slurm-sessions) command to allocate a worker node for an interactive session.
 
 ## Do not store large files in your home directory
 
 Your home directory is located at `/users/`. This directory is part of a mount that is only 20 TB which is shared between all users. Do not store large files or data in your home directory. Your home directory is for small files and scripts only. Filling up the `/users/` mount can prevent jobs from running and may prevent users accessing the cluster. Please see information on the ilifu [directory structure](data/directory_structure).
 
-## Do not leave files in your /scratch folder
+## Do not leave files in your scratch folder
 
-The scratch mounts are used for data processing. Files should only be in your `/scratch3/users` folder while you are processing data. Once you have finished processing data on the `/scratch3` mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
+The scratch mounts (/scratch2 and /scratch3) are used for data processing. Files should only be in your `/scratch2/users` or `/scratch3/users` folder while you are processing data. Once you have finished processing data on the scratch mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
 
 ## Identify the approriate resources that are required for your job
 
-The Slurm resource pool consists of a finite number of CPUs and memory. Please make sure to use the appropriate quantity of resources required to run your task or job, i.e. do not request resources in excess of your requirements. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the appropriate resources required. For more information, see [how to specify job resources](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm).
+The Slurm resource pool consists of a finite number of CPUs and memory. Please make sure to use the appropriate quantity of resources required to run your task or job, i.e. do not request resources in excess of your requirements. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the appropriate resources required. For more information, see [how to specify job resources](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm).
 
 ## Identify the minimum wall-time that is required for your job
 
-When submitting a job, the default wall-time is set to 3 days. It is important to assign a wall-time for your job that is accurate to the length of time you expect your job to run. Setting an accurate wall-time will improve the performance of the cluster scheduler and will reduce overall wait time for jobs. Wall-time for a job can be set using the `-t` parameter (units in minutes or hours:minutes:seconds or days-hours:minutes:seconds). For more information, see [how to specify job resources](tech_docs/running_jobs#_4-specifying-resources-when-running-jobs-on-slurm).
+When submitting a job, the default wall-time is set to 3 days. It is important to assign a wall-time for your job that is accurate to the length of time you expect your job to run. Setting an accurate wall-time will improve the performance of the cluster scheduler and will reduce overall wait time for jobs. Wall-time for a job can be set using the `-t` parameter (units in minutes or hours:minutes:seconds or days-hours:minutes:seconds). For more information, see [how to specify job resources](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm).
 
 ## When submitting multiples of the same job, consider using a Slurm job array
 
