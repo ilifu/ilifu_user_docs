@@ -69,6 +69,39 @@ Please do not install CARACal in your `/users/` directory (see directory structu
 
 Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider logging a [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/), rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
+## CASA
+
+The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist, a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
+
+CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available from CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
+
+CASA modules are also available which include helpful short-hand commands that can be used to run functions from the CASA containers. Run `module help casa` for information.
+
+### CASA plotms
+
+As of CASA 6, plotms is wrapped in AppImage and requires FUSE mounting inside the container. This is currently not possible on the Ilifu due to permission issues, and the use of plotms with FUSE will result in an error. As of the CASA 6.5.0 modular container, the plotms app has been extracted inside the container and is available to run with and without the GUI.
+
+To run CASA plotms with the GUI, you can run the following from the slurm-login node:
+
+```bash
+srun --x11 -p Devel singularity exec /idia/software/containers/casa-6.5.0-modular.sif casaplotms
+```
+
+To use CASA plotms in a Jupyter notebook and display the output image within the notebook, you can use the following Python code example:
+
+```python
+import os
+from casaplotms import plotms
+from IPython.display import Image
+import pyvirtualdisplay
+_display = pyvirtualdisplay.Display(visible=False, size=(1400, 900))
+_ = _display.start()
+
+plotms(vis='</path/to/input>',plotfile='<imagename>.png',showgui=False,overwrite=True)
+Image('<imagename>.png', height=500)
+```
+*Credit to SKA-SA for the above method detailed* [here](https://github.com/ska-sa/ARIWS-Cookbook/blob/main/2-Flagging_and_calibration/L_band_RFI_frequency_flagging.ipynb).
+
 ## Simba
 
 ### About Simba
@@ -76,7 +109,6 @@ Please don't run CARACal on the ilifu login node, but on a compute node, using `
 Simba is a state-of-the-art suite of galaxy formation simulations for exploring the co-evolution of galaxies, black holes, and circum- and inter-galactic gas within a cosmological context. Simba snapshots and galaxy catalogs span up to 151 redshift outputs from z = 20 to z = 0. Further details can be found on the [Simba website](http://simba.roe.ac.uk/).
 
 Please contact [Romeel Davé](mailto:rad@roe.ac.uk) if you have project ideas involving SIMBA data.
-
 
 ### Simba products on ilifu
 
