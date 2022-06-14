@@ -71,20 +71,26 @@ Please don't run CARACal on the ilifu login node, but on a compute node, using `
 
 ## CASA
 
-The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist, a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
+The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist: a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
 
-CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available from CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
+CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available for CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
 
-CASA modules are also available which include helpful short-hand commands that can be used to run functions from the CASA containers. Run `module help casa` for information.
+CASA modules are also available, which include helpful short-hand commands that can be used to run functions using the CASA containers. Run `module help casa` for more information.
 
 ### CASA plotms
 
-As of CASA 6, plotms is wrapped in AppImage and requires FUSE mounting inside the container. This is currently not possible on the Ilifu due to permission issues, and the use of plotms with FUSE will result in an error. As of the CASA 6.5.0 modular container, the plotms app has been extracted inside the container and is available to run with and without the GUI.
+Within CASA 6, plotms is wrapped in AppImage and requires FUSE mounting inside the container. This is currently not possible on the Ilifu due to permission issues, and the use of plotms with FUSE will result in an error. As of the CASA 6.5.0 modular container onwards, the plotms app has been extracted inside the container and is available to run with and without the GUI.
 
 To run CASA plotms with the GUI, you can run the following from the slurm-login node:
 
 ```bash
 srun --x11 -p Devel singularity exec /idia/software/containers/casa-6.5.0-modular.sif casaplotms
+```
+
+To run CASA plotms non-interactively, you can make use of a virtual X server by wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
+
+```bash
+srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
 ```
 
 To use CASA plotms in a Jupyter notebook and display the output image within the notebook, you can use the following Python code example:
@@ -165,7 +171,7 @@ The user guide for the archive is available [here](https://archive.sarao.ac.za/s
 
 In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. This can be done by selecting the "CONFIGURE MVF TO MS" button near the bottom left of the SARAO archive screen. On the next screen, it's important to ensure that the button corresponding to the correct spectral resolution is selected when configuring your transfer (e.g. "32K" when transferring data labelled as "32KW" or "32KN", and "4K" when transferring data labelled as "4KW" or "4KN"), to ensure that configuration corresponds to that transfer. Configuration options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and the flag categories are shown [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
 
-A good configuration includes setting `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Similarly, for spectral-line projects, if frequencies above 1420 MHz aren't needed, we suggest a channel selection of `-C 0,21591`, reducing your volume by a further ~34%. If you observed in 32k mode but only need 4k data, use `--chanbin=8`, which will reduce your volumes by eight. Using `--quack=1` (to discard the first dump) may also be desirable. For more information, please see our [MeerKAT processing documentation](/astronomy/meerkat_processing). 
+A good configuration includes setting `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Similarly, for spectral-line projects, if frequencies above 1420 MHz aren't needed, we suggest a channel selection of `-C 0,21591`, reducing your volume by a further ~34%. If you observed in 32k mode but only need 4k data, use `--chanbin=8`, which will reduce your volumes by eight. Using `--quack=1` (to discard the first dump) may also be desirable. For more information, please see our [MeerKAT processing documentation](/astronomy/meerkat_processing).
 
 It is important to note that currently (August 2021):
 
