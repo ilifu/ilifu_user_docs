@@ -69,6 +69,45 @@ Please do not install CARACal in your `/users/` directory (see directory structu
 
 Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider logging a [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/), rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
 
+## CASA
+
+The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist: a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
+
+CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available for CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
+
+CASA modules are also available, which include helpful short-hand commands that can be used to run functions using the CASA containers. Run `module help casa` for more information.
+
+### CASA plotms
+
+Within CASA 6, plotms is wrapped in AppImage and requires FUSE mounting inside the container. This is currently not possible on the Ilifu due to permission issues, and the use of plotms with FUSE will result in an error. As of the CASA 6.5.0 modular container onwards, the plotms app has been extracted inside the container and is available to run with and without the GUI.
+
+To run CASA plotms with the GUI, you can run the following from the slurm-login node:
+
+```bash
+srun --x11 -p Devel singularity exec /idia/software/containers/casa-6.5.0-modular.sif casaplotms
+```
+
+To run CASA plotms non-interactively, you can make use of a virtual X server by wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
+
+```bash
+srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
+```
+
+To use CASA plotms in a Jupyter notebook and display the output image within the notebook, you can use the following Python code example:
+
+```python
+import os
+from casaplotms import plotms
+from IPython.display import Image
+import pyvirtualdisplay
+_display = pyvirtualdisplay.Display(visible=False, size=(1400, 900))
+_ = _display.start()
+
+plotms(vis='</path/to/input>',plotfile='<imagename>.png',showgui=False,overwrite=True)
+Image('<imagename>.png', height=500)
+```
+*Credit to SKA-SA for the above method detailed* [here](https://github.com/ska-sa/ARIWS-Cookbook/blob/main/2-Flagging_and_calibration/L_band_RFI_frequency_flagging.ipynb).
+
 ## Simba
 
 ### About Simba
@@ -76,7 +115,6 @@ Please don't run CARACal on the ilifu login node, but on a compute node, using `
 Simba is a state-of-the-art suite of galaxy formation simulations for exploring the co-evolution of galaxies, black holes, and circum- and inter-galactic gas within a cosmological context. Simba snapshots and galaxy catalogs span up to 151 redshift outputs from z = 20 to z = 0. Further details can be found on the [Simba website](http://simba.roe.ac.uk/).
 
 Please contact [Romeel Davé](mailto:rad@roe.ac.uk) if you have project ideas involving SIMBA data.
-
 
 ### Simba products on ilifu
 
@@ -121,19 +159,19 @@ It includes the following packages:
 
 # Transfer data from the SARAO archive
 
-If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project, you may want to transfer your observational data from the SARAO archive to the ilifu facility.
+If you are a principal investigator (PI) or member of one of the MeerKAT projects whose proposal has been accepted by SARAO, such as a Large Survey Project (LSP) or an Open Time Project (OTP), you may want to transfer your observational data from the SARAO archive to the ilifu facility.
 
-Before pushing your data, it is important to have an existing project on the ilifu facility in order for us to make the data available to the project members. If you do not have an existing ilifu project, please make contact with the ilifu support team at support@ilifu.ac.za to request one, and notify us of your intention to transfer data. Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
+Before pushing your data, it is important to have an existing project on the ilifu facility, so we can make the data available to the project members. If you do not have an existing ilifu project, please contact [ilifu support](mailto:support@ilifu.ac.za) to request one, and notify us of your intention to transfer data, with reference to your proposal ID (PID). Eligible MeerKAT projects are those with a PI or lead technical contact based at a South African institution. ​If a student is the PI, they will need written approval from their supervisor.
 
-In order to push your data from SARAO to ilifu, a PI, or a representative that a PI has nominated, must go to [https://archive.sarao.ac.za](https://archive.sarao.ac.za) and register an account. Once they have registered, the PI must request for this person to access the proposal via https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1.
+In order to access your proposal data on the SARAO archive, you must have an archive account with access to your project. Please visit [https://archive.sarao.ac.za](https://archive.sarao.ac.za) to register an account, and have a PI, or a representative that a PI has nominated, add you do the proposal following the [group management guide](https://archive.sarao.ac.za/statics/Group_Management_Guide.pdf). The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf), and further requests can be made via the [SARAO service desk](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1).
 
-The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf).
+In order to push your data from SARAO to ilifu, your project must be enabled for pushing to IDIA, after which, a "push to IDIA" icon will be shown on the archive, next to the data under the proposal. To request this, please contact [ilifu support](mailto:support@ilifu.ac.za) and provide the relevant MeerKAT proposal ID (PID), and the ilifu project name under which you want to associate this. If you have not yet requested support for this PID, please summarise your expected observing time, data volumes and general resource requirements.
 
 ## MVF to MS configuration
 
 In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. This can be done by selecting the "CONFIGURE MVF TO MS" button near the bottom left of the SARAO archive screen. On the next screen, it's important to ensure that the button corresponding to the correct spectral resolution is selected when configuring your transfer (e.g. "32K" when transferring data labelled as "32KW" or "32KN", and "4K" when transferring data labelled as "4KW" or "4KN"), to ensure that configuration corresponds to that transfer. Configuration options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and the flag categories are shown [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
 
-A good configuration includes setting `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Similarly, for spectral-line projects, if frequencies above 1420 MHz aren't needed, we suggest a channel selection of `-C 0,21591`, reducing your volume by a further ~34%. If you observed in 32k mode but only need 4k data, use `--chanbin=8`, which will reduce your volumes by eight. Using `--quack=1` (to discard the first dump) may also be desirable. For more information, please see our [MeerKAT processing documentation](/astronomy/meerkat_processing). 
+A good configuration includes setting `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Similarly, for spectral-line projects, if frequencies above 1420 MHz aren't needed, we suggest a channel selection of `-C 0,21591`, reducing your volume by a further ~34%. If you observed in 32k mode but only need 4k data, use `--chanbin=8`, which will reduce your volumes by eight. Using `--quack=1` (to discard the first dump) may also be desirable. For more information, please see our [MeerKAT processing documentation](/astronomy/meerkat_processing).
 
 It is important to note that currently (August 2021):
 
