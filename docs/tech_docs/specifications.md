@@ -10,7 +10,6 @@ The Ilifu infrastructure includes the following compute and storage resources:
     * 1 x GPU node, 24 CPUs, 256 GB RAM, 1 x Tesla V100 32 GB GPU
 
 ## Storage
-    * 400 TiB BeeGFS (fast storage mounted as /scratch2)
     * 6.6 PiB CephFS
 
 

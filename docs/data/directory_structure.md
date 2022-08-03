@@ -4,7 +4,7 @@ The following describes the directory structure as related to the ilifu data pol
 
 Users' home directories are located in `/users/`. This directory is for users' scripts. No large files should be stored in `/users/`. It is recommended that users make use of a repository such as Github to backup scripts and files.
 
-The scratch mounts (`/scratch2` and `/scratch3`) are the primary directories for data processing. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
+The scratch mounts are the primary directories for data processing. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
 
 `/scratch3/users/<username>` is a users' specific directory for data processing.
 

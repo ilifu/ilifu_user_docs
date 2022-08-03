@@ -346,9 +346,6 @@ Include: software-properties-common
     cd /install
     tar xfv pink-latest.tar
 
-    # Create /users to bind home directories into the container.
-    mkdir -p /users /scratch2 /data
-
     # Installation of PINK
     cd pink-latest
     mkdir build
