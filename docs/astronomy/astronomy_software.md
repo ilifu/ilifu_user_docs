@@ -2,7 +2,11 @@
 
 ## IDIA Pipeline
 
-The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration and imaging of radio data using the ilifu system. It is currently a 1GC (cross-calibration) pipeline that runs on ilifu using CASA and SLURM, which is actively being extended to 2GC (self-calibration), as well as being optimised to run more than an order of magnitude faster, with good success so far. Please visit the IDIA Pipeline [website](https://idia-pipelines.github.io/) for additional information, including documentation and tutorials. We strongly encourage you to engage with the developers by reporting any bugs or enhancements to the [GitHub issues page](https://github.com/idia-astro/pipelines/issues).
+The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration and imaging of radio data using the ilifu system. It is currently a fully automated 1GC (cross-calibration) and 2GC (self-calibration) pipeline that runs on ilifu using CASA and SLURM. Please visit the IDIA Pipeline [website](https://idia-pipelines.github.io/) for additional information, including documentation and tutorials. We strongly encourage you to engage with the developers by reporting any bugs or enhancements to the [GitHub issues page](https://github.com/idia-astro/pipelines/issues).
+
+## Oxkat
+
+Oxkat is another MeerKAT processing pipeline that is written for and commonly used on ilifu, as well as CHPC. It is a highly automated pipeline for MeerKAT data processing all the way through to 3GC (third-generation direction-dependent calibration), including software such as WSClean, DDFacet, killMS and CubiCal. For more information about installation, usage, design and software packages, please see the [GitHub documentation](https://github.com/IanHeywood/oxkat) and [ASCL entry](https://ui.adsabs.harvard.edu/abs/2020ascl.soft09003H/abstract)
 
 ## CARTA
 
@@ -76,6 +80,24 @@ The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilif
 CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available for CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
 
 CASA modules are also available, which include helpful short-hand commands that can be used to run functions using the CASA containers. Run `module help casa` for more information.
+
+There is a known issue with the CASA containers from CASA 6.2 upwards when making a general import of all `casatools` (e.g. to use a script written for CASA 5 without changing it) in the following way:
+
+```python
+from casatools import *
+```
+
+for which the following error is output:
+
+```python
+AttributeError: module 'casatools' has no attribute 'version_stringatmosphere'
+```
+
+The solution to overcoming this issue is by making specific imports, such as
+
+```python
+from casatools import msmetadata,table,image,measures,quanta
+```
 
 ### CASA plotms
 
@@ -169,19 +191,19 @@ In order to push your data from SARAO to ilifu, your project must be enabled for
 
 ## MVF to MS configuration
 
-In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. This can be done by selecting the "CONFIGURE MVF TO MS" button near the bottom left of the SARAO archive screen. On the next screen, it's important to ensure that the button corresponding to the correct spectral resolution is selected when configuring your transfer (e.g. "32K" when transferring data labelled as "32KW" or "32KN", and "4K" when transferring data labelled as "4KW" or "4KN"), to ensure that configuration corresponds to that transfer. Configuration options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and the flag categories are shown [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
+In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. This can be done by pressing the "push to IDIA" button and configuring your transfer within the pop-up window. Configuration options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and the flag categories are shown [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).
 
 A good configuration includes setting `-a true` (to remove auto-correlations) and `--flags=cam,data_lost` (to apply instrumental flags that can't be identified during processing, and to avoid flagging real data, including HI lines). If you have no interest in polarisation data, we also suggest you use `-f false` and `-p HH,VV`, which will halve your data volume. Similarly, for spectral-line projects, if frequencies above 1420 MHz aren't needed, we suggest a channel selection of `-C 0,21591`, reducing your volume by a further ~34%. If you observed in 32k mode but only need 4k data, use `--chanbin=8`, which will reduce your volumes by eight. Using `--quack=1` (to discard the first dump) may also be desirable. For more information, please see our [MeerKAT processing documentation](/astronomy/meerkat_processing).
 
-It is important to note that currently (August 2021):
+It is important to note that currently (August 2022):
 
 1. Only a single transfer is allowed per MS<sup>1</sup>
 2. Newer transfers (manually done following instructions below) will not overwrite older data, since timestamps are written to the transfer directory<sup>1</sup>
 3. Transfers are MS by default<sup>2</sup>
 
-<sup>1</sup> After a dataset has been transferred, the SARAO archive sets a flag that prevents that same dataset from being downloaded to the same destination. If you need to re-transfer your data (e.g. with a different selection), and the archive disallows another transfer (orange arrow labelled 'IDIA'), contact [ilifu support](mailto:support@ilifu.ac.za) to complete the push for you. Discussions to optimise this process are ongoing.
+<sup>1</sup> After a dataset has been transferred, the SARAO archive sets a flag that prevents that same dataset from being downloaded to the same destination. If you need to re-transfer your data (e.g. with a different selection), and the archive disallows another transfer (orange arrow labelled 'IDIA'), contact [ilifu support](mailto:support@ilifu.ac.za) to complete the push for you. A feature enabling multiple pushes of the same CBID with different selection is being implemented and will soon be deployed to the SARAO archive.
 
-<sup>2</sup>Transfers of data in the native MeerKAT MVF format can also be arranged by contacting the [SARAO archive](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1).
+<sup>2</sup>Transfers of data in the native MeerKAT MVF format can also be arranged by contacting [ilifu support](mailto:support@ilifu.ac.za).
 
 ## Changes to flagging
 

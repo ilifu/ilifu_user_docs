@@ -16,7 +16,7 @@ After logging into the JupyterLab service, the user is presented with a breakdow
 
 <div style="text-align:center"><img src="/_media/jupyter_spawner_dropdown.png" alt="drop-down menu" width=800 /></div>
 
-Each node will be terminated after a preset interval of time, however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section). 
+Each node will be terminated after a preset interval of time, however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data is also persisted in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section).
 
 **Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select "File" > "Hub Control Panel":
 
@@ -111,21 +111,21 @@ To check the progress of the jobs, use the `squeue` command or check the `logs` 
 
 ## Interactive Slurm Sessions
 
-An interactive session allows you to connect to a computing node and work on that node directly. There are several ways to use an interactive session on Ilifu. If you need to do work that you would normally do on a dedicated node, without waiting in the queue, the simplest option is to use the `sinteractive` command. To use `sinteractive`, please see the Interactive Session Quick Start section below. 
+An interactive session allows you to connect to a computing node and work on that node directly. There are several ways to use an interactive session on Ilifu. If you need to do work that you would normally do on a dedicated node, without waiting in the queue, the simplest option is to use the `sinteractive` command. To use `sinteractive`, please see the Interactive Session Quick Start section below.
 
 For more sophisticated interactive usage, the `srun` command accommodates a variety of modes and options. See the Interactive Session Features section below for common features of the `srun` command.
 
 Please note the following before starting an interactive job:
 
-**Note:** Interactive sessions may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or GNU `screen` can help to reduce volatility. See the section Persistent Terminals for instructions. 
+**Note:** Interactive sessions may be lost if you lose connection to the ilifu cluster. Persistent terminals, such as `tmux` or GNU `screen` can help to reduce volatility. See the section Persistent Terminals for instructions.
 
-**Note:** In order is to ensure that resources are available in an optimal way for all users, interactive jobs are limited by time and compute resources. For work that uses significant compute resources, or that takes longer than three hours, we recommend that users submit jobs to the batch queue using `sbatch`. 
+**Note:** In order is to ensure that resources are available in an optimal way for all users, interactive jobs are limited by time and compute resources. For work that uses significant compute resources, or that takes longer than three hours, we recommend that users submit jobs to the batch queue using `sbatch`.
 
-**Note:** No software should be run on the Slurm login node (slurm.ilifu.ac.za). It should only be used to start, stop and monitor Slurm jobs. 
+**Note:** No software should be run on the Slurm login node (slurm.ilifu.ac.za). It should only be used to start, stop and monitor Slurm jobs.
 
 ### Interactive Session Quick Start
 
-If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command aims to provide on-demand access to resources on the `Devel` partition. This partition is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` is a wrapper around the `srun` command that allows you to quickly start a job on the `Devel` partition, connect to the appropriate server, and work on that server directly with minimal configuration. 
+If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command aims to provide on-demand access to resources on the `Devel` partition. This partition is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` is a wrapper around the `srun` command that allows you to quickly start a job on the `Devel` partition, connect to the appropriate server, and work on that server directly with minimal configuration.
 
 For example, run the following command on the login node to start an interactive session with four cores and X11 support:
 
@@ -137,7 +137,7 @@ After entering this command, you will be presented with a new prompt on a comput
 
 Most options that can be used with `sbatch` or `srun` can also be passed to the `sinteractive` command. We recommend specifying the flags for the number of CPUs (`-c` or `--cpus-per-core`) and for job time (`--time=`). The default time limit for the Devel partition is three hours. The job will only remain active until the terminal is exited. Therefore, it is recommended to use `sinteractive` together with a persistent connection tool such as `tmux` or `GNU screen`. See the Persistent Terminals section below for instructions.
 
-In order to minimize wait time for interactive sessions, resources on the `Devel` partition are shared between all users -- memory is not tracked by Slurm and the cpus are oversubscribed. Also, job time is limited to a maximum of twelve hours. Please only request the number of cores and time that you need for the task at hand and be aware of your memory usage. If you need an interactive job with additional features and options, with a dedicated allocation of compute resources, or that lasts longer than twelve hours, please use `srun` command, which is documented in the following section. 
+In order to minimize wait time for interactive sessions, resources on the `Devel` partition are shared between all users -- memory is not tracked by Slurm and the cpus are oversubscribed. Also, job time is limited to a maximum of twelve hours. Please only request the number of cores and time that you need for the task at hand and be aware of your memory usage. If you need an interactive job with additional features and options, with a dedicated allocation of compute resources, or that lasts longer than twelve hours, please use `srun` command, which is documented in the following section.
 
 ### Interactive Session Features
 
@@ -163,7 +163,7 @@ You can directly run a Singularity containers or other software using the srun c
 	$ srun --pty singularity shell /idia/software/containers/ASTRO-PY3.simg
 ```
 
-This will start an interactive session on a compute node and open a shell in the `ASTRO-PY3` container, which contains a large suite of astronomy software. 
+This will start an interactive session on a compute node and open a shell in the `ASTRO-PY3` container, which contains a large suite of astronomy software.
 
 Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
@@ -257,6 +257,27 @@ or for Mac OS:
 	$ ssh-add -K
 ``` -->
 
+## Non-Interactive Plotting
+
+Some Slurm jobs performing non-interactive plotting may require a virtual X-server, such as [CASA plotMS](/astronomy/astronomy_software#casa-plotms). This can by achived wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
+
+```bash
+srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
+```
+
+Some older versions of xvfb (e.g. for CASA 5) may require use of the `-d` option via following syntax:
+
+```bash
+xvfb-run -d python my-plotms-script.py
+```
+
+Non-interactive jobs making use of the Python `matplotlib` package may also require using the `Agg` backend, utilised with the following:
+
+```python
+from matplotlib import use
+use('Agg')
+```
+
 ## Specifying Resources when Running Jobs on Slurm
 
 ### Available resources
@@ -345,7 +366,3 @@ If you wish to run a job on the GPU node you need to specify the `GPU` or `GPUV1
 ```code bash
 #SBATCH --partition=GPU
 ```
-
-
-
-
