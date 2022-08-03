@@ -6,7 +6,7 @@ The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration 
 
 ## Oxkat
 
-Oxkat is a MeerKAT processing pipeline that is written for and commonly used on ilifu, as well as CHPC. It is a highly automated pipeline for MeerKAT data processing all the way through to 3GC (third-generation direction-dependent calibration), including software such as WSClean, DDFacet, killMS and CubiCal. For more information about installation, usage, design and software packages, please see the [GitHub documentation](https://github.com/IanHeywood/oxkat) and [ASCL entry](https://ui.adsabs.harvard.edu/abs/2020ascl.soft09003H/abstract)
+Oxkat is a MeerKAT processing pipeline that is written for and commonly used on ilifu, as well as CHPC. It is a highly automated pipeline for MeerKAT data processing all the way through to 3GC (third-generation direction-dependent calibration), including software such as WSClean, DDFacet, killMS and CubiCal. For more information about installation, usage, design and software packages, please see the [GitHub documentation](https://github.com/IanHeywood/oxkat) and [ASCL entry](https://ui.adsabs.harvard.edu/abs/2020ascl.soft09003H/abstract).
 
 ## CARTA
 
