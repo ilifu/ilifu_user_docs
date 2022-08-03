@@ -259,7 +259,7 @@ or for Mac OS:
 
 ## Non-Interactive Plotting
 
-Some Slurm jobs performing non-interactive plotting may require a virtual X-server, such as [CASA plotMS](/astronomy/astronomy_software#casa-plotms). This can by achived wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
+Some Slurm jobs performing non-interactive plotting may require a virtual X-server, such as [CASA plotMS](/astronomy/astronomy_software#casa-plotms). This can be achieved by wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
 
 ```bash
 srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
