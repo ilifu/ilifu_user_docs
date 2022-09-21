@@ -56,7 +56,7 @@ Select `Transfer or Sync to...` to select the other endpoint in your file transf
 
 ### Configuring a transfer
 
-Globus does not transfer symbolic links, so data transferred that includes symlinks, such as Multi-MeasurementSets (MMS) for astronomy, will be incomplete. Therefore, it is advised that the user select "Transfer & Sync Options" --> "preserve source file modification times" from the file manager. This enables the symlinks to be later repaired with a quick and simple rsync command, such as:
+Globus does not transfer symbolic links (symlinks), so data transferred that includes symlinks, such as Multi-MeasurementSets (MMS) for astronomy, will be incomplete. Therefore, it is advised that the user select "Transfer & Timer Options" --> "preserve source file modification times" from the file manager. This enables the symlinks to be later repaired with a quick and simple rsync command, such as:
 
 ```bash
 rsync -avhn --size-only --progress --stats <username>@transfer.ilifu.ac.za:/scratch3/users/${USER}/my_data/ /${USER}/my_desktop/my_data
@@ -97,7 +97,7 @@ Globus will then inform your by email of the status of your transfer once it’s
 
 ### Using Globus for internal ilifu transfers
 
-Globus can be used to transfer files internal to ilifu (e.g. from one filesystem to another), by setting the two endpoints as the ilifu DTN. However, the performance (< 100 MB/s) is comparable to running `cp`, `mv`, `rsync` or `scp` on transfer.ilifu.ac.za. In the event that a user makes a transfer with Globus (e.g. under poor network conditions, or for long transfers), it is advised that the user [configure a transfer](#configuring-a-transfer) following the instructions above.
+Globus can be used to transfer files internal to ilifu (e.g. from one filesystem to another), by setting the two endpoints as the ilifu DTN. However, the performance (< 100 MB/s) is comparable to running `cp`, `mv`, `rsync` or `scp` on transfer.ilifu.ac.za. In the event that a user makes a transfer with Globus (e.g. under poor network conditions, or for large/long transfers), it is advised that the user [configure a transfer](#configuring-a-transfer) following the instructions above.
 
 ### Setting Up An Endpoint for Another Data Transfer Node
 
@@ -116,6 +116,14 @@ Before pushing your data, it is important to have an existing project on the ili
 In order to access your proposal data on the SARAO archive, you must have an archive account with access to your project. Please visit [https://archive.sarao.ac.za](https://archive.sarao.ac.za) to register an account, and have a PI, or a representative that a PI has nominated, add you do the proposal following the [group management guide](https://archive.sarao.ac.za/statics/Group_Management_Guide.pdf). The user guide for the archive is available [here](https://archive.sarao.ac.za/statics/Archive_Interface_User_Guide.pdf), and further requests can be made via the [SARAO service desk](https://skaafrica.atlassian.net/servicedesk/customer/portal/1/group/-1).
 
 In order to push your data from SARAO to ilifu, your project must be enabled for pushing to IDIA, after which, a "push to IDIA" icon will be shown on the archive, next to the data under the proposal. To request this, please contact [ilifu support](mailto:support@ilifu.ac.za) and provide the relevant MeerKAT proposal ID (PID), and the ilifu project name under which you want to associate this. If you have not yet requested support for this PID, please summarise your expected observing time, data volumes and general resource requirements.
+
+SARAO archive transfers will be written to `/idia/raw` by default, with symbolic links to this path from your project directory in `/idia/projects`. The MS will be read-only, from where it can read and written to your working directory. We request that you please make use of this "push to IDIA" feature rather than creating a directory download link, for the following reasons:
+
+1. The data will make use of a direct Globus transfer, and complete much more quickly compared to directly downloading and decompressing the data with `wget` and `tar`
+2. The data will remain as read-only and will therefore ensure project members don't inadvertently edit the raw data
+3. The file/directory structure will be easier for both parties (your project group and ilifu support) to understand and monitor
+
+For more information about a general workflow and its relation to raw data, please read our MeerKAT [data management documentation](/data/data_management#general-workflow).
 
 ### MVF to MS configuration
 

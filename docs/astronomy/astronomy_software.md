@@ -189,6 +189,14 @@ In order to access your proposal data on the SARAO archive, you must have an arc
 
 In order to push your data from SARAO to ilifu, your project must be enabled for pushing to IDIA, after which, a "push to IDIA" icon will be shown on the archive, next to the data under the proposal. To request this, please contact [ilifu support](mailto:support@ilifu.ac.za) and provide the relevant MeerKAT proposal ID (PID), and the ilifu project name under which you want to associate this. If you have not yet requested support for this PID, please summarise your expected observing time, data volumes and general resource requirements.
 
+SARAO archive transfers will be written to `/idia/raw` by default, with symbolic links to this path from your project directory in `/idia/projects`. The MS will be read-only, from where it can read and written to your working directory. We request that you please make use of this "push to IDIA" feature rather than creating a directory download link, for the following reasons:
+
+1. The data will make use of a direct Globus transfer, and complete much more quickly compared to directly downloading and decompressing the data with `wget` and `tar`
+2. The data will remain as read-only and will therefore ensure project members don't inadvertently edit the raw data
+3. The file/directory structure will be easier for both parties (your project group and ilifu support) to understand and monitor
+
+For more information about a general workflow and its relation to raw data, please read our MeerKAT [data management documentation](/data/data_management#general-workflow).
+
 ## MVF to MS configuration
 
 In February 2020, new SARAO archive functionality was introduced to configure the conversion to MeasurementSet (MS), including the selection of channel ranges, polarisation products, flags, and options to average in time and frequency channel. This can be done by pressing the "push to IDIA" button and configuring your transfer within the pop-up window. Configuration options are shown [here](https://github.com/ska-sa/MeerKAT-Cookbook/blob/master/archive/Convert%20MVF%20dataset(s)%20to%20MeasurementSet.ipynb), and the flag categories are shown [here](https://archive.sarao.ac.za/statics/sdp_flags.pdf).

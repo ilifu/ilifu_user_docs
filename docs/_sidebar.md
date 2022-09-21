@@ -9,6 +9,7 @@
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
   - [Best Practices](getting_started/best_practices.md)
+  - [Data Management](data/data_management.md)
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
   - [Astronomy](astronomy/astronomy_software.md)
