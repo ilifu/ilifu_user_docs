@@ -9,7 +9,6 @@
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
   - [Best Practices](getting_started/best_practices.md)
-  - [Data Management](data/data_management.md)
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
   - [Astronomy](astronomy/astronomy_software.md)
@@ -19,6 +18,7 @@
   - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
+  - [Data Management](data/data_management.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)

@@ -5,15 +5,15 @@ Storage on the ilifu Research Facility is shared amongst all members of our user
 1. Prototype your workflow (via a version-controlled repository) over small volumes
 2. Develop your workflow into a fully-automated production workflow
 3. Automatically write selected data products (including logs, software versions and input parameters) for longer-term storage
-4. Automatically remove temporary/intermediate data products (i.e. the remainer)
+4. Automatically remove temporary/intermediate data products (i.e. the remainder)
 
 ## Typical Workflow
 
-As outlined in our [directory structure](/data/directory_structure) documentation, the scratch mounts are for the purpose of data processing, and are expected to contain temporary data products that can be quickly removed. As also outlined there, the `/{idia,cbio,ilifu}/projects` (referred to collectively as `/n/data` herein) directories are project-specific directories expected to contain final data products for longer-term storage. A good workflow utilising this directory structure is shown below.
+As outlined in our [directory structure](/data/directory_structure) documentation, the scratch mounts are for the purpose of data processing, and are expected to contain temporary data products that can be quickly removed. As also outlined there, the `/{idia,cbio,ilifu}/projects` directories are project-specific directories expected to contain final data products for longer-term storage. A good workflow utilising this directory structure is shown below.
 
 <div style="text-align:center"><img src="/_media/DM-workflow.png" alt="Data management workflow" width=800 /></div>
 
-Within this workflow, scripts and configuration files stored in `/users` are used to run a processing workflow or pipeline, reading (e.g. raw) data from a read-only mount such as `/n/raw` or `/n/data`, and writing temporary/intermediate data products to a scratch mount such as `/scratch3`. At the end of this process, specific data products (e.g. final results - see suggested products below) are selected and written into a project directory. After this, all remaining data is removed from the workspace on the scratch mount. There are two approaches for doing this:
+Within this workflow, scripts and configuration files stored in `/users` are used to run a processing workflow or pipeline, reading (e.g. raw) data from a read-only directory such as `/n/raw`, `/n/projects` or `/n/data`, and writing temporary/intermediate data products to a scratch mount such as `/scratch3`. At the end of this process, specific data products (e.g. final results - see suggested products below) are selected and written into a project directory. After this, all remaining data is removed from the workspace on the scratch mount. There are two approaches for doing this:
 
 1. Identify products to selectively write for longer-term storage, and remove the rest
 2. Remove what isn't needed, and write the remainder to longer-term storage
@@ -36,7 +36,7 @@ cp -ra /scratch3/projects/my-project/final-run /cbio/projects/my-project/process
 
 The archive mode (option `-a`) will preserve the timestamps, ownership and other metadata, and recurrsive `-r` option is needed when copying a directory rather than a single file.
 
-When copy data on ilifu, please do not make use of the SLURM login node. Copying is best done via an sbatch script, which will be run on a compute node and therefore be much less volatile. Alternatively, transfers can be run via the [transfer node](/data/data_transfer#transfer-using-scp-and-rsync), or on a SLURM node interactively via a persistent terminal (e.g. screen/tmux/mosh).
+When copy data on ilifu, please do not make use of the Slurm login node. Copying is best done via an sbatch script, which will be run on a compute node and therefore be much less volatile. Alternatively, transfers can be run via the [transfer node](/data/data_transfer#transfer-using-scp-and-rsync), or on a Slurm compute node interactively via a persistent terminal (e.g. screen/tmux/mosh).
 
 ### Large Transfers with Globus
 
@@ -46,7 +46,7 @@ For large transfers, we recommend making use of [Globus](/data/data_transfer#tra
 
 If you wish to run an efficient internal copy on ilifu, we recommend making use of the GNU `parallel` task to simultaneously transfer a number of large files. Before writing and launching a script to do so, it's important to identify directories in which there are a number of large files or subdirectories, as this approach performs poorly when run over a small number of files. In this example, the `/scratch3/users/$USER/my-data` directory contains 16 large files/subdirectories.
 
-Therefore we write the following script, which runs 16 parallel calls of `cp -ra` over these 16 files/subdirectories.
+Therefore we include the following lines of code in a script called `parallel_copy.sh`, which will run 16 parallel calls of `cp -ra` over these 16 files/subdirectories.
 
 ```bash
 shopt -s dotglob #Include hidden files with '*'
@@ -62,7 +62,7 @@ chmod +x parallel_copy.sh
 mkdir logs
 ```
 
-Then we write an sbatch file to run our copy on a SLURM compute node, ensuring we use 16 CPUs and allow enough wall-time to complete the transfer:
+Then we write an sbatch file, `parallel_copy.sbatch` to run our copy on a Slurm compute node, ensuring we use 16 CPUs and allow enough wall-time to complete the transfer:
 
 ```bash
 #!/bin/bash
@@ -79,7 +79,7 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 ./parallel_copy.sh
 ```
 
-Lastly, we run the script and monitor it via the SLURM queue.
+Lastly, we run the script and monitor it via the Slurm queue.
 
 ```bash
 sbatch parallel_copy.sbatch
@@ -87,7 +87,7 @@ sbatch parallel_copy.sbatch
 
 ## Checking File Integrity
 
-When copying data, it may be important to check the integrity of your data before removing it from its original location. For individual files, this can achieved using a program such as `md5sum` or `sha256sum`, which will output a checksum. The checksum will be identical for each file if it has been transferred intact. Using one of the same paths as previously, below is an example of checking the integrity of all files within the directory **from** which (source) and **to** which (destination) you've copied your data.
+When copying data, it may be important to check the integrity of your data before removing it from its original location. For individual files, this can be achieved using a program such as `md5sum` or `sha256sum`, which will output a checksum. The checksum will be identical for each file if it has been transferred intact. Using the paths from a previous example, below is an example of checking the integrity of all files within the directory **from** which (source) and **to** which (destination) you've copied your data.
 
 ```bash
 cd /scratch3/projects/my-project/final-run
@@ -97,7 +97,7 @@ find -type f -exec md5sum '{}' \; > md5sum.txt
 diff /scratch3/projects/my-project/final-run/md5sum.txt /cbio/projects/my-project/processed/md5sum.txt
 ```
 
-If nothing is output when running `diff`, your data has been copied intact, as all checksums between source and destination are identical. If any files have been missed or skipped, or have partially transferred and are incomplete, they will be output when running `diff`. In such a case, either wait until your copy has completed and run your checksum again, or remove the data from destination and re-run the copy of that file. When multiple files are missing, the difference between them can be checked by running rsync in a similar way to what is documented [here](/data/data_transfer#configuring-a-transfer). Paticular attention must be paid to including the trailing slash (`/`) for the source path, and exluding it for the destination path. A final `rsync` can also be used to ensure source and desination are identical, before removing the data from source.
+If nothing is output when running `diff`, your data has been copied intact, as all checksums between source and destination are identical. If any files have been missed or skipped, or have partially transferred and are incomplete, they will be output when running `diff`. In such a case, either wait until your copy has completed and run your checksum again, or remove the data from destination and re-run the copy of that file. When multiple files are missing, the difference between them can be checked by running `rsync` in a similar way to what is documented [here](/data/data_transfer#configuring-a-transfer). Paticular attention must be paid to including the trailing slash (`/`) for the source path, and excluding it for the destination path. A final `rsync` can also be used to ensure source and desination are identical, before removing the data from source.
 
 As mentioned above, file integrity is checked automatically during Globus transfers, although this option can be switched off if necessary.
 
@@ -135,7 +135,7 @@ Importantly, during production, temporary data products can be regenerated at an
 ### General Best Practises
 
 * Prototyping should develop into production workflows
-* Backup your scripts, workflow or pipeline, ideally by uploading to a version-controlled repository such as via GitHub<sup>1</sup>
+* Backup your scripts, workflow or pipeline, ideally by uploading to a version-controlled repository such as GitHub<sup>1</sup>
 * For each processing run, keep a record of your the software versions of your workflow/pipeline, and its input parameters
 
 <sup>1</sup> We recommend users familiarise themselves with the resources available from the [Software Carpentry website](https://software-carpentry.org).
@@ -146,7 +146,7 @@ For a typical workflow, final data products will be retained for longer-term sto
 
 ## Products to Remove
 
-Following the [typical workflow](#typical-workflow) above, we recommend first selectively writing data products you wish to retain for longer-term storage, and removing everything else from your processing run, which will include your temporary / inflated data products. In some cases, it may be better/easier to identify which products to remove, and write the remainder to longer-term storage. A helpful start is idenfifying the large data products that don't need to be retained, and removing those. For very large files, it may be more suitable or quicker to run `rm` within an interative SLURM session, or on the transfer node. Some additional domain-specific data products to remove are [listed below](#domain-specific-data-management).
+Following the [typical workflow](#typical-workflow) above, we recommend first selectively writing data products you wish to retain for longer-term storage, and removing everything else from your processing run, which will include your temporary / inflated data products. In some cases, it may be better/easier to identify which products to remove, and write the remainder to longer-term storage. A helpful start is identifying the large data products that don't need to be retained, and removing those. For very large files, it may be more suitable to run `rm` within an interative Slurm session, or on the transfer node. Some additional domain-specific data products to remove are [listed below](#domain-specific-data-management).
 
 ## Domain-Specific Data Management
 
@@ -176,7 +176,7 @@ rm -r $(cat vis_and_flags_tmp.txt)
 rm vis_and_flags_tmp.txt
 ```
 
-This script finds and then displays the volume (and total sum) of the (M)MSs on disk, and the `read -p` step forces you to press return to remove the data, or otherwise press control-C to cancel the script (e.g. if an (M)MS is displayed that you do not wish to remove). If you also don't need to retain the flag versions, add the following to the `find` call (at the end of the brackets):
+This script finds and then displays the volume (and total sum) of the (M)MSs on disk, and the `read -p` step forces you to press return to remove the data, or otherwise press control+C to cancel the script (e.g. if an (M)MS is displayed that you do not wish to remove). If you also don't need to retain the flag versions, add the following to the `find` call (at the end of the brackets):
 
 ```bash
  -o -name "*flagversions"
@@ -188,7 +188,7 @@ Below is a diagram showing the cumulative inflation of data for a general MeerKA
 
 <div style="text-align:center"><img src="/_media/MS-inflation.png" alt="MS inflation" width=800 /></div>
 
-The data volumes shown here are for a typical MeerKAT 32k MS, for an 8 hour observation including all antennas and polarisations. As suggested [here](/data/data_transfer#mvf-to-ms-configuration), it is recommended that you average or select data wherever possible during SARAO archive transfers. This will reduce the disk volumes and significantly improve the data processing time. If you pushed raw data with high spectral resolution and wish to replace it with averaged data, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this.
+The data volumes shown here are for a typical MeerKAT 32k MS, for an 8 hour observation including all antennas and polarisations. As suggested [here](/data/data_transfer#mvf-to-ms-configuration), it is recommended that you average or select data wherever possible during SARAO archive transfers. This will reduce the disk volumes and significantly improve the data processing time. If you have pushed raw data with high spectral resolution and wish to replace it with averaged data, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this.
 
 The raw data contains a single `DATA` column by default, and is stored as a read-only MS in `/idia/raw` (symlinked from `/idia/projects`), from where it can be read during the initial processing steps (e.g. via CASA tasks `mstransform`, `split` or `partition`), ideally on a scratch mount. For pipelines that require the MS within the working directory, or for cases where you wish to give the raw MS a different name, we recommended creating a symbolic link (symlink) to the raw MS, via the following:
 
@@ -199,9 +199,9 @@ ln -s /idia/raw/my-project/SCI-YYYYMMDD-PI-01/0123456789/0123456789_sdp_l0.ms my
 
 After this, `/scratch3/projects/my-project/processing/my-raw-data.ms` will point to your raw read-only MS.
 
-During processing, the (M)MSs from within your working directory will inflate by ~2.5 times, as they will add a `MODEL_DATA` column (e.g. during CASA task `setjy`) and a `CORRECTED_DATA` column (e.g. during `applycal`), in addition to the `DATA` column. Often an initial cross-calibration process will produce these temporary (M)MSs, split out the corrected data for your target(s), and then self-calibrate the target(s), further inflating this separate (M)MS with three data columns. The final data calibrated data should contain a single corrected data column, roughly equal in size to the raw data (or smaller with averaging), to be selectively written back to your project direcotry for longer-term storage. All other temporary inflated data products should be removed.
+During processing, the (M)MSs from within your working directory will inflate by ~2.5 times, as they will add a `MODEL_DATA` column (e.g. during CASA task `setjy`) and a `CORRECTED_DATA` column (e.g. during `applycal`), in addition to the `DATA` column. Often an initial cross-calibration process will produce these temporary (M)MSs, split out the corrected data for your target(s), and then self-calibrate the target(s), further inflating this separate (M)MS with three data columns. The final calibrated data should contain a single corrected data column, roughly equal in size to the raw data (or smaller with averaging), to be selectively written back to your project direcotry for longer-term storage. All other temporary inflated data products should be removed.
 
-Once you have selectively written your final data products for longer-term storage, we recommend removing your raw MS. As this is read-only, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this, specifying which MSs can be removed. In some cases, it may be require for you to retain your raw MS for a longer verification period, and we request that you please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to motivate for this. However, it should be noted that your raw data can be transferred again from the SARAO archive (and if older than 200 days, first restaged from tape). Furthermore, it may be possible to recover your raw from (M)MSs derived from it, such as where the original `DATA` column exists, running `flagmanager` to undo flags where needed.
+Once you have selectively written your final data products for longer-term storage, we recommend removing your raw MS. As this is read-only, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this, specifying which MSs can be removed. In some cases, it may be require for you to retain your raw MS for a longer verification period, and we request that you please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to motivate for this. However, it should be noted that your raw data can be transferred again from the SARAO archive (and if older than 200 days, first restaged from tape). Furthermore, it may be possible to recover your raw data from (M)MSs derived from it, such as where the original `DATA` column exists, running `flagmanager` to undo flags where needed.
 
 For further information about MeerKAT processing and data management strategies, please read our [MeerKAT processing documentation](/astronomy/meerkat_processing).
 
