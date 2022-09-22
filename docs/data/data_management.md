@@ -4,7 +4,7 @@ Storage on the ilifu Research Facility is shared amongst all members of our user
 
 1. Prototype your workflow (via a version-controlled repository) over small volumes
 2. Develop your workflow into a fully-automated production workflow
-3. Automatically write selected data products (including logs, software versions and input parameters) for longer-term storage
+3. Automatically write selected data products (including logs, software versions and input parameters) to longer-term storage
 4. Automatically remove temporary/intermediate data products (i.e. the remainder)
 
 ## Typical Workflow
@@ -15,7 +15,7 @@ As outlined in our [directory structure](/data/directory_structure) documentatio
 
 Within this workflow, scripts and configuration files stored in `/users` are used to run a processing workflow or pipeline, reading (e.g. raw) data from a read-only directory such as `/n/raw`, `/n/projects` or `/n/data`, and writing temporary/intermediate data products to a scratch mount such as `/scratch3`. At the end of this process, specific data products (e.g. final results - see suggested products below) are selected and written into a project directory. After this, all remaining data is removed from the workspace on the scratch mount. There are two approaches for doing this:
 
-1. Identify products to selectively write for longer-term storage, and remove the rest
+1. Identify products to selectively write to longer-term storage, and remove the rest
 2. Remove what isn't needed, and write the remainder to longer-term storage
 
 For a typical workflow, there are many more temporary products than final products, meaning the first approach is significantly easier. Following our directory structure, we expect you to remove old files on scratch mounts, but as a start, it's helpful to identify and remove large files that are no longer needed.
@@ -28,15 +28,19 @@ Data can be moved or copied between directories on the same or different mounts 
 mv /idia/users/$USER/run1 /idia/projects/my-project/processed
 ```
 
+[Python virtual environments](/tech_docs/software_environments?id=python-virtual-environments) should not be moved, as the path associated with these environments is hard-coded, and the environment cannot be activated after changing its location. Instead, the virtual environment can be rebuilt, making use of the `pip freeze` command where necessary, to identify the virtual environment's packages. In general, we recommend building virtual environments in one of your personal workspaces, such as `/idia/users/$USER/software`.
+
+<!-- https://stackoverflow.com/questions/32407365/can-i-move-a-virtualenv -->
+
 When moving data between mounts, the `mv` command can also be used, which (under the hood) will first copy and then remove your data. However, this is very slow, and may result in data loss if your transfer is interrupted mid-transfer. Therefore, we recommend rather making use of the `cp` command, and then removing your data after verifying its integrity. Below is an example of copying data between different mounts:
 
 ```bash
-cp -ra /scratch3/projects/my-project/final-run /cbio/projects/my-project/processed
+cp -a /scratch3/projects/my-project/final-run /cbio/projects/my-project/processed
 ```
 
-The archive mode (option `-a`) will preserve the timestamps, ownership and other metadata, and recurrsive `-r` option is needed when copying a directory rather than a single file.
+The archive mode (option `-a`) will preserve the timestamps, ownership and other metadata, and includes the recursive `-r` option, which is needed when copying a directory rather than a single file.
 
-When copy data on ilifu, please do not make use of the Slurm login node. Copying is best done via an sbatch script, which will be run on a compute node and therefore be much less volatile. Alternatively, transfers can be run via the [transfer node](/data/data_transfer#transfer-using-scp-and-rsync), or on a Slurm compute node interactively via a persistent terminal (e.g. screen/tmux/mosh).
+When copying data on ilifu, please do not make use of the Slurm login node. Copying is best done via an sbatch script, which will be run on a compute node and therefore be much less volatile. Alternatively, transfers can be run via the [transfer node](/data/data_transfer#transfer-using-scp-and-rsync), or on a Slurm compute node interactively via a persistent terminal (e.g. screen/tmux/mosh).
 
 ### Large Transfers with Globus
 
@@ -46,13 +50,14 @@ For large transfers, we recommend making use of [Globus](/data/data_transfer#tra
 
 If you wish to run an efficient internal copy on ilifu, we recommend making use of the GNU `parallel` task to simultaneously transfer a number of large files. Before writing and launching a script to do so, it's important to identify directories in which there are a number of large files or subdirectories, as this approach performs poorly when run over a small number of files. In this example, the `/scratch3/users/$USER/my-data` directory contains 16 large files/subdirectories.
 
-Therefore we include the following lines of code in a script called `parallel_copy.sh`, which will run 16 parallel calls of `cp -ra` over these 16 files/subdirectories.
+Therefore we include the following lines of code in a script called `parallel_copy.sh`, which will run 16 parallel calls of `cp -a` over these 16 files/subdirectories.
 
 ```bash
+#!/bin/bash
 shopt -s dotglob #Include hidden files with '*'
 mkdir /ilifu/astro/projects/my-project/my-data
 cd /scratch3/users/$USER/my-data
-printf '%s\n' * | parallel -j 16 cp -ra {} /ilifu/astro/projects/my-project/my-data
+printf '%s\n' * | parallel -j 16 cp -a {} /ilifu/astro/projects/my-project/my-data
 ```
 
 Next, we make it executible and create a directory for the logs:
@@ -199,12 +204,12 @@ ln -s /idia/raw/my-project/SCI-YYYYMMDD-PI-01/0123456789/0123456789_sdp_l0.ms my
 
 After this, `/scratch3/projects/my-project/processing/my-raw-data.ms` will point to your raw read-only MS.
 
-During processing, the (M)MSs from within your working directory will inflate by ~2.5 times, as they will add a `MODEL_DATA` column (e.g. during CASA task `setjy`) and a `CORRECTED_DATA` column (e.g. during `applycal`), in addition to the `DATA` column. Often an initial cross-calibration process will produce these temporary (M)MSs, split out the corrected data for your target(s), and then self-calibrate the target(s), further inflating this separate (M)MS with three data columns. The final calibrated data should contain a single corrected data column, roughly equal in size to the raw data (or smaller with averaging), to be selectively written back to your project direcotry for longer-term storage. All other temporary inflated data products should be removed.
+During processing, the (M)MSs from within your working directory will inflate by ~2.5 times, as they will add a `MODEL_DATA` column (e.g. during CASA task `setjy`) and a `CORRECTED_DATA` column (e.g. during `applycal`), in addition to the `DATA` column. Often an initial cross-calibration process will produce these temporary (M)MSs, split out the corrected data for your target(s), and then self-calibrate the target(s), further inflating this separate (M)MS with three data columns. The final calibrated data should contain a single corrected data column, roughly equal in size to the raw data (or smaller with averaging), to be selectively written back to your project directory for longer-term storage. All other temporary inflated data products should be removed.
 
-Once you have selectively written your final data products for longer-term storage, we recommend removing your raw MS. As this is read-only, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this, specifying which MSs can be removed. In some cases, it may be require for you to retain your raw MS for a longer verification period, and we request that you please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to motivate for this. However, it should be noted that your raw data can be transferred again from the SARAO archive (and if older than 200 days, first restaged from tape). Furthermore, it may be possible to recover your raw data from (M)MSs derived from it, such as where the original `DATA` column exists, running `flagmanager` to undo flags where needed.
+Once you have selectively written your final data products for longer-term storage, we recommend removing your raw MS. As this is read-only, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this, specifying which MSs can be removed. In some cases, you may require retaining your raw MS for a longer verification period, and we request that you please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to motivate for this. However, it should be noted that your raw data can be transferred again from the SARAO archive (and if older than 200 days, first restaged from tape). Furthermore, it may be possible to recover your raw data from (M)MSs derived from it, such as where the original `DATA` column exists, running `flagmanager` to undo flags where needed.
 
 For further information about MeerKAT processing and data management strategies, please read our [MeerKAT processing documentation](/astronomy/meerkat_processing).
 
- ### Bioinformatics
+ <!-- ### Bioinformatics
 
- DANE
+ DANE -->
