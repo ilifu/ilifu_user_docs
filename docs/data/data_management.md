@@ -99,10 +99,24 @@ cd /scratch3/projects/my-project/final-run
 find -type f -exec md5sum '{}' \; > md5sum.txt
 cd /cbio/projects/my-project/processed
 find -type f -exec md5sum '{}' \; > md5sum.txt
+```
+
+Lastly, produce a checksum for the entire set of output checksums, and compare the two to ensure they're the same:
+
+```bash
+cat /scratch3/projects/my-project/final-run/md5sum.txt | sort -k 2 | md5sum
+cat /cbio/projects/my-project/processed/md5sum.txt | sort -k 2 | md5sum
+```
+
+<!-- https://unix.stackexchange.com/questions/35832/how-do-i-get-the-md5-sum-of-a-directorys-contents-as-one-sum -->
+
+If the output is identical, your data has been copied intact, as all checksums between source and destination are identical. If they're not identical, the difference can be investigated using `diff`. If any files have been missed or skipped, or have partially transferred and are incomplete, they will be output when running `diff`:
+
+```
 diff /scratch3/projects/my-project/final-run/md5sum.txt /cbio/projects/my-project/processed/md5sum.txt
 ```
 
-If nothing is output when running `diff`, your data has been copied intact, as all checksums between source and destination are identical. If any files have been missed or skipped, or have partially transferred and are incomplete, they will be output when running `diff`. In such a case, either wait until your copy has completed and run your checksum again, or remove the data from destination and re-run the copy of that file. When multiple files are missing, the difference between them can be checked by running `rsync` in a similar way to what is documented [here](/data/data_transfer#configuring-a-transfer). Paticular attention must be paid to including the trailing slash (`/`) for the source path, and excluding it for the destination path. A final `rsync` can also be used to ensure source and desination are identical, before removing the data from source.
+In such a case, either wait until your copy has completed and run your checksum again, or remove the data from destination and re-run the copy of that file. When multiple files are missing, the difference between them can be checked by running `rsync` in a similar way to what is documented [here](/data/data_transfer#configuring-a-transfer). Paticular attention must be paid to including the trailing slash (`/`) for the source path, and excluding it for the destination path. A final `rsync` can also be used to ensure source and desination are identical, before removing the data from source. Files that are only present in the destination directory but not the source directory will also be displayed with this `diff` command, and can be ignored when you wish to verify the integrity of only the files copied from source.
 
 As mentioned above, file integrity is checked automatically during Globus transfers, although this option can be switched off if necessary.
 
