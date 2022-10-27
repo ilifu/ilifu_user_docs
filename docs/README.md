@@ -46,7 +46,7 @@ For more information, please see a list of [best practices](getting_started/best
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
-  - [Openstack flavours](openstack/flavours.md)
+  - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
