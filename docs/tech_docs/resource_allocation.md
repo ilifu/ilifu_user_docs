@@ -22,16 +22,29 @@ As outlined in the [ilifu documentation](tech_docs/running_jobs#specifying-resou
 
 scontrol show partition
 
-| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
-|-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
-| Main      | compute-[001-080] | 1           | 32      | 3                   | 232             | 3 hours           | 14 days       |
-| Main      | compute-[101-105] | 1           | 48      | 3                   | 232             | 3 hours           | 14 days       |
-| HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
-| Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
+| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GiB) | Max Memory (GiB) | Default wall-time | Max wall-time |
+|-----------|-------------------|-------------|---------|----------------------|------------------|-------------------|---------------|
+| Main      | compute-[002-021] | 1           | 32      | 3                    | 232              | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 3                    | 232              | 3 hours           | 14 days       |
+| Main      | compute-[201-260] | 1           | 32      | 3                    | 251              | 3 hours           | 14 days       |
+| HighMem   | highmem-[001-002] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
+| GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           | 14 days       |
+| GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
+| GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           | 12 hours      |
 
 *Table 1. The different Slurm partitions and their resources, listing the default and maximum allocations. Default memory scales with the number of CPUs allocated. Jobs submitted to the Devel partition cannot allocate memory.*
 
-In addition to the above resources, 4 GPU (Tesla P100) nodes are 1 GPU (V100) are available in the `GPU` and `GPUV100` partitions respectively.
+The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006) and A100 (gpu-007). To submit a job on a specific GPU node, the `-w` or `--nodelist` parameter may be used, with a list of the relevant `Node names`. Alternatively, the `-C` or `--constraint` parameter may be used, with the list of constraints or tags, as indicated in the table below:
+
+| Partition | Node names        | GPU type    | Constraint/Tag | Number of GPUs per node | GPU Memory (GiB) |
+|-----------|-------------------|-------------|----------------|-------------------------|------------------|
+| GPU       | gpu-[001-004]     | P100        | P100,p100      | 2                       | 12               |
+| GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
+| GPU       | gpu-006           | A40         | A40,a40        | 1                       | 45               |
+| GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
+*Table 2. Available GPUs and their resources.*
 
 Note that if a job uses all the CPUs or all the available memory on a node, that node becomes fully allocated and no other jobs can be run on the node for the duration of the job. This means that any unused CPU or memory resources cannot be used by another job, including your own. Therefore, if you have a job that has a high CPU requirement and a low memory footprint, or a large memory requirement but a low CPU requirement, consider not allocating the maximum available CPU or memory, respectively, and allow a little headroom for other jobs to be allocated to the node.
 
