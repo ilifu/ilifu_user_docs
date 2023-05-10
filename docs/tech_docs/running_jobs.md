@@ -284,16 +284,28 @@ use('Agg')
 
 When running a job using `sbatch` or `srun`, a user is able to specify the resources required for their job. The following table lists the different node sizes in the cluster and indicates the maximum number of resources that can be requested for the different node types.
 
-| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GB) | Max Memory (GB) | Default wall-time | Max wall-time |
-|-----------|-------------------|-------------|---------|---------------------|-----------------|-------------------|---------------|
-| Main      | compute-[001-080] | 1           | 32      | 3                   | 232             | 3 hours           | 14 days       |
-| Main      | compute-[101-105] | 1           | 48      | 3                   | 232             | 3 hours           | 14 days       |
-| HighMem   | highmem-[001-002] | 1           | 32      | 15                  | 480             | 3 hours           | 14 days       |
-| Devel     | compute-060       | 1           | 32      | -                   | -               | 3 hours           | 12 hours      |
+| Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GiB) | Max Memory (GiB) | Default wall-time | Max wall-time |
+|-----------|-------------------|-------------|---------|----------------------|------------------|-------------------|---------------|
+| Main      | compute-[002-021] | 1           | 32      | 3                    | 232              | 3 hours           | 14 days       |
+| Main      | compute-[101-105] | 1           | 48      | 3                    | 232              | 3 hours           | 14 days       |
+| Main      | compute-[201-260] | 1           | 32      | 3                    | 251              | 3 hours           | 14 days       |
+| HighMem   | highmem-[001-002] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
+| GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           | 14 days       |
+| GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
+| GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           | 12 hours      |
 
 *Note jobs submitted to the Devel partition cannot allocate memory.*
 
-In addition to the above resources, 4 GPU (Tesla P100) nodes and 1 GPU (V100) are available in the `GPU` and `GPUV100` partitions respectively.
+The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006) and A100 (gpu-007). To submit a job on a specific GPU node, the `-w` or `--nodelist` parameter may be used, with a list of the relevant `Node names`. Alternatively, the `-C` or `--constraint` parameter may be used, with the list of constraints or tags, as indicated in the table below:
+
+| Partition | Node names        | GPU type    | Constraint/Tag | Number of GPUs per node | GPU Memory (GiB) |
+|-----------|-------------------|-------------|----------------|-------------------------|------------------|
+| GPU       | gpu-[001-004]     | P100        | P100,p100      | 2                       | 12               |
+| GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
+| GPU       | gpu-006           | A40         | A40,a40        | 1                       | 45               |
+| GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
 
 ### Parallel computing on the cluster
 
