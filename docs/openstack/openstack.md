@@ -2,7 +2,7 @@
 
 ## Openstack Cloud Dashboard
 
-The Openstack dashboard is available for certain users at [dashboard2.ilifu.ac.za](https://dashboard2.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters.
+The Openstack dashboard is available for certain users at [openstack.ilifu.ac.za](https://openstack.ilifu.ac.za) which provides a cloud computing environment, allowing users or groups to create, modify, and remove virtual machines or even entire computing clusters.
 
 <img src="/_media/dashboard_view.png" alt="openstack dashboard" width=600 />
 
