@@ -5,11 +5,12 @@ The Ilifu infrastructure includes the following compute and storage resources:
 ## Compute
     * 110 x compute nodes, 32 CPUs, 256 GB RAM
     * 2 x compute nodes, 32 CPUs, 512 GB RAM
-    * 5 x compute npdes, 48 CPUs, 256 GB RAM
+    * 5 x compute nodes, 48 CPUs, 256 GB RAM
     * 4 x GPU nodes, 32 CPUs, 256 GB RAM, 2 x Tesla P100 16 GB GPU
     * 1 x GPU node, 24 CPUs, 256 GB RAM, 1 x Tesla V100 32 GB GPU
     * 1 x GPU node, 48 CPUs, 348 GB RAM, 1 x NVIDIA A40 48 GB GPU
     * 1 x GPU node, 48 CPUs, 348 GB RAM, 1 x NVIDIA A100 40 GB GPU
+    * 1 x compute node, 96 CPUs, 1.5 TB RAM
 
 ## Storage
     * 7.3 PiB CephFS
