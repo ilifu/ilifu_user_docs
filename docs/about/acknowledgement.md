@@ -12,7 +12,7 @@ We acknowledge the use of the ilifu cloud computing facility - www.ilifu.ac.za, 
 
 This work was carried out using the data processing pipelines developed at the Inter-University Institute for Data Intensive Astronomy (IDIA) and available at https://idia-pipelines.github.io. IDIA is a partnership of the University of Cape Town, the University of Pretoria and the University of the Western Cape.
 
-This work made use of the Inter-University Institute for Data Intensive Astronomy (IDIA) visualization lab https://vislab.idia.ac.za. IDIA is a partnership of the University of Cape Town, the University of Pretoria, the University of the Western Cape and the South African Radio Astronomy Observatory.
+This work made use of the Inter-University Institute for Data Intensive Astronomy (IDIA) visualization lab https://vislab.idia.ac.za. IDIA is a partnership of the University of Cape Town, the University of Pretoria and the University of the Western Cape.
 
 ## Use of CARTA software
 
