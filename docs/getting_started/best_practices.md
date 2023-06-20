@@ -29,7 +29,7 @@ The scratch mounts are used for data processing. Files should only be in your `/
 ## Do not store large numbers of files on the system
 
 Try not generate very large number of files, especially if these are temporary files. Each file consumes a metadata entry on the filesystem and the cluster filesystem struggles to deal with directories with more than 10,000 files. If at all possible try working in memory with files (say using `/dev/shm`, or using pipes `|` between steps in a workflow) or making sure you delete small temporary files as soon as possible. Writing your workflow in a modern workflow
-language such as [NextFlow](https://nf-co.re/events/2023/training-march-2023) or [SnakeMake](https://carpentries-incubator.github.io/workflows-snakemake/) can help with this.
+language such as [NextFlow](https://nf-co.re/events/2023/training-march-2023) or [SnakeMake](https://carpentries-incubator.github.io/workflows-snakemake/) for bioinformatics (although they are general purpose) can help with this.
 
 ## Identify the approriate resources that are required for your job
 
