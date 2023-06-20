@@ -43,3 +43,10 @@ The main benefit of using a job array is that once resources have been allocated
 ## You cannot install software on the nodes
 
 As ilifu users, for the sake of data security, you do not have root access on any of the available nodes. This means that you are unable to install software on the nodes. Available software packages are encapulated in Singularity containers located in `/idia/software/containers` and `/cbio/images`. The software containers allow for the software to be available across all nodes, rather than having to install software on individual nodes.  Additional information about the containers and how to use them can be found [here](tech_docs/software_environments?id=singularity-containers) and the lists of the included software packages in the supported containers can be found [here](tech_docs/software_environments?id=available-containers). You are also able to [create custom Singularity containers](tech_docs/software_environments?id=building-your-own-container) and migrate them to the ILIFU cluster for use, and many of the supported projects have their own specialised containers.
+
+## Do not store large numbers of files on the system
+
+Do not generate very large number of files, especially if these are temporary files. Each file consumes a metadata
+entry on the filesystem and the cluster filesystem struggles to deal with directories with more than 10,000 files. If
+at all possible try working in memory (say in `/dev/shm`) with files or making sure you delete small temporary files
+as soon as possible.
