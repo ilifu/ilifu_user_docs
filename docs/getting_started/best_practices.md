@@ -26,6 +26,14 @@ Your home directory is located at `/users/`. This directory is part of a mount t
 
 The scratch mounts are used for data processing. Files should only be in your `/scratch3/users` folder while you are processing data. Once you have finished processing data on the scratch mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
 
+## Do not store large numbers of files on the system
+
+Try not generate very large number of files, especially if these are temporary files. Each file consumes a metadata
+entry on the filesystem and the cluster filesystem struggles to deal with directories with more than 10,000 files. If
+at all possible try working in memory with files (say using `/dev/shm`, or using pipes `|` between steps in a workflow)
+or making sure you delete small temporary files as soon as possible. Writing your workflow in a modern workflow
+language such as [NextFlow](https://nf-co.re/events/2023/training-march-2023) or [SnakeMake](https://carpentries-incubator.github.io/workflows-snakemake/) can help with this.
+
 ## Identify the approriate resources that are required for your job
 
 The Slurm resource pool consists of a finite number of CPUs and memory. Please make sure to use the appropriate quantity of resources required to run your task or job, i.e. do not request resources in excess of your requirements. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the appropriate resources required. For more information, see [how to specify job resources](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm).
@@ -44,9 +52,4 @@ The main benefit of using a job array is that once resources have been allocated
 
 As ilifu users, for the sake of data security, you do not have root access on any of the available nodes. This means that you are unable to install software on the nodes. Available software packages are encapulated in Singularity containers located in `/idia/software/containers` and `/cbio/images`. The software containers allow for the software to be available across all nodes, rather than having to install software on individual nodes.  Additional information about the containers and how to use them can be found [here](tech_docs/software_environments?id=singularity-containers) and the lists of the included software packages in the supported containers can be found [here](tech_docs/software_environments?id=available-containers). You are also able to [create custom Singularity containers](tech_docs/software_environments?id=building-your-own-container) and migrate them to the ILIFU cluster for use, and many of the supported projects have their own specialised containers.
 
-## Do not store large numbers of files on the system
 
-Do not generate very large number of files, especially if these are temporary files. Each file consumes a metadata
-entry on the filesystem and the cluster filesystem struggles to deal with directories with more than 10,000 files. If
-at all possible try working in memory (say in `/dev/shm`) with files or making sure you delete small temporary files
-as soon as possible.
