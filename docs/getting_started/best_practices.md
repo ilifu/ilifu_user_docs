@@ -26,6 +26,11 @@ Your home directory is located at `/users/`. This directory is part of a mount t
 
 The scratch mounts are used for data processing. Files should only be in your `/scratch3/users` folder while you are processing data. Once you have finished processing data on the scratch mount, please remove files that you do not need, and move files that you wish to keep to your relevant project folder.
 
+## Do not store large numbers of files on the system
+
+Try not generate very large number of files, especially if these are temporary files. Each file consumes a metadata entry on the filesystem and the cluster filesystem struggles to deal with directories with more than 10,000 files. If at all possible try working in memory with files (say using `/dev/shm`, or using pipes `|` between steps in a workflow) or making sure you delete small temporary files as soon as possible. Writing your workflow in a modern workflow
+language such as [NextFlow](https://nf-co.re/events/2023/training-march-2023) or [SnakeMake](https://carpentries-incubator.github.io/workflows-snakemake/) for bioinformatics (although they are general purpose) can help with this.
+
 ## Identify the approriate resources that are required for your job
 
 The Slurm resource pool consists of a finite number of CPUs and memory. Please make sure to use the appropriate quantity of resources required to run your task or job, i.e. do not request resources in excess of your requirements. This will ensure that more resources are available for yourself and other users at any given time. The `sbatch` and `srun` commands can be used to customise the number of resources used when submitting a job. You may have to experiment with the number of resource you allocate to a job to gain insight into the appropriate resources required. For more information, see [how to specify job resources](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm).
