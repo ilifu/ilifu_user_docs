@@ -7,6 +7,8 @@ This user documentation site guides users on technical and procedural aspects re
 
 The ilifu project website may be found at http://www.ilifu.ac.za
 
+Ilifu training videos and the accompanying slides from our user training workshops are available on the ilifu website [here](https://www.ilifu.ac.za/latest-training/).
+
 Please familiarise yourself with the list of recommendations below.
 
 #### DOs:
@@ -45,7 +47,8 @@ For more information, please see a list of [best practices](getting_started/best
   - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
   - [Data Transfer](data/data_transfer.md)
-  - [Resource Allocation Guide](tech_docs/resource_allocation.md)
+  - [Data Management](data/data_management.md)
+  - [Resource Allocation Guide](tech_docs/resource_allocation.md)]
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
@@ -54,3 +57,4 @@ For more information, please see a list of [best practices](getting_started/best
   - [Requesting Help](help/requesting_help.md)
 - **About**
   - [What is ilifu?](about/what_is.md)
+  - [Acknowledgement](about/acknowledgement.md)
