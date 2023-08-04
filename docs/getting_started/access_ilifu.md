@@ -1,12 +1,16 @@
 # Logging into the ilifu services
 
-There are two main ilifu service platforms, including the Slurm batch scheduler and JupyterLab.
+There are two main ways to access ilifu services, either by using SSH via a terminal to access a service, or using a web browser for access to web-based applications. 
+
+The Slurm batch schedular is the primary service accessed via SSH. Other services accessed via SSH include the [transfer node](data/data_transfer?id=transfer-using-scp-and-rsync).
+
+ Web-based applications include [Jupyter](https://jupyter.ilifu.ac.za/), [CARTA](https://carta.idia.ac.za/) and a [reports](https://reports.ilifu.ac.za/) portal, where users can manage their profile information, review usage data and manage the SSH public keys associated with their account. Web-based services are accessible through the dashboard on the [IDIA Gateway](https://gateway.idia.ac.za/), or directly via their URL linked above.
 
 ## Slurm batch scheduler
 
 Slurm is a job scheduling system. It consists of a single login node and many compute nodes. The login node is likened to a controller and manages the cluster resources and job submissions.
 
-The Slurm system can be accessed via `ssh` at `slurm.ilifu.ac.za`.
+The Slurm system can be accessed via `SSH` at `slurm.ilifu.ac.za`.
 
 ```
 $ ssh <username>@slurm.ilifu.ac.za
@@ -19,10 +23,21 @@ This will place the user on the login node. Note that this node should only be u
 ```bash
 $ ssh -A <username>@slurm.ilifu.ac.za
 ```
+See a summary of the Slurm partitions and their use cases [below](getting_started/access_ilifu?id=summary-of-ilifu-services-or-partitions-and-their-use-case).
+
+## IDIA Gateway
+
+The IDIA gateway is accessible at `https://gateway.idia.ac.za`. The IDIA gateway provides access to public data downloads and an application dashboard.
+
+<div style="text-align:center"><img src="/_media/idia_gateway.png" alt="idia gateway" width=500 /></div>
+
+ The application dashboard utilises Single Sign-on (SSO) to ilifu web-based applications, including Jupyter, CARTA, account usage data, SSH key management, amongst other services.
+
+<div style="text-align:center"><img src="/_media/open_ondemand.png" alt="application dashboard" width=500 /></div>
 
 ## Jupyter
 
-The Jupyter service can be accessed via a web browser at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
+The Jupyter service can be accessed via a web browser, either through the [IDIA Gateway](https://gateway.idia.ac.za/) application dashboard, or directly at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
 
 After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. **Please select the smallest session size that will provide sufficient resources for the task at hand.**
 
@@ -40,7 +55,7 @@ This will bring you to the page with the `Stop My Server` option, where you can 
 
 Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
 
-# Summary of ilifu services or partitions and their use case
+## Summary of ilifu services or partitions and their use case
 
 Ilifu offers a number of different services, compute partitions and environments. Each of these has a different purpose, and can be considered within a variety of use cases. 
 
