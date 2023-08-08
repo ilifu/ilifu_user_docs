@@ -2,7 +2,7 @@
 
 There are two main ways to access ilifu services, either by using SSH via a terminal to access a service, or using a web browser for access to web-based applications. 
 
-The Slurm batch schedular is the primary service accessed via SSH. Other services accessed via SSH include the [transfer node](data/data_transfer?id=transfer-using-scp-and-rsync).
+The Slurm batch scheduler is the primary service accessed via SSH. Other services accessed via SSH include the [transfer node](data/data_transfer?id=transfer-using-scp-and-rsync).
 
  Web-based applications include [Jupyter](https://jupyter.ilifu.ac.za/), [CARTA](https://carta.idia.ac.za/) and a [reports](https://reports.ilifu.ac.za/) portal, where users can manage their profile information, review usage data and manage the SSH public keys associated with their account. Web-based services are accessible through the dashboard on the [IDIA Gateway](https://gateway.idia.ac.za/), or directly via their URL linked above.
 

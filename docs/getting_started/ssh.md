@@ -2,7 +2,7 @@
 
 Access to ilifu is controlled through SSH public-private key pairs.
 
-If you are a new user you have likely just generated a SSH key pair, and sent your public key to our system through the webform.
+If you are a new user, you have likely just generated an SSH key pair, and sent your public key to our system through the webform.
 
 ## Managing your SSH public key
 
