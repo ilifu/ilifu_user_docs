@@ -4,7 +4,7 @@ There are two main ways to access ilifu services, either by using SSH via a term
 
 The Slurm batch scheduler is the primary service accessed via SSH. Other services accessed via SSH include the [transfer node](data/data_transfer?id=transfer-using-scp-and-rsync).
 
- Web-based applications include [Jupyter](https://jupyter.ilifu.ac.za/), [CARTA](https://carta.idia.ac.za/) and a [reports](https://reports.ilifu.ac.za/) portal, where users can manage their profile information, review usage data and manage the SSH public keys associated with their account. Web-based services are accessible through the dashboard on the [IDIA Gateway](https://gateway.idia.ac.za/), or directly via their URL linked above.
+ Web-based applications include [Jupyter](https://jupyter.ilifu.ac.za/), [CARTA](https://carta.idia.ac.za/) and a [reports](https://reports.ilifu.ac.za/) portal, where users can manage their profile information, review usage data and manage the SSH public keys associated with their account. Web-based services are accessible through the dashboard on the [IDIA Science Gateway](https://gateway.idia.ac.za/), or directly via their URL linked above.
 
 ## Slurm batch scheduler
 
@@ -25,11 +25,11 @@ $ ssh -A <username>@slurm.ilifu.ac.za
 ```
 See a summary of the Slurm partitions and their use cases [below](getting_started/access_ilifu?id=summary-of-ilifu-services-or-partitions-and-their-use-case).
 
-## IDIA Gateway
+## IDIA Science Gateway
 
-The IDIA gateway is accessible at `https://gateway.idia.ac.za`. The IDIA gateway provides access to public data downloads and an application dashboard.
+The IDIA Science Gateway is accessible at `https://gateway.idia.ac.za`. The IDIA Science Gateway provides access to public data downloads and an application dashboard.
 
-<div style="text-align:center"><img src="/_media/idia_gateway.png" alt="idia gateway" width=500 /></div>
+<div style="text-align:center"><img src="/_media/idia_gateway.png" alt="idia science gateway" width=500 /></div>
 
  The application dashboard utilises Single Sign-on (SSO) to ilifu web-based applications, including Jupyter, CARTA, account usage data, SSH key management, amongst other services.
 
@@ -37,7 +37,7 @@ The IDIA gateway is accessible at `https://gateway.idia.ac.za`. The IDIA gateway
 
 ## Jupyter
 
-The Jupyter service can be accessed via a web browser, either through the [IDIA Gateway](https://gateway.idia.ac.za/) application dashboard, or directly at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
+The Jupyter service can be accessed via a web browser, either through the [IDIA Science Gateway](https://gateway.idia.ac.za/) application dashboard, or directly at `https://jupyter.ilifu.ac.za`. This service allows the user to spawn a job on the ilifu cluster running JupyterLab, providing a development space for writing, testing and debugging new code, software, workflows or routines, within a highly interactive Jupyter notebook environment that enables tab-completion, viewing doc strings (i.e. documentation from Python functions and modules), and running subroutines within different notebook cells. Jupyter may also be the primary interface for stable workflows that aren’t necessary to submit to the Slurm cluster, such as short analysis routines or other highly interactive workflows.
 
 After logging into the JupyterLab service, the user is presented with a breakdown of the available session sizes and a drop-down menu with a list of options for compute resources. **Please select the smallest session size that will provide sufficient resources for the task at hand.**
 
