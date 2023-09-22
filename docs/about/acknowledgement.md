@@ -14,6 +14,10 @@ This work was carried out using the data processing pipelines developed at the I
 
 This work made use of the Inter-University Institute for Data Intensive Astronomy (IDIA) visualization lab https://vislab.idia.ac.za. IDIA is a partnership of the University of Cape Town, the University of Pretoria and the University of the Western Cape.
 
+This work made use of the iDaVIE-v (immersive Data Visualisation Interactive Explorer for volumetric rendering) software (DOI – 10.5281/zenodo.4614116 – https://idavie.readthedocs.io).
+
+This work made use of the CARTA (Cube Analysis and Rendering Tool for Astronomy) software (DOI 10.5281/zenodo.3377984 –  https://cartavis.github.io).
+
 ## Use of CARTA software
 
 This work made use of the CARTA (Cube Analysis and Rendering Tool for Astronomy) software (DOI 10.5281/zenodo.3377984 - https://cartavis.github.io).
