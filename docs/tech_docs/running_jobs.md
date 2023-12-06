@@ -84,6 +84,12 @@ To do so, we must create a job submit script. In this example, we will assume th
 singularity exec /idia/software/containers/casa-stable.img python casa_job_N.py
 ```
 
+Alternatively, the python script can also be run through casa with the following command:
+
+```bash
+singularity exec /idia/software/containers/casa-stable.img casa -c casa_job_N.py
+```
+
 To execute our (set of) scripts using the Slurm batch scheduler, you must create an additional Slurm submit script. This is a bash script that contains the above command, along with a set of parameters that instruct Slurm how to run the jobs:
 
 ```bash
