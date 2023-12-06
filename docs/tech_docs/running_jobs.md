@@ -78,10 +78,10 @@ Slurm is a general purpose job scheduling system which is highly versatile. Ther
 
 The Slurm batch system can be accessed via `ssh` with private key to `slurm.ilifu.ac.za`. Note that this node should only be used to submit and manage batch jobs and not for running code or software directly. The login node does not have significant resources and will likely crash under heavy usage. From this node you can submit jobs to the Slurm queue, which will then be scheduled to run when resources become available.
 
-To do so, we must create a job submit script. In this example, we will assume that the user is executing their analysis or data processing code using python. We also assume that your code is contained in a set of python script called `casa_job_N.py`, where N represents the job number. If you were working directly on your laptop, you could run this script by running `python -c casa_job_N.py`. However, since our script will be run on a compute node, we need to use a singularity container to encapsulate our system environment and requisite software. To execute our python script on the Ilifu cluster using a singularity container, we prepend `singularity exec` to this command:
+To do so, we must create a job submit script. In this example, we will assume that the user is executing their analysis or data processing code using python. We also assume that your code is contained in a set of python script called `casa_job_N.py`, where N represents the job number. If you were working directly on your laptop, you could run this script by running `python casa_job_N.py`. However, since our script will be run on a compute node, we need to use a singularity container to encapsulate our system environment and requisite software. To execute our python script on the Ilifu cluster using a singularity container, we prepend `singularity exec` to this command:
 
 ```bash
-singularity exec /idia/software/containers/casa-stable.img python -c casa_job_N.py
+singularity exec /idia/software/containers/casa-stable.img python casa_job_N.py
 ```
 
 To execute our (set of) scripts using the Slurm batch scheduler, you must create an additional Slurm submit script. This is a bash script that contains the above command, along with a set of parameters that instruct Slurm how to run the jobs:
