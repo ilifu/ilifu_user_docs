@@ -526,6 +526,35 @@ Finally in your browser you can connect to http://localhost:8082 and you can log
 
 The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
+### Visual Studio Code
+
+It is possible to use Visual Studio Code (or VS code) for interactive coding instead of JupyterLab. This was previously achieved by allowing VS Code to connect directly to the Slurm Login Node for a persistent session. However, this impacted the performance of the Slurm Login Node, interfering with the ability of users to submit their Slurm jobs. The following setup ensures that VS Code does not run code on the Slurm Login Node.
+
+Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
+
+```bash 
+Host *.ilifu.ac.za
+    User <USERNAME>
+    ForwardAgent yes
+
+Host compute-001
+    User <USERNAME>
+    ForwardAgent yes
+    Hostname %h
+    ProxyCommand ssh <USERNAME>@slurm.ilifu.ac.za nc %h 22
+
+```
+
+Next, an interactive job should be started and then connected to with VS Code. To start an interactive job, the `sinteractive` command is used. The below example extends the default length of 3 hours to 1 day by using the `--time` flag and allocates 4 CPUS using the `-c` flag. Currently, the maximum length for an interactive session is 5 days.
+
+```bash
+USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
+```
+
+Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm Login Node.
+
+Lastly use VS Code's remote explorer to connect to compute-001.
+
 ## Environment Modules
 
 The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general.
