@@ -553,7 +553,7 @@ USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
 
 Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm Login Node.
 
-Lastly use VS Code's remote explorer to connect to compute-001.
+Lastly use VS Code's remote explorer to connect to compute-001. It will ask for the operating system of the remote server (pick Linux) and will then install the necessary VS Code server software. You should then be able to use VS Code to browse your ilifu home directory and open an interactive terminal.
 
 ## Environment Modules
 
