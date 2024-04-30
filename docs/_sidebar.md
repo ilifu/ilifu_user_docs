@@ -17,6 +17,7 @@
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
+  - [Container Registry Server](tech_docs/sregistry_userdoc.md)
   - [Data Transfer](data/data_transfer.md)
   - [Data Management](data/data_management.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
