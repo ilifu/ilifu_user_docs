@@ -12,12 +12,12 @@
   - [Next Steps](getting_started/next_steps.md)
 - **Technical Documentation**
   - [Astronomy](astronomy/astronomy_software.md)
-  - [Container Registry Server](astronomy/sregistry_userdoc.md)
   - [MeerKAT processing](astronomy/meerkat_processing.md)
   - [Bioinformatics](bioinformatics/cbio.md)
   - [Running jobs on the cluster](tech_docs/running_jobs.md)
   - [Fairshare](tech_docs/fairshare.md)
   - [Supported software environments](tech_docs/software_environments.md)
+  - [Container Registry Server](tech_docs/sregistry_userdoc.md)
   - [Data Transfer](data/data_transfer.md)
   - [Data Management](data/data_management.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)

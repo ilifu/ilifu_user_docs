@@ -1,6 +1,6 @@
 # IDIA Singularity Registry Server 
 
-The IDIA Singularity Registry Server (IDIA sregistry) is available for managing, organising, and sharing Singularity container images. Ilifu users are able to upload containers and maintain their own teams and collections. Public containers are available to be downloaded to any remote site using Singularity CE software.
+The IDIA Singularity Registry Server (IDIA sregistry) is available for managing, organising, and sharing Singularity container images. Ilifu users are able to upload containers and maintain their own teams and collections. Public containers are available to be downloaded to any remote site using `Singularity CE` software.
 
 ## Requirements
 
@@ -17,24 +17,24 @@ Contacts ilifu support at support@ilifu.ac.za to get help with uploading or down
 `Team` is a group of users that can be assigned as collaborators to a collection.
 
 ## Available Collections
-To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All container-collections listed are publicly available.
+To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All public container-collections are available without requiring an ilifu account.
 
 ## Access/Download Available Containers:
-All containers listed in the collection page are available for use by the public. Containers can be pulled to the local machine using the Singularity CE pull only. 
+All containers listed in the collection page are publically available (private collections and containers required logging into the IDIA sregistry site). Containers can be pulled to the local machine using the Singularity CE pull only. 
 
 Example:
-Run this `cmd`to pull/download a `container` in `collection` with `tag`.
+Run the following command to pull/download a `container` in `collection` with `tag`.
 ```bash
 singularity pull --library https://sregistry.idia.ac.za/ collection/container:tag
 ```
-To pull a container called `wsclean` with a tag `v3.3` in a collection called `busybox`, We use the cmd:
+To pull a container called `wsclean` with a tag `v3.3` in a collection called `wsclean`, We use the cmd:
 ```bash
-singularity pull --library https://sregistry.idia.ac.za/ busybox/wsclean:v3.3
+singularity pull --library https://sregistry.idia.ac.za/ wsclean/wsclean:v3.3
 ```
 
 If you have already added the **remote endpoint**, you can pull the same container using the cmd below (See https://docs.sylabs.io/guides/3.7/user-guide/endpoint.html for details about adding an end-point, also see below about adding IDIA sregistry end-point):
 ```bash
-singularity pull library://busybox/wsclean:v3.3
+singularity pull library://wsclean/wsclean:v3.3
 ```
 **Note**: most public containers available in the IDIA sregistry are also available on ilifu at `/idia/software/containers`. Please confirm whether the container already exists on the filesystem before pulling the container to ilifu storage. 
 
@@ -94,7 +94,7 @@ singularity remote login idia-registry.
 To create a collection login via the [webUI](https://sregistry.idia.ac.za). Go to [View Collection](https://sregistry.idia.ac.za/collections) or select containers from the top menu. You Should see the “New Collection” button. Use this to create a collection. A collection name should all be in small letters and must not have the “/” or ”.” characters.
 
 ### Push the container to your collection:
-**NB**. You can only push containers to the collections you created, or one to which your group has been assigned.
+**NB**. You can only push containers to the collections you created, or one to which your team has been assigned.
 
 Make sure the end point is added successfully. 
 You can check the remote status via; `singularity remote use idia-registry`, then `singularity remote status` and output would look like.
@@ -113,11 +113,10 @@ To push a container named `astror` to a collection `calibration` (as shown in th
 ```bash
 singularity push -U ASTRO-R.simg library://walter/calibration/astror:latest
 ```
-In this command: `ASTRO-R`is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
-See the screenshot below to demonstrate the container has been uploaded.. 
+In this command: `ASTRO-R.simg`is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
 
 ## Team/Group Container Management
-A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user in a group then has the ability to push containers to the collection and also has permissions to view private containers.
+A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user in a team then has the ability to push containers to the collection and also has permissions to view private containers.
 
 Create a Teams:
 - Go to webUI:https://sregistry.idia.ac.za/
