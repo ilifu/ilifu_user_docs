@@ -5,10 +5,10 @@ The IDIA Singularity Registry Server (IDIA sregistry) is available for managing,
 ## Requirements
 
 An ilifu user account is required to upload containers to the IDIA Singularity Registry repository.
-For containers to be uploaded to the IDIA Singularity Registry repository, the containers must have been built using Singularity `version 3.3.0+`
+For containers to be uploaded to the IDIA Singularity Registry repository, the containers must have been built using Singularity `version 3.3.0+`.
 
 ## Support
-Contacts ilifu support at support@ilifu.ac.za to get help with uploading or downloading containers from IDIA sregistry
+Contact ilifu support at support@ilifu.ac.za to get help with uploading or downloading containers from IDIA sregistry.
 
 ## Definitions
 `Collection` describes a class of containers, or a project group for which containers are created. A collection can be public or private, and, if private, only the creator, or assigned group, will have access to the collection.<br />
@@ -20,7 +20,7 @@ Contacts ilifu support at support@ilifu.ac.za to get help with uploading or down
 To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All public container-collections are available without requiring an ilifu account.
 
 ## Access/Download Available Containers:
-All containers listed in the collection page are publically available (private collections and containers required logging into the IDIA sregistry site). Containers can be pulled to the local machine using the Singularity CE pull only. 
+All containers listed in the collection page are publicly available (private collections and containers require logging into the IDIA sregistry site). Containers can be pulled to the local machine using the Singularity CE pull only. 
 
 Example:
 Run the following command to pull/download a `container` in `collection` with `tag`.
@@ -64,7 +64,7 @@ Any user with the IDIA/ilifu user account is able to login and push images to th
 
 ### Adding remote end-point (also see this [guide](https://docs.sylabs.io/guides/3.7/user-guide/endpoint.html)).
 
-To Add the registry end-point, run:
+To add the registry end-point, run:
 ```bash
 singularity remote add idia-registry https://sregistry.idia.ac.za/
 ```
@@ -91,13 +91,13 @@ singularity remote login idia-registry.
 ```
 
 ### Create a collection
-To create a collection login via the [webUI](https://sregistry.idia.ac.za). Go to [View Collection](https://sregistry.idia.ac.za/collections) or select containers from the top menu. You Should see the “New Collection” button. Use this to create a collection. A collection name should all be in small letters and must not have the “/” or ”.” characters.
+To create a collection: login via the [webUI](https://sregistry.idia.ac.za), then go to [View Collection](https://sregistry.idia.ac.za/collections) or select containers from the top menu. You Should see the “New Collection” button. Use this to create a collection. A collection name should all be in small letters and must not have the “/” or ”.” characters.
 
 ### Push the container to your collection:
 **NB**. You can only push containers to the collections you created, or one to which your team has been assigned.
 
 Make sure the end point is added successfully. 
-You can check the remote status via; `singularity remote use idia-registry`, then `singularity remote status` and output would look like.
+You can check the remote status via: `singularity remote use idia-registry`, then `singularity remote status` and output would look like:
 ```
 INFO:    Checking status of default remote.
 SERVICE    STATUS  VERSION  URI
@@ -113,7 +113,7 @@ To push a container named `astror` to a collection `calibration` (as shown in th
 ```bash
 singularity push -U ASTRO-R.simg library://walter/calibration/astror:latest
 ```
-In this command: `ASTRO-R.simg`is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
+In this command: `ASTRO-R.simg` is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
 
 ## Team/Group Container Management
 A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user in a team then has the ability to push containers to the collection and also has permissions to view private containers.
