@@ -394,7 +394,7 @@ In order to achieve this, the `ipykernel` python package must be installed in th
     "argv": [
         "singularity", "exec", "<path/to/container/container.simg>", "<path/to/python_executable>",
         "-m",
-        "IPython.kernel",
+        "ipykernel_launcher",
         "-f",
         "{connection_file}"
         ]
