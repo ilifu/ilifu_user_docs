@@ -4,10 +4,6 @@
 
 The IDIA `processMeerKAT` Pipeline has been developed as a tool for calibration and imaging of radio data using the ilifu system. It is currently a fully automated 1GC (cross-calibration) and 2GC (self-calibration) pipeline that runs on ilifu using CASA and SLURM. Please visit the IDIA Pipeline [website](https://idia-pipelines.github.io/) for additional information, including documentation and tutorials. We strongly encourage you to engage with the developers by reporting any bugs or enhancements to the [GitHub issues page](https://github.com/idia-astro/pipelines/issues).
 
-## Oxkat
-
-Oxkat is a MeerKAT processing pipeline that is written for and commonly used on ilifu, as well as CHPC. It is a highly automated pipeline for MeerKAT data processing all the way through to 3GC (third-generation direction-dependent calibration), including software such as WSClean, DDFacet, killMS and CubiCal. For more information about installation, usage, design and software packages, please see the [GitHub documentation](https://github.com/IanHeywood/oxkat) and [ASCL entry](https://ui.adsabs.harvard.edu/abs/2020ascl.soft09003H/abstract).
-
 ## CARTA
 
 CARTA is the Cube Analysis and Rendering Tool for Astronomy, a new image visualization and analysis tool designed for MeerKAT, ALMA, the VLA, and the SKA pathfinders. Please see the CARTA [website](https://cartavis.github.io/) and [documentation](https://carta.readthedocs.io/en/latest/) for additional information.
@@ -63,17 +59,19 @@ The predicted memory usage for slow-mode conversion is reported when using both 
 
 ## CARACal
 
-The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction, which currently exists outside ilifu's [supported software environments](/tech_docs/software_environments), and is managed by the developers. Please read the documentation [here](https://caracal.readthedocs.io/en/latest/), and find the repository [here](https://github.com/caracal-pipeline/caracal).
-<!-- For access to this repository, please contact [Paolo Serra](mailto:paolo.serra@inaf.it). -->
+The CARACal Pipeline is a pipeline in active development for radio interferometry data reduction and is managed by the developers on ilifu. Please find the CARACal documentation [here](https://caracal.readthedocs.io/en/latest/), and find the repository [here](https://github.com/caracal-pipeline/caracal).
 
 ### Installing CARACal on ilifu
 
-<!-- Installing a stable version of CARACal on ilifu is a work in progress, as captured in [this](https://github.com/caracal-pipeline/caracal/issues/625) GitHub issue. Please consult this issue for the latest progress, and comment here if you make some of your own progress.  -->
-Please do not install CARACal in your `/users/` directory (see directory structure documentation [here](/data/directory_structure)), particularly the singularity containers, which are available and maintained at `/software/astro/caracal/`.
+CARACal can be installed in a Python virtual environment on ilifu. We suggest creating the Python virtual environment, using the available modules (rather than system Python), in your shared project directory or user workspace. Please do not install CARACal in your `$HOME` (`/users/`) directory (see directory structure documentation [here](/data/directory_structure)). The Singularity containers associated with CARACal software are available and maintained at `/software/astro/caracal/`. 
 
 ### Running CARACal on ilifu
 
 Please don't run CARACal on the ilifu login node, but on a compute node, using `sbatch` or `srun`, as documented [here](/getting_started/submit_job_slurm). If you encounter issues with running CARACal, please consider logging a [GitHub issue](https://github.com/caracal-pipeline/caracal/issues/), rather than contacting ilifu support, unless the issue is clearly an ilifu issue.
+
+## Oxkat
+
+Oxkat is a MeerKAT processing pipeline that is written for and commonly used on ilifu, as well as CHPC. It is a highly automated pipeline for MeerKAT data processing all the way through to 3GC (third-generation direction-dependent calibration), including software such as WSClean, DDFacet, killMS and CubiCal. For more information about installation, usage, design and software packages, please see the [GitHub documentation](https://github.com/IanHeywood/oxkat) and [ASCL entry](https://ui.adsabs.harvard.edu/abs/2020ascl.soft09003H/abstract).
 
 ## CASA
 
