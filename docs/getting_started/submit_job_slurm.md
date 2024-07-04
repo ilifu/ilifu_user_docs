@@ -223,7 +223,7 @@ When running a job using `sbatch` or `srun`, a user is able to specify the resou
 | GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
 | GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
-| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           | 12 hours      |
+| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           |  5 days       |
 
 *Note jobs submitted to the Devel partition cannot allocate memory.*
 
