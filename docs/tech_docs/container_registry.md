@@ -116,7 +116,7 @@ singularity push -U ASTRO-R.simg library://walter/calibration/astror:latest
 In this command: `ASTRO-R.simg` is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
 
 ## Team/Group Container Management
-A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user in a team then has the ability to push containers to the collection and also has permissions to view private containers.
+A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user added as a `contributor` in a team has only the ability to view and pull containers including private containers. A user added as `Owner` then has the ability to push containers to the collection, view private containers and is able to delete containers from the collection.
 
 Create a Teams:
 - Go to webUI:https://sregistry.idia.ac.za/
