@@ -117,7 +117,7 @@ In this command: `ASTRO-R`is the local name of the container that I want to push
 See the screenshot below to demonstrate the container has been uploaded.. 
 
 ## Team/Group Container Management
-A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user in a group then has the ability to push containers to the collection and also has permissions to view private containers.
+A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user added as a `contributor` in a team has only the ability to view and pull containers including private containers. A user added as `Owner` then has the ability to push containers to the collection, view private containers and is able to delete containers from the collection.
 
 Create a Teams:
 - Go to webUI:https://sregistry.idia.ac.za/
