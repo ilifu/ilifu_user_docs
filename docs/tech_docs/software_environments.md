@@ -109,7 +109,7 @@ A number of the containers that are supported by ilifu do not include runscripts
 
 ### Available containers
 
-Several containers have been developed for use on the ilifu cluster and are currently maintained by the support team. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**):
+Several containers have been developed for use on the ilifu cluster and in other clusters, and are currently maintained by the support team. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**). For use in other clusters the containers can be downloaded from the [IDIA Singularity Registry Server](https://sregistry.idia.ac.za/):
 
 <details>
 <summary id="astro-r-container">astro-r container</summary>
@@ -318,7 +318,7 @@ A simply way to determine what Python packages a container includes is to run th
 
 ### Building your own container
 
-In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized.
+In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized. To move a container to ilifu, a user can follow this [user guide](https://docs.ilifu.ac.za/#/tech_docs/container_registry) to push the container to the [IDIA Singularity Registry Server](https://sregistry.idia.ac.za/) and then pull a container to ilifu or follow the [transfers guide](https://docs.ilifu.ac.za/#/data/data_transfer) to move container to ilifu.
 
 There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://www.sylabs.io/guides/2.6/user-guide/build_a_container.html#).
 
