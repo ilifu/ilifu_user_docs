@@ -132,15 +132,20 @@ Image('<imagename>.png', height=500)
 
 ## Simba
 
-### About Simba
+### About Simba and Simba-C
 
-Simba is a state-of-the-art suite of galaxy formation simulations for exploring the co-evolution of galaxies, black holes, and circum- and inter-galactic gas within a cosmological context. Simba snapshots and galaxy catalogs span up to 151 redshift outputs from z = 20 to z = 0. Further details can be found on the [Simba website](http://simba.roe.ac.uk/).
+**Simba** is a state-of-the-art suite of galaxy formation simulations for exploring the co-evolution of galaxies, black holes, and circum- and inter-galactic gas within a cosmological context. Simba snapshots and galaxy catalogs span up to 151 redshift outputs from z = 20 to z = 0. Further details can be found on the [Simba website](http://simba.roe.ac.uk/).
+
+**Simba-C** is an updated version of the Simba suite which incorporates new chemical enrichment and feedback models, and finds better agreement with observations on e.g. the mass-metallicity relation, galaxy stellar mass function, and galaxy abundance ratios. Please see the [paper](https://ui.adsabs.harvard.edu/abs/2023MNRAS.525.1061H/abstract) for further information on Simba-C.
+
 
 Please contact [Romeel Davé](mailto:rad@roe.ac.uk) if you have project ideas involving SIMBA data.
 
 ### Simba products on ilifu
 
 #### Snapshots and file structure
+
+##### Simba
 
 The following snapshots and corresponding galaxy catalogs are available (read-only access) within the **/idia/data/laduma/SIMBA/** directory. Within this directory files are structured by name (e.g. m100n1024), wind model (e.g. s50), and snapshot number (e.g. 151; see mapping between snapshot number and redshift [here](http://simba.roe.ac.uk/outputs.txt)). For example:
 
@@ -156,6 +161,20 @@ Snapshot runs currently available:
 - **m100n1024** - 100 Mpc/h box, 2x10243 particles. Flagship Run. 31 snapshots available. Full Simba physics only (s50).
 
 Some other files also exist for the above snapshots, such as a ‘blackhole details file’ for m100n1024 (*/idia/data/laduma/SIMBA/m100n1024/s50/blackhole_details/bhALL.hdf5*).
+
+##### Simba-C
+Similar to Simba snapshots, files can be found within **/idia/data/laduma/SIMBA-C/** directory. Only the full Simba physics is available, so snapshots are available through e.g.*/idia/data/laduma/SIMBAC/m100n1024/*.
+
+Snapshot runs currently available:
+
+- **m100n1024** - 100 Mpc/h box, 2x10243 particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the redshift z = 0 snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
+
+The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*). 
+
+These are also accessible to all IDIA users on ilifu. If you cannot access them, please make a request with ilifu support. If further Simba-C files are of interest to your project, please contact [Romeel Davé](mailto:rad@roe.ac.uk) or [Marcin Glowacki](mailto:marcin@idia.ac.za).
+
+**Coming soon**: m25n512 high-resolution run! We expect these to be available by early 2025.
+
 
 #### HI Cubes
 
@@ -178,6 +197,11 @@ It includes the following packages:
 - pandas
 - spectral-cube
 
+Previous Simba containers are maintained within /idia/software/containers/, and are named by date. If you would like an update or addition to be made to this software container, please first contact [Marcin Glowacki](mailto:marcin@idia.ac.za).
+
+### Simba Example Jupyter Notebook
+
+An example notebook for accessing a Simba snapshot file and corresponding CAESAR file, obtaining, can be found in [Simba_Demo.ipynb](https://docs.ilifu.ac.za/#/getting_started/using_jupyterlab). You can copy it to your home directory and access it via ilifu’s JupyterLab system.
 
 # Transfer data from the SARAO archive
 
