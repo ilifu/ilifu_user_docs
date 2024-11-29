@@ -201,7 +201,7 @@ Previous Simba containers are maintained within /idia/software/containers/, and 
 
 ### Simba Example Jupyter Notebook
 
-An example notebook for accessing a Simba snapshot file and corresponding CAESAR file, obtaining, can be found in [Simba_Demo.ipynb](https://docs.ilifu.ac.za/#/getting_started/using_jupyterlab). You can copy it to your home directory and access it via ilifu’s JupyterLab system.
+An example notebook for accessing a Simba snapshot file and corresponding CAESAR file, obtaining, can be found at `/idia/data/laduma/SIMBA/Simba_Demo.ipynb`. You can copy it to your home directory and access it via ilifu’s JupyterLab system.
 
 # Transfer data from the SARAO archive
 
