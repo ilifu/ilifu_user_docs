@@ -167,7 +167,7 @@ Similar to Simba snapshots, files can be found within **/idia/data/laduma/SIMBA-
 
 Snapshot runs currently available:
 
-- **m100n1024** - 100 Mpc/h box, 2x10243 particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the redshift z = 0 snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
+- **m100n1024** - 100 Mpc/h box, 2x10243 particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the first snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
 
 The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*). 
 
