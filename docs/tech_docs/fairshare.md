@@ -259,7 +259,6 @@ PriorityCalcPeriod      = 00:05:00
 
 The QOS settings on ilifu are another limit put in place that is used to limit the amount of resources research projects or users have access to. This is used to ensure that the cluster is not overused by a single user or project. The QOS settings can be checked using the `sacctmgr` command as follows:
 
-
 ```shell
 $ sacctmgr show qos format="Name%20,GrpTRESRunMins%32,MaxTRESPA%32,MaxTRESPU%35,MaxJobsPU"
                 Name                   GrpTRESRunMins                        MaxTRESPA                           MaxTRESPU MaxJobsPU
