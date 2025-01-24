@@ -6,4 +6,4 @@ If you feel that you have an issue that you would like the technical staff to ha
 
 You can also feel free to use the Ilifu Slack channel, but you will be asked to create a ticket by sending the email as mentioned above regardless.
 
-The Ilifu ticket system is hosted at [Ilifu Helpdesk Website](https://ilifu.freshdesk.com/). New tickets can be created directly there and you can also obtain a view of your historical tickets if you create a login on the ticket system.
+The Ilifu ticket system is hosted at [Ilifu Helpdesk Website](https://helpdesk.ilifu.ac.za/). Access to the helpdesk portal requires an active ilifu account. New tickets can be created directly there and you can also obtain a view of your historical tickets.
