@@ -2,7 +2,7 @@
 
 ## What is the official help channel?
 
-Send an email to [support@ilifu.ac.za](mailto:support@ilifu.ac.za). This will go into the ticket system for attention of the support staff which is hosted at [https://ilifu.freshdesk.com/](https://ilifu.freshdesk.com/).
+Send an email to [support@ilifu.ac.za](mailto:support@ilifu.ac.za). This will go into the ticket system for attention of the support staff which is hosted at [https://helpdesk.ilifu.ac.za](https://helpdesk.ilifu.ac.za/). Access to the ilifu helpdesk portal requires an active ilifu account, but sending us an email doesn't!
 
 ## What kind of storage system is used?
 
