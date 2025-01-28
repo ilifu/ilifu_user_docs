@@ -1,5 +1,5 @@
-# Understanding Priority and Fairshare
-The Slurm documentation [on priority](https://slurm.schedmd.com/priority_multifactor.html) and [fairshare](https://slurm.schedmd.com/fair_tree.html) is very extensive; what follows here is a short summary of the principles behind priority and fairshare, and how to check what's going on with your jobs on ilifu.
+# Understanding Priority, Fairshare and Quality of Service
+The Slurm documentation [on priority](https://slurm.schedmd.com/priority_multifactor.html), [fairshare](https://slurm.schedmd.com/fair_tree.html) and [QOS](https://slurm.schedmd.com/qos.html) is very extensive; what follows here is a short summary of the principles behind priority and fairshare, and how to check what's going on with your jobs on ilifu.
 
 ## Multifactor Priority
 Our Slurm is configured to use multifactor priority scheduling which uses a number of factors to determine a job's priority. For each job that's submitted to the cluster, these factors are used to calculate that job's priority. The weighting of these factors can change if they're found not to be giving a fair usage to all users of the cluster. At any time the weights of the factors can be checked as follows:
@@ -254,3 +254,31 @@ PriorityCalcPeriod      = 00:05:00
 ```
 
 </details>
+
+## Quality of Service (QOS)
+
+The QOS settings on ilifu are another limit put in place that is used to limit the amount of resources research projects or users have access to. This is used to ensure that the cluster is not overused by a single user or project. The QOS settings can be checked using the `sacctmgr` command as follows:
+
+```shell
+$ sacctmgr show qos format="Name%20,GrpTRESRunMins%32,MaxTRESPA%32,MaxTRESPU%35,MaxJobsPU"
+                Name                   GrpTRESRunMins                        MaxTRESPA                           MaxTRESPU MaxJobsPU
+-------------------- -------------------------------- -------------------------------- ----------------------------------- ---------
+              normal                                               cpu=2105,mem=15265G                  cpu=1203,mem=8723G     10000
+     qos-interactive                                                                                  cpu=4,mem=28G,node=1         1
+             jupyter      cpu=99999999,mem=530491648G      cpu=99999999,mem=530491648G
+               devel      cpu=99999999,mem=530491648G      cpu=99999999,mem=530491648G
+        a01-idia-qos      cpu=17998848,mem=130491648G              cpu=2105,mem=15265G                  cpu=1203,mem=8723G     10000
+        a02-cbio-qos      cpu=17998848,mem=130491648G              cpu=2105,mem=15265G                  cpu=1203,mem=8723G     10000
+      a03-dirisa-qos      cpu=17998848,mem=130491648G              cpu=2105,mem=15265G                  cpu=1203,mem=8723G     10000
+       a04-cchem-qos      cpu=17998848,mem=130491648G              cpu=2105,mem=15265G                  cpu=1203,mem=8723G     10000
+         highmem_qos
+             gpu-qos                                                 cpu=192,mem=1440G         cpu=128,gres/gpu=4,mem=960G
+```
+
+The `GrpTRESRunMins` (or Group Trackable Resource Running Minutes) is used to control the amount of resources a group has access to over time. These are calculated as a percentage of the cluster over time, e.g. for IDIA projects, the limit is currently set to `cpu=17998848,mem=130491648G`, which means that approximately 65% of the cluster can be used for 7 days continuously. i.e. if the total remaining resources allocated to running IDIA jobs nears this limit, the scheduler will not start new IDIA jobs.
+
+The `MaxTRESPA` limits the instantaneous amount of resources allocated to an account. In the case of IDIA projects this is set to `cpu=2105,mem=15265G` which means that at most 70% of the cluster can be used by IDIA jobs at any one time.
+
+The `MaxTRESPU` setting the instantaneous amount of resources allocated to a specific user. A setting of `cpu=1203,mem=8723G` means that at most 40% of the cluster can be allocated to a single user at any one time.
+
+Finally the `MaxJobsPU` setting limits the number of jobs a user can run at any one time.
