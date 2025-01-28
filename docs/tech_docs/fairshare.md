@@ -275,15 +275,10 @@ $ sacctmgr show qos format="Name%20,GrpTRESRunMins%32,MaxTRESPA%32,MaxTRESPU%35,
              gpu-qos                                                 cpu=192,mem=1440G         cpu=128,gres/gpu=4,mem=960G
 ```
 
-The `GrpTRESRunMins` (or Group Trackable Resource Running Minutes) is used to control the amount of resources a project/account has access to over time. These are
-calculated as a percentage of the cluster over time, e.g. for IDIA projects the limit is currently set to `cpu=17998848,mem=130491648G` which means that approximately
-65% of the cluster can be used for 7 days continuously. i.e. if the total remaining resources allocated to running IDIA jobs nears this limit, the scheduler will not
-start new IDIA jobs.
+The `GrpTRESRunMins` (or Group Trackable Resource Running Minutes) is used to control the amount of resources a group has access to over time. These are calculated as a percentage of the cluster over time, e.g. for IDIA projects, the limit is currently set to `cpu=17998848,mem=130491648G`, which means that approximately 65% of the cluster can be used for 7 days continuously. i.e. if the total remaining resources allocated to running IDIA jobs nears this limit, the scheduler will not start new IDIA jobs.
 
-The `MaxTRESPA` limits the instantaneous amount of resources allocated to an account. In the case of IDIA projects this is set to `cpu=2105,mem=15265G` which means that
-at most 70% of the cluster can be used by IDIA jobs at any one time.
+The `MaxTRESPA` limits the instantaneous amount of resources allocated to an account. In the case of IDIA projects this is set to `cpu=2105,mem=15265G` which means that at most 70% of the cluster can be used by IDIA jobs at any one time.
 
-The `MaxTRESPU` setting the instantaneous amount of resources allocated to a specific user. A setting of `cpu=1203,mem=8723G` means that at most 40% of the cluster can be
-allocated to a single user at any one time.
+The `MaxTRESPU` setting the instantaneous amount of resources allocated to a specific user. A setting of `cpu=1203,mem=8723G` means that at most 40% of the cluster can be allocated to a single user at any one time.
 
 Finally the `MaxJobsPU` setting limits the number of jobs a user can run at any one time.
