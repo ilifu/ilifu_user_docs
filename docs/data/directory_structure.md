@@ -2,9 +2,9 @@
 
 The following describes the directory structure as related to the ilifu data policies.
 
-Users' home directories are located in `/users/`. This directory is for users' scripts. No large files should be stored in `/users/`. It is recommended that users make use of a repository such as Github to backup scripts and files.
+Users' home directories are located in `/users/`, **limited to 200GB**. This directory is for users' scripts. No large files should be stored in `/users/`. It is highly recommended that users make use of a repository such as Github to backup scripts and files.
 
-The scratch mounts are the primary directories for data processing. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
+The scratch mounts are the primary directories for data processing, where large intermediate data products are expected to be generated. These directories are for **short-term** use only. Only temporary data required for processing should be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working.**
 
 `/scratch3/users/<username>` is a users' specific directory for data processing.
 
@@ -12,13 +12,22 @@ The scratch mounts are the primary directories for data processing. These direct
 
 `/software` contains common software packages needed for workflows, including containers and modules.
 
-There are a number of groups within the ilifu cloud computing community, including IDIA, CBIO and SANBI among others. For **medium- and long-term storage**, the directory structure has been broken down by group.
+There are a number of groups within the ilifu cloud computing community, including IDIA, CBio and ilifu, among others. For **medium- and long-term storage**, the directory structure has been broken down by group.
+
+**Summary of filesystem quotas:**
+
+| Directory path      | Quota          |
+|---------------------|----------------|
+| /users ($HOME)      | 200GB          |
+| /idia/users/        | 10TB           |
+| /cbio/users/        | 10TB           |
+| /ilifu/users/       | 2TB            |
 
 ### IDIA directory structure
 
 * `/idia/` - the base directory for all IDIA related projects.
 
-* `/idia/users` - user's personal workspace. **Limited to 10TB**. For storing longer-term data and data products.
+* `/idia/users` - user's personal workspace. **Limited to 10TB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
 
 * `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project long-term data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
 
@@ -51,7 +60,7 @@ Please note the [restrictions](/bioinformatics/cbio#restrictions).
 
 * `/ilifu/` - the base directory for all ilifu related projects.
 
-* `/ilifu/users` - user's personal workspace.
+* `/ilifu/users` - user's personal workspace. **Limited to 2TB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
 
 * `/ilifu/astro/projects/` and `ilifu/bio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project raw data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. It is recommended that raw data folders should always be read-only.
 
