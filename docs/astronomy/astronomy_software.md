@@ -169,12 +169,15 @@ Snapshot runs currently available:
 
 - **m100n1024** - 100 Mpc/h box, 2x10243 particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the first snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
 
-The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*). 
+The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*).
+
+- **m50n512** - 100 Mpc/h box, 2x5123 particles, at the full Simba-C physics run. Currently only contains 10 snapshot boxes (snapshot_{036,051,062,073,078,079,105,124,125,151}.hdf5) but will be faster to load than the 100 Mpc/h boxes for any preliminary checks.
+
+The above is accompanied by the respective CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m50n512/Groups*), and additional files in the *hfof_files* and *other_files* subdirectories. 
 
 These are also accessible to all IDIA users on ilifu. If you cannot access them, please make a request with ilifu support. If further Simba-C files are of interest to your project, please contact [Romeel Davé](mailto:rad@roe.ac.uk) or [Marcin Glowacki](mailto:marcin@idia.ac.za).
 
 **Coming soon**: m25n512 high-resolution run! We expect these to be available by early 2025.
-
 
 #### HI Cubes
 

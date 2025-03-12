@@ -528,7 +528,7 @@ The exported environmental variable `R_INSTALL_STAGED=false` in the above script
 
 ### Visual Studio Code
 
-It is possible to use Visual Studio Code (or VS code) for interactive coding instead of JupyterLab. This was previously achieved by allowing VS Code to connect directly to the Slurm Login Node for a persistent session. However, this impacted the performance of the Slurm Login Node, interfering with the ability of users to submit their Slurm jobs. The following setup ensures that VS Code does not run code on the Slurm Login Node.
+It is possible to use Visual Studio Code (or VS code, vscode) for interactive coding instead of JupyterLab. This was previously achieved by allowing VS Code to connect directly to the Slurm login node for a persistent session. However, this impacted the performance of the Slurm login node, interfering with the ability of users to submit their Slurm jobs. The following setup ensures that VS Code does not run code on the Slurm login node.
 
 Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
 
@@ -551,7 +551,7 @@ Next, an interactive job should be started and then connected to with VS Code. T
 USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
 ```
 
-Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm Login Node.
+Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm login node.
 
 Lastly use VS Code's remote explorer to connect to compute-001. It will ask for the operating system of the remote server (pick Linux) and will then install the necessary VS Code server software. You should then be able to use VS Code to browse your ilifu home directory and open an interactive terminal.
 
