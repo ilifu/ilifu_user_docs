@@ -163,7 +163,7 @@ Snapshot runs currently available:
 Some other files also exist for the above snapshots, such as a ‘blackhole details file’ for m100n1024 (*/idia/data/laduma/SIMBA/m100n1024/s50/blackhole_details/bhALL.hdf5*).
 
 ##### Simba-C
-Similar to Simba snapshots, files can be found within **/idia/data/laduma/SIMBA-C/** directory. Only the full Simba physics is available, so snapshots are available through e.g.*/idia/data/laduma/SIMBAC/m100n1024/*.
+Similar to Simba snapshots, files can be found within **/idia/data/laduma/SIMBAC/** directory. Only the full Simba physics is available, so snapshots are available through e.g.*/idia/data/laduma/SIMBAC/m100n1024/*.
 
 Snapshot runs currently available:
 
@@ -171,7 +171,7 @@ Snapshot runs currently available:
 
 The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*).
 
-- **m50n512** - 100 Mpc/h box, 2x5123 particles, at the full Simba-C physics run. Currently only contains 10 snapshot boxes (snapshot_{036,051,062,073,078,079,105,124,125,151}.hdf5) but will be faster to load than the 100 Mpc/h boxes for any preliminary checks.
+- **m50n512** - 50 Mpc/h box, 2x5123 particles, at the full Simba-C physics run. Currently only contains 10 snapshot boxes (snapshot_{036,051,062,073,078,079,105,124,125,151}.hdf5) but will be faster to load than the 100 Mpc/h boxes for any preliminary checks.
 
 The above is accompanied by the respective CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m50n512/Groups*), and additional files in the *hfof_files* and *other_files* subdirectories. 
 
