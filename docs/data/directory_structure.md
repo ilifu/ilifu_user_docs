@@ -19,7 +19,7 @@ These directories are for **short-term** use only, and have a 90-day auto-deleti
 
 **Auto-deletion process**
 
-The `/scratch3` auto-deletion process performs a deletion of files that have not been accessed in more than 90 days. Usually the deletion process is run on the third or fourth tuesday of month. Affected users are notified with at least two weekly emails prior to the deletion date. The email includes a summary of files flagged for deletion, as well as link to text file containing a list of all the files. It is possible for users to request to be excluded from a specific `scratch3` deletion run, but this will have to be motivated in an email to support@ilifu.ac.za. In general exclusion from deletion runs will not be applied multiple months in a row.
+The `/scratch3` auto-deletion process performs a deletion of files that have not been accessed in more than 90 days. Usually the deletion process is run on the third or fourth tuesday of month. Affected users are notified with at least two weekly emails prior to the deletion date. The email includes a summary of files flagged for deletion, as well as a link to text file containing a list of all the flagged files. It is possible for users to request to be excluded from a specific `scratch3` deletion run, but this will have to be motivated in an email to support@ilifu.ac.za. In general exclusion from deletion runs will not be applied multiple months in a row.
 
 ### Group Directories
 
