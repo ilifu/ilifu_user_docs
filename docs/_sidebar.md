@@ -23,7 +23,6 @@
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
-  - [Temporary Files](tech_docs/temporary_files.md)
 - **Help and Info**
   - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
