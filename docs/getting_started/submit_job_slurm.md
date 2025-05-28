@@ -282,4 +282,3 @@ The following table lists the parameters that can be used to describe the requir
 * default parameters, if not specified, include: 1 node; 1 task; 1 CPU and 3 GiB RAM; running on the Main partition for 3 hrs.
 * to find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} cluster=ilifu-slurm2021 -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
 * for more information, see [advanced usage](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm)
-
