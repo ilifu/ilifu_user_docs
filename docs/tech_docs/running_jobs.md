@@ -379,7 +379,6 @@ The following table lists the parameters that can be used to describe the requir
 If you wish to run a job on a GPU node you need to specify the `GPU` partition using `--partition=GPU`; as well as indicate the number of GPU resources you require using `--gres=gpu:<number_of_gpus>`. The number of GPUs you can request depends on the GPU node type you are using — some have a single GPU while others have two. The following example requests one GPU on a GPU node:
 
 ```bash
-```code bash
 #SBATCH --partition=GPU
 #SBATCH --gres=gpu:1
 ``` 
