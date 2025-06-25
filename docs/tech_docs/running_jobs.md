@@ -367,24 +367,66 @@ The following table lists the parameters that can be used to describe the requir
 3. CPUs refers to the the number of CPUs associated with your job.
 4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), Slurm works with MPI to manage parallelised processing of data.
 5. nodes refers to a single compute node or Slurm worker, i.e. one node that has 32 CPUs and 232 GB RAM
-6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
+6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](#notes-for-gpu-jobs).
 7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
-8. Request generic resource (per node). You will only use this if you are [running a GPU job](/getting_started/submit_job_slurm?id=notes-for-gpu-jobs).
+8. Request generic resource (per node). You will only use this if you are [running a GPU job](#notes-for-gpu-jobs).
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
 11. **Note that if you specify more memory or cores than is available on the nodes, or more nodes than are available on the cluster, _your job will never start but it will sit in the queue!_**
 
 ### Notes for GPU jobs
 
-If you wish to run a job on the GPU node you need to specify the `GPU` or `GPUV100` partition, i.e. your sbatch script will have something like the following lines in the header:
-<!-- and you need to specify the number of GPU resources you require with the `--gres` option.
-```code bash
+If you wish to run a job on a GPU node you need to specify the `GPU` partition using `--partition=GPU`; as well as indicate the number of GPU resources you require using `--gres=gpu:<number_of_gpus>`. The number of GPUs you can request depends on the GPU node type you are using — some have a single GPU while others have two. The following example requests one GPU on a GPU node:
+
+```bash
 #SBATCH --partition=GPU
-#SBATCH --gres=gpu:p100:1
-``` -->
-```code bash
-#SBATCH --partition=GPU
+#SBATCH --gres=gpu:1
+``` 
+
+You can also get the properties of the GPU node using `scontrol show node <node_name>`, which will show you the number of GPUs available on that node, as well as the GPU type and memory available. For example, to get the properties of the `gpu-001` node, you would run:
+
+```bash
+$ scontrol show node gpu-001
+NodeName=gpu-001 Arch=x86_64 CoresPerSocket=16 
+   CPUAlloc=24 CPUEfctv=32 CPUTot=32 CPULoad=24.00
+   AvailableFeatures=p100,P100
+   ActiveFeatures=p100,P100
+   Gres=gpu:2(S:0-31)
+   NodeAddr=gpu-001 NodeHostName=gpu-001 Version=23.11.6
+   OS=Linux 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 
+   RealMemory=237568 AllocMem=178176 FreeMem=221788 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=1 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=GPU 
+   BootTime=2025-05-30T05:41:42 SlurmdStartTime=2025-05-30T05:44:29
+   LastBusyTime=2025-06-24T07:17:18 ResumeAfterTime=None
+   CfgTRES=cpu=32,mem=232G,billing=1763704832,gres/gpu=2
+   AllocTRES=cpu=24,mem=174G,gres/gpu=1
+   CapWatts=n/a
+   CurrentWatts=0 AveWatts=0
+   ExtSensorsJoules=n/a ExtSensorsWatts=0 ExtSensorsTemp=n/a
 ```
+
+Two lines of interest here are:
+```
+   Gres=gpu:2(S:0-31)
+```
+which shows that there are two GPUs available on this node, and that they are available on all 32 cores of the node (S:0-31); and
+```
+   AvailableFeatures=p100,P100
+```
+which shows that this node has two P100 GPUs available.
+
+Note that one can select nodes based on the GPU type using the `--constraint` parameter, for example:
+
+```bash
+#SBATCH --partition=GPU
+#SBATCH --gres=gpu:1
+#SBATCH --constraint=p100
+```
+
+This will select a node with a P100 GPU. Alternatively if you prefer a specific type of GPU but are open to other types one can use `--prefer=p100` which will preferentially choose a p100 nodes, however if none are available then something else may be used. Please see the [Available resources](#available-resources) section above for more information on the available GPU nodes and their properties.
+
+
 
 ### Temporary Files
 
