@@ -9,7 +9,9 @@ Users' home directories (`$HOME`) are located in `/users/`, **limited to 200GB**
 ### Scratch storage
 
 The scratch mounts are the primary directories for data processing, particularly when large intermediate data products (many TBs) are expected to be generated.
-These directories are for **short-term use only, and have a 90-day auto-deletion policy**. This means that **once every month**, we will **automatically delete files from scratch mounts** that have not been accessed for more than 90 days. Only temporary data required for processing should therefore be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working**.
+These directories are for **short-term use only, and have a 90-day auto-deletion policy**. This means that **once every month**, we will **automatically delete files from scratch mounts** that have not been accessed or modified for more than 90 days[^1]. Only temporary data required for processing should therefore be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working**.
+
+[^1]: To determine the age of a file, we use the maximum of the access/modify/change/creation time of a file. As a formula this can be expressed as: `time = max(atime,mtime,ctime,birthtime)`. If this time is more than 90 days old, then the file is seen as expired and is viable for deletion. This time formula was chosen to be more prudent in determining the age of files, because there is some unexpected behaviour in cephFS that causes the access time (`atime`) to update less frequently than in a typical unix filesystem.
 
 **Folder locations:**  
 
