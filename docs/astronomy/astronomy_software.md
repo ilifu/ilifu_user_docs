@@ -156,9 +156,10 @@ These are accessible to all IDIA users on ilifu. If you cannot access them, plea
 
 Snapshot runs currently available:
 
-- **m25n512** - High-Resolution Run. 25 Mpc/h box, 2x5123 particles. Currently contains the 051, 056, 062, 071,074, 078, 090, 105, 125, 145, and 151 snapshots. Full Simba physics (s50).
-- **m50n512** - 50 Mpc/h box, 2x5123 particles. Contains feedback variants: s50 (full Simba physics), s50nox (no X-ray AGN feedback), s50nojet (no X-ray, jet feedback) and s50noagn (no AGN feedback). All snapshots available bar for the s50noagn model (smaller selection currently available).
-- **m100n1024** - 100 Mpc/h box, 2x10243 particles. Flagship Run. 31 snapshots available. Full Simba physics only (s50).
+- **m25n512** - High-Resolution Run. 25 Mpc/h box, 2x512<sup>3</sup> particles. Currently contains the 051, 056, 062, 071,074, 078, 090, 105, 125, 145, and 151 snapshots. Full Simba physics (s50).
+- **m50n512** - 50 Mpc/h box, 2x512<sup>3</sup> particles. Contains feedback variants: s50 (full Simba physics), s50nox (no X-ray AGN feedback), s50nojet (no X-ray, jet feedback) and s50noagn (no AGN feedback). All snapshots available bar for the s50noagn model (smaller selection currently available).
+    - In a separate subdirectory of SIMBA/ is **m50n512_NR**/ (non-radiative model), featuring snapshots and caesar files.
+- **m100n1024** - 100 Mpc/h box, 2x1024<sup>3</sup> particles. Flagship Run. 31 snapshots available. Full Simba physics only (s50).
 
 Some other files also exist for the above snapshots, such as a ‘blackhole details file’ for m100n1024 (*/idia/data/laduma/SIMBA/m100n1024/s50/blackhole_details/bhALL.hdf5*).
 
@@ -167,13 +168,17 @@ Similar to Simba snapshots, files can be found within **/idia/data/laduma/SIMBAC
 
 Snapshot runs currently available:
 
-- **m100n1024** - 100 Mpc/h box, 2x10243 particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the first snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
+- **m100n1024** - 100 Mpc/h box, 2x1024<sup>3</sup> particles. Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5), every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), and the first snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
 
 The above is accompanied by additional files, such as **all** CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m100n1024/Groups*), and files describing black holes in the Simba-C snapshots (within */idia/data/laduma/SIMBAC/m100n1024/blackhole_details*).
 
-- **m50n512** - 50 Mpc/h box, 2x5123 particles, at the full Simba-C physics run. Currently only contains 10 snapshot boxes (snapshot_{036,051,062,073,078,079,105,124,125,151}.hdf5) but will be faster to load than the 100 Mpc/h boxes for any preliminary checks.
+- **m50n512** - 50 Mpc/h box, 2x512<sup>3</sup> particles, at the full Simba-C physics run. Currently only contains 10 snapshot boxes (snapshot_{036,051,062,073,078,079,105,124,125,151}.hdf5) but will be faster to load than the 100 Mpc/h boxes for any preliminary checks.
 
 The above is accompanied by the respective CAESAR snapshot files (within */idia/data/laduma/SIMBAC/m50n512/Groups*), and additional files in the *hfof_files* and *other_files* subdirectories. 
+
+- **m25n512** - 25 Mpc/h box, 2x512<sup>3</sup> particles (High-Resolution Run). Currently only some snapshots are available: all snapshots at redshifts z < 0.1 (snapshot_{145-151}.hdf5); every second snapshot until redshift z = 10 (i.e. snapshot_145.hdf5, snapshot_143.hdf5, …, snapshot_019.hdf5), additionally snapshots at z =  2 (snapshot_078.hdf5), 3 (snapshot_062.hdf5), and 6 (snapshot_036.hdf5); and the first snapshot (snapshot_000.hdf5). This is the Flagship full Simba-C physics run.
+
+The above is accompanied by additional files, such as all CAESAR snapshot files as caesar_xxx.hdf5 (within /idia/data/laduma/SIMBAC/m25n512/Groups).
 
 These are also accessible to all IDIA users on ilifu. If you cannot access them, please make a request with ilifu support. If further Simba-C files are of interest to your project, please contact [Romeel Davé](mailto:rad@roe.ac.uk) or [Marcin Glowacki](mailto:marcin@idia.ac.za).
 
