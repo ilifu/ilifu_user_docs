@@ -182,8 +182,6 @@ The above is accompanied by additional files, such as all CAESAR snapshot files 
 
 These are also accessible to all IDIA users on ilifu. If you cannot access them, please make a request with ilifu support. If further Simba-C files are of interest to your project, please contact [Romeel Davé](mailto:rad@roe.ac.uk) or [Marcin Glowacki](mailto:marcin@idia.ac.za).
 
-**Coming soon**: m25n512 high-resolution run! We expect these to be available by early 2025.
-
 #### HI Cubes
 
 HI spectral line cubes (in .fits format), and corresponding quick moment maps for individual galaxies in Simba can be created and made available on ilifu, within a ‘Cube’ subfolder. This is done via the [MARTINI](https://github.com/kyleaoman/martini) package (webpage includes tutorial). More can be generated and made available to all ilifu users; please contact [Marcin Glowacki](mailto:marcin@idia.ac.za). (It is also possible to create your own cubes on ilifu, as Martini is installed via the Simba container; see below.)
