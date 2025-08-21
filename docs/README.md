@@ -13,6 +13,7 @@ Please familiarise yourself with the list of recommendations below.
 
 #### DOs:
 * try to run jobs using [sbatch](getting_started/submit_job_slurm#submitting-a-job-using-a-batch-script) rather than interactive jobs
+* store larger files in a project [directory](data/directory_structure.md) or your ~/workspace directory (latter limited to 10 TiB total)
 * cleanup unused files when not needed
 * set --time, --mem, --account parameters when [submitting jobs](getting_started/submit_job_slurm#specifying-resources-when-running-jobs-on-slurm), as accurate job parameters improves the performance of the SLURM scheduler
 
@@ -20,7 +21,7 @@ Please familiarise yourself with the list of recommendations below.
 * run software on the login-node
 * transfer large data on the login-node, use [transfer.ilifu.ac.za](data/data_transfer) (accessed via ssh) to do this
 * copy large files to /users directory
-* leave data in /scratch as this space is limited, after processing remove data that is not required and move files to your project directory
+* leave data in /scratch3 as this space is limited, after processing remove data that is not required and move files to your project directory
 
 For more information, please see a list of [best practices](getting_started/best_practices.md). For any queries or if you need help please contact the support team at [support@ilifu.ac.za](mailto:support@ilifu.ac.za)
 
@@ -49,7 +50,7 @@ For more information, please see a list of [best practices](getting_started/best
   - [Container Registry Server](tech_docs/container_registry.md)
   - [Data Transfer](data/data_transfer.md)
   - [Data Management](data/data_management.md)
-  - [Resource Allocation Guide](tech_docs/resource_allocation.md)]
+  - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
