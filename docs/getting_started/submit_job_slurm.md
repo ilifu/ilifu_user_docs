@@ -219,10 +219,13 @@ When running a job using `sbatch` or `srun`, a user is able to specify the resou
 | Main      | compute-[201-260] | 1           | 32      | 3                    | 251              | 3 hours           | 14 days       |
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
 | HighMem   | highmem-003       | 1           | 96      | 15                   | 1508             | 3 hours           | 14 days       |
+| HighMem   | highmem[004-007]  | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
+| HighMem   | highmem-008       | 1           | 32      | 15                   | 1007             | 3 hours           | 14 days       |
 | GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
 | GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| GPU       | highmem-008       | 1           | 32      | 7                    | 1007             | 3 hours           | 14 days       |
 | Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           |  5 days       |
 
 *Note jobs submitted to the Devel partition cannot allocate memory.*
@@ -235,6 +238,7 @@ The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006)
 | GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
 | GPU       | gpu-006           | A40         | A40,a40        | 1                       | 45               |
 | GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
+| GPU       | highmem-008       | A40         | A40,a40        | 1                       | 45               |
 
 ### Parallel computing on the cluster
 
