@@ -87,5 +87,5 @@ CASA <1>:
 
 The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the Slurm cluster.
 
-For further information on the software environments available on ilifu, including modules and virtual environments, please see the [Supported software environments](tech_docs/software_environments.md) documents.
+For further information on the software environments available on ilifu, including [modules](tech_docs/software_environments?id=environment-modules) and [virtual environments](tech_docs/software_environments?id=python-virtual-environments), please see the [Supported software environments](tech_docs/software_environments.md) documents.
 

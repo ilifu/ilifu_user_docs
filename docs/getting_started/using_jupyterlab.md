@@ -2,9 +2,11 @@
 
 Once you have logged into JupyterLab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run.
 
+For a more in-depth guide on the JupyterLab interface please see the JupyterLab training tutorial [here](https://github.com/ilifu/ilifu_user_training/blob/5cde9a250ccbef129ad248b8f54fe69aad9f66fa/session1/tutorial1/jupyter_tutorial.ipynb).
+
 ## Navigating to other directories
 
-The directory navigation panel will default to your `$HOME` directory when you first log in. In order to navigate to your personal workspace or scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
+The directory navigation panel will default to your `$HOME` directory when you first log in. You can navigate to your personal workspace using the existing `workspace` symlink. In order to navigate to directories on other mounts, for example your scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
 
 ```bash
 	$ ln -s /scratch3/users/$USER $HOME/scratch3
