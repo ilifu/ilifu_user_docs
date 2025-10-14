@@ -2,7 +2,7 @@
 
 Once you have logged into JupyterLab and selected a node size you will be placed on the main launch page of your Jupyter session. On the left sidebar you will find a directory navigation panel. On the right of the screen you will find the launch panel which provides a list of kernels to choose from. The different kernels provide the software environment within which your Jupyter notebook is run.
 
-For a more indepth guide on the JupyterLab interface please see the JupyterLab training tutorial [here](https://github.com/ilifu/ilifu_user_training/blob/5cde9a250ccbef129ad248b8f54fe69aad9f66fa/session1/tutorial1/jupyter_tutorial.ipynb).
+For a more in-depth guide on the JupyterLab interface please see the JupyterLab training tutorial [here](https://github.com/ilifu/ilifu_user_training/blob/5cde9a250ccbef129ad248b8f54fe69aad9f66fa/session1/tutorial1/jupyter_tutorial.ipynb).
 
 ## Navigating to other directories
 

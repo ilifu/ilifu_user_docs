@@ -12,23 +12,29 @@ You can provide access to files and folders using standard UNIX permissions. The
 
 You can allow access on a directory to a group of users using the `chmod` command, for example:
 ```bash
-chmod g+rx /idia/users/$USER
+$ chmod g+rx /idia/users/$USER
 ```
 This will enable (`+`) read (`r`) and execute (`x`) permissions on the specified directory (your user workspace in this example) to all members of the group (`g`) of the currently configured group owner. Note that, by default, your workspace will have group ownership of the general group (`idia-group`, `cbio-group`, `ilifu-group`), meaning that any user in that group will now have access to your directory and data. If you want to restrict access to your project group, first adjust the group ownership to the project group with which you want to share the data, for example, to change the group owner of your workspace to the MIGHTEE project group:
 
 ```bash
-chgrp idia-mightee /idia/users/$USER
+$ chgrp idia-mightee /idia/users/$USER
 ```
 And then run the `chmod` command. 
 
 To remove the group read and execute permission use a `-` in place of the `+`:
 ```bash
-chmod g-rx /idia/users/$USER
+$ chmod g-rx /idia/users/$USER
 ```
 
 These commands can be run rescursively, using `-R`, to adjust the permissions on all subdirectories and files. To navigate into a directory, execute (`x`) permission is required. If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory. 
 
-When opening access to files or directories, always be aware of the group ownership and access permissions set on your other files and directories. You can list these using `ls -la`. By default, any directory or file created will have access permissions `drwxr-xr-x` and `-rw-r--r--`, respectively, meaning that once a group has been given access to the parent folder, they will have read or execute access on most other files and subdirectories. 
+When opening access to files or directories, always be aware of the group ownership and access permissions set on your other files and directories. You can list these using `ls -ld`, for example:
+```bash
+$ ls -ld /idia/users/$USER
+drwx------ 12 janedoe idia-group 21 Oct  7 13:02 /idia/users/janedoe
+```
+
+By default, any directory or file created will have access permissions `drwxr-xr-x` and `-rw-r--r--`, respectively, meaning that once a group has been given access to the parent folder, they will have read or execute access on most other files and subdirectories. 
 
 **Becareful! If you modify 'u' (Owner) permissions on a file or directory, you can remove your own access!**
 
@@ -40,7 +46,7 @@ An **Access Control List** (ACL) is a feature that provides fine grain control f
 
 ACLs are set using the `setfacl` command. For example, to share data with another user, the following will enable read (`r`) and execute (`x`) permissions on your workspace folder, in this case for the user `jeremy`:
 ```bash
-setfacl -m u:jeremy:r-x /idia/users/$USER
+$ setfacl -m u:jeremy:r-x /idia/users/$USER
 ```
 You can view the ACLs that are configured on a file or folder using the `getfacl` command, for example:
 ```bash
@@ -57,16 +63,16 @@ other::---
 ```
 To share data with a project group, the following will enable read (`r`) and execute (`x`) permissions on your scratch folder, in this case for the group, `idia-mightee`:
 ```bash
-setfacl -m g:idia-mightee:r-x /scratch3/users/$USER
+$ setfacl -m g:idia-mightee:r-x /scratch3/users/$USER
 ```
 You can remove ACLs using the `-x` parameter, for example:
 ```bash
-setfacl -x u:jeremy: /idia/users/$USER
-setfacl -x g:idia-mightee: /scratch3/users/$USER
+$ setfacl -x u:jeremy: /idia/users/$USER
+$ setfacl -x g:idia-mightee: /scratch3/users/$USER
 ```
 Or the following will remove all configured ACLs on the specified directory:
 ```bash
-setfacl -b /idia/users/$USER
+$ setfacl -b /idia/users/$USER
 ```
 The above `setfacl` commands can be set recursively on all files and subdirectories in the specified directory using the `-R` parameter.
 
@@ -74,12 +80,12 @@ If you enable access on a file or directory in a subdirectory, and the user tryi
 
 Enable execute (`x`) permissions on the two parent directories for the user `jeremy`:
 ```bash
-setfacl -m u:jeremy:--x /idia/users/$USER
-setfacl -m u:jeremy:--x /idia/users/$USER/thesis
+$ setfacl -m u:jeremy:--x /idia/users/$USER
+$ setfacl -m u:jeremy:--x /idia/users/$USER/thesis
 ```
 And then provide execute (`x`) and read (`r`) permissions on the `COSMOS_output` directory and all contained files and subdirectories:
 ```bash
-setfacl -R -m u:jeremy:r-x /idia/users/$USER/thesis/COSMOS_output
+$ setfacl -R -m u:jeremy:r-x /idia/users/$USER/thesis/COSMOS_output
 ```
 The user `jeremy` will now be able to navigate to and view all files located at `/idia/users/$USER/thesis/COSMOS_output` without having access to other files and directories located in the parent directories.
 
