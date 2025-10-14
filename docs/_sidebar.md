@@ -20,11 +20,11 @@
   - [Container Registry Server](tech_docs/container_registry.md)
   - [Data Transfer](data/data_transfer.md)
   - [Data Management](data/data_management.md)
+  - [Sharing Data](data/sharing_data.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
-  - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
   - [Requesting Help](help/requesting_help.md)
 - **About**

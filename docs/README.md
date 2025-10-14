@@ -26,8 +26,6 @@ Please familiarise yourself with the list of recommendations below.
 For more information, please see a list of [best practices](getting_started/best_practices.md). For any queries or if you need help please contact the support team at [support@ilifu.ac.za](mailto:support@ilifu.ac.za)
 
 #### Table of Contents
-- **News**
-  - [Updates](news/updates.md)
 - **Getting Started**
   - [Request access](getting_started/request_access.md)
   - [SSH keys](getting_started/ssh.md)
@@ -35,7 +33,7 @@ For more information, please see a list of [best practices](getting_started/best
   - [Change your password](getting_started/change_password.md)
   - [Directory structure](data/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
-  - [Submit a job on SLURM](getting_started/submit_job_slurm.md)
+  - [Submit a job on Slurm](getting_started/submit_job_slurm.md)
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
   - [Best Practices](getting_started/best_practices.md)
@@ -50,11 +48,11 @@ For more information, please see a list of [best practices](getting_started/best
   - [Container Registry Server](tech_docs/container_registry.md)
   - [Data Transfer](data/data_transfer.md)
   - [Data Management](data/data_management.md)
+  - [Sharing Data](data/sharing_data.md)
   - [Resource Allocation Guide](tech_docs/resource_allocation.md)
   - [Openstack](openstack/openstack.md)
   - [System Specifications](tech_docs/specifications.md)
 - **Help and Info**
-  - [FAQ](help/faq.md)
   - [Contact and Communication](help/contact.md)
   - [Requesting Help](help/requesting_help.md)
 - **About**
