@@ -28,23 +28,17 @@ $
 ```
 This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
-Similary, the following will execute `print "hello world!"` using the CASA software package that is contained in the `casa-stable.img` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
+Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
 
 ```bash
-$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c 'print "hello world!"'
+$ singularity exec /idia/software/containers/casa-stable-v6.sif casa --log2term --nologger -c 'print("hello world!")'
 
-=========================================
-The start-up time of CASA may vary
-depending on whether the shared libraries
-are cached or not.
-=========================================
+optional configuration file not found, continuing CASA startup without it
 
-IPython 5.1.0 -- An enhanced Interactive Python.
-
-CASA 5.7.0-134   -- Common Astronomy Software Applications
-
-2025-10-17 10:15:02	INFO	::casa	CASA Version  5.7.0-134  
---> CrashReporter initialized.
+No event loop hook running.
+Using matplotlib backend: agg
+CASA 6.7.0.31 -- Common Astronomy Software Applications [6.7.0.31]
+...
 hello world!
 ```
 
@@ -52,12 +46,19 @@ hello world!
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
 ```bash
-$ singularity shell /idia/software/containers/casa-stable.img
-Singularity: Invoking an interactive shell within container...
+$ singularity shell /idia/software/containers/SoFiA2v2.5.1.sif 
+SoFiA2v2.5.1.sif:~$ sofia
+____________________________________________________________________________
 
-Singularity casa-stable-5.1.1.img:~>
+ Pipeline started
+____________________________________________________________________________
+
+  Using:    Source Finding Application (SoFiA)
+  Version:  2.5.1 (24-Jun-2022)
+  CPU:      1 thread available
+  Time:     Tue Oct 21 11:36:38 2025
 ```
 
-This command will spawn a new shell inside the container, in this case the `casa-stable.img` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
+This command will spawn a new shell inside the container, in this case the `SoFiA2v2.5.1.sif` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
 For further information on the software environments available on ilifu, including [modules](tech_docs/software_environments?id=environment-modules) and [virtual environments](tech_docs/software_environments?id=python-virtual-environments), please see the supported [Software environments](tech_docs/software_environments.md) documentation.

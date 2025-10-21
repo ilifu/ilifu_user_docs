@@ -26,25 +26,19 @@ $ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
 hello world!
 $
 ```
-This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.simg` container. The script will have access to all the Python libraries that have been included in the container.
+This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
-Similary, the following will execute `print "hello world!"` using the CASA software package that is contained in the `casa-stable.img` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
+Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
 
 ```bash
-$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c 'print "hello world!"'
+$ singularity exec /idia/software/containers/casa-stable-v6.sif casa --log2term --nologger -c 'print("hello world!")'
 
-=========================================
-The start-up time of CASA may vary
-depending on whether the shared libraries
-are cached or not.
-=========================================
+optional configuration file not found, continuing CASA startup without it
 
-IPython 5.1.0 -- An enhanced Interactive Python.
-
-CASA 5.7.0-134   -- Common Astronomy Software Applications
-
-2025-10-17 10:15:02	INFO	::casa	CASA Version  5.7.0-134  
---> CrashReporter initialized.
+No event loop hook running.
+Using matplotlib backend: agg
+CASA 6.7.0.31 -- Common Astronomy Software Applications [6.7.0.31]
+...
 hello world!
 ```
 
@@ -52,13 +46,20 @@ hello world!
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
 ```bash
-$ singularity shell /idia/software/containers/casa-stable.img
-Singularity: Invoking an interactive shell within container...
+$ singularity shell /idia/software/containers/SoFiA2v2.5.1.sif 
+SoFiA2v2.5.1.sif:~$ sofia
+____________________________________________________________________________
 
-Singularity casa-stable-5.1.1.img:~>
+ Pipeline started
+____________________________________________________________________________
+
+  Using:    Source Finding Application (SoFiA)
+  Version:  2.5.1 (24-Jun-2022)
+  CPU:      1 thread available
+  Time:     Tue Oct 21 11:36:38 2025
 ```
 
-This command will spawn a new shell inside the container, in this case the `casa-stable.img` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
+This command will spawn a new shell inside the container, in this case the `SoFiA2v2.5.1.sif` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
 #### 3. Run command
 
@@ -85,46 +86,45 @@ A number of the containers that are supported by ilifu do not include runscripts
 Several containers have been developed for use on the ilifu cluster and in other clusters, and are currently maintained by the support team. These containers include the following (**See the dropdown information for specific container details by clicking on the relevant arrow below**). For use in other clusters the containers can be downloaded from the [IDIA Singularity Registry Server](https://sregistry.idia.ac.za/):
 
 <details>
-<summary id="astro-r-container">astro-r container</summary>
+<summary id="casa-modular-v6-container">casa-modular-v6 container</summary>
 
-**Description:** an R container with collection of R astronomy packages, including ProFound, ProFit and ProSpect.
+**Description:** the latest stable release of CASA from [NRAO CASA website](https://casa.nrao.edu).
 
-**JupyterLab Kernel:** ASTRO-R
+**JupyterLab Kernel:** CASA-6
 
-| Name                     | Recipe File            | Github repo     | OSVersion |
-|--------------------------|------------------------|-----------------|-----------|
-| ASTRO-R.simg             |                        |                 | bionic    |
+| Name        | Def file           | Github repo           | OSVersion |
+|-------------|--------------------|-----------------------|-----------|
+| casa-6.simg | casa-6-modular.def | idia-container-casa-6 | jammy     |
 
-| Packages and Libraries | R Libraries |               |           |
-|------------------------|-------------|---------------|-----------|
-| fftw                   | akima       | fftwtools     | nnet      |
-| R                      | astro       | FITSio        | party     |
-| R-essentials           | astrodatR   | knitr         | ProFit    |
-|                        | BiocManager | lambda.r      | ProFound  |
-|                        | data.table  | LaplacesDemon | ProSpect  |
-|                        | devtools    | magicaxis     | rmarkdown |
-|                        | EBImage     | mice          |           |
+| Packages & Libraries | Python Libraries |                  |              |
+|----------------------|------------------|------------------|--------------|
+| Python 3.10          | PyQt5            | casashell        | holoviews    |
+| casacore-data        | astropy          | casatablebrowser | katbeam      |
+| casacore-dev         | astroquery       | casatasks        | katdal       |
+| xvfb                 | bokeh            | casatestutils    | matplotlib   |
+|                      | casaconfig       | casatools        | numpy        |
+|                      | casadata         | casaviewer       | pandas       |
+|                      | casafeather      | cloudpickle      | protobuf     |
+|                      | casalogger       | dask-ms[xarray]  | pybdsf       |
+|                      | casampi          | datashader       | pygdsm       |
+|                      | casaplotms       | h5py             | scikit-image |
+|                      | casaplotserver   | healpy           | scipy        |
 
 </details>
 
 <details>
-<summary id="casa-kernel-container">casa-kernel container</summary>
+<summary id="casa-stable-v6-container">casa-stable-v6 container</summary>
 
-**Description:** a working development version of CASA which is controlled through the Jupyter Notebook. Open a new notebook with this kernel to run casa as a python module in a jupyter notebook.
+**Description:** the latest stable release of CASA from [NRAO CASA website](https://casa.nrao.edu).
 
-**JupyterLab Kernel:** CASA 5.5
+| Name               | Def file        | Github repo                    | OSVersion |
+|--------------------|-----------------|--------------------------------|-----------|
+| casa-stable-v6.sif | casa-stable.def | idia-container-casa-stable-py3 | jammy     |
 
-| Name                     | Recipe File            | Github repo                   | OSVersion |
-|--------------------------|------------------------|-------------------------------|-----------|
-| jupyter-casa-latest.simg | jupyter-casa-build.def | idia-container-casakernel     | xenial    |
-
-| Packages and Libraries | Python Libraries |            |            |
-|------------------------|------------------|------------|------------|
-| CASA 5.5               | bokeh            | matplotlib | psutil     |
-| Python 2.7             | Click            | mpi4py     | scipy      |
-|                        | cloudpickle      | nose       | virtualenv |
-|                        | cryptography     | numpy      |            |
-|                        | dask             | pandas     |            |
+| Packages and Libraries |
+|------------------------|
+| CASA (Python 3.10)     |
+| xvfb                   |
 
 </details>
 
@@ -133,32 +133,141 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **Description:** the latest stable release of CASA from [NRAO CASA website](https://casa.nrao.edu).
 
-| Name                               | Def file        | Github repo                | OSVersion |
-|------------------------------------|-----------------|----------------------------|-----------|
-| casa-stable-&#60;version&#62;.simg | casa-stable.def | idia-container-casa-stable | CentOS    |
+| Name                           | Def file        | Github repo                | OSVersion       |
+|--------------------------------|-----------------|----------------------------|-----------------|
+| casa-stable-[4.7.2-5.8.0].simg | casa-stable.def | idia-container-casa-stable | CentOS / Ubuntu |
 
 | Packages and Libraries |
 |------------------------|
-| CASA                   |
-
+| CASA (Python 2.7)      |
 
 </details>
 
 <details>
-<summary id="casameer-container">casameer container</summary>
+<summary id="ASTRO-PY3.X-container">ASTRO-PY3.X containers</summary>
 
-**Description:** casameer container used in the IDIA Pipeline software, contains CASA 5.4.1 and is appropriate for use with MPI.
+**Description:** A collection of astronomy software, including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-| Name                            | Def file        | Github repo             | OSVersion |
-|---------------------------------|-----------------|-------------------------|-----------|
-| casameer-&#60;version&#62;.simg |                 |                         | CentOS    |
+**JupyterLab Kernel:** ASTRO-PY3 (Python 3.112), ASTRO-PY3 (Python 3.10), ASTRO-PY3 (Python 3.8)
 
-| Packages and Libraries |
-|------------------------|
-| CASA                   |
-| ghostscript            |
-| xvfb-run               |
+| Name             | Def file | Github repo | OSVersion |
+|------------------|----------|-------------|-----------|
+| ASTRO-PY3.12.sif |          |             | noble     |
+| ASTRO-PY3.10.sif |          |             | jammy     |
+| ASTRO-PY3.8.simg |          |             | bionic    |
 
+| Packages & Libraries |                      | Python Libraries      |                  |
+|----------------------|----------------------|-----------------------|------------------|
+| AEGEAN               | PINK                 | altair                | opencv           |
+| AGNFitter            | PSEx                 | aplpy                 | pandas           |
+| Aladin               | PUMA                 | astroML               | photutils        |
+| ANNZ                 | PyBDSF               | astroplan             | psycopg2         |
+| Astromatic           | SCAMP                | astropy               | pydl             |
+| Astrometry           | SED3FIT              | astroquery            | pymc             |
+| BlobCat              | Sextractor           | autokeras             | pymoc            |
+| CIGALE               | SkyMaker             | bohek                 | PyMultiNest      |
+| datalab              | SoFiA                | ccdproc               | pyregion         |
+| DS9                  | sofia2               | corner                | pyregion         |
+| EASZY                | Sourcery             | dask                  | pyspark          |
+| EAZY-PIPE            | STIFF                | datalab               | pystan           |
+| EyE                  | stilts               | datashader            | pytorch          |
+| GALFIT               | Stuff                | easydict              | pyvo             |
+| GalFitM              | Swarp                | emcee                 | regions          |
+| GalSim               | Topcat               | fits2hdf              | reproject        |
+| GPz                  | Tractor              | ginga                 | scikit-bootstrap |
+| LFTools              | VAEX                 | glueviz               | scikit-image     |
+| MissFITS             | VisiOmatic           | gwcs                  | scikit-learn     |
+| Montage              | VIZIC                | h5py                  | scikit-plot      |
+| PASTA                | WeightWatcher        | healpy                | scipy            |
+|                      |                      | herschelhelp_internal | sciserver        |
+|                      |                      | herschelhelp_python   | seaborn          |
+|                      |                      | hfpy                  | somoclu          |
+|                      |                      | hips                  | specutils        |
+|                      |                      | holoviews             | squarify         |
+|                      |                      | keras                 | statsmodels      |
+|                      |                      | lifelines             | tensorflow       |
+|                      |                      | matplotlib            | tensorpack       |
+|                      |                      | nbconvert             | theano           |
+|                      |                      | nbdime                | tqdm             |
+|                      |                      | numba                 | XID_plus         |
+|                      |                      | numpy                 | yt               |
+
+</details>
+
+<details>
+<summary id="ASTRO-PY3-container">ASTRO-PY3 container</summary>
+
+**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software. This is a legacy container, see ASTRO-PY3.10 & ASTRO-PY3.12 containers.
+
+**JupyterLab Kernel:** ASTRO-PY3, SF-PY3
+
+| Name           | Def file | Github repo | OSVersion |
+|----------------|----------|-------------|-----------|
+| ASTRO-PY3.simg |          |             | bionic    |
+
+| Packages & Libraries |                      | Python Libraries      |                  |
+|----------------------|----------------------|-----------------------|------------------|
+| AEGEAN               | PINK                 | altair                | opencv           |
+| AGNFitter            | PSEx                 | aplpy                 | pandas           |
+| Aladin               | PUMA                 | astroML               | photutils        |
+| ANNZ                 | PyBDSF               | astroplan             | psycopg2         |
+| Astromatic           | SCAMP                | astropy               | pydl             |
+| Astrometry           | SED3FIT              | astroquery            | pymc             |
+| BlobCat              | Sextractor           | autokeras             | pymoc            |
+| CIGALE               | SkyMaker             | bohek                 | PyMultiNest      |
+| datalab              | SoFiA                | ccdproc               | pyregion         |
+| DS9                  | sofia2               | corner                | pyregion         |
+| EASZY                | Sourcery             | dask                  | pyspark          |
+| EAZY-PIPE            | STIFF                | datalab               | pystan           |
+| EyE                  | stilts               | datashader            | pytorch          |
+| GALFIT               | Stuff                | easydict              | pyvo             |
+| GalFitM              | Swarp                | emcee                 | regions          |
+| GalSim               | Topcat               | fits2hdf              | reproject        |
+| GPz                  | Tractor              | ginga                 | scikit-bootstrap |
+| LFTools              | VAEX                 | glueviz               | scikit-image     |
+| MissFITS             | VisiOmatic           | gwcs                  | scikit-learn     |
+| Montage              | VIZIC                | h5py                  | scikit-plot      |
+| PASTA                | WeightWatcher        | healpy                | scipy            |
+|                      |                      | herschelhelp_internal | sciserver        |
+|                      |                      | herschelhelp_python   | seaborn          |
+|                      |                      | hfpy                  | somoclu          |
+|                      |                      | hips                  | specutils        |
+|                      |                      | holoviews             | squarify         |
+|                      |                      | keras                 | statsmodels      |
+|                      |                      | lifelines             | tensorflow       |
+|                      |                      | matplotlib            | tensorpack       |
+|                      |                      | nbconvert             | theano           |
+|                      |                      | nbdime                | tqdm             |
+|                      |                      | numba                 | XID_plus         |
+|                      |                      | numpy                 | yt               |
+
+</details>
+
+<details>
+<summary id="ASTRO-GPU-container">ASTRO-GPU containers</summary>
+
+**Description:** These containers includes Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python pacakges have also been included. 
+
+**JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
+
+| Name                   | Repo                      | Github repo | OSVersion |
+|------------------------|---------------------------|-------------|-----------|
+| ASTRO-GPU.simg (TF)    | nvcr.io/nvidia/tensorflow |             | noble     |
+| ASTRO-GPU-PyTorch.simg | nvcr.io/nvidia/pytorch    |             | focal     |
+
+| Packages & Libraries              | Python Libraries (TF) | Python Libraries (PyTorch) |
+|-----------------------------------|-----------------------|----------------------------|
+| CUDA                              | astropy               | astropy                    |
+| cuBLAS                            | glop                  | glop                       |
+| NVIDIA cuDNN                      | ipykernel             | ipykernel                  |
+| NVIDIA NCCL                       | ipython               | ipython                    |
+| RAPIDS                            | ipywidgets            | matplotlib                 |
+| NVIDIA Data Loading Library (DALI)| jupyterlab-optuna     | numpy                      |
+| TensorRT                          | matplotlib            | scipy                      |
+| TensorFlow with TensorRT (TF-TRT) | numpy                 | zoobot[pytorch]            |
+| OR Torch-TensorRT                 | optuna                |                            |
+|                                   | plotly                |                            |
+|                                   | scipy                 |                            |
 </details>
 
 <details>
@@ -235,51 +344,32 @@ Several containers have been developed for use on the ilifu cluster and in other
 </details>
 
 <details>
-<summary id="ASTRO-PY3-container">ASTRO-PY3 container</summary>
+<summary id="astro-r-container">astro-r container</summary>
 
-**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software.
+**Description:** an R container with collection of R astronomy packages, including ProFound, ProFit and ProSpect.
 
-**JupyterLab Kernel:** ASTRO-PY3, SF-PY3
+**JupyterLab Kernel:** ASTRO-R
 
-| Name               | Def file                     | Github repo                    | OSVersion |
-|--------------------|-------------        ---------|--------------------------------|-----------|
-| ASTRO-PY3.simg     |                              |                                | bionic    |
+| Name                     | Recipe File            | Github repo     | OSVersion |
+|--------------------------|------------------------|-----------------|-----------|
+| ASTRO-R.simg             |                        |                 | jammy     |
 
-| Packages & Libraries |                      | Python Libraries      |                  |
-|----------------------|----------------------|-----------------------|------------------|
-| AEGEAN               | PINK                 | altair                | opencv           |
-| AGNFitter            | PSEx                 | aplpy                 | pandas           |
-| Aladin               | PUMA                 | astroML               | photutils        |
-| ANNZ                 | PyBDSF               | astroplan             | psycopg2         |
-| Astromatic           | SCAMP                | astropy               | pydl             |
-| Astrometry           | SED3FIT              | astroquery            | pymc             |
-| BlobCat              | Sextractor           | autokeras             | pymoc            |
-| CIGALE               | SkyMaker             | bohek                 | PyMultiNest      |
-| datalab              | SoFiA                | ccdproc               | pyregion         |
-| DS9                  | sofia2               | corner                | pyregion         |
-| EASZY                | Sourcery             | dask                  | pyspark          |
-| EAZY-PIPE            | STIFF                | datalab               | pystan           |
-| EyE                  | stilts               | datashader            | pytorch          |
-| GALFIT               | Stuff                | easydict              | pyvo             |
-| GalFitM              | Swarp                | emcee                 | regions          |
-| GalSim               | Topcat               | fits2hdf              | reproject        |
-| GPz                  | Tractor              | ginga                 | scikit-bootstrap |
-| LFTools              | VAEX                 | glueviz               | scikit-image     |
-| MissFITS             | VisiOmatic           | gwcs                  | scikit-learn     |
-| Montage              | VIZIC                | h5py                  | scikit-plot      |
-| PASTA                | WeightWatcher        | healpy                | scipy            |
-|                      |                      | herschelhelp_internal | sciserver        |
-|                      |                      | herschelhelp_python   | seaborn          |
-|                      |                      | hfpy                  | somoclu          |
-|                      |                      | hips                  | specutils        |
-|                      |                      | holoviews             | squarify         |
-|                      |                      | keras                 | statsmodels      |
-|                      |                      | lifelines             | tensorflow       |
-|                      |                      | matplotlib            | tensorpack       |
-|                      |                      | nbconvert             | theano           |
-|                      |                      | nbdime                | tqdm             |
-|                      |                      | numba                 | XID_plus         |
-|                      |                      | numpy                 | yt               |
+| Packages and Libraries | R Libraries   |            |           |
+|------------------------|---------------|------------|-----------|
+| fftw                   | BiocManager   | Rfits      | lambda.r  |
+| R                      | Cairo         | Rwcs       | magicaxis |
+|                        | DBI           | akima      | mgcv      |
+|                        | EBImage       | astro      | mice      |
+|                        | FITSio        | castrodatR | nlme      |
+|                        | Highlander    | caret      | nnet      |
+|                        | IRkernel      | cmaeshpc   | pacman    |
+|                        | LaplacesDemon | data.table | party     |
+|                        | ProFit        | devtools   | remotes   |
+|                        | ProFound      | dplyr      | rmarkdown |
+|                        | ProPane       | fftwtools  | shiny     |
+|                        | ProSpect      | ggplot2    | tidyr     |
+|                        | ProSpectData  | imager     | tidyverse |
+|                        | Rcpp          | knitr      | xtable    |
 
 </details>
 
@@ -297,62 +387,64 @@ There are several ways a user can build a container, including: creating a sandb
 
 The recommended way to build a container for the ilifu system is through using a recipe. A recipe allows for reproducability of the container environment and allows for containers to be more easily referenced in research publications. Recipes define the way a container is built, which OS system is abstracted from within the container, and what files, libraries, packages and environmental variables and dependencies are included in the container.
 
-Here is an example of the PINK container recipe, the recipe file is called `pink.def`:
+Here is an example of the SoFiA2 container recipe, the recipe file is called `sofia2.def`:
 
 ```text
 Bootstrap: debootstrap
 MirrorURL: http://archive.ubuntu.com/ubuntu/
-OSVersion: xenial
-Include: software-properties-common
+OSVersion: focal
+
+%help
+	This container includes SoFiA2 master branch
 
 %environment
-    export PATH=/software/pink/bin:$PATH
-
-%setup
-    cp pink-latest.tar $SINGULARITY_ROOTFS
+	export LC_ALL=C
+	export SOFIA2_PATH="/opt/SoFiA-2"
+	export PATH="$PATH:/opt/SoFiA-2"
 
 %post
-    apt-get update -y
-    apt-get install -y doxygen wget vim apt-utils gcc make cmake build-essential
-    mkdir /install /software
-    mv /pink-latest.tar /install
-    cd /install
-    tar xfv pink-latest.tar
+	# Installation of initial packages
+	export DEBIAN_FRONTEND=noninteractive
+	apt-get update -y
+	apt-get install -y software-properties-common
+	add-apt-repository -y universe
+	apt-get install -y wget vim apt-utils git build-essential make bzip2 curl pkg-config python3-pip python-is-python3 libpng-dev
 
-    # Installation of PINK
-    cd pink-latest
-    mkdir build
-    cd build
-    cmake -DCMAKE_INSTALL_PREFIX=/software/pink  ..
-    make -j 2
-    make install
+	# Install SoFiA2
+	apt-get install -y gcc wcslib-dev libopenmpi-dev openmpi-bin openmpi-common
+	cd /opt
+	git clone https://github.com/SoFiA-Admin/SoFiA-2.git
+	cd SoFiA-2
+	./compile.sh -fopenmp
+
+	# Cleanup the container
+	apt-get clean
+	apt-get autoclean
 ```
 
-In the example above the operating system that is abstracted or seen from within the container is Ubuntu 16.04 xenial. Environmental variables and paths within the container are set within the `%environment` section. Copying files into the container from the root environment where the container is being built is completed in the `%setup` section (this is now `%file` in later versions of Singularity). Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run PINK when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://www.sylabs.io/guides/2.6/user-guide/build_a_container.html#building-containers-from-singularity-definition-files).
+In the example above the operating system that is abstracted or seen from within the container is Ubuntu 20.04 focal. Environmental variables and paths within the container are set within the `%environment` section. Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run `sofia` when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://docs.sylabs.io/guides/latest/user-guide/definition_files.html).
 
 In order to build the container from the recipe, the following command can be used:
 
 ```shell
-# singularity build pink.simg pink.def
-Using container recipe deffile: pink.def
-Sanitizing environment
-Adding base Singularity environment to container
-I: Retrieving InRelease
+$ sudo singularity build sofia2.sif sofia2.def 
+INFO:    Starting build...
+I: Retrieving InRelease 
 I: Checking Release signature
-I: Valid Release signature (key id 790BC7277767219C42C86F933B4FE6ACC0B21F32)
-I: Retrieving Packages
-I: Validating Packages
+I: Valid Release signature (key id F6ECB3762474EDA9D21B7022871920D1991BC93C)
+I: Retrieving Packages 
+I: Validating Packages 
 I: Resolving dependencies of required packages...
 I: Resolving dependencies of base packages...
 I: Checking component main on http://archive.ubuntu.com/ubuntu...
-I: Retrieving adduser 3.113+nmu3ubuntu4
-I: Validating adduser 3.113+nmu3ubuntu4
-I: Retrieving apt 1.2.10ubuntu1
-I: Validating apt 1.2.10ubuntu1
+I: Retrieving adduser 3.118ubuntu2
+I: Validating adduser 3.118ubuntu2
+I: Retrieving apt 2.0.2
+I: Validating apt 2.0.2
 ...
 ```
 
-This command will build a container using the `pink.def` file and will name the container `pink.simg`. The container can then be copied to the ilifu cloud and run using the `shell` or `exec` command.
+This command will build a container using the `sofia2.def` file and will name the container `sofia2.sif`. The container can then be copied to the ilifu cloud and run using the `shell` or `exec` command.
 
 ### Using a custom container as a Jupyter kernel
 
@@ -379,7 +471,7 @@ where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu
 ### RStudio
 
 The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
-the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg`. The examples below will be given for the bio container.
+the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg`. The examples below will be given for the bio container.
 
 #### Running R
 
@@ -388,10 +480,10 @@ It is recommended that the following script be created `~/bin/R` (remember to `c
 ```bash
 #!/bin/bash
 export R_INSTALL_STAGED=false
-singularity run --app R /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
+singularity run --app R /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
 ```
 
-<sup>* See the note below on installing packages</sup>
+<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
 
 This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
 
@@ -402,10 +494,10 @@ Similarly you should create the script `~/bin/Rscript`:
 ```bash
 #!/bin/bash
 export R_INSTALL_STAGED=false
-singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg "$@"
+singularity run --app Rscript /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
 ```
 
-<sup>* See the note below on installing packages</sup>
+<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
 
 #### Running RStudio Server
 
@@ -413,18 +505,18 @@ singularity run --app Rscript /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.sim
 
 RStudio has been updated to be launched via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
 
-The procedure is to start an interactive job, add the RStudio module and run the  `rstudio` as below:
+The procedure is to start an interactive job, add the RStudio module and run the `rstudio` as below:
 
 ```bash
 USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
-USERNAME@slwrk-101:~$ module add R/RStudio1.2.5042-R4.0.0
-USERNAME@slwrk-101:~$ rstudio
-The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It is: lMoV0akqQu6V2lDGu1DUMyYZGpjmoL
-Running rserver on port 43627
+USERNAME@compute-101:~$ module load R/RStudio2025.05.1-513-R4.5.1
+USERNAME@compute-101:~$ rstudio
+The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It's: BcOaaYLmpjfufcQDozchq79rpZAdjo
+Running rserver on port 53997
 To connect to this server run this on your local machine:
-    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:43627
-then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "lMoV0akqQu6V2lDGu1DUMyYZGpjmoL"
-(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser
+    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:53997
+then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "BcOaaYLmpjfufcQDozchq79rpZAdjo"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
 ```
 
 Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
@@ -437,12 +529,12 @@ You will then be presented with an rstudio session:
 
 If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
 ```bash
-USERNAME@slwrk-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
-USERNAME@slwrk-101:~$ rstudio
-Running rserver on port 60407
+USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
+USERNAME@compute-101:~$ rstudio
+Running rserver on port 60759
 To connect to this server run this on your local machine:
-    ssh -A USERNAME@slwrk-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc slwrk-101 22" -L8081:localhost:60407
-then vist http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
+    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:60759
+then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
 (You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
 ```
 
@@ -455,7 +547,7 @@ Host *.ilifu.ac.za
     User USERNAME
     ForwardAgent yes
 
-Host slwrk-*
+Host compute-*
     Hostname %h
     User USERNAME
     StrictHostKeyChecking no
@@ -468,25 +560,25 @@ Next is the process of starting an interactive job and launching RStudio. To beg
 
 ```console
 USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
-USERNAME@slwrk-103:~$
+USERNAME@compute-103:~$
 ```
 
-Once the interactive session has begun on a specific node (in this case `slwrk-103`), RStudio can be launched as follows:
+Once the interactive session has begun on a specific node (in this case `compute-103`), RStudio can be launched as follows:
 
 ```console
-USERNAME@slwrk-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.1-RStudio1.2.1335-bio.simg
+USERNAME@compute-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg
 Running rserver on port 37543
 ```
 
 This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
 
 ```bash
-$ ssh slwrk-103 -L8082:localhost:37543
+$ ssh compute-103 -L8082:localhost:37543
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 ...
 ```
 
-on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `slwrk-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
+on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `compute-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
 
 ```bash
 bind [127.0.0.1]:8000: Address already in use
@@ -495,7 +587,7 @@ channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
 
 Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
 
-*Note on installing packages:*
+##### Note on installing packages
 
 The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
@@ -570,15 +662,15 @@ the "keys".
 Use the `module add` command, e.g.
 
 ```bash
-USERNAME@slwrk-101:~$ R --version  # this won't work until the module is added
+USERNAME@compute-101:~$ R --version  # this won't work until the module is added
 
 Command 'R' not found, but can be installed with:
 
 apt install r-base-core
 Please ask your administrator.
 
-USERNAME@slwrk-101:~$ module add R/4.0.0
-USERNAME@slwrk-101:~$ R --version
+USERNAME@compute-101:~$ module add R/4.0.0
+USERNAME@compute-101:~$ R --version
 R version 4.0.0 (2020-04-24) -- "Arbor Day"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
@@ -595,10 +687,10 @@ https://www.gnu.org/licenses/.
 User the `module list` command, e.g.
 
 ```bash
-USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+USERNAME@compute-101:/cbio/soft/lmod$ module list
 No modules loaded
-USERNAME@slwrk-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
-USERNAME@slwrk-101:/cbio/soft/lmod$ module list
+USERNAME@compute-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
+USERNAME@compute-101:/cbio/soft/lmod$ module list
 
 Currently Loaded Modules:
   1) jdk/11.0.2   2) slurm-drmaa/1.1.0   3) bio/htslib/1.9   4) R/3.6.1   5) bio/svtoolkit/2.00.1918

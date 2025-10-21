@@ -23,7 +23,7 @@ If you generated the SSH key pair using non-default name and path (i.e. it is no
 ```bash
 ssh -i /path/to/ssh/key <username>@slurm.ilifu.ac.za
 ```
-The path should point to the private key file, i.e. the file that doesn't have the .pub suffix, example: `ssh -i ~/.ssh/ilifu_key jeremy@slurm.ilifu.ac.za`.
+The path should point to the private key file, i.e. the file that doesn't have the .pub suffix, example: `ssh -i ~/.ssh/ilifu_key janedoe@slurm.ilifu.ac.za`.
 
 ### Your ssh-agent doesn't know about your SSH key
 
