@@ -156,48 +156,67 @@ Several containers have been developed for use on the ilifu cluster and in other
 | ASTRO-PY3.10.sif |          |             | jammy     |
 | ASTRO-PY3.8.simg |          |             | bionic    |
 
-| Packages & Libraries |                      | Python Libraries      |                  |
-|----------------------|----------------------|-----------------------|------------------|
-| AEGEAN               | PINK                 | altair                | opencv           |
-| AGNFitter            | PSEx                 | aplpy                 | pandas           |
-| Aladin               | PUMA                 | astroML               | photutils        |
-| ANNZ                 | PyBDSF               | astroplan             | psycopg2         |
-| Astromatic           | SCAMP                | astropy               | pydl             |
-| Astrometry           | SED3FIT              | astroquery            | pymc             |
-| BlobCat              | Sextractor           | autokeras             | pymoc            |
-| CIGALE               | SkyMaker             | bohek                 | PyMultiNest      |
-| datalab              | SoFiA                | ccdproc               | pyregion         |
-| DS9                  | sofia2               | corner                | pyregion         |
-| EASZY                | Sourcery             | dask                  | pyspark          |
-| EAZY-PIPE            | STIFF                | datalab               | pystan           |
-| EyE                  | stilts               | datashader            | pytorch          |
-| GALFIT               | Stuff                | easydict              | pyvo             |
-| GalFitM              | Swarp                | emcee                 | regions          |
-| GalSim               | Topcat               | fits2hdf              | reproject        |
-| GPz                  | Tractor              | ginga                 | scikit-bootstrap |
-| LFTools              | VAEX                 | glueviz               | scikit-image     |
-| MissFITS             | VisiOmatic           | gwcs                  | scikit-learn     |
-| Montage              | VIZIC                | h5py                  | scikit-plot      |
-| PASTA                | WeightWatcher        | healpy                | scipy            |
-|                      |                      | herschelhelp_internal | sciserver        |
-|                      |                      | herschelhelp_python   | seaborn          |
-|                      |                      | hfpy                  | somoclu          |
-|                      |                      | hips                  | specutils        |
-|                      |                      | holoviews             | squarify         |
-|                      |                      | keras                 | statsmodels      |
-|                      |                      | lifelines             | tensorflow       |
-|                      |                      | matplotlib            | tensorpack       |
-|                      |                      | nbconvert             | theano           |
-|                      |                      | nbdime                | tqdm             |
-|                      |                      | numba                 | XID_plus         |
-|                      |                      | numpy                 | yt               |
+| Packages & Libraries | Python Libraries |                       |                         |
+|----------------------|------------------|-----------------------|-------------------------|
+| Aladin               | Aegean           | fastprogress          | pymc                    |
+| GPz                  | H-E-L-P/XID_plus | fits2hdf              | pymoc                   |
+| LFTools              | Jinja2           | fitsio                | pymultinest             |
+| MultiNest            | MCVCM            | fruitbat              | pyregion                |
+| SoFiA (python 2.7)   | MontagePy        | future                | pyro-ppl                |
+| SoFiA-2              | MrMoose          | galsim                | pyspark                 |
+| astromatic/eye       | PASTA            | geopandas             | pystan                  |
+| astromatic/skymaker  | PUMA             | ginga                 | pyswarms                |
+| astrometry.net       | Pillow           | glob2                 | pysynch                 |
+| blackbox             | PyQt5yt          | glueviz               | python-casacore         |
+| blobcat              | PyVirtualDisplay | graphviz              | pyvo                    |
+| casacore-data        | RM-Tools         | gwcs                  | qtpy                    |
+| casacore-dev         | RMextract        | h5py                  | regions                 |
+| cds.cdsclient        | Tractor          | hips                  | reproject               |
+| ds9                  | TreeCorr         | httplib2              | rich                    |
+| eog                  | WCSAxes          | imbalanced-learn      | schwimmbad              |
+| galfit               | altair           | imgcat                | scikit-image            |
+| galfitm              | aplpy            | ipykernel             | scikit-learn            |
+| graphviz             | astro-datalab    | ipywidgets            | scikit-optimize         |
+| libblas-dev          | astro-pink       | jdaviz                | scikit-plot             |
+| libcfitsio-dev       | astroML          | jmetalpy[distributed] | scikit-survival         |
+| libfftw3-dev         | astroNN          | kapteyn               | scikits.bootstrap       |
+| libgsl-dev           | astroimtools     | lark-parser           | scipy                   |
+| libplplot            | astroplan        | lifelines             | sciserver               |
+| missfits             | astropy          | matplotlib            | seaborn                 |
+| montage              | astropy-healpix  | mlflow                | sep                     |
+| openjdk-11-jre       | astroquery       | mlpack                | sfdmap                  |
+| postgresql           | atpy             | mocpy                 | skypy                   |
+| psfex                | autokeras        | mpi4py                | somoclu                 |
+| python-tk            | bdsf[ishell]     | mpld3                 | sourcery                |
+| python2.7            | cachey           | mpsort                | spectral-cube           |
+| python3-pip          | ccdproc          | mxnet                 | specutils               |
+| scamp                | cdshealpix       | nbconvert             | sqlalchemy              |
+| sextractor           | ceres-solver     | nbdime                | squarify                |
+| stiff                | cesium           | ne2001                | statsmodels             |
+| stilts               | cfgrib           | netCDF4               | tensorflow_probability  |
+| swarp                | cigale           | networkx              | tensorpack              |
+| texlive-latex-extra  | click            | numba                 | theano                  |
+| topcat               | cma              | numpy                 | tkp                     |
+| wcslib-dev           | configobj        | numpyro               | tqdm                    |
+| weightwatcher        | corner           | opencv-python         | vaex                    |
+| wsctools             | cython           | pandas                | virtualenv              |
+| xvfb                 | dask             | patsy                 | xarray                  |
+|                      | dask-ml          | photutils             | xgboost                 |
+|                      | dask-ms[xarray]  | plotly                | zoobot                  |
+|                      | deeplenstronomy  | plotly-express        | astropy (python 2.7)    |
+|                      | docopt           | pscikit-learn         | eazy-pype (python 2.7)  |
+|                      | easydict         | psycopg2-binary       | matplotlib (python 2.7) |
+|                      | eazy             | pydl                  | numpy (python 2.7)      |
+|                      | eazy-py          | pydot                 | scipy (python 2.7)      |
+|                      | emcee            | pyds9                 |                         |
+|                      | extinction       | pyesasky              |                         |
 
 </details>
 
 <details>
 <summary id="ASTRO-PY3-container">ASTRO-PY3 container</summary>
 
-**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software. This is a legacy container, see ASTRO-PY3.10 & ASTRO-PY3.12 containers.
+**Description:** A collection of astronomy software (originally named sourcefinding_py3), including sourcefinding, machine learning, visualization, SED- and fusion-related software. This is a **legacy** container, see ASTRO-PY3.10 & ASTRO-PY3.12 containers.
 
 **JupyterLab Kernel:** ASTRO-PY3, SF-PY3
 
@@ -776,7 +795,7 @@ Note the kernel can be named anything, but it is recommended to use something de
 If you require a single, less common package to use in conjunction with an existing kernel, you can install it for your user account with
 
 ```bash
-$ pip install --user python_package
+$ pip install --user <python_package>
 ```
 
 This command needs to be run from a worker node that has access to the `pip` command, either by using a Python module or by shelling inside a container. This is most easily done through a command line terminal started from the Jupyter Launcher. Note that packages installed this way in a user space can conflict with the same packages in existing kernels, and as such this method should only be used for very use-case specific packages. Note that to use a package in conjunction with an existing kernel, the pip python version must correspond to the python version of the kernel (3.6, 3.7 etc.).
