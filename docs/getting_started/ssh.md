@@ -1,4 +1,4 @@
-# SSH Keys
+# SSH keys
 
 Access to ilifu is controlled through SSH public-private key pairs.
 

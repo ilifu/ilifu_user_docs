@@ -1,9 +1,9 @@
-# Apply for Access
+# Apply for access
 
 ilifu may be accessed by faculty and researchers from the partner institutions. Time on the cluster is allocated via
 the Computing Resouce Allocation Committee which makes recommendations to the Facility Director.
 
-## New Users
+## New users
 
 Please apply for access to the ilifu cloud services through this [webform](https://docs.google.com/forms/d/e/1FAIpQLSfHtL7R_S2HHIecFeZn8sicABdvFO7NZC1TRJdU2S5GSL4zYQ/viewform).
 

@@ -1,4 +1,4 @@
-# Data Management
+# Data management
 
 Storage on the ilifu Research Facility is shared amongst all members of our user community. In order to support our users and the diverse range of projects that we host, it is important to make efficient use of storage by having a good data management strategy. The following describes some of these strategies, best practises and workflows in reference to data management. A good data management strategy includes the following, all of which is outlined within this documentation:
 
@@ -7,7 +7,7 @@ Storage on the ilifu Research Facility is shared amongst all members of our user
 3. Automatically write selected data products (including logs, software versions and input parameters) to longer-term storage
 4. Automatically remove temporary/intermediate data products (i.e. the remainder)
 
-## Typical Workflow
+## Typical workflow
 
 As outlined in our [directory structure](/data/directory_structure) documentation, the scratch mounts are for the purpose of data processing, and are expected to contain temporary data products that can be quickly removed. As also outlined there, the `/{idia,cbio,ilifu}/projects` directories are project-specific directories expected to contain final data products for longer-term storage. A good workflow utilising this directory structure is shown below.
 
@@ -20,7 +20,7 @@ Within this workflow, scripts and configuration files stored in `/users` are use
 
 For a typical workflow, there are many more temporary products than final products, meaning the first approach is significantly easier. Following our directory structure, we expect you to remove old files on scratch mounts, but as a start, it's helpful to identify and remove large files that are no longer needed.
 
-## Copying or Moving Data
+## Copying or moving data
 
 Data can be moved or copied between directories on the same or different mounts / filesystems. When moving from one directory to another within the same mount, we recommend making use of the `mv` command, which will instantly move your data. Below is an example of moving data between different directories on the same mount:
 
@@ -42,11 +42,11 @@ The archive mode (option `-a`) will preserve the timestamps, ownership and other
 
 When copying data on ilifu, please do not make use of the Slurm login node. Copying is best done via an sbatch script, which will be run on a compute node and therefore be much less volatile. Alternatively, transfers can be run via the [transfer node](/data/data_transfer#transfer-using-scp-and-rsync), or on a Slurm compute node interactively via a persistent terminal (e.g. screen/tmux/mosh).
 
-### Large Transfers with Globus
+### Large transfers with Globus
 
 For large transfers, we recommend making use of [Globus](/data/data_transfer#transfer-using-globus-online). When undertaking internal ilifu transfers with Globus, the performance will [not be optimal](/data/data_transfer?id=using-globus-for-internal-ilifu-transfers) compared to transfers between two well-configured end-points. However, a number of the features contained within Globus (accessible via the "Transfer & Timer Options") make Globus useful for internal transfers. These include the "sync" option to only transfer new or changed files, the verifying of file integrity, and the functionality to schedule regular transfers within paticular directories. In general, we recommend enabling the sync option, and the option to "preserve source file modification times" (e.g. when having to [repair symbolic links with rsync](/data/data_transfer#configuring-a-transfer)).
 
-### Fast Transfers with Parallel Copy Script
+### Fast transfers with parallel copy script
 
 If you wish to run an efficient internal copy on ilifu, we recommend making use of the GNU `parallel` task to simultaneously transfer a number of large files. Before writing and launching a script to do so, it's important to identify directories in which there are a number of large files or subdirectories, as this approach performs poorly when run over a small number of files. In this example, the `/scratch3/users/$USER/my-data` directory contains 16 large files/subdirectories.
 
@@ -90,7 +90,7 @@ Lastly, we run the script and monitor it via the Slurm queue.
 sbatch parallel_copy.sbatch
 ```
 
-## Checking File Integrity
+## Checking file integrity
 
 When copying data, it may be important to check the integrity of your data before removing it from its original location. For individual files, this can be achieved using a program such as `md5sum` or `sha256sum`, which will output a checksum. The checksum will be identical for each file if it has been transferred intact. Using the paths from a previous example, below is an example of checking the integrity of all files within the directory **from** which (source) and **to** which (destination) you've copied your data.
 
@@ -120,7 +120,7 @@ In such a case, either wait until your copy has completed and run your checksum 
 
 As mentioned above, file integrity is checked automatically during Globus transfers, although this option can be switched off if necessary.
 
-## Maturity of Workflow
+## Maturity of workflow
 
 During processing, it's important to identify the maturity of your workflow, in terms of the its stage or type, as this affects what processing and data management strategy is followed. In general, you will be:
 
@@ -151,7 +151,7 @@ Best practises when running a production workflow include the following:
 
 Importantly, during production, temporary data products can be regenerated at any point via running the same workflow with the same inputs. Therefore, it's safe and ideal to remove such products automatically during your production workflow.
 
-### General Best Practises
+### General best practises
 
 * Prototyping should develop into production workflows
 * Backup your scripts, workflow or pipeline, ideally by uploading to a version-controlled repository such as GitHub<sup>1</sup>
@@ -159,17 +159,17 @@ Importantly, during production, temporary data products can be regenerated at an
 
 <sup>1</sup> We recommend users familiarise themselves with the resources available from the [Software Carpentry website](https://software-carpentry.org).
 
-## Products to Retain
+## Products to retain
 
 For a typical workflow, final data products will be retained for longer-term storage, as produced by your workflow. For the purpose of reproducibility and posterity, it is important to retain your workflow's parameters / inputs / versions, and its logs (e.g. sbatch standard out / error). Further domain-specific data products to retain are [listed below](#domain-specific-data-management).
 
-## Products to Remove
+## Products to remove
 
 Following the [typical workflow](#typical-workflow) above, we recommend first selectively writing data products you wish to retain for longer-term storage, and removing everything else from your processing run, which will include your temporary / inflated data products. In some cases, it may be better/easier to identify which products to remove, and write the remainder to longer-term storage. A helpful start is identifying the large data products that don't need to be retained, and removing those. For very large files, it may be more suitable to run `rm` within an interative Slurm session, or on the transfer node. Some additional domain-specific data products to remove are [listed below](#domain-specific-data-management).
 
-## Domain-Specific Data Management
+## Domain-specific data management
 
-### Radio Astronomy
+### Radio astronomy
 
 For radio astronomy processing with a MeasurementSet (MS) or Multi-MeasurementSet (MMS), it's often important to retain your final calibrated data (often a few to 10s TB in size for MeerKAT data). Ideally, this is in the form of an MS with a single data column (e.g. corrected data). Additionally, it's important to retain the following data products, which are typically much smaller in size than the calibrated data:
 
@@ -179,7 +179,7 @@ For radio astronomy processing with a MeasurementSet (MS) or Multi-MeasurementSe
 
 It is possible to store only the calibration tables and flag versions, and remove your calibrated data, which can be regenerated at any point by applying the calibration and flags to the raw MS (e.g. using CASA's `applycal` and `flagmanager` tasks).
 
-#### Find and Remove MeasurementSets
+#### Find and remove MeasurementSets
 
 As mentioned above, we expect you to remove old files on scratch mounts, but as a start, it's helpful to identify and remove large files that are no longer needed. If you no longer need the (M)MSs from a completed processing run, remove them to free up the bulk of the storage from your processing run.
 
@@ -201,7 +201,7 @@ This script finds and then displays the volume (and total sum) of the (M)MSs on 
  -o -name "*flagversions"
  ```
 
-#### General Workflow
+#### General workflow
 
 Below is a diagram showing the cumulative inflation of data for a general MeerKAT processing workflow, following the [typical workflow](#typical-workflow) shown above.
 
@@ -223,7 +223,3 @@ During processing, the (M)MSs from within your working directory will inflate by
 Once you have selectively written your final data products for longer-term storage, we recommend removing your raw MS. As this is read-only, please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to request this, specifying which MSs can be removed. In some cases, you may require retaining your raw MS for a longer verification period, and we request that you please contact [support@ilifu.ac.za](mailto:support@ilifu.ac.za) to motivate for this. However, it should be noted that your raw data can be transferred again from the SARAO archive (and if older than 200 days, first restaged from tape). Furthermore, it may be possible to recover your raw data from (M)MSs derived from it, such as where the original `DATA` column exists, running `flagmanager` to undo flags where needed.
 
 For further information about MeerKAT processing and data management strategies, please read our [MeerKAT processing documentation](/astronomy/meerkat_processing).
-
- <!-- ### Bioinformatics
-
- DANE -->

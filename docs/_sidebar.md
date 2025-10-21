@@ -8,25 +8,28 @@
   - [Submit a job on Slurm](getting_started/submit_job_slurm.md)
   - [Using JupyterLab](getting_started/using_jupyterlab.md)
   - [Getting help](getting_started/getting_help.md)
-  - [Best Practices](getting_started/best_practices.md)
-  - [Next Steps](getting_started/next_steps.md)
-- **Technical Documentation**
-  - [Astronomy](astronomy/astronomy_software.md)
+  - [Best practices](getting_started/best_practices.md)
+  - [Next steps](getting_started/next_steps.md)
+- **Astronomy**
+  - [Astronomy software](astronomy/astronomy_software.md)
   - [MeerKAT processing](astronomy/meerkat_processing.md)
-  - [Bioinformatics](bioinformatics/cbio.md)
-  - [Running jobs on the cluster](tech_docs/running_jobs.md)
+- **Bioinformatics**
+  - [CBIO](bioinformatics/cbio.md)
+- **Data Management**
+  - [Data transfer](data/data_transfer.md)
+  - [Data management](data/data_management.md)
+  - [Sharing data](data/sharing_data.md)
+- **Technical Documentation**
+  - [Specifying resources for Slurm jobs](tech_docs/running_jobs.md)
+  - [Software environments](tech_docs/software_environments.md)
+  - [Resource allocation guide](tech_docs/resource_allocation.md)
   - [Fairshare](tech_docs/fairshare.md)
-  - [Supported software environments](tech_docs/software_environments.md)
-  - [Container Registry Server](tech_docs/container_registry.md)
-  - [Data Transfer](data/data_transfer.md)
-  - [Data Management](data/data_management.md)
-  - [Sharing Data](data/sharing_data.md)
-  - [Resource Allocation Guide](tech_docs/resource_allocation.md)
+  - [Container registry server](tech_docs/container_registry.md)
   - [Openstack](openstack/openstack.md)
-  - [System Specifications](tech_docs/specifications.md)
+  - [System specifications](tech_docs/specifications.md)
 - **Help and Info**
-  - [Contact and Communication](help/contact.md)
-  - [Requesting Help](help/requesting_help.md)
+  - [Contact and communication](help/contact.md)
+  - [Requesting help](help/requesting_help.md)
 - **About**
   - [What is ilifu?](about/what_is.md)
   - [Acknowledgement](about/acknowledgement.md)

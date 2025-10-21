@@ -8,9 +8,9 @@ The Slurm batch scheduler is the primary service accessed via SSH. Other service
 
 ## Slurm batch scheduler
 
-Slurm is a job scheduling system. It consists of a single login node and many compute nodes. The login node is the access point to the ilifu Slurm cluster, and allows you to view the available resources, current activity (queued and running jobs) and submit jobs to the cluster.
+Slurm is a job scheduling system. It consists of a single login node and many compute nodes. The login node is the access point to the ilifu Slurm cluster, and allows the user to view available resources, current activity (queued and running jobs) and to submit jobs to the cluster.
 
-The ilifu Slurm cluster can be accessed via `SSH` at `slurm.ilifu.ac.za`.
+The ilifu Slurm cluster can be accessed via SSH at `slurm.ilifu.ac.za`.
 
 ```
 $ ssh <username>@slurm.ilifu.ac.za
@@ -43,19 +43,9 @@ After logging into the JupyterLab service, the user is presented with a breakdow
 
 <div style="text-align:center"><img src="/_media/jupyter_spawner_dropdown.png" alt="drop-down menu" width=800 /></div>
 
-The **Jupyter development session** type is aimed at lightweight development and testing of workflows that don't require dedicated resources (i.e. CPU and RAM). Instead, the sessions make use of shared resources (CPU cores) and are allocated 2 CPU cores, 3 GB RAM and have a 14 day lifespan (with 18 hour idle timeout). We recommend that users should initially use the development session type for new sessions, and only select a larger session size if it is found that additional memory resources or dedicated resources are required (e.g. for running an intensive workflow).
+The **Jupyter development session** type is aimed at lightweight development and testing of workflows that don't require dedicated resources (i.e. CPU and RAM). Instead, the sessions make use of shared resources (CPU cores) and are allocated `2 CPU cores`, `3GB RAM` and have a `14 day` lifespan (with 18 hour idle timeout). We recommend that users should initially use the development session type for new sessions, and only select a larger session size if it is found that additional memory resources or dedicated resources are required (e.g. for running an intensive workflow).
 
-Each node will be terminated after a preset interval of time (currently set to terminate after 18 hours of inactivity or 5 days), however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data also persists in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](http://docs.ilifu.ac.za/#/tech_docs/running_jobs?id=slurm-batch-scheduler) section. 
-
-**Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select `File` > `Hub Control Panel`:
-
-<div style="text-align:center"><img src="/_media/hub_selection.png" alt="menu bar options" width=500 /></div>
-
-This will bring you to the page with the `Stop My Server` option, where you can stop your current session, freeing up the resources that have been allocated to your Jupyter session. You are also able to use this process to change the size of the resources allocated to you. Once you have stopped your session you are able to choose a smaller or larger node size.
-
-<div style="text-align:center"><img src="/_media/stop_server_button.png" alt="stop server button" width=600 /></div>
-
-Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.
+Each node will be terminated after a preset interval of time (currently set to terminate after 18 hours of inactivity or 5 days), however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data also persists in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](getting_started/submit_job_slurm?id=submitting-a-job-using-a-batch-script) section. 
 
 ## Summary of ilifu services or partitions and their use case
 

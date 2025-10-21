@@ -1,4 +1,4 @@
-# Astronomy Software
+# Astronomy software
 
 ## IDIA Pipeline
 
@@ -130,6 +130,27 @@ Image('<imagename>.png', height=500)
 ```
 *Credit to SKA-SA for the above method detailed* [here](https://github.com/ska-sa/ARIWS-Cookbook/blob/main/2-Flagging_and_calibration/L_band_RFI_frequency_flagging.ipynb).
 
+### Non-interactive plotting
+
+Some Slurm jobs performing non-interactive plotting may require a virtual X-server, such as [CASA plotMS](/astronomy/astronomy_software#casa-plotms). This can be achieved by wrapping your script within `xvfb`, using the following syntax (e.g. within a sbatch script):
+
+```bash
+srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
+```
+
+Some older versions of xvfb (e.g. for CASA 5) may require use of the `-d` option via following syntax:
+
+```bash
+xvfb-run -d python my-plotms-script.py
+```
+
+Non-interactive jobs making use of the Python `matplotlib` package may also require using the `Agg` backend, utilised with the following:
+
+```python
+from matplotlib import use
+use('Agg')
+```
+
 ## Simba
 
 ### About Simba and Simba-C
@@ -205,7 +226,7 @@ It includes the following packages:
 
 Previous Simba containers are maintained within /idia/software/containers/, and are named by date. If you would like an update or addition to be made to this software container, please first contact [Marcin Glowacki](mailto:marcin@idia.ac.za).
 
-### Simba Example Jupyter Notebook
+### Simba example Jupyter notebook
 
 An example notebook for accessing a Simba snapshot file and corresponding CAESAR file, obtaining, can be found at `/idia/data/laduma/SIMBA/Simba_Demo.ipynb`. You can copy it to your home directory and access it via ilifu’s JupyterLab system.
 

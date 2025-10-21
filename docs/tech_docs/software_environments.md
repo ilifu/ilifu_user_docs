@@ -1,109 +1,82 @@
-# Supported Software Environments
+# Supported software environments
 
-For Astronomy, IDIA provides a number of supported software environments on ilifu. These are provided principally through [singularity containers](#singularity-containers). Bioinformatics software is also supported via containers, but also through the use of [environment modules](#environment-modules).
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group. 
 
-## Singularity Containers
+## Singularity containers
 
 Containers are unit software packages that contain all the software, files, libraries, dependencies and environmental variables necessary to run a particular task or workflow. Containers are encapsulated software environments and abstract the software and applications from the underlying operating system. This allows users to run workflows in customized environments, switch between environments, and to share these environments with colleagues and research teams.
 
+The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/idia/software/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
+
 ### Using a container
 
-The container images that are maintained by the support team can be found at `/idia/software/containers/`. There are a number of ways one can use a Singularity container, including both interactive and non-interactive sessions, as detailed below.
+The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/idia/software/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
 
-#### 1. Interactive shell command
+**Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
-A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command.
+#### 1. Execute software in a container
 
-```shell
+A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
+```bash
+$ sinteractive
+```
+This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
+```bash
+$ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
+hello world!
+$
+```
+This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.simg` container. The script will have access to all the Python libraries that have been included in the container.
+
+Similary, the following will execute `print "hello world!"` using the CASA software package that is contained in the `casa-stable.img` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
+
+```bash
+$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c 'print "hello world!"'
+
+=========================================
+The start-up time of CASA may vary
+depending on whether the shared libraries
+are cached or not.
+=========================================
+
+IPython 5.1.0 -- An enhanced Interactive Python.
+
+CASA 5.7.0-134   -- Common Astronomy Software Applications
+
+2025-10-17 10:15:02	INFO	::casa	CASA Version  5.7.0-134  
+--> CrashReporter initialized.
+hello world!
+```
+
+#### 2. Interactive shell command
+
+A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
+```bash
 $ singularity shell /idia/software/containers/casa-stable.img
 Singularity: Invoking an interactive shell within container...
 
 Singularity casa-stable-5.1.1.img:~>
 ```
 
-This command will spawn a new shell inside the container, in this case the `casa-stable` container, allowing the user to interact with the container environment. The user can then run software or develop workflows interactively.
-
-#### 2. Exec command
-
-A user is able to execute a script within the container environment using the singularity `exec` command.
-
-```shell
-$ singularity exec /idia/software/containers/sourcefinding_py3.simg python myscript.py
-hello world!
-$
-```
-
-This command will execute the script, `myscript.py`, using Python within the `sourcefinding_py3` container. The script will have access to all the Python libraries that have been included in the container.
-
-Similary,
-
-```shell
-$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger -c "print 'hello world'"
-
-=========================================
-The start-up time of CASA may vary
-depending on whether the shared libraries
-are cached or not.
-=========================================
-
-IPython 5.1.0 -- An enhanced Interactive Python.
-
-CASA 5.1.1-5   -- Common Astronomy Software Applications
-
-2019-04-01 13:49:49     INFO    ::casa  CASA Version 5.1.1-5
---> CrashReporter initialized.
-hello world
-$
-```
-
-will execute `print 'hello world'` using the CASA software package that is contained in the `casa-stable` container.
-
-The `exec` command can also be used to initiate an interative session. For example:
-
-```shell
-$ singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
-
-=========================================
-The start-up time of CASA may vary
-depending on whether the shared libraries
-are cached or not.
-=========================================
-
-IPython 5.1.0 -- An enhanced Interactive Python.
-
-CASA 5.1.1-5   -- Common Astronomy Software Applications
-
-2019-04-01 13:51:39     INFO    ::casa  CASA Version 5.1.1-5
---> CrashReporter initialized.
-Enter doc('start') for help getting started with CASA...
-Using matplotlib backend: TkAgg
-
-CASA <1>:
-
-```
-
-The above command will run the CASA software within the `casa-stable` container environment and will allow the user to use the environment interactively. However, the primary use of the `exec` command is to execute scripts without interaction, for example on the Slurm cluster.
+This command will spawn a new shell inside the container, in this case the `casa-stable.img` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
 #### 3. Run command
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
 ```shell
-$ singularity run /idia/software/containers/ASTRO-PY3.simg
-Python 3.6.5 |Anaconda, Inc.| (default, Apr 29 2018, 16:14:56)
-[GCC 7.2.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>>
+$ singularity run /idia/software/containers/ASTRO-PY3.10.sif -c 'print("hello world!")'
+hello world!
 ```
 
 The runscript for this container is:
 
 ```text
 %runscript
-    /anaconda3/bin/python "$@"
+    /usr/bin/python "$@"
 ```
 
-Running this container using the `run` command will initialize a container session and open the Python package (from Anaconda3 in this case) contained within the container, allowing the user to run python commands interactively. However, as soon as the Python command line is exited the container session is closed.
+Running this container using the `run` command will initialize a container session and run any arguments (`"$@"`) using the Python package contained within the container, allowing the user to run python commands interactively. However, as soon as the Python command line is exited the container session is closed.
 
 A number of the containers that are supported by ilifu do not include runscripts and therefore cannot be used using the `run` command.
 
@@ -318,9 +291,9 @@ A simply way to determine what Python packages a container includes is to run th
 
 ### Building your own container
 
-In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu system. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilized. To move a container to ilifu, a user can follow this [user guide](https://docs.ilifu.ac.za/#/tech_docs/container_registry) to push the container to the [IDIA Singularity Registry Server](https://sregistry.idia.ac.za/) and then pull a container to ilifu or follow the [transfers guide](https://docs.ilifu.ac.za/#/data/data_transfer) to move container to ilifu.
+In order to build containers a user requires root access on the system where the container is being built. Therefore, users cannot build containers directly on the ilifu cluster. However, containers can be built in an environment where a user has root access, and then the container can be moved to the ilifu system where it can be utilised. To move a container to ilifu, a user can follow this [user guide](tech_docs/container_registry) to push the container to the [IDIA Singularity Registry Server](https://sregistry.idia.ac.za/) and then pull a container to ilifu or follow the [transfers guide](data/data_transfer) to move container to ilifu.
 
-There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://www.sylabs.io/guides/2.6/user-guide/build_a_container.html#).
+There are several ways a user can build a container, including: creating a sandbox, building from a Docker image, building from the Singularity hub, building from an existing Singularity container or through a recipe or definition file . Additional information for building containers can be found at the [Singularity website](https://docs.sylabs.io/guides/latest/user-guide/build_a_container.html).
 
 The recommended way to build a container for the ilifu system is through using a recipe. A recipe allows for reproducability of the container environment and allows for containers to be more easily referenced in research publications. Recipes define the way a container is built, which OS system is abstracted from within the container, and what files, libraries, packages and environmental variables and dependencies are included in the container.
 
@@ -526,7 +499,7 @@ Finally in your browser you can connect to http://localhost:8082 and you can log
 
 The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
 
-### Visual Studio Code
+## Visual Studio Code
 
 It is possible to use Visual Studio Code (or VS code, vscode) for interactive coding instead of JupyterLab. This was previously achieved by allowing VS Code to connect directly to the Slurm login node for a persistent session. However, this impacted the performance of the Slurm login node, interfering with the ability of users to submit their Slurm jobs. The following setup ensures that VS Code does not run code on the Slurm login node.
 
@@ -555,7 +528,7 @@ Note that it also possible to run the sinteractive session in a tmux session. Th
 
 Lastly use VS Code's remote explorer to connect to compute-001. It will ask for the operating system of the remote server (pick Linux) and will then install the necessary VS Code server software. You should then be able to use VS Code to browse your ilifu home directory and open an interactive terminal.
 
-## Environment Modules
+## Environment modules
 
 The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general.
 
@@ -592,7 +565,7 @@ the "keys".
 
 *Note: CBIO users will notice they have an additional section for modules found in `/cbio/soft/lmod`.*
 
-### Loading and Using modules
+### Loading and using modules
 
 Use the `module add` command, e.g.
 
@@ -651,7 +624,7 @@ This should generally only be used on compute nodes and not the login node. Howe
 module load anaconda3/login
 ```
 
-## Python Virtual Environments
+## Python virtual environments
 
 Virtual envrionments provide isolated environments for python projects, in which you can customize the dependencies to suit your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
 
