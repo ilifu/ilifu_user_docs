@@ -26,9 +26,9 @@ $ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
 hello world!
 $
 ```
-This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
+This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
-Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
+Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
 
 ```bash
 $ singularity exec /idia/software/containers/casa-stable-v6.sif casa --log2term --nologger -c 'print("hello world!")'

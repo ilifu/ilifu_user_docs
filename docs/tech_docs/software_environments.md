@@ -26,9 +26,9 @@ $ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
 hello world!
 $
 ```
-This command will execute the script, `myscript.py`, using Python within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
+This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
-Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. The `singularity exec` command is **widely used to submit jobs on Slurm**.
+Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
 
 ```bash
 $ singularity exec /idia/software/containers/casa-stable-v6.sif casa --log2term --nologger -c 'print("hello world!")'
@@ -375,8 +375,8 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 | Packages and Libraries | R Libraries   |            |           |
 |------------------------|---------------|------------|-----------|
-| fftw                   | BiocManager   | Rfits      | lambda.r  |
-| R                      | Cairo         | Rwcs       | magicaxis |
+| R                      | BiocManager   | Rfits      | lambda.r  |
+| fftw                   | Cairo         | Rwcs       | magicaxis |
 |                        | DBI           | akima      | mgcv      |
 |                        | EBImage       | astro      | mice      |
 |                        | FITSio        | castrodatR | nlme      |
@@ -392,11 +392,32 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 </details>
 
-A simply way to determine what Python packages a container includes is to run the command `pip freeze` within the container environment to list all the Python packages installed using `pip`. This can be achieved using the following command:
+#### How to know what software a container includes
 
+The maintained containers are generally named after the primary software they are created for, for example `SoFiA2v2.5.1.sif`, and include the version or date they were built. Some containers, however, contain a suite of software, such as the `ASTRO-PY3` containers, and therefore it isn't feasible to include all the software in the container name. There are a number of useful techniques to determine what sofware is included in a container:
+
+##### Check the container %help information
+
+Sometimes a container will include information in its help function, which can be access using the following command:
+```bash
+    $ srun singularity run-help /path/to/container
+```
+##### Check the included python packages
+
+A simple way to determine what Python packages a container includes is to run the command `pip freeze` within the container environment to list all the Python packages installed using `pip`. This can be achieved using the following command:
 ```bash
 	$ srun singularity exec /path/to/container pip freeze
 ```
+
+##### Check the container build script (definition file)
+
+You can generally see the build script that was used to build the container using the `inspect -d` parameter, for example:
+
+```bash
+    $ srun singularity inspect -d /path/to/container
+```
+
+The build script will include all the commands used to create the container, `apt-get`, `pip install`, etc, so you can use this information to find out what software was installed in the container. This unfortunately is not possible if the Singularity container was created by pulling a Docker container (although it will indicate which Docker library and image was used), or if the container was built from another base image/container only the last build script will be visible. If the latter is the case, the build scripts of each previous layer are included in the container at `/.singularity.d/bootstrap_history/` and may provide additional information about the included software.
 
 ### Building your own container
 

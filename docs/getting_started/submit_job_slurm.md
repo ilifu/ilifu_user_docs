@@ -40,7 +40,7 @@ You can see the status of all jobs in the Slurm queue by using the command:
 	$ squeue
 ```
 
-Note that, as we didn't specified any resources in the job submission script, the default resources will be used to run the job. The defaults for a Slurm job are `1 CPU`, `3GB RAM`, a time limit of `3 hours`, and the job will be run on the `Main` partition. You can view the partition defaults, as well as the available resources and limits in the [Specifying Resources when Running Jobs on Slurm](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm) section.
+**Note that, as we didn't specified any resources in the job submission script, the default resources will be used to run the job.** The defaults for a Slurm job are `1 CPU`, `3GB RAM`, a time limit of `3 hours`, and the job will be run on the `Main` partition. You can view the partition defaults, as well as the available resources and limits in the [Specifying resources for Slurm jobs](tech_docs/running_jobs?id=specifying-resources-when-running-jobs-on-slurm) section.
 
 Let's now improve our job submission script by specifying some useful parameters. We may find that the default resources are not sufficient to run our job (for example, a 3 hours time limit may result in our job timing out), but in this case, the defaults are actually excessive for our test job, so lets be considerate and specify only the necessary resources required to run our small script. Update the `my_slurm_script.sh` to the following:
 
@@ -58,7 +58,7 @@ echo "Submitting Slurm job"
 singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
 ```
 
-The parameters that follow `#SBATCH` indicate the requested resources and other job parameters, such as the job name and logging information. It's helpful to name your job, using a description of the software or process, so that you can refer back to the name when debugging or reviewing past jobs. In the script, we've also now defined the number of CPU (cores), amount of memory and the time limit for the job, using the appropriate parameters. We've also defined the log output for the job, both the standard output (what you would generally see written out to the terminal when running the commands in the script) as well as the error output. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the `sbatch --help` command from the terminal to see additional parameters or see the table in the [Customising your job using sbatch/srun parameters](tech_docs/running_jobs?id=customising-your-job-using-sbatchsrun-parameters) section for more details.
+The parameters that follow `#SBATCH` indicate the requested resources and other job parameters, such as the job name and logging information. It's helpful to name your job, using a description of the software or process, so that you can refer back to the name when debugging or reviewing past jobs. In the script, we've also now defined the number of CPU (cores), amount of memory and the time limit for the job, using the appropriate parameters. We've also defined the log output for the job, both the standard output (what you would generally see written out to the terminal when running the commands in the script) as well as the error output. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the `sbatch --help` command from the terminal to see additional parameters or see the table in the [Customising your job using sbatch/srun parameters](tech_docs/running_jobs?id=customising-your-job-using-sbatchsrun-parameters) section for more details. Very useful parameters to set are the `--mail-user` and `--mail-type` which you can use to receive email notifications on your job status, including if the job fails, completes or is at 80% of the allocated walltime.
 
 In the shell script above, the other change that we have made is which Python binary we want use to run the `myscript.py`. Instead of using the Python software module as we did before, we've opted to use a `Singularity` container, called `ASTRO-PY3.simg`. This container includes a suite of astronomy related Python packages, and while not necessary to run the small script, it's a useful demonstration for an alternative to software modules. We've also included the `echo` command, the output of which will be written to the log file defined by `--output`. This is sometimes useful for debugging, but is also just a demonstration that you can run more than a single line in the job submission script.
 
@@ -208,7 +208,7 @@ The table below provides a summary of these commands and indicates at which stag
 | squeue         | X                    |                    | X                        |                           |
 | sbatch         |                      | X                  |                          |                           |
 | srun           |                      | X                  |                          |                           |
-| scontrol*      |                      |                    | X                        |                           |
+| scontrol       |                      |                    | X                        |                           |
 | sacct          |                      |                    |                          | X                         |
 
 To view the different Slurm partitions (also known as queues) and to get an indication of how busy the cluster is, run the [sinfo](https://slurm.schedmd.com/sinfo.html) command:
@@ -234,11 +234,11 @@ The number of nodes and state information are helpful indicators of how busy the
 
 While your job is queued or running, you can check on its status using `squeue` or `scontrol`. We've already covered `squeue` above, but there are additional parameters and customisations that are useful, for example listing the expected start time of your jobs. More information on [squeue](https://slurm.schedmd.com/squeue.html) can be found in the Slurm documentation.
 
-`scontrol` can be used to look at individual jobs in more detail. You can use `squeue` to determine the relevant `jobid` and then use the following command to view detailed information for that job:
+[scontrol](https://slurm.schedmd.com/scontrol.html) can be used to look at individual jobs in more detail. You can use `squeue` to determine the relevant `jobid` and then use the following command to view detailed information for that job:
 ```bash
 	$ scontrol show j <jobid>
 ```
-This will show all the information associated with the job, including the job parameters you set, as well as the defaults that were used for parameters that you did not set. You can review a jobs timelimit this way and check if a long running jobs is at risk of timing out or not.
+This will show all the information associated with the job, including the job parameters you set, as well as the defaults that were used for parameters that you did not set. You can review a jobs timelimit this way and check if a long running jobs is at risk of timing out or not. **Note this command is only valid for pending or running jobs.**
 
 Finally, you can view previously run jobs using [sacct](https://slurm.schedmd.com/sacct.html). This is helpful, for example, to find out what the error state was for a job that failed, or to find out how much CPU, RAM, or walltime resources a job used, so that you can more accurately allocate resources to similar jobs in the future. See the [Resource Allocation guide](tech_docs/resource_allocation) for more detailed information on determining what resources to allocate to jobs.
 
