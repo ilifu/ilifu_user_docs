@@ -20,7 +20,10 @@ Most processes do not scale linearly (or even close to it), so it is important t
 ## Maximum allocation
 As outlined in the [ilifu documentation](tech_docs/running_jobs#specifying-resources-when-running-jobs-on-slurm), nodes in the Slurm cluster are grouped under different partitions, with different resources and purposes for each partition. Below is a summary of the resources available in each partition, showing the maximum values that can be allocated to a job, as well as the default values. This information can also be listed with:
 
+```bash
 scontrol show partition
+```
+*Table 1. The different Slurm partitions and their resources, listing the default and maximum allocations. Default memory scales with the number of CPUs allocated. Jobs submitted to the Devel partition cannot allocate memory.*
 
 | Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GiB) | Max Memory (GiB) | Default wall-time | Max wall-time |
 |-----------|-------------------|-------------|---------|----------------------|------------------|-------------------|---------------|
@@ -29,15 +32,18 @@ scontrol show partition
 | Main      | compute-[201-260] | 1           | 32      | 3                    | 251              | 3 hours           | 14 days       |
 | HighMem   | highmem-[001-002] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
 | HighMem   | highmem-003       | 1           | 96      | 15                   | 1508             | 3 hours           | 14 days       |
+| HighMem   | highmem-[004-007] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
+| HighMem   | highmem-008       | 1           | 32      | 15                   | 1007             | 3 hours           | 14 days       |
 | GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
 | GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
-| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           | 12 hours      |
-
-*Table 1. The different Slurm partitions and their resources, listing the default and maximum allocations. Default memory scales with the number of CPUs allocated. Jobs submitted to the Devel partition cannot allocate memory.*
+| GPU       | highmem-008       | 1           | 32      | 7                    | 1007             | 3 hours           | 14 days       |
+| Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           |  5 days       |
 
 The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006) and A100 (gpu-007). To submit a job on a specific GPU node, the `-w` or `--nodelist` parameter may be used, with a list of the relevant `Node names`. Alternatively, the `-C` or `--constraint` parameter may be used, with the list of constraints or tags, as indicated in the table below:
+
+*Table 2. Available GPUs and their resources.*
 
 | Partition | Node names        | GPU type    | Constraint/Tag | Number of GPUs per node | GPU Memory (GiB) |
 |-----------|-------------------|-------------|----------------|-------------------------|------------------|
@@ -45,11 +51,11 @@ The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006)
 | GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
 | GPU       | gpu-006           | A40         | A40,a40        | 1                       | 45               |
 | GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
-*Table 2. Available GPUs and their resources.*
+| GPU       | highmem-008       | A40         | A40,a40        | 1                       | 45               |
 
 Note that if a job uses all the CPUs or all the available memory on a node, that node becomes fully allocated and no other jobs can be run on the node for the duration of the job. This means that any unused CPU or memory resources cannot be used by another job, including your own. Therefore, if you have a job that has a high CPU requirement and a low memory footprint, or a large memory requirement but a low CPU requirement, consider not allocating the maximum available CPU or memory, respectively, and allow a little headroom for other jobs to be allocated to the node.
 
-## Finding your Job ID
+## Finding your job ID
 
 In order to profile your previous jobs when submitting a similar job, you may need to find the ID of a previous job to display the usage statistics. Firstly, check if any logs were written into your working directory, which typically include the job ID. Otherwise, search for your job ID within the time range that you submitted the job, using sacct. For example:
 

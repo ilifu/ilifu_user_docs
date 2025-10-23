@@ -44,9 +44,9 @@ By default, any directory or file created will have access permissions `drwxr-xr
 
 An **Access Control List** (ACL) is a feature that provides fine grain control for managing permissions on the file system, more so than standard UNIX permissions. With ACLs you are able to share data with individual users, and provide groups access without having to adjust group ownership.
 
-ACLs are set using the `setfacl` command. For example, to share data with another user, the following will enable read (`r`) and execute (`x`) permissions on your workspace folder, in this case for the user `jeremy`:
+ACLs are set using the `setfacl` command. For example, to share data with another user, the following will enable read (`r`) and execute (`x`) permissions on your workspace folder, in this case for the user `janedoe`:
 ```bash
-$ setfacl -m u:jeremy:r-x /idia/users/$USER
+$ setfacl -m u:janedoe:r-x /idia/users/$USER
 ```
 You can view the ACLs that are configured on a file or folder using the `getfacl` command, for example:
 ```bash
@@ -56,7 +56,7 @@ getfacl: Removing leading '/' from absolute path names
 # owner: johndoe
 # group: idia-group
 user::rwx
-user:jeremy:r-x
+user:janedoe:r-x
 group::---
 mask::r-x
 other::---
@@ -67,7 +67,7 @@ $ setfacl -m g:idia-mightee:r-x /scratch3/users/$USER
 ```
 You can remove ACLs using the `-x` parameter, for example:
 ```bash
-$ setfacl -x u:jeremy: /idia/users/$USER
+$ setfacl -x u:janedoe: /idia/users/$USER
 $ setfacl -x g:idia-mightee: /scratch3/users/$USER
 ```
 Or the following will remove all configured ACLs on the specified directory:
@@ -76,18 +76,18 @@ $ setfacl -b /idia/users/$USER
 ```
 The above `setfacl` commands can be set recursively on all files and subdirectories in the specified directory using the `-R` parameter.
 
-If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. To navigate into a directory, execute (`x`) permission is required. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory without providing access to other files or directories. For example, say you want to provide user `jeremy` access to the directory at `/idia/users/$USER/thesis/COSMOS_output`, without providing them access to other files or directories located at `/idia/users/$USER` or `/idia/users/$USER/thesis`, you can do the following:
+If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. To navigate into a directory, execute (`x`) permission is required. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory without providing access to other files or directories. For example, say you want to provide user `janedoe` access to the directory at `/idia/users/$USER/thesis/COSMOS_output`, without providing them access to other files or directories located at `/idia/users/$USER` or `/idia/users/$USER/thesis`, you can do the following:
 
-Enable execute (`x`) permissions on the two parent directories for the user `jeremy`:
+Enable execute (`x`) permissions on the two parent directories for the user `janedoe`:
 ```bash
-$ setfacl -m u:jeremy:--x /idia/users/$USER
-$ setfacl -m u:jeremy:--x /idia/users/$USER/thesis
+$ setfacl -m u:janedoe:--x /idia/users/$USER
+$ setfacl -m u:janedoe:--x /idia/users/$USER/thesis
 ```
 And then provide execute (`x`) and read (`r`) permissions on the `COSMOS_output` directory and all contained files and subdirectories:
 ```bash
-$ setfacl -R -m u:jeremy:r-x /idia/users/$USER/thesis/COSMOS_output
+$ setfacl -R -m u:janedoe:r-x /idia/users/$USER/thesis/COSMOS_output
 ```
-The user `jeremy` will now be able to navigate to and view all files located at `/idia/users/$USER/thesis/COSMOS_output` without having access to other files and directories located in the parent directories.
+The user `janedoe` will now be able to navigate to and view all files located at `/idia/users/$USER/thesis/COSMOS_output` without having access to other files and directories located in the parent directories.
 
 ## Sharing files or data with non-ilifu users
 

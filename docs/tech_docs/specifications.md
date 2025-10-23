@@ -1,4 +1,4 @@
-# System Specifications
+# System specifications
 
 The Ilifu infrastructure includes the following compute and storage resources:
 

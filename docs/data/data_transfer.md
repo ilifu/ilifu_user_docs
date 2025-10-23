@@ -74,7 +74,7 @@ rsync -avhn --size-only --progress --stats <username>@transfer.ilifu.ac.za:/scra
 
 This will perform a 'dry run', which will "perform a trial run with no changes made". After verifying the correct files (i.e. symlinks only) will be transferred, re-running the expression above with option `-n` removed will perform the transfer.
 
-### Setting Up An Endpoint for your Desktop
+### Setting up an endpoint for your desktop
 
 You can also use Globus to transfer files between ilifu and your desktop using the `Globus Connect Personal`. For installing on your personal computer, click [here](https://docs.globus.org/how-to/globus-connect-personal-linux/) for Linux, [here](https://docs.globus.org/how-to/globus-connect-personal-mac) for Mac OS X, or [here](https://docs.globus.org/how-to/globus-connect-personal-windows) for Windows.
 
@@ -109,7 +109,7 @@ Globus will then inform your by email of the status of your transfer once it’s
 
 Globus can be used to transfer files internal to ilifu (e.g. from one filesystem to another), by setting the two endpoints as the ilifu DTN. However, the performance (< 100 MB/s) is comparable to running `cp`, `mv`, `rsync` or `scp` on transfer.ilifu.ac.za. In the event that a user makes a transfer with Globus (e.g. under poor network conditions, or for large/long transfers), it is advised that the user [configure a transfer](#configuring-a-transfer) following the instructions above.
 
-### Setting Up An Endpoint for Another Data Transfer Node
+### Setting up an endpoint for another data transfer node
 
 `Globus Connect Personal` can also be installed on computing clusters. However, for best support and reliability, if the destination to which you wish to transfer files operates an endpoint already registered with Globus, it is highly recommended to use this endpoint instead. Just search for the endpoint in the collections box on the right as before and complete the login process similar to how you logged into the ilifu DTN.
 

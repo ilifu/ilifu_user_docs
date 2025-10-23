@@ -45,3 +45,13 @@ The following table lists the available kernels and their related Singularity co
 | Simba                       | SIMBA.simg                                |
 
 Details of the python libraries, software and other libraries available within the different kernels can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
+
+**Please shut down your Jupyter server if you are not planning to use it for more than a few hours.** We encourage you to be especially vigilant about shutting down your unused server if you have selected a "Max" or "Half-max" server option. To shut down your session, navigate in your browser to the Jupyter menu and select `File` > `Hub Control Panel`:
+
+<div style="text-align:center"><img src="/_media/hub_selection.png" alt="menu bar options" width=500 /></div>
+
+This will bring you to the page with the `Stop My Server` option, where you can stop your current session, freeing up the resources that have been allocated to your Jupyter session. You are also able to use this process to change the size of the resources allocated to you. Once you have stopped your session you are able to choose a smaller or larger node size.
+
+<div style="text-align:center"><img src="/_media/stop_server_button.png" alt="stop server button" width=600 /></div>
+
+Whenever possible, **please submit your work via the Slurm batch queue rather than running it in a Jupyter session.** Any non-interactive work that requires an execution time longer than a few minutes, or that requires a high amount of resources, should be submitted to the batch queue.

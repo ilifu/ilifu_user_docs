@@ -16,10 +16,10 @@ Contact ilifu support at support@ilifu.ac.za to get help with uploading or downl
 `Tag` is the version of the primary software package included in the container (example v6.5.0), a date to indicate different builds (2023-01-23), or another custom versioning method.<br />
 `Team` is a group of users that can be assigned as collaborators to a collection.
 
-## Available Collections
+## Available collections
 To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All public container-collections are available without requiring an ilifu account.
 
-## Access/Download Available Containers:
+## Access/download available containers:
 All containers listed in the collection page are publicly available (private collections and containers require logging into the IDIA sregistry site). Containers can be pulled to the local machine using the Singularity CE pull only. 
 
 Example:
@@ -59,7 +59,7 @@ singularity shell library://collection/container:tag
 **Note**: containers used this way are stored in a local cache (usually `$HOME/.singularity/cache` if an alternative is not set using `SINGULARITY_CACHEDIR`). The storage used for this can grow considerably over time and we recommend using `singularity cache clean -a` to remove images after use.
  
 
-## Pushing Containers to the Registry
+## Pushing containers to the registry
 Any user with the IDIA/ilifu user account is able to login and push images to their collections.
 
 ### Adding remote end-point (also see this [guide](https://docs.sylabs.io/guides/3.7/user-guide/endpoint.html)).
@@ -115,7 +115,7 @@ singularity push -U ASTRO-R.simg library://walter/calibration/astror:latest
 ```
 In this command: `ASTRO-R.simg` is the local name of the container that I want to push, `walter` - is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. 
 
-## Team/Group Container Management
+## Team/group container management
 A team (group of users) can be created to manage a collection specific to a project and multiple users must manage it. A team is created by an authenticated user. Creating a team means that the creator becomes the Owner of the team that can add and remove users. A user added as a `contributor` in a team has only the ability to view and pull containers including private containers. A user added as `Owner` then has the ability to push containers to the collection, view private containers and is able to delete containers from the collection.
 
 Create a Teams:
