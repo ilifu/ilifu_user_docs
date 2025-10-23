@@ -10,7 +10,7 @@ The Slurm batch scheduler is the primary service accessed via SSH. Other service
 
 Slurm is a job scheduling system. It consists of a single login node and many compute nodes. The login node is the access point to the ilifu Slurm cluster, and allows the user to view available resources, current activity (queued and running jobs) and to submit jobs to the cluster.
 
-The ilifu Slurm cluster can be accessed via SSH at `slurm.ilifu.ac.za`.
+The ilifu Slurm cluster can be accessed via `ssh` at `slurm.ilifu.ac.za`.
 
 ```
 $ ssh <username>@slurm.ilifu.ac.za
@@ -43,7 +43,7 @@ After logging into the JupyterLab service, the user is presented with a breakdow
 
 <div style="text-align:center"><img src="/_media/jupyter_spawner_dropdown.png" alt="drop-down menu" width=800 /></div>
 
-The **Jupyter development session** type is aimed at lightweight development and testing of workflows that don't require dedicated resources (i.e. CPU and RAM). Instead, the sessions make use of shared resources (CPU cores) and are allocated `2 CPU cores`, `3GB RAM` and have a `14 day` lifespan (with 18 hour idle timeout). We recommend that users should initially use the development session type for new sessions, and only select a larger session size if it is found that additional memory resources or dedicated resources are required (e.g. for running an intensive workflow).
+The **Jupyter development session** type is aimed at lightweight development and testing of workflows that don't require dedicated resources (i.e. CPU and RAM). Instead, the sessions make use of shared resources (CPU cores) and are allocated `2 CPU cores`, `3GB RAM` and have a `14 day` lifespan (with an 18 hour idle timeout). We recommend that users should initially use the development session type for new sessions, and only select a larger session size if it is found that additional memory resources or dedicated resources are required (e.g. for running an intensive workflow).
 
 Each node will be terminated after a preset interval of time (currently set to terminate after 18 hours of inactivity or 5 days), however the user's Jupyter environment is saved in their home directory, so when a new jupyter server is spawned their workspace and notebooks will be recreated. Some data also persists in the notebook file, however any long-running processes will be terminated when the jupyter session is stopped, or when it reaches its time limit. The Jupyter service is designed for interactive development and analysis, not for high performance computing. For long running or resource heavy tasks, please refer to the [Slurm Batch Scheduler](getting_started/submit_job_slurm?id=submitting-a-job-using-a-batch-script) section. 
 

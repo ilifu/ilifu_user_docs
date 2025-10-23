@@ -238,7 +238,7 @@ While your job is queued or running, you can check on its status using `squeue` 
 ```bash
 	$ scontrol show j <jobid>
 ```
-This will show all the information associated with the job, including the job parameters you set, as well as the defaults that were used for parameters that you did not set. You can review a jobs timelimit this way and check if a long running jobs is at risk of timing out or not. **Note this command is only valid for pending or running jobs.**
+This will show all the information associated with the job, including the job parameters you set, as well as the defaults that were used for parameters that you did not set. You can review a jobs timelimit this way and check if a long running jobs is at risk of timing out or not. **Note this command is only valid for pending or running jobs, use sacct for jobs that have completed.**
 
 Finally, you can view previously run jobs using [sacct](https://slurm.schedmd.com/sacct.html). This is helpful, for example, to find out what the error state was for a job that failed, or to find out how much CPU, RAM, or walltime resources a job used, so that you can more accurately allocate resources to similar jobs in the future. See the [Resource Allocation guide](tech_docs/resource_allocation) for more detailed information on determining what resources to allocate to jobs.
 
