@@ -20,7 +20,7 @@ A user is able to execute a script using the software from the container environ
 ```bash
 $ sinteractive
 ```
-This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
+This will place you on the development node `compute-001`. Singularity is then available and you could execute a Python script using the `python` software in a container, for example:
 ```bash
 $ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
 hello world!
