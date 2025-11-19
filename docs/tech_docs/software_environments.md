@@ -14,7 +14,7 @@ The container images that are maintained by the support team can be found at dif
 
 **Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
-#### 1. Execute software in a container
+#### Execute software in a container
 
 A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
 ```bash
@@ -42,7 +42,7 @@ CASA 6.7.0.31 -- Common Astronomy Software Applications [6.7.0.31]
 hello world!
 ```
 
-#### 2. Interactive shell command
+#### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
 ```bash
@@ -61,7 +61,7 @@ ____________________________________________________________________________
 
 This command will spawn a new shell inside the container, in this case the `SoFiA2v2.5.1.sif` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
-#### 3. Run command
+#### Run command
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
@@ -508,158 +508,6 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 
 where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.simg>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
 
-### RStudio
-
-The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
-the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg`. The examples below will be given for the bio container.
-
-#### Running R
-
-It is recommended that the following script be created `~/bin/R` (remember to `chmod u+x ~/bin/R`):
-
-```bash
-#!/bin/bash
-export R_INSTALL_STAGED=false
-singularity run --app R /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
-```
-
-<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
-
-This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
-
-#### Running Rscript
-
-Similarly you should create the script `~/bin/Rscript`:
-
-```bash
-#!/bin/bash
-export R_INSTALL_STAGED=false
-singularity run --app Rscript /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
-```
-
-<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
-
-#### Running RStudio Server
-
-##### How to launch RStudio Server
-
-RStudio has been updated to be launched via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
-
-The procedure is to start an interactive job, add the RStudio module and run the `rstudio` as below:
-
-```bash
-USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
-USERNAME@compute-101:~$ module load R/RStudio2025.05.1-513-R4.5.1
-USERNAME@compute-101:~$ rstudio
-The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It's: BcOaaYLmpjfufcQDozchq79rpZAdjo
-Running rserver on port 53997
-To connect to this server run this on your local machine:
-    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:53997
-then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "BcOaaYLmpjfufcQDozchq79rpZAdjo"
-(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
-```
-
-Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
-
-<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
-
-You will then be presented with an rstudio session:
-
-<img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
-
-If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
-```bash
-USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
-USERNAME@compute-101:~$ rstudio
-Running rserver on port 60759
-To connect to this server run this on your local machine:
-    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:60759
-then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
-(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
-```
-
-##### Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)
-
-Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
-
-```bash
-Host *.ilifu.ac.za
-    User USERNAME
-    ForwardAgent yes
-
-Host compute-*
-    Hostname %h
-    User USERNAME
-    StrictHostKeyChecking no
-    ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
-```
-
-One should substitute in your ilifu `USERNAME` in the above script.
-
-Next is the process of starting an interactive job and launching RStudio. To begin start an interactive job – below is an example of launching a single node / 4 core job with 32Gb of ram:
-
-```console
-USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
-USERNAME@compute-103:~$
-```
-
-Once the interactive session has begun on a specific node (in this case `compute-103`), RStudio can be launched as follows:
-
-```console
-USERNAME@compute-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg
-Running rserver on port 37543
-```
-
-This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
-
-```bash
-$ ssh compute-103 -L8082:localhost:37543
-Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
-...
-```
-
-on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `compute-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
-
-```bash
-bind [127.0.0.1]:8000: Address already in use
-channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
-```
-
-Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
-
-##### Note on installing packages
-
-The exported environmental variable `R_INSTALL_STAGED=false` in the above scripts is only necessary should you wish to install your own packages — [this is due to the home directories using the BeeGFS filesystem](http://r.789695.n4.nabble.com/Staged-installation-fail-on-some-file-systems-td4756897.html)). Should you wish to install packages from within an RStudio session you should run `export R_INSTALL_STAGED=false` before starting the server.
-
-## Visual Studio Code
-
-It is possible to use Visual Studio Code (or VS code, vscode) for interactive coding instead of JupyterLab. This was previously achieved by allowing VS Code to connect directly to the Slurm login node for a persistent session. However, this impacted the performance of the Slurm login node, interfering with the ability of users to submit their Slurm jobs. The following setup ensures that VS Code does not run code on the Slurm login node.
-
-Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
-
-```bash 
-Host *.ilifu.ac.za
-    User <USERNAME>
-    ForwardAgent yes
-
-Host compute-001
-    User <USERNAME>
-    ForwardAgent yes
-    Hostname %h
-    ProxyCommand ssh <USERNAME>@slurm.ilifu.ac.za nc %h 22
-
-```
-
-Next, an interactive job should be started and then connected to with VS Code. To start an interactive job, the `sinteractive` command is used. The below example extends the default length of 3 hours to 1 day by using the `--time` flag and allocates 4 CPUS using the `-c` flag. Currently, the maximum length for an interactive session is 5 days.
-
-```bash
-USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
-```
-
-Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm login node.
-
-Lastly use VS Code's remote explorer to connect to compute-001. It will ask for the operating system of the remote server (pick Linux) and will then install the necessary VS Code server software. You should then be able to use VS Code to browse your ilifu home directory and open an interactive terminal.
-
 ## Environment modules
 
 The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is available on the cluster. The [online user documentation](https://lmod.readthedocs.io/en/latest/010_user.html) serves as a comprehensive guide to using lmod in general.
@@ -724,7 +572,7 @@ https://www.gnu.org/licenses/.
 
 ### Checking which modules are loaded
 
-User the `module list` command, e.g.
+Use the `module list` command, e.g.
 
 ```bash
 USERNAME@compute-101:/cbio/soft/lmod$ module list
@@ -736,25 +584,165 @@ Currently Loaded Modules:
   1) jdk/11.0.2   2) slurm-drmaa/1.1.0   3) bio/htslib/1.9   4) R/3.6.1   5) bio/svtoolkit/2.00.1918
 ```
 
-### Anaconda
+## RStudio
 
-`anaconda3` is available as a module, which can be accessed with
+The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
+the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg`. The examples below will be given for the bio container.
 
-```bash
-module load anaconda3
-```
+### Running R
 
-This changes `python` and `python3` to use
-
-```bash
-/software/common/anaconda3/2020.07/bin/python
-```
-
-This should generally only be used on compute nodes and not the login node. However, it is accessible from the login node with
+It is recommended that the following script be created `~/bin/R` (remember to `chmod u+x ~/bin/R`):
 
 ```bash
-module load anaconda3/login
+#!/bin/bash
+export R_INSTALL_STAGED=false
+singularity run --app R /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
 ```
+
+<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
+
+This will allow you to run `R` as normal (you may need to log out and in again if you don't already have scripts in `~/bin`).
+
+### Running Rscript
+
+Similarly you should create the script `~/bin/Rscript`:
+
+```bash
+#!/bin/bash
+export R_INSTALL_STAGED=false
+singularity run --app Rscript /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg "$@"
+```
+
+<sup>* See the [note](#note-on-installing-packages) below on installing packages</sup>
+
+### Running RStudio Server
+
+#### How to launch RStudio Server
+
+RStudio has been updated to be launched via a the use of modules (which is described in more detail [below](#loading-and-using-modules))
+
+The procedure is to start an interactive job, add the RStudio module and run the `rstudio` as below:
+
+```bash
+USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
+USERNAME@compute-101:~$ module load R/RStudio2025.05.1-513-R4.5.1
+USERNAME@compute-101:~$ rstudio
+The environment variable RSTUDIO_PASSWORD was not set, so your password has been chosen for you. It's: BcOaaYLmpjfufcQDozchq79rpZAdjo
+Running rserver on port 53997
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:53997
+then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "BcOaaYLmpjfufcQDozchq79rpZAdjo"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
+```
+
+Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
+
+<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
+
+You will then be presented with an rstudio session:
+
+<img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
+
+If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
+```bash
+USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
+USERNAME@compute-101:~$ rstudio
+Running rserver on port 60759
+To connect to this server run this on your local machine:
+    ssh -A USERNAME@compute-101 -o "ProxyCommand=ssh USERNAME@slurm.ilifu.ac.za nc compute-101 22" -L8081:localhost:60759
+then visit http://localhost:8081 in your browser and use the username "USERNAME" to login with the password "this is a long password, HoopLA"
+(You may need to choose a different port (other than 8081), so remember to change this in both the ssh and browser)
+```
+
+#### Old way of launching RStudio Server (You may need this if you're using one of the older CBIO RStudio images)
+
+Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
+
+```bash
+Host *.ilifu.ac.za
+    User USERNAME
+    ForwardAgent yes
+
+Host compute-*
+    Hostname %h
+    User USERNAME
+    StrictHostKeyChecking no
+    ProxyCommand ssh slurm.ilifu.ac.za nc %h 22
+```
+
+One should substitute in your ilifu `USERNAME` in the above script.
+
+Next is the process of starting an interactive job and launching RStudio. To begin start an interactive job – below is an example of launching a single node / 4 core job with 32Gb of ram:
+
+```console
+USERNAME@slurm-login:~$ srun --nodes=1 --ntasks 4 --mem=32g --pty bash
+USERNAME@compute-103:~$
+```
+
+Once the interactive session has begun on a specific node (in this case `compute-103`), RStudio can be launched as follows:
+
+```console
+USERNAME@compute-103:~$ RSTUDIO_PASSWORD='Make your own secure password here' /cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg
+Running rserver on port 37543
+```
+
+This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
+
+```bash
+$ ssh compute-103 -L8082:localhost:37543
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
+...
+```
+
+on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `compute-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
+
+```bash
+bind [127.0.0.1]:8000: Address already in use
+channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
+```
+
+Finally in your browser you can connect to http://localhost:8082 and you can login with your `USERNAME` and the `RSTUDIO_PASSWORD` which you set.
+
+## Visual Studio Code
+
+[Visual Studio Code](https://code.visualstudio.com/) (or VS code, vscode) is an alternative interactive development environment to Jupyter. A Visual Code Studio server, using [Code Server](https://github.com/coder/code-server), can be launched as an interactive app from the [IDIA Science Gateway](https://gateway.idia.ac.za) application dashboard, and run in your web browser.
+
+After selecting the Visual Studio Code from the application dashboard, select the number of cores and duration for your session, and select `Launch`.
+
+<div style="text-align:center"><img src="/_media/vscode_launcher.png" alt="application dashboard" width=600 /></div>
+
+The Visual Studio Code server will be launched on the [Devel partition](getting_started/access_ilifu?id=devel) in the ilifu Slurm environment, and after a moment, you'll be able to `Connect to Visual Studio Code server`, opening the VS code in a new window in your web browser. Note that Visual Code Studio server is restricted to one session per user.
+
+<div style="text-align:center"><img src="/_media/vscode_session.png" alt="application dashboard" width=600 /></div>
+
+### Old way of running Visual Code Studio
+
+Running VS Code on the Slurm login node will impacted the performance of the Slurm login node, interfering with users' ability to submit and manage their Slurm jobs. The following setup ensures that VS Code server is run on the Devel partion (`compute-001`), and does not run code on the Slurm login node, however, the process has now been superseded by VS code being available through the application dashboard as a web app.
+
+Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
+
+```bash 
+Host *.ilifu.ac.za
+    User <USERNAME>
+    ForwardAgent yes
+
+Host compute-001
+    User <USERNAME>
+    ForwardAgent yes
+    Hostname %h
+    ProxyCommand ssh <USERNAME>@slurm.ilifu.ac.za nc %h 22
+
+```
+
+Next, an interactive job should be started and then connected to with VS Code. To start an interactive job, the `sinteractive` command is used. The below example extends the default length of 3 hours to 1 day by using the `--time` flag and allocates 4 CPUS using the `-c` flag. Currently, the maximum length for an interactive session is 5 days.
+
+```bash
+USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
+```
+
+Note that it also possible to run the sinteractive session in a tmux session. This allows the interactive job to persist when losing connectivity to the Slurm login node.
+
+Lastly use VS Code's remote explorer to connect to compute-001. It will ask for the operating system of the remote server (pick Linux) and will then install the necessary VS Code server software. You should then be able to use VS Code to browse your ilifu home directory and open an interactive terminal.
 
 ## Python virtual environments
 

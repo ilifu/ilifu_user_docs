@@ -31,7 +31,7 @@ The [IDIA Science Gateway](https://gateway.idia.ac.za) is accessible at `https:/
 
 <div style="text-align:center"><img src="/_media/idia_gateway.png" alt="idia science gateway" width=500 /></div>
 
- The application dashboard utilises Single Sign-on (SSO) to ilifu web-based applications, including Jupyter, CARTA, account usage data, SSH key management, amongst other services.
+ The application dashboard utilises Single Sign-on (SSO) to ilifu web-based applications, including [Jupyter](getting_started/access_ilifu?id=jupyter), [CARTA](astronomy/astronomy_software?id=carta), [Visual Studio Code](tech_docs/software_environments?id=visual-studio-code), account usage data, SSH key management, amongst other services.
 
 <div style="text-align:center"><img src="/_media/open_ondemand.png" alt="application dashboard" width=500 /></div>
 
