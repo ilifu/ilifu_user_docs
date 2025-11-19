@@ -14,7 +14,7 @@ The container images that are maintained by the support team can be found at dif
 
 **Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
-#### 1. Execute software in a container
+#### Execute software in a container
 
 A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
 ```bash
@@ -42,7 +42,7 @@ CASA 6.7.0.31 -- Common Astronomy Software Applications [6.7.0.31]
 hello world!
 ```
 
-#### 2. Interactive shell command
+#### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
 ```bash
