@@ -711,9 +711,11 @@ After selecting the Visual Studio Code from the application dashboard, select th
 
 <div style="text-align:center"><img src="/_media/vscode_launcher.png" alt="application dashboard" width=600 /></div>
 
-The Visual Studio Code server will be launched on the [Devel partition](getting_started/access_ilifu?id=devel) in the ilifu Slurm environment, and after a moment, you'll be able to `Connect to Visual Studio Code server`, opening the VS code in a new window in your web browser. Note that Visual Code Studio server is restricted to one session per user.
+The Visual Studio Code server will be launched on the [Devel partition](getting_started/access_ilifu?id=devel) in the ilifu Slurm environment, and after a moment, you'll be able to `Connect to Visual Studio Code Server`, opening the VS code web app in a new window in your web browser. Note that Visual Code Studio server is restricted to one session per user.
 
 <div style="text-align:center"><img src="/_media/vscode_session.png" alt="application dashboard" width=600 /></div>
+
+You can reconnect to a running VS code server session by going to `My Interactive Sessions` on the top menu bar in the application dashboard. 
 
 ### Old way of running Visual Code Studio
 
