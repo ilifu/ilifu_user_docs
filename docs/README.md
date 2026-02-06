@@ -41,6 +41,8 @@ For more information, please see a list of [best practices](getting_started/best
 - **Astronomy**
   - [Astronomy software](astronomy/astronomy_software.md)
   - [MeerKAT processing](astronomy/meerkat_processing.md)
+- **Pipeline Tutorial**
+  - [MeerKAT Pipeline Tutorials](pipeline_tutorial/tutorials.md)
 - **Bioinformatics**
   - [CBIO](bioinformatics/cbio.md)
 - **Data Management**
