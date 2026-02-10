@@ -13,6 +13,7 @@
 - **Astronomy**
   - [Astronomy software](astronomy/astronomy_software.md)
   - [MeerKAT processing](astronomy/meerkat_processing.md)
+  - [MeerKAT Pipeline Tutorials](astronomy/pipeline_tutorial/tutorials.md)
 - **Bioinformatics**
   - [CBIO](bioinformatics/cbio.md)
 - **Data Management**
