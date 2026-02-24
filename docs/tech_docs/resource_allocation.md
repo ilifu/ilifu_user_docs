@@ -38,7 +38,6 @@ scontrol show partition
 | GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
 | GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
 | GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
-| GPU       | highmem-008       | 1           | 32      | 7                    | 1007             | 3 hours           | 14 days       |
 | Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           |  5 days       |
 
 The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006) and A100 (gpu-007). To submit a job on a specific GPU node, the `-w` or `--nodelist` parameter may be used, with a list of the relevant `Node names`. Alternatively, the `-C` or `--constraint` parameter may be used, with the list of constraints or tags, as indicated in the table below:
@@ -49,9 +48,8 @@ The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), A40 (gpu-006)
 |-----------|-------------------|-------------|----------------|-------------------------|------------------|
 | GPU       | gpu-[001-004]     | P100        | P100,p100      | 2                       | 12               |
 | GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
-| GPU       | gpu-006           | A40         | A40,a40        | 1                       | 45               |
+| GPU       | gpu-006           | A40         | A40,a40        | 2                       | 45               |
 | GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
-| GPU       | highmem-008       | A40         | A40,a40        | 1                       | 45               |
 
 Note that if a job uses all the CPUs or all the available memory on a node, that node becomes fully allocated and no other jobs can be run on the node for the duration of the job. This means that any unused CPU or memory resources cannot be used by another job, including your own. Therefore, if you have a job that has a high CPU requirement and a low memory footprint, or a large memory requirement but a low CPU requirement, consider not allocating the maximum available CPU or memory, respectively, and allow a little headroom for other jobs to be allocated to the node.
 
