@@ -77,7 +77,7 @@ Oxkat is a MeerKAT processing pipeline that is written for and commonly used on 
 
 The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist: a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
 
-CASA containers are available at `/idia/software/containers/`. Monolithic CASA containers are prefixed with `casa-stable-<version>`, while modular CASA is available for CASA 6, and the containers are prefixed with `casa-6.<version>`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`.
+All CASA containers are available in `/software/astro/containers/`. The latest Monolithic CASA container is `/software/astro/containers/casa-stable-latest.sif`, The modular CASA is available for CASA 6, and the latest modular CASA 6 container is `/software/astro/containers/casa-modular-latest.sif`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`. Older versions of both the monolithic and modular CASA containers are available in: `/software/astro/containers/casa-stable/` and `/software/astro/containers/casa-modular` respectively.
 
 CASA modules are also available, which include helpful short-hand commands that can be used to run functions using the CASA containers. Run `module help casa` for more information.
 
@@ -106,13 +106,13 @@ Within CASA 6, plotms is wrapped in AppImage and requires FUSE mounting inside t
 To run CASA plotms with the GUI, you can run the following from the slurm-login node:
 
 ```bash
-srun --x11 -p Devel singularity exec /idia/software/containers/casa-6.5.0-modular.sif casaplotms
+srun --x11 -p Devel singularity exec /software/astro/containers/casa-modular-py3.10-latest.sif casaplotms
 ```
 
 To run CASA plotms non-interactively, you can make use of a virtual X server by wrapping your script within xvfb, using the following syntax (e.g. within a sbatch script):
 
 ```bash
-srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
+srun singularity exec /software/astro/containers/casa-modular-py3.10-latest.sif xvfb-run -a python my-plotms-script.py
 ```
 
 To use CASA plotms in a Jupyter notebook and display the output image within the notebook, you can use the following Python code example:
@@ -135,7 +135,7 @@ Image('<imagename>.png', height=500)
 Some Slurm jobs performing non-interactive plotting may require a virtual X-server, such as [CASA plotMS](/astronomy/astronomy_software#casa-plotms). This can be achieved by wrapping your script within `xvfb`, using the following syntax (e.g. within a sbatch script):
 
 ```bash
-srun singularity exec /idia/software/containers/casa-6.5.0-modular.sif xvfb-run -a python my-plotms-script.py
+srun singularity exec /software/astro/containers/casa-modular-py3.10-latest.sif xvfb-run -a python my-plotms-script.py
 ```
 
 Some older versions of xvfb (e.g. for CASA 5) may require use of the `-d` option via following syntax:
@@ -211,7 +211,7 @@ Currently, example cubes are available for several galaxies within the high reso
 
 ### Simba container
 
-A Simba singularity container (see instructions [here](getting_started/container_environments)) can be accessed on ilifu at */idia/software/containers/SIMBA.simg*. It is also a selectable kernel on [https://jupyter.ilifu.ac.za/](https://jupyter.ilifu.ac.za/) to be used with Jupyter notebooks.
+A Simba singularity container (see instructions [here](getting_started/container_environments)) can be accessed on ilifu at */software/astro/containers/simba-latest.sif*. It is also a selectable kernel on [https://jupyter.ilifu.ac.za/](https://jupyter.ilifu.ac.za/) to be used with Jupyter notebooks.
 
 It includes the following packages:
 
@@ -224,7 +224,7 @@ It includes the following packages:
 - pandas
 - spectral-cube
 
-Previous Simba containers are maintained within /idia/software/containers/, and are named by date. If you would like an update or addition to be made to this software container, please first contact [Marcin Glowacki](mailto:marcin@idia.ac.za).
+Previous Simba containers are maintained within /software/astro/containers/simba/, and are named by date. If you would like an update or addition to be made to this software container, please first contact [Marcin Glowacki](mailto:marcin@idia.ac.za).
 
 ### Simba example Jupyter notebook
 

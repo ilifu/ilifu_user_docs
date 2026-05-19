@@ -36,7 +36,7 @@ If you have already added the **remote endpoint**, you can pull the same contain
 ```bash
 singularity pull library://wsclean/wsclean:v3.3
 ```
-**Note**: most public containers available in the IDIA sregistry are also available on ilifu at `/idia/software/containers`. Please confirm whether the container already exists on the filesystem before pulling the container to ilifu storage. 
+**Note**: most public containers available in the IDIA sregistry are also available on ilifu at `/software/astro/containers/`. Please confirm whether the container already exists on the filesystem before pulling the container to ilifu storage. 
 
 Containers from the repository can be used within a job step, without creating the container image file, using the following examples: 
 

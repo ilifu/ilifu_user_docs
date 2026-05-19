@@ -6,11 +6,9 @@ The software environments on ilifu are provided principally through [Singularity
 
 Containers are unit software packages that contain all the software, files, libraries, dependencies and environmental variables necessary to run a particular task or workflow. Containers are encapsulated software environments and abstract the software and applications from the underlying operating system. This allows users to run workflows in customized environments, switch between environments, and to share these environments with colleagues and research teams.
 
-The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/idia/software/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
-
 ### Using a container
 
-The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/idia/software/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
+The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/software/astro/containers`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
 
 **Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
@@ -22,16 +20,16 @@ $ sinteractive
 ```
 This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
 ```bash
-$ singularity exec /idia/software/containers/ASTRO-PY3.10.sif python myscript.py
+$ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
 ```
-This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10.sif` container. The script will have access to all the Python libraries that have been included in the container.
+This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10-latest.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
 
 ```bash
-$ singularity exec /idia/software/containers/casa-stable-v6.sif casa --log2term --nologger -c 'print("hello world!")'
+$ singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger -c 'print("hello world!")'
 
 optional configuration file not found, continuing CASA startup without it
 
@@ -46,7 +44,7 @@ hello world!
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
 ```bash
-$ singularity shell /idia/software/containers/SoFiA2v2.5.1.sif 
+$ singularity shell /software/astro/containers/sofia-latest.sif
 SoFiA2v2.5.1.sif:~$ sofia
 ____________________________________________________________________________
 
@@ -59,14 +57,14 @@ ____________________________________________________________________________
   Time:     Tue Oct 21 11:36:38 2025
 ```
 
-This command will spawn a new shell inside the container, in this case the `SoFiA2v2.5.1.sif` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
+This command will spawn a new shell inside the container, in this case the latest `SoFiA` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
 #### Run command
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
 ```shell
-$ singularity run /idia/software/containers/ASTRO-PY3.10.sif -c 'print("hello world!")'
+$ singularity run /software/astro/containers/ASTRO-PY3.10-latest.sif -c 'print("hello world!")'
 hello world!
 ```
 
@@ -148,13 +146,13 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **Description:** A collection of astronomy software, including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-**JupyterLab Kernel:** ASTRO-PY3 (Python 3.112), ASTRO-PY3 (Python 3.10), ASTRO-PY3 (Python 3.8)
+**JupyterLab Kernel:** ASTRO-PY3 (Python 3.12), ASTRO-PY3 (Python 3.10), ASTRO-PY3 (Python 3.8)
 
-| Name             | Def file | Github repo | OSVersion |
-|------------------|----------|-------------|-----------|
-| ASTRO-PY3.12.sif |          |             | noble     |
-| ASTRO-PY3.10.sif |          |             | jammy     |
-| ASTRO-PY3.8.simg |          |             | bionic    |
+| Name                    | Def file | Github repo | OSVersion |
+|-------------------------|----------|-------------|-----------|
+| ASTRO-PY3.12-latest.sif |          |             | noble     |
+| ASTRO-PY3.10-latest.sif |          |             | jammy     |
+| ASTRO-PY3.8-latest.sif  |          |             | bionic    |
 
 | Packages & Libraries | Python Libraries |                       |                         |
 |----------------------|------------------|-----------------------|-------------------------|
@@ -220,9 +218,9 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **JupyterLab Kernel:** ASTRO-PY3, SF-PY3
 
-| Name           | Def file | Github repo | OSVersion |
-|----------------|----------|-------------|-----------|
-| ASTRO-PY3.simg |          |             | bionic    |
+| Name                   | Def file | Github repo | OSVersion |
+|------------------------|----------|-------------|-----------|
+| ASTRO-PY3.6-latest.sif |          |             | bionic    |
 
 | Packages & Libraries |                      | Python Libraries      |                  |
 |----------------------|----------------------|-----------------------|------------------|
@@ -269,10 +267,10 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
 
-| Name                   | Repo                      | Github repo | OSVersion |
-|------------------------|---------------------------|-------------|-----------|
-| ASTRO-GPU.simg (TF)    | nvcr.io/nvidia/tensorflow |             | noble     |
-| ASTRO-GPU-PyTorch.simg | nvcr.io/nvidia/pytorch    |             | focal     |
+| Name                         | Repo                      | Github repo | OSVersion |
+|------------------------------|---------------------------|-------------|-----------|
+| ASTRO-GPU-latest.sif (TF)    | nvcr.io/nvidia/tensorflow |             | noble     |
+| ASTRO-GPU-PyTorch-latest.sif | nvcr.io/nvidia/pytorch    |             | focal     |
 
 | Packages & Libraries              | Python Libraries (TF) | Python Libraries (PyTorch) |
 |-----------------------------------|-----------------------|----------------------------|
@@ -506,7 +504,7 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 }
 ```
 
-where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.simg>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.sif>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
 
 ## Environment modules
 
@@ -587,7 +585,7 @@ Currently Loaded Modules:
 ## RStudio
 
 The R/RStudio container comes in two flavours: one for the astronomy community; and one for the bioinformatics community, where
-the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/idia/software/containers/bionic-R3.6.1-RStudio1.2.1335-astro.simg` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg`. The examples below will be given for the bio container.
+the only difference between them is the default selection of packages that are installed. The astro variant can be found at `/software/astro/containers/ASTRO-R-latest.sif` while the bioinformatics variant can be found at `/cbio/images/bionic-R3.6.3-RStudio1.2.5042-bio.simg`. The examples below will be given for the bio container.
 
 ### Running R
 
