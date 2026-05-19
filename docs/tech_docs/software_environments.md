@@ -8,7 +8,7 @@ Containers are unit software packages that contain all the software, files, libr
 
 ### Using a container
 
-The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/software/astro/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
+The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/software/astro/containers`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
 
 **Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
@@ -146,13 +146,13 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **Description:** A collection of astronomy software, including sourcefinding, machine learning, visualization, SED- and fusion-related software.
 
-**JupyterLab Kernel:** ASTRO-PY3 (Python 3.112), ASTRO-PY3 (Python 3.10), ASTRO-PY3 (Python 3.8)
+**JupyterLab Kernel:** ASTRO-PY3 (Python 3.12), ASTRO-PY3 (Python 3.10), ASTRO-PY3 (Python 3.8)
 
-| Name             | Def file | Github repo | OSVersion |
-|------------------|----------|-------------|-----------|
-| ASTRO-PY3.12.sif |          |             | noble     |
+| Name                    | Def file | Github repo | OSVersion |
+|-------------------------|----------|-------------|-----------|
+| ASTRO-PY3.12-latest.sif |          |             | noble     |
 | ASTRO-PY3.10-latest.sif |          |             | jammy     |
-| ASTRO-PY3.8.simg |          |             | bionic    |
+| ASTRO-PY3.8-latest.sif  |          |             | bionic    |
 
 | Packages & Libraries | Python Libraries |                       |                         |
 |----------------------|------------------|-----------------------|-------------------------|
@@ -218,9 +218,9 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **JupyterLab Kernel:** ASTRO-PY3, SF-PY3
 
-| Name           | Def file | Github repo | OSVersion |
-|----------------|----------|-------------|-----------|
-| ASTRO-PY3.simg |          |             | bionic    |
+| Name                   | Def file | Github repo | OSVersion |
+|------------------------|----------|-------------|-----------|
+| ASTRO-PY3.6-latest.sif |          |             | bionic    |
 
 | Packages & Libraries |                      | Python Libraries      |                  |
 |----------------------|----------------------|-----------------------|------------------|
@@ -267,10 +267,10 @@ Several containers have been developed for use on the ilifu cluster and in other
 
 **JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
 
-| Name                   | Repo                      | Github repo | OSVersion |
-|------------------------|---------------------------|-------------|-----------|
-| ASTRO-GPU.simg (TF)    | nvcr.io/nvidia/tensorflow |             | noble     |
-| ASTRO-GPU-PyTorch.simg | nvcr.io/nvidia/pytorch    |             | focal     |
+| Name                         | Repo                      | Github repo | OSVersion |
+|------------------------------|---------------------------|-------------|-----------|
+| ASTRO-GPU-latest.sif (TF)    | nvcr.io/nvidia/tensorflow |             | noble     |
+| ASTRO-GPU-PyTorch-latest.sif | nvcr.io/nvidia/pytorch    |             | focal     |
 
 | Packages & Libraries              | Python Libraries (TF) | Python Libraries (PyTorch) |
 |-----------------------------------|-----------------------|----------------------------|
@@ -504,7 +504,7 @@ In order to achieve this, the `ipykernel` python package must be installed in th
 }
 ```
 
-where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.simg>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
+where `<kernel_name>` is the name that will appear in the JupyterHub kernel menu, `<path/to/container/container.sif>` is the path to the container you wish to use as a kernel, and the `<path/to/python_executable>` is the path to the python executable inside the container (this must be the version of python you wish to use as a kernel, for example 2.7 or 3.6). Once this is complete you should be able to select your custom kernel from the kernel menu within JupyterHub.
 
 ## Environment modules
 
