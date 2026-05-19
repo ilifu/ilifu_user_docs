@@ -59,6 +59,6 @@ ____________________________________________________________________________
   Time:     Tue Oct 21 11:36:38 2025
 ```
 
-This command will spawn a new shell inside the container, in this case the latets `SoFiA` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
+This command will spawn a new shell inside the container, in this case the latest `SoFiA` container, allowing the user to interact with the container environment. The user can then run software that is housed in the container and develop workflows interactively.
 
 For further information on the software environments available on ilifu, including [modules](tech_docs/software_environments?id=environment-modules) and [virtual environments](tech_docs/software_environments?id=python-virtual-environments), please see the supported [Software environments](tech_docs/software_environments.md) documentation.
