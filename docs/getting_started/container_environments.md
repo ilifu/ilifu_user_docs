@@ -10,7 +10,7 @@ Containers are unit software packages that contain all the software, files, libr
 
 ### Using a container
 
-The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/software/astro/containers/`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
+The container images that are maintained by the support team can be found at different paths, depending on the group that you belong to: `/software/astro/containers`, `/cbio/images` and `/ilifu/software/containers`, as well as common areas `/software/<astro|bio|common>/containers`. There are a number of ways one can use a Singularity container, including executing the software inside a container or interactively using a shell session in the container environment, as detailed below.
 
 **Note:** singularity is not installed on the Slurm login node and therefore containers can only be accessed from worker nodes, either through job submissions using `sbatch` or using the `sinteractive`/`srun` command for interactively running a job on a worker node.
 
