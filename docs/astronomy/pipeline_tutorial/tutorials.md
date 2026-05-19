@@ -52,7 +52,7 @@ sinteractive
 ```
 3. Navigate to your workspace for processing. Ideally, use `/scratch3/user` or `/scratch3/projects`. Then launch a CASA-stable container:
 ```bash
-singularity shell /idia/software/containers/casa-stable-v6.7.0-31-py3.10-2025-04-08.sif
+singularity shell /software/astro/containers/casa-modular-py3.10-latest.sif
 ```
 4. Start CASA and use the listobs() task to inspect your data. This task provides a summary of scans, frequency setup, source list, and antenna locations.
 In the container shell, initialize CASA with:
@@ -224,7 +224,7 @@ If all is good, this should be your output, with different timestamps and now yo
 processMeerKAT.py -B -C tutorial_config.txt -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -v
 2025-09-17 10:52:11,534 INFO: Extracting field IDs from MeasurementSet "/idia/data/public/1525469431/1525469431_sdp_l0.ms" using CASA.
 2025-09-17 10:52:11,534 DEBUG: Using the following command:
-    srun --time=10 --mem=4GB --partition=Main --account=b03-idia-ag --qos qos-interactive singularity exec /idia/software/containers/casa-6.5.0-modular.sif  python /idia/software/pipelines/master/processMeerKAT/read_ms.py -B -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -C tutorial_config.txt -N 1 -t 8 -v
+    srun --time=10 --mem=4GB --partition=Main --account=b03-idia-ag --qos qos-interactive singularity exec /software/astro/containers/casa-6.5.0-modular.sif  python /idia/software/pipelines/master/processMeerKAT/read_ms.py -B -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -C tutorial_config.txt -N 1 -t 8 -v
 srun: job 11686703 queued and waiting for resources
 srun: job 11686703 has been allocated resources
 2025-09-17 10:52:50	WARN	msmetadata_cmpt.cc::fieldsforintent	No intent 'CALIBRATE_FLUX' exists in this dataset.
@@ -268,7 +268,7 @@ The purpose of this call is to read the input MS and extract information used to
     exclude = ''
     time = '12:00:00'
     submit = False
-    container = '/idia/software/containers/casa-6.5.0-modular.sif'
+    container = '/software/astro/containers/casa-6.5.0-modular.sif'
     mpi_wrapper = 'mpirun'
     name = ''
     dependencies = ''
@@ -338,7 +338,7 @@ The purpose of this call is to read the input MS and extract information used to
     exclude = ''
     time = '12:00:00'
     submit = False
-    container = '/idia/software/containers/casa-6.5.0-modular.sif'
+    container = '/software/astro/containers/casa-6.5.0-modular.sif'
     mpi_wrapper = 'mpirun'
     name = ''
     dependencies = ''
@@ -878,7 +878,7 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
     --------------------+----------------------------------------------------------
     Infrastructure      | IDIA
     Singularity         | Enabled
-    Searching           | ['/idia/software/containers/', '/users/walter/containers/']
+    Searching           | ['/software/astro/containers/', '/users/walter/containers/']
     Found container     | oxkat-0.41.sif
     --------------------+----------------------------------------------------------
     Run file            | submit_info_job.sh
@@ -923,7 +923,7 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
         --------------------+----------------------------------------------------------
         Infrastructure      | IDIA
         Singularity         | Enabled
-        Searching           | ['/idia/software/containers/', '/users/walter/containers/']
+        Searching           | ['/software/astro/containers/', '/users/walter/containers/']
         Found container     | oxkat-0.41.sif
         --------------------+----------------------------------------------------------
         Run file            | submit_1GC_jobs.sh

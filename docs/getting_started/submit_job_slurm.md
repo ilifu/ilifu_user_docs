@@ -55,12 +55,12 @@ Let's now improve our job submission script by specifying some useful parameters
 #SBATCH --error=testjob-%j-stderr.log
 
 echo "Submitting Slurm job"
-singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
+singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 ```
 
 The parameters that follow `#SBATCH` indicate the requested resources and other job parameters, such as the job name and logging information. It's helpful to name your job, using a description of the software or process, so that you can refer back to the name when debugging or reviewing past jobs. In the script, we've also now defined the number of CPU (cores), amount of memory and the time limit for the job, using the appropriate parameters. We've also defined the log output for the job, both the standard output (what you would generally see written out to the terminal when running the commands in the script) as well as the error output. The `%j` in the output log file names is a placeholder for the job number or `jobid`. Run the `sbatch --help` command from the terminal to see additional parameters or see the table in the [Customising your job using sbatch/srun parameters](tech_docs/running_jobs?id=customising-your-job-using-sbatchsrun-parameters) section for more details. Very useful parameters to set are the `--mail-user` and `--mail-type` which you can use to receive email notifications on your job status, including if the job fails, completes or is at 80% of the allocated walltime.
 
-In the shell script above, the other change that we have made is which Python binary we want use to run the `myscript.py`. Instead of using the Python software module as we did before, we've opted to use a `Singularity` container, called `ASTRO-PY3.simg`. This container includes a suite of astronomy related Python packages, and while not necessary to run the small script, it's a useful demonstration for an alternative to software modules. We've also included the `echo` command, the output of which will be written to the log file defined by `--output`. This is sometimes useful for debugging, but is also just a demonstration that you can run more than a single line in the job submission script.
+In the shell script above, the other change that we have made is which Python binary we want use to run the `myscript.py`. Instead of using the Python software module as we did before, we've opted to use a `Singularity` container, called `ASTRO-PY3.10-latest.sif`. This container includes a suite of astronomy related Python packages, and while not necessary to run the small script, it's a useful demonstration for an alternative to software modules. We've also included the `echo` command, the output of which will be written to the log file defined by `--output`. This is sometimes useful for debugging, but is also just a demonstration that you can run more than a single line in the job submission script.
 
 Now that the new parameters have been configured, submit the job to Slurm again:
 ```bash
@@ -126,21 +126,21 @@ Note that, as memory is not tracked in the `Devel` partition, specifying any mem
 You can directly run a Singularity containers or other software using the srun command, for example:
 
 ```bash
-	$ srun --pty singularity shell /idia/software/containers/ASTRO-PY3.simg
+	$ srun --pty singularity shell /software/astro/containers/ASTRO-PY3.10-latest.sif
 ```
 
-This will start an interactive session on a compute node and open a shell in the `ASTRO-PY3` container, which contains a large suite of astronomy software. 
+This will start an interactive session on a compute node and open a shell in the `ASTRO-PY3.10-latest` container, which contains a large suite of astronomy software. 
 
 Alternatively, the following command will open an interactive CASA session on a compute node using the casa-stable.img container:
 
 ```bash
-	$ srun --pty singularity exec /idia/software/containers/casa-stable.img casa --log2term --nologger
+	$ srun --pty singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger
 ```
 
 Incidently, you can submit non-interactive jobs to Slurm using the `srun` command without the `--pty` parameter, for example:
 
 ```bash
-	$ srun singularity exec /idia/software/containers/ASTRO-PY3.simg python myscript.py
+	$ srun singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 ```
 
 This will run the Python script `myscript.py` using the ASTRO-PY3 container on a compute node, similar to the `sbatch` command, however the job will not be run in the background, but will utilise your current terminal.
