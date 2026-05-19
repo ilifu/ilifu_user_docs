@@ -77,7 +77,7 @@ Oxkat is a MeerKAT processing pipeline that is written for and commonly used on 
 
 The NRAO [CASA](https://casa.nrao.edu/index.shtml) software is available on Ilifu within dedicated containers. Two CASA implementations exist: a monolithic version installed using the downloadable tar-file distribution, and a modular version installed through pip-wheels.
 
-All CASA containers are available in `/software/astro/containers/`. The latest Monolithic CASA container is `/software/astro/containers/casa-stable-latest.sif`, The modular CASA is available for CASA 6, and the latest modular CASA 6 container is `/software/astro/containers/casa-modular-latest.sif`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`. Older versions of both the monolithic and modular CASA containers are available in: `/software/astro/containers/casa-stable/` and `/software/astro/containers/casa-modular` repectively.
+All CASA containers are available in `/software/astro/containers/`. The latest Monolithic CASA container is `/software/astro/containers/casa-stable-latest.sif`, The modular CASA is available for CASA 6, and the latest modular CASA 6 container is `/software/astro/containers/casa-modular-latest.sif`. A CASA 6 modular container is also available as a Jupyter kernel, named `CASA 6`. Older versions of both the monolithic and modular CASA containers are available in: `/software/astro/containers/casa-stable/` and `/software/astro/containers/casa-modular` respectively.
 
 CASA modules are also available, which include helpful short-hand commands that can be used to run functions using the CASA containers. Run `module help casa` for more information.
 
