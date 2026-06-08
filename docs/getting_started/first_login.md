@@ -17,7 +17,7 @@ Multi-Factor Authentication (MFA) adds an extra layer of security to your accoun
 
 6. Your app will generate a 6-digit verification code.
 
-7. Enter this 6-digit code into the prompt on your computer, and a device name, then click Submit.
+7. Enter this 6-digit code into the prompt on your computer, add a device name for reference, then click Submit.
 
 If you lose access to your phone, you will need to request that your OTP authentication is reset for your account by emailing a request to [support@ilifu.ac.za](mailto:support@ilifu.ac.za).
 
@@ -38,7 +38,7 @@ After updating your password, you must verify that your email address is correct
 
 3. Look for an email with the subject "Verify email".
 
-4. Click the Verify Email link inside the message.
+4. Click the "Link to e-mail address verification" link inside the message.
 
 You will be redirected to the secure login page with a confirmation message.
 
