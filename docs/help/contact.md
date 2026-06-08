@@ -4,7 +4,7 @@ If you need to get hold of any one of the developers or administrators at Ilifu 
 
 ## Email support Tickets
 
-The primary method of support is via email to [support@ilifu.ac.za](mailto:support@ilifu.ac.za) . This goes into a ticket
+The primary method of support is via email to [support@ilifu.ac.za](mailto:support@ilifu.ac.za). This goes into a ticket
 system which the technical staff will respond to.
 
 ## Slack

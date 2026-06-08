@@ -1,8 +1,7 @@
 - **Getting Started**
   - [Request access](getting_started/request_access.md)
-  - [SSH keys](getting_started/ssh.md)
+  - [First login](getting_started/first_login.md)
   - [Accessing the ilifu services](getting_started/access_ilifu.md)
-  - [Change your password](getting_started/change_password.md)
   - [Directory structure](data/directory_structure.md)
   - [Software containers](getting_started/container_environments.md)
   - [Submit a job on Slurm](getting_started/submit_job_slurm.md)
@@ -21,6 +20,7 @@
   - [Data management](data/data_management.md)
   - [Sharing data](data/sharing_data.md)
 - **Technical Documentation**
+  - [SSH keys](tech_docs/ssh.md)
   - [Specifying resources for Slurm jobs](tech_docs/running_jobs.md)
   - [Software environments](tech_docs/software_environments.md)
   - [Resource allocation guide](tech_docs/resource_allocation.md)
