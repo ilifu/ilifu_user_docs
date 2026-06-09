@@ -81,12 +81,12 @@ cat ~/.ssh/id_ed25519.pub
 type %userprofile%\.ssh\id_ed25519.pub
 ```
 
-### 3. Paste the Key into Your Profile
-Use the [SSH key management tool](https://accounts.ilifu.ac.za/ssh_keys) or navigate to your account settings in the top right corner of the [ilifu accounts dashboard](https://accounts.ilifu.ac.za), Select Profile, and click SSH Keys.
+### 3. Add the Key into Your Profile
+Use the [SSH key management tool](https://accounts.ilifu.ac.za/ssh_keys) or navigate to your account settings in the top right corner of the [ilifu accounts dashboard](https://accounts.ilifu.ac.za), Select Profile, and click Update SSH Keys.
 
-Paste your copied public key into the Key text field.
+Paste your copied public key into the SSH Key text field.
 
-Click Save Key.
+Click Add to save your key on your profile.
 
 ## Setup Complete!
 
