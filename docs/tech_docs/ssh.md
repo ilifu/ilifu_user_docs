@@ -28,7 +28,7 @@ Please follow these SSH key hygiene practices:
 
 If you're hitting a `permission denied (publickey)` error it means that their is a mismatch between the SSH keys known to your ssh-agent on your local workstation and the keys associated with your ilifu account.
 
->**SSH hostkeys changed**: Notes that on 9 June 2026 the ilifu services were redeployed and the hostkeys were cycled. When sshing to slurm.ilifu.ac.za or transfer.ilifu.ac.a for the first time, users may see a message about fingerprint of the hostkeys being different to those in ~/.ssh/known_hosts. Users may need to remove the reported line in the known_hosts file, or run `ssh-keygen -R slurm.ilifu.ac.za` and `ssh-keygen -R transfer.ilifu.ac.za` to remove the old hostkeys references. You can check the reported fingerprints against the following:
+>**SSH hostkeys changed**: Notes that on 9 June 2026 the ilifu services were redeployed and the hostkeys were cycled. When sshing to slurm.ilifu.ac.za or transfer.ilifu.ac.a for the first time, users may see a message about fingerprint of the hostkeys being different to those in ~/.ssh/known_hosts. Users may need to remove the reported line in the known_hosts file, or run `ssh-keygen -R slurm.ilifu.ac.za` and `ssh-keygen -R transfer.ilifu.ac.za` to remove the old hostkeys references. You can check the reported fingerprints against the following to ensure you are connecting to the correct remote host:
 
 ```bash
 256 SHA256:aIqjA4PzrzZ71QDouwFBJA6Wv1IKfv3vbAJGEcsCRaE (ED25519)
