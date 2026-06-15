@@ -3,7 +3,7 @@
 To ensure the security of your data and access to ilifu, you need to complete a few essential security steps during your first login. This guide will walk you through enabling One-Time Password (OTP) multi-factor authentication, updating your password, verifying your email, and adding an SSH key.
 
 ## Step 1: Set Up OTP Authentication (MFA)
-Multi-Factor Authentication (MFA) adds an extra layer of security to your account. You will use an authenticator app (like Google Authenticator, 1Password, or Authy) on your mobile device to generate temporary codes.
+Multi-Factor Authentication (MFA) adds an extra layer of security to your account. You will use an authenticator app (like Google Authenticator, Microsoft Authenticator, or Authy) on your mobile device to generate temporary codes.
 
 1. Download an authenticator app from your mobile device's app store.
 
