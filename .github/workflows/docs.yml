@@ -1,0 +1,60 @@
+name: Docs checks
+
+# Guardrails for the documentation. Runs on every pull request to master and on
+# pushes to master. Two blocking checks (markdown lint + internal link check)
+# gate merges; external link rot is reported but non-blocking to avoid flaky
+# failures from transiently unreachable third-party hosts.
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: Markdown lint (mdl)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Install mdl
+        run: gem install mdl
+      - name: Lint docs
+        run: mdl -s mdl.style docs
+
+  internal-links:
+    name: Internal link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check internal links
+        run: python3 scripts/check_links.py
+
+  external-links:
+    name: External link check (non-blocking)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check external URLs with lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Only verify http/https URLs; internal Docsify links (which omit .md
+          # and use ?id= anchors) are covered by the internal-links job instead.
+          args: >-
+            --scheme https --scheme http
+            --exclude-mail
+            --exclude localhost
+            --exclude 'example\.(com|org)'
+            --accept 200,206,429
+            --max-retries 2
+            'docs/**/*.md'
+          fail: false

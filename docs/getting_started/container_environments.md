@@ -21,7 +21,7 @@ A user is able to execute a script using the software from the container environ
 $ sinteractive
 ```
 This will place you on the development node `compute-001`. Singularity is then available and you could execute a Python script using the `python` software in a container, for example:
-```bash
+```console
 $ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
@@ -30,7 +30,7 @@ This command will execute the script, `myscript.py`, using the Python software t
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to run commands in jobs submitted on Slurm**.
 
-```bash
+```console
 $ singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger -c 'print("hello world!")'
 
 optional configuration file not found, continuing CASA startup without it
@@ -45,7 +45,7 @@ hello world!
 #### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
-```bash
+```console
 $ singularity shell /software/astro/containers/sofia-latest.sif 
 SoFiA2v2.5.1.sif:~$ sofia
 ____________________________________________________________________________

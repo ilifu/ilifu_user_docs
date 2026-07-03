@@ -3,7 +3,7 @@ The Slurm documentation [on priority](https://slurm.schedmd.com/priority_multifa
 
 ## Multifactor priority
 Our Slurm is configured to use multifactor priority scheduling which uses a number of factors to determine a job's priority. For each job that's submitted to the cluster, these factors are used to calculate that job's priority. The weighting of these factors can change if they're found not to be giving a fair usage to all users of the cluster. At any time the weights of the factors can be checked as follows:
-```shell
+```console
 $ scontrol show config | grep PriorityWeight
 PriorityWeightAge       = 500
 PriorityWeightAssoc     = 0
@@ -23,7 +23,7 @@ If one needs to check the priority of your jobs you can see this, together with 
 <details>
 <summary><code>sprio -u userA,userB,userC</code></summary>
 
-```shell
+```console
 sprio -u userA,userB,userC
           JOBID PARTITION     USER   PRIORITY       SITE        AGE  FAIRSHARE    JOBSIZE        QOS
         1019947 Main         userC      56778          0         83      56545        151          0
@@ -46,7 +46,7 @@ The fairshare shares associated within the funder-level accounts is set to refle
 <details>
 <summary><code>sshare --format="Account,RawShares"</code></summary>
 
-```shell
+```console
 $ sshare --format="Account,RawShares" | grep " a\|Raw"
              Account  RawShares 
  a01-idia-ag                 33 
@@ -62,7 +62,7 @@ The fairshare shares associated within projects are usually all the same, i.e. a
 <details>
 <summary><code>sshare --format="Account,RawShares" | head -n 30</code></summary>
 
-```shell
+```console
 $ sshare --format="Account,RawShares" | head -n 30
              Account  RawShares 
 -------------------- ---------- 
@@ -104,7 +104,7 @@ CBIO has chosen however to give a higher priority to their primary project:
 <details>
 <summary><code>sshare --format="Account,RawShares | grep cbio</code></summary>
 
-```shell
+```console
 $ sshare --format="Account,RawShares" | grep cbio
  a02-cbio-ag                 20 
   b16-cbio-ag                 1 
@@ -130,7 +130,7 @@ Finally all users within projects (on ilifu) have equal access within their proj
 <details>
 <summary><code>sshare -a --format="Account,User,RawShares" | head -n 40</code></summary>
 
-```shell
+```console
 $ sshare -a --format="Account,User,RawShares" | head -n 40
              Account       User  RawShares 
 -------------------- ---------- ---------- 
@@ -182,7 +182,7 @@ Once the shares have been allocated the actual usage by users/accounts is consid
 <details>
 <summary><code>sshare -a --format="Account,User,RawUsage,FairShare,LevelFS"</code></summary>
 
-```shell
+```console
 $ sshare -a --format="Account,User,RawUsage,FairShare,LevelFS" | grep -v "inf" | grep "User\|b24\|b19"
              Account       User    RawUsage  FairShare    LevelFS 
   b19-meerlicht-ag                239670481              0.188518 
@@ -227,7 +227,7 @@ A note on **LevelFS**: This gives an indication whether an account is using more
 <details>
 <summary><code>sshare --format="Account,RawShares,RawUsage,LevelFS" | grep -v "inf" | grep "Shares\|a0</code></summary>
 
-```shell
+```console
 $ sshare --format="Account,RawShares,RawUsage,LevelFS" | grep -v "inf" | grep "Shares\|a0"
              Account  RawShares    RawUsage    LevelFS 
  a01-idia-ag                 33  2078039237   0.423716 
@@ -243,12 +243,12 @@ And lastly we consider [PriorityDecayHalfLife](https://slurm.schedmd.com/priorit
 <details>
 <summary><code>scontrol show config | grep Decay</code></summary>
 
-```shell
+```console
 $ scontrol show config | grep Decay
 PriorityDecayHalfLife   = 14-00:00:00
 ```
 This is calculated every 5 minutes.
-```shell
+```console
 $ scontrol show config | grep PriorityCalcPeriod
 PriorityCalcPeriod      = 00:05:00
 ```
@@ -259,7 +259,7 @@ PriorityCalcPeriod      = 00:05:00
 
 The QOS settings on ilifu are another limit put in place that is used to limit the amount of resources research projects or users have access to. This is used to ensure that the cluster is not overused by a single user or project. The QOS settings can be checked using the `sacctmgr` command as follows:
 
-```shell
+```console
 $ sacctmgr show qos format="Name%20,GrpTRESRunMins%32,MaxTRESPA%32,MaxTRESPU%35,MaxJobsPU"
                 Name                   GrpTRESRunMins                        MaxTRESPA                           MaxTRESPU MaxJobsPU
 -------------------- -------------------------------- -------------------------------- ----------------------------------- ---------

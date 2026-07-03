@@ -117,7 +117,7 @@ listfile = details_1525469431.txt
 
     We can now inspect details about our observation in the `details_1525469431.txt` which should be similar to the output below.
 
-    ```bash
+    ```text
     ================================================================================
             MeasurementSet Name:  /idia/data/public/1525469431/1525469431_sdp_l0.ms      MS Version 2
     ================================================================================
@@ -376,7 +376,7 @@ The purpose of this call is to read the input MS and extract information used to
 processMeerKAT.py -R -C tutorial_config.txt
 ```
 This should produce an output like
-```bash
+```text
 2025-09-17 11:48:04,902 INFO: Won't process spw '*:1170.909090909091~1243.6363636363635MHz', since it's completely encompassed by bad frequency range 'MHz'.
 2025-09-17 11:48:04,902 INFO: Won't process spw '*:1534.5454545454545~1607.2727272727273MHz', since it's completely encompassed by bad frequency range 'MHz'.
 2025-09-17 11:48:04,910 INFO: Making 9 directories for SPWs (['*:880.0~952.7272727272727MHz', '*:952.7272727272727~1025.4545454545455MHz', '*:1025.4545454545455~1098.1818181818182MHz', '*:1098.1818181818182~1170.909090909091MHz', '*:1243.6363636363635~1316.3636363636365MHz', '*:1316.3636363636365~1389.090909090909MHz', '*:1389.090909090909~1461.818181818182MHz', '*:1461.8181818181818~1534.5454545454545MHz', '*:1607.2727272727273~1680.0MHz']) and copying 'tutorial_config.txt' to each of them.
@@ -414,7 +414,7 @@ This should produce an output like
 ```
 A number of sbatch files have now been written to your working directory, each of which corresponds to the python script in the list of scripts set by the scripts parameter in our config file. Our config file was copied to .`config.tmp`, which is the config file written and edited by the pipeline, which **the user should not touch**. A `logs` directory was created, which will store the **CASA and Slurm** log files. Lastly, a bash script called `submit_pipeline.sh` was written, however, this script was not run, since we set `submit = False` in our config file (to immediately submit to the Slurm queue, you can change this in your config file, or by using option [-s --submit] when you build your config file with processMeerKAT.py). Normally, we would run `./submit_pipeline.sh` to run the pipeline, and return later when it is completed. However, we will look at that later, as we first want to get a handle on how the pipeline works.
 
-    ```
+    ```console
     walter@slurm-login:/scratch3/users/walter/tutorial/1525469431$ ls -l
     1025.4545454545455~1098.1818181818182MHz  
     1389.090909090909~1461.818181818182MHz    
@@ -474,7 +474,7 @@ A number of sbatch files have now been written to your working directory, each o
 
     Using the `./summary.sh` script.
 
-    ```
+    ```console
     walter@compute-001:/scratch3/users/walter/tutorial/1525469431$ ./summary.sh
     SPW #1: /scratch3/users/walter/tutorial/1525469431/880.0~952.7272727272727MHz
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
@@ -559,7 +559,7 @@ A number of sbatch files have now been written to your working directory, each o
     You can also select any other SPW directory from the summary above and run the same command.
     The output will provide a detailed summary of the pipeline jobs for that SPW.
 
-    ```
+    ```console
     walter@compute-001:/scratch3/users/walter/tutorial/1525469431/1607.2727272727273~1680.0MHz$ ./summary.sh
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
     --------------- --------------- ---------- ---------- ------ ------ ----- ------------ ------------ -------------------- ---------- ---------- ---------- ---------- --------
@@ -609,7 +609,7 @@ A number of sbatch files have now been written to your working directory, each o
 Below is an example case where the correct reference antenna was missing.
 
     The full summary (`./summary.sh`) of that failed processing is shown below.
-    ```
+    ```console
     walter@compute-001:~/scratch3/users/walter/tutorial/1525469431$ ./summary.sh
     SPW #1: /scratch3/users/walter/tutorial/1525469431/880.0~952.7272727272727MHz
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
@@ -738,7 +738,7 @@ processMeerKAT.py -R -C tutorial_config.txt
 ```
 Now we wait until all scheduled jobs have completed successfully. Once all imaging jobs have finalized, the resulting product directories will be available in your working area. Using ls -l helps to quickly list and identify the various image products created during the iterative self-calibration process:
 
-```bash
+```console
 walter@compute-001:/scratch3/users/walter/pipeline-training/1525469431-3$ ls -l | grep image.tt0
 drwxr-xr-x 3 walter idia-group         6 Sep  5 03:52 1525469431_sdp_l0_2025-09-03T09-10-19_s1f.ACT-CLJ2023.3-5535.science_image.image.tt0
 drwxr-xr-x 3 walter idia-group         6 Sep  5 03:52 1525469431_sdp_l0_2025-09-03T09-10-19_s1f.ACT-CLJ2023.3-5535.science_image.katbeam_pbcor.image.tt0

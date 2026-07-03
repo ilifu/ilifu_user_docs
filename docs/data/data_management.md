@@ -112,7 +112,7 @@ cat /cbio/projects/my-project/processed/md5sum.txt | sort -k 2 | md5sum
 
 If the output is identical, your data has been copied intact, as all checksums between source and destination are identical. If they're not identical, the difference can be investigated using `diff`. If any files have been missed or skipped, or have partially transferred and are incomplete, they will be output when running `diff`:
 
-```
+```bash
 diff /scratch3/projects/my-project/final-run/md5sum.txt /cbio/projects/my-project/processed/md5sum.txt
 ```
 

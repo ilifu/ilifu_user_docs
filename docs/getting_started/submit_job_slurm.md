@@ -212,7 +212,7 @@ The table below provides a summary of these commands and indicates at which stag
 | sacct          |                      |                    |                          | X                         |
 
 To view the different Slurm partitions (also known as queues) and to get an indication of how busy the cluster is, run the [sinfo](https://slurm.schedmd.com/sinfo.html) command:
-```bash
+```console
 	$ sinfo
 	PARTITION  AVAIL  TIMELIMIT  NODES  STATE NODELIST
 	Main*         up 14-00:00:0      1   resv compute-020

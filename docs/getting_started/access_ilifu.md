@@ -12,7 +12,7 @@ Slurm is a job scheduling system. It consists of a single login node and many co
 
 The ilifu Slurm cluster can be accessed via `ssh` at `slurm.ilifu.ac.za`.
 
-```
+```bash
 $ ssh <username>@slurm.ilifu.ac.za
 ```
 

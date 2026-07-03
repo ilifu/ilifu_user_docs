@@ -32,7 +32,7 @@ While CARTA supports `FITS`, `CASA`, and `Miriad` images as well, we strongly su
 srun fits2idia -o {OUTPUT HDF5 file} {INPUT FITS file}
 ```
 We suggest you perform this conversion with the output file copying straight into a carta_share subdirectory, to avoid additional copies, for example:
-```
+```bash
 srun fits2idia -o /carta_share/users/${USER}/image.hdf5 image.fits
 
 ```

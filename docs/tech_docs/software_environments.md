@@ -19,7 +19,7 @@ A user is able to execute a script using the software from the container environ
 $ sinteractive
 ```
 This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
-```bash
+```console
 $ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
@@ -28,7 +28,7 @@ This command will execute the script, `myscript.py`, using the Python software t
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
 
-```bash
+```console
 $ singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger -c 'print("hello world!")'
 
 optional configuration file not found, continuing CASA startup without it
@@ -43,7 +43,7 @@ hello world!
 #### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
-```bash
+```console
 $ singularity shell /software/astro/containers/sofia-latest.sif
 SoFiA2v2.5.1.sif:~$ sofia
 ____________________________________________________________________________
@@ -63,7 +63,7 @@ This command will spawn a new shell inside the container, in this case the lates
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
-```shell
+```console
 $ singularity run /software/astro/containers/ASTRO-PY3.10-latest.sif -c 'print("hello world!")'
 hello world!
 ```
@@ -464,7 +464,7 @@ In the example above the operating system that is abstracted or seen from within
 
 In order to build the container from the recipe, the following command can be used:
 
-```shell
+```console
 $ sudo singularity build sofia2.sif sofia2.def 
 INFO:    Starting build...
 I: Retrieving InRelease 
@@ -514,7 +514,7 @@ The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is 
 
 Use the `module avail` command, e.g.
 
-```bash
+```console
 $ module avail
 
 ------------------------------ /software/modules/common -------------------------------
@@ -547,7 +547,7 @@ the "keys".
 
 Use the `module add` command, e.g.
 
-```bash
+```console
 USERNAME@compute-101:~$ R --version  # this won't work until the module is added
 
 Command 'R' not found, but can be installed with:
@@ -572,7 +572,7 @@ https://www.gnu.org/licenses/.
 
 Use the `module list` command, e.g.
 
-```bash
+```console
 USERNAME@compute-101:/cbio/soft/lmod$ module list
 No modules loaded
 USERNAME@compute-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
@@ -621,7 +621,7 @@ RStudio has been updated to be launched via a the use of modules (which is descr
 
 The procedure is to start an interactive job, add the RStudio module and run the `rstudio` as below:
 
-```bash
+```console
 USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
 USERNAME@compute-101:~$ module load R/RStudio2025.05.1-513-R4.5.1
 USERNAME@compute-101:~$ rstudio
@@ -635,14 +635,14 @@ then visit http://localhost:8081 in your browser and use the username "USERNAME"
 
 Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
 
-<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
+<img src="/_media/rstudio_login.png" alt="RStudio login page" width=800 />
 
 You will then be presented with an rstudio session:
 
 <img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
 
 If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
-```bash
+```console
 USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
 USERNAME@compute-101:~$ rstudio
 Running rserver on port 60759
@@ -656,7 +656,7 @@ then visit http://localhost:8081 in your browser and use the username "USERNAME"
 
 Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
 
-```bash
+```text
 Host *.ilifu.ac.za
     User USERNAME
     ForwardAgent yes
@@ -686,7 +686,7 @@ Running rserver on port 37543
 
 This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
 
-```bash
+```console
 $ ssh compute-103 -L8082:localhost:37543
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 ...
@@ -694,7 +694,7 @@ Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 
 on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `compute-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
 
-```bash
+```text
 bind [127.0.0.1]:8000: Address already in use
 channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
 ```
@@ -721,7 +721,7 @@ Running VS Code on the Slurm login node will impacted the performance of the Slu
 
 Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
 
-```bash 
+```text
 Host *.ilifu.ac.za
     User <USERNAME>
     ForwardAgent yes
@@ -736,7 +736,7 @@ Host compute-001
 
 Next, an interactive job should be started and then connected to with VS Code. To start an interactive job, the `sinteractive` command is used. The below example extends the default length of 3 hours to 1 day by using the `--time` flag and allocates 4 CPUS using the `-c` flag. Currently, the maximum length for an interactive session is 5 days.
 
-```bash
+```console
 USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
 ```
 
@@ -760,7 +760,7 @@ This will create a virtual environment with the name *virtualenv* (any name can 
 
 The `virtualenv` command will create an environment using the version of python available on the current `$PATH` which by default is the system `python 3.8.10`. If you want to use a different version of python, you can load the corresponding module from those available before creating the virtual environment
 
-```bash
+```console
 $ module load python/2.7.18
 $ which python
 /software/common/python/2.7.18/bin/python
@@ -768,7 +768,7 @@ $ which python
 
 A created virtual environment can then be activated with
 
-```bash
+```console
 $ source /path/to/virtualenv/bin/activate
 (virtualenv)$
 ```
@@ -791,7 +791,7 @@ Virtual envrionments can also be used as Jupyter kernels. This is useful if you 
 
 Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following commmand to install a kernel for the virtual environment.
 
-```bash
+```console
 (virtualenv)$ ipython kernel install --name "my_python_kernel" --user
 
 Installed kernelspec my_python_kernel in /users/USERNAME/.local/share/jupyter/kernels/my_python_kernel

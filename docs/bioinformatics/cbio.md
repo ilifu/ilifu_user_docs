@@ -21,7 +21,7 @@ Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-
 
 Genome strip requires the use of [environment modules](tech_docs/software_environments#environment-modules) to configure your software environment. The genome strip module is: `bio/svtoolkit/2.00.1918`, i.e. you should run:
 
-```bash
+```console
 $ module add bio/svtoolkit/2.00.1918
 $ module list
 

@@ -12,13 +12,13 @@ The `scp` and `rsync` tools are useful for transferring data up to 200 GB, or if
 
 The following is an example of how to scp from your personal computer to the ilifu facility. From the terminal on your personal computer:
 
-```
+```bash
 $ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
 ```
 
 The above command will copy the file to your home directory on ilifu. You can also specify an alternative path in the destination, for example:
 
-```
+```bash
 $ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts/
 ```
 
@@ -46,15 +46,15 @@ Type in `ilifu` in the Collection search field and select the `Ilifu (Globus 5)`
 
 Authentication will be required and you can select `Continue`:
 
-<div style="text-align:center"><img src="/_media/data_globus_03_1.png" alt="globus online ilifu login" width=500 /></div>
+<div style="text-align:center"><img src="/_media/data_globus_03_1.png" alt="Globus authentication Continue prompt" width=500 /></div>
 
 You will be redirected to page to select an identity from an identity provider, choose to `Link an identity from IDIA (login.idia.ac.za)`
 
-<div style="text-align:center"><img src="/_media/data_globus_03_2.png" alt="globus online ilifu login" width=500 /></div>
+<div style="text-align:center"><img src="/_media/data_globus_03_2.png" alt="Globus identity provider selection screen" width=500 /></div>
 
 If you access the app directly from the `Globus` URL, you will then be redirected to a login screen, where you can enter your ilifu credentials:
 
-<div style="text-align:center"><img src="/_media/data_globus_04.png" alt="globus online ilifu login" width=400 /></div>
+<div style="text-align:center"><img src="/_media/data_globus_04.png" alt="ilifu credentials login screen" width=400 /></div>
 
 Otherwise, you’ll then be redirected to a window where you’ll be able to browse through your home directory on the ilifu system. The ilifu system is only one endpoint of the transfer process. You will need to then set up the source or destination for the transfer. In order to do this, click on the button in the upper right corner of the file list, and you’ll see a menu displayed:
 

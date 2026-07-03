@@ -107,7 +107,7 @@ If you wish to run a job on a GPU node you need to specify the `GPU` partition u
 
 You can also get the properties of the GPU node using `scontrol show node <node_name>`, which will show you the number of GPUs available on that node, as well as the GPU type and memory available. For example, to get the properties of the `gpu-001` node, you would run:
 
-```bash
+```console
 $ scontrol show node gpu-001
 NodeName=gpu-001 Arch=x86_64 CoresPerSocket=16 
    CPUAlloc=24 CPUEfctv=32 CPUTot=32 CPULoad=24.00

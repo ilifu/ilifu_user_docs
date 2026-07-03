@@ -29,7 +29,7 @@ $ chmod g-rx /idia/users/$USER
 These commands can be run rescursively, using `-R`, to adjust the permissions on all subdirectories and files. To navigate into a directory, execute (`x`) permission is required. If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory. 
 
 When opening access to files or directories, always be aware of the group ownership and access permissions set on your other files and directories. You can list these using `ls -ld`, for example:
-```bash
+```console
 $ ls -ld /idia/users/$USER
 drwx------ 12 janedoe idia-group 21 Oct  7 13:02 /idia/users/janedoe
 ```
@@ -49,7 +49,7 @@ ACLs are set using the `setfacl` command. For example, to share data with anothe
 $ setfacl -m u:janedoe:r-x /idia/users/$USER
 ```
 You can view the ACLs that are configured on a file or folder using the `getfacl` command, for example:
-```bash
+```console
 $ getfacl /idia/users/$USER
 getfacl: Removing leading '/' from absolute path names
 # file: idia/users/johndoe
