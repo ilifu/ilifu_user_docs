@@ -19,9 +19,6 @@ jobs:
   markdownlint:
     name: Markdown lint (mdl, advisory)
     runs-on: ubuntu-latest
-    # Advisory only: reports style findings but does not block merges while the
-    # pre-existing backlog is worked down. Flip to false once the docs are clean.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -30,6 +27,10 @@ jobs:
       - name: Install mdl
         run: gem install mdl
       - name: Lint docs
+        # Advisory only (step-level continue-on-error keeps the check green):
+        # reports style findings without blocking merges while the pre-existing
+        # backlog is worked down. Drop this line once the docs lint clean.
+        continue-on-error: true
         run: mdl -s ./mdl.style docs
 
   internal-links:
