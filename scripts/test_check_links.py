@@ -17,6 +17,8 @@ def _load_module(docs_root: Path):
     spec = importlib.util.spec_from_file_location(
         "check_links", Path(__file__).with_name("check_links.py")
     )
+    if spec is None or spec.loader is None:
+        raise RuntimeError("Could not load check_links.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     mod.DOCS_ROOT = docs_root  # point the checker at our fixture tree

@@ -96,7 +96,7 @@ Paste your copied public key into the SSH Key text field.
 
 Click Add to save your key on your profile.
 
->**SSH hostkeys changed**: Notes that on 9 June 2026 the ilifu services were redeployed and the hostkeys were cycled. When sshing to slurm.ilifu.ac.za or transfer.ilifu.ac.a for the first time, users may see a message about fingerprint of the hostkeys being different to those in ~/.ssh/known_hosts. Users may need to remove the reported line in the known_hosts file, or run `ssh-keygen -R slurm.ilifu.ac.za` and `ssh-keygen -R transfer.ilifu.ac.za` to remove the old hostkeys references. You can check the reported fingerprints against the following to ensure you are connecting to the correct remote host:
+>**SSH hostkeys changed**: Notes that on 9 June 2026 the ilifu services were redeployed and the hostkeys were cycled. When sshing to slurm.ilifu.ac.za or transfer.ilifu.ac.za for the first time, users may see a message about fingerprint of the hostkeys being different to those in ~/.ssh/known_hosts. Users may need to remove the reported line in the known_hosts file, or run `ssh-keygen -R slurm.ilifu.ac.za` and `ssh-keygen -R transfer.ilifu.ac.za` to remove the old hostkeys references. You can check the reported fingerprints against the following to ensure you are connecting to the correct remote host:
 
 ```text
 256 SHA256:aIqjA4PzrzZ71QDouwFBJA6Wv1IKfv3vbAJGEcsCRaE (ED25519)
@@ -107,6 +107,6 @@ Click Add to save your key on your profile.
 
 ## Setup Complete
 
-You have successfully secured your account. You will now be to access ilifu services. On future logins, you will only need your new password for web-based services and the rotating 6-digit OTP code from your phone for both web-based services and access via SSH.
+You have successfully secured your account. You will now be able to access ilifu services. On future logins, you will only need your new password for web-based services and the rotating 6-digit OTP code from your phone for both web-based services and access via SSH.
 
 If you encounter any issues during this setup process, please contact the ilifu support team at [support@ilifu.ac.za](mailto:support@ilifu.ac.za).
