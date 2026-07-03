@@ -3,32 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <title>Ilifu User Documentation</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="keywords" content="doc,docs,documentation,ILIFU,ilifu,Ilifu,astronomy,bioinformatics,biology,jekyll,github-pages">
-  <meta name="description" content="Ilifu User Documentation.">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" title="vue">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="ilifu,documentation,HPC,Slurm,cloud computing,astronomy,MeerKAT,bioinformatics,research computing">
+  <meta name="description" content="User documentation for the ilifu cloud computing facility: how to request access, log in, transfer data, submit Slurm jobs, and run astronomy and bioinformatics workflows.">
+
+  <!-- Favicon & mobile browser chrome -->
+  <link rel="icon" type="image/svg+xml" href="_media/IlifuLogoHiRes.svg">
+  <meta name="theme-color" content="#0384bb">
+
+  <!-- Open Graph / Twitter link previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ilifu User Documentation">
+  <meta property="og:description" content="How to use the ilifu cloud computing facility: access, data transfer, Slurm jobs, and astronomy/bioinformatics workflows.">
+  <meta property="og:url" content="https://docs.ilifu.ac.za/">
+  <meta property="og:image" content="https://docs.ilifu.ac.za/_media/Ilifu_background.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ilifu User Documentation">
+  <meta name="twitter:description" content="How to use the ilifu cloud computing facility: access, data transfer, Slurm jobs, and astronomy/bioinformatics workflows.">
+  <meta name="twitter:image" content="https://docs.ilifu.ac.za/_media/Ilifu_background.png">
+
+  <link rel="stylesheet" href="https://unpkg.com/docsify@4.13.1/lib/themes/vue.css" title="vue">
+  <style>
+    /* Brand the stock Vue theme with the ilifu palette (logo cyan / navy). */
+    :root {
+      --theme-color: #0384bb;        /* ilifu cyan, darkened for AA contrast on white links */
+    }
+
+    /* Command blocks are prompt-free and meant to be copied. `console` blocks are
+       terminal transcripts (prompt + output) shown for illustration, not copying,
+       so hide the copy button on them. */
+    .markdown-section pre[data-lang="console"] .docsify-copy-code-button {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <div id="app">Loading ...</div>
   <script>
     window.$docsify = {
-      //repo: 'https://github.com/ilifu/ilifu_user_docs',
+      repo: 'ilifu/ilifu_user_docs',
       coverpage: false,
       auto2top: true,
       maxLevel: 5,
-      subMaxLevel: 5,
+      subMaxLevel: 3,
       loadSidebar: true,
       name: 'Ilifu User Documentation',
-      logo: '_media/IlifuLogoHiRes.svg'
+      logo: '_media/IlifuLogoHiRes.svg',
+      search: {
+        placeholder: 'Search the docs…',
+        noData: 'No results found.',
+        depth: 4
+      }
     }
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <script src="//unpkg.com/prismjs/components/prism-json.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
-  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
-<!-- <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script> -->
-  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.js"></script>
-  <script src="//unpkg.com/docsify-copy-code"></script>
+  <script src="https://unpkg.com/docsify@4.13.1/lib/docsify.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.30.0/components/prism-json.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.30.0/components/prism-bash.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.30.0/components/prism-python.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.30.0/components/prism-yaml.min.js"></script>
+  <!-- shell-session depends on bash (loaded above); alias `console` to it below. -->
+  <script src="https://unpkg.com/prismjs@1.30.0/components/prism-shell-session.min.js"></script>
+  <script>
+    if (window.Prism && Prism.languages['shell-session']) {
+      Prism.languages.console = Prism.languages['shell-session'];
+    }
+  </script>
+  <script src="https://unpkg.com/docsify@4.13.1/lib/plugins/search.min.js"></script>
+  <script src="https://unpkg.com/docsify@4.13.1/lib/plugins/emoji.min.js"></script>
+  <script src="https://unpkg.com/docsify-pagination@2.10.1/dist/docsify-pagination.min.js"></script>
+  <script src="https://unpkg.com/docsify-copy-code@3.0.2/dist/docsify-copy-code.min.js"></script>
 </body>
 </html>

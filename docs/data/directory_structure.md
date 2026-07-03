@@ -11,7 +11,7 @@ Users' home directories (`$HOME`) are located in `/users/`, **limited to 200GB**
 The scratch mounts are the primary directories for data processing, particularly when large intermediate data products (many TBs) are expected to be generated.
 These directories are for **short-term use only, and have a 90-day auto-deletion policy**. This means that **once every month**, we will **automatically delete files from scratch mounts** that have not been accessed or modified for more than 90 days<sup>1</sup>. Only temporary data required for processing should therefore be copied here. After processing, data products should be moved to the relevant project or group directory, and intermediate data products should be removed **immediately**. **No files or data should remain in the scratch directories when not actively working**.
 
-**Folder locations:**  
+**Folder locations:**
 
 `/scratch3/users/<username>` is a users' specific directory for data processing.
 
@@ -36,7 +36,6 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 `/software` contains common software packages needed for workflows, including containers and modules.
 
-
 #### IDIA directory structure
 
 * `/idia/` - the base directory for all IDIA related projects.
@@ -56,6 +55,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 Users' home directories are in `/users/`. This is not currently backed up.
 
 CBIO users will be using the CephFS parallel file partition — our space is in `/cbio/`. Directories that have been setup:
+
 * `/cbio/users` - user's personal workspace. **Limited to 10TB**. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
 
 * `/cbio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project long-term data, data products, intermediate data and project specific resources, such as scripts , are stored here.

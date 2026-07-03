@@ -51,12 +51,12 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 #SBATCH --cpus-per-task=1
 
 module load openmpi/4.1.0
-mpirun -n <number of processes to run> singularity exec <path/to/container> </path/to/binary/within/container>
+mpirun -n NUM_PROCESSES singularity exec /path/to/container.sif /path/to/binary/within/container
 ```
 
-It is important to note that when running jobs in parallel using a container, the container must also have `MPI` installed in it and the version and implementation inside the container must be the same as the version used on the cluster. Please keep this in mind if building a new container intended for parallel jobs, and select an `MPI` implemtation this is supported on ilifu. There are a number of versions of `openmpi` supported, as well as a single version of `mpich`. View available versions by running `module avail`.
+It is important to note that when running jobs in parallel using a container, the container must also have `MPI` installed in it and the version and implementation inside the container must be the same as the version used on the cluster. Please keep this in mind if building a new container intended for parallel jobs, and select an `MPI` implementation that is supported on ilifu. There are a number of versions of `openmpi` supported, as well as a single version of `mpich`. View available versions by running `module avail`.
 
-A detailed guide on parallelism on the cluster can be found in the [ilifu User Training video](https://www.ilifu.ac.za/latest-training/#training-advanced2) and [presentation slides](https://docs.ilifu.ac.za/training/2025/ilifu_online_training_session3_20250916_presentation1.pdf). 
+A detailed guide on parallelism on the cluster can be found in the [ilifu User Training video](https://www.ilifu.ac.za/latest-training/#training-advanced2) and [presentation slides](https://docs.ilifu.ac.za/training/2025/ilifu_online_training_session3_20250916_presentation1.pdf).
 
 ### Customising your job using sbatch/srun parameters
 
@@ -64,22 +64,22 @@ The following table lists the parameters that can be used to describe the requir
 
 <summary id='slurm-job-parameters'></summary>
 
-| Syntax                                                                               | Meaning                                         		      |
+| Syntax                                                                               | Meaning                                                       |
 |--------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | --time=&#60;minutes&#62;<sup>1</sup>                                                 | Walltime for job (default is 3 hrs)                          |
 | --mem=&#60;number&#62;<sup>2,11</sup>                                                | Maximum amount of memory per node                            |
-| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)						      |
+| --mem-per-cpu=&#60;number&#62;<sup>2,3,11</sup>                                      | Memory per processor core (CPU)                              |
 | --cpus-per-task=&#60;number&#62;<sup>3,4,11</sup>                                    | Number of CPUs per task (default is 1)                       |
-| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)          	      |
-| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)     	      |
-| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node            		      |
-| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main)    	      |
-| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job       	      |
-| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources       	      |
-| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                   	      |
-| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to             	      |
-| --mail-user=&#60;email_address&#62;<sup>10</sup>                                     | email address where notifications should be sent   	      |
-| --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification 	      |
+| --ntasks=&#60;number&#62;<sup>4</sup>                                                | Number of processes to run (default is 1)                    |
+| --nodes=&#60;number&#62;<sup>5,11</sup>                                              | Number of nodes on which to run (default is 1)               |
+| --ntasks-per-node=&#60;number&#62;<sup>4,5</sup>                                     | Number of tasks to invoke on each node                          |
+| --partition=&#60;partition_name&#62;<sup>6</sup>                                     | Request specific partition/queue (default Main)              |
+| --account=&#60;account_name&#62;<sup>7</sup>                                         | The account that will be charged for the job                 |
+| --gres=&#60;resource_type&#62;:&#60;resource_name&#62;:&#60;number&#62;<sup>8</sup>  | Specify type and number of generic resources                 |
+| --output=&#60;file_name&#62;<sup>9</sup>                                             | File to write standard output to                             |
+| --error=&#60;file_name&#62;<sup>9</sup>                                              | File to write standard error output to                       |
+| --mail-user=&#60;email_address&#62;<sup>10</sup>                                     | email address where notifications should be sent             |
+| --mail-type=&#60;event_types&#62;<sup>10</sup>                                       | list of events that should send email notification           |
 <!-- also include row for array jobs -->
 
 *default parameters, if not specified, include: 1 node, 1 task, 1 CPU, 3 hrs, and the Main partition. Default memory scales with the number of CPUs specified, and by default (for 1 CPU), is 7.25 GB on Main nodes, 15 GB on HighMem nodes, and unallocated the Devel node.*
@@ -90,7 +90,7 @@ The following table lists the parameters that can be used to describe the requir
 4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), Slurm works with MPI to manage parallelised processing of data.
 5. nodes refers to a single compute node or Slurm worker, i.e. one node that has 32 CPUs and 232 GB RAM
 6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](#notes-for-gpu-jobs).
-7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
+7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=ACCOUNT`, where `ACCOUNT` is one of your valid accounts.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](#notes-for-gpu-jobs).
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)
@@ -103,22 +103,22 @@ If you wish to run a job on a GPU node you need to specify the `GPU` partition u
 ```bash
 #SBATCH --partition=GPU
 #SBATCH --gres=gpu:1
-``` 
+```
 
 You can also get the properties of the GPU node using `scontrol show node <node_name>`, which will show you the number of GPUs available on that node, as well as the GPU type and memory available. For example, to get the properties of the `gpu-001` node, you would run:
 
-```bash
+```console
 $ scontrol show node gpu-001
-NodeName=gpu-001 Arch=x86_64 CoresPerSocket=16 
+NodeName=gpu-001 Arch=x86_64 CoresPerSocket=16
    CPUAlloc=24 CPUEfctv=32 CPUTot=32 CPULoad=24.00
    AvailableFeatures=p100,P100
    ActiveFeatures=p100,P100
    Gres=gpu:2(S:0-31)
    NodeAddr=gpu-001 NodeHostName=gpu-001 Version=23.11.6
-   OS=Linux 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 
+   OS=Linux 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023
    RealMemory=237568 AllocMem=178176 FreeMem=221788 Sockets=2 Boards=1
    State=MIXED ThreadsPerCore=1 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
-   Partitions=GPU 
+   Partitions=GPU
    BootTime=2025-05-30T05:41:42 SlurmdStartTime=2025-05-30T05:44:29
    LastBusyTime=2025-06-24T07:17:18 ResumeAfterTime=None
    CfgTRES=cpu=32,mem=232G,billing=1763704832,gres/gpu=2
@@ -129,13 +129,17 @@ NodeName=gpu-001 Arch=x86_64 CoresPerSocket=16
 ```
 
 Two lines of interest here are:
-```
+
+```text
    Gres=gpu:2(S:0-31)
 ```
+
 which shows that there are two GPUs available on this node, and that they are available on all 32 cores of the node (S:0-31); and
-```
+
+```text
    AvailableFeatures=p100,P100
 ```
+
 which shows that this node has two P100 GPUs available.
 
 Note that one can select nodes based on the GPU type using the `--constraint` parameter, for example:
@@ -155,6 +159,7 @@ Temporary files are files that are not intended to be kept permanently. They are
 In addition to the scratch storage described in the [Directory structure](data/directory_structure.md#scratch-storage) section, many applications and jobs will, by default, create temporary files in the user's home directory, in the job's working directory and in the `/tmp/` system directory. These files can accumulate over time and consume significant disk space. It is important to regularly clean up these temporary files to maintain a healthy storage environment. `/tmp/` is especially important to clean up as it is shared by all users and can fill up quickly, leading to system issues and should be avoided if at all possible.
 
 #### Using `/dev/shm/` for temporary files
+
 The `/dev/shm/` directory is a temporary filesystem (tmpfs) that is used for shared memory in Linux. It is often used for storing temporary files that need to be accessed quickly. The advantage of using `/dev/shm/` is that it is stored in RAM, which makes it much faster than disk-based storage. But in order to use it effectively, you need to ensure that the size of `/dev/shm/` is sufficient for your needs — and this will come out of your memory allocation for the job. So if you are running a job that requires a lot of temporary storage, you should ensure that the job is allocated enough memory to accommodate the size of `/dev/shm/` in addition to the memory required for the job itself.
 
 Below is an example of how to use `/dev/shm/` for temporary files in a Slurm job script:
