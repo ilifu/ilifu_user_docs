@@ -13,7 +13,7 @@ Slurm is a job scheduling system. It consists of a single login node and many co
 The ilifu Slurm cluster can be accessed via `ssh` at `slurm.ilifu.ac.za`.
 
 ```bash
-ssh <username>@slurm.ilifu.ac.za
+ssh USERNAME@slurm.ilifu.ac.za
 ```
 
 This will place the user on the login node. Note that this node should only be used to submit and manage jobs and not for running code or software directly. The compute nodes are where jobs are run, either through submitting a batch script that describes the job to be executed, or interactively running applications on a compute node. See [Submitting a job on Slurm](getting_started/submit_job_slurm.md) for more information on how to do this.
@@ -21,7 +21,7 @@ This will place the user on the login node. Note that this node should only be u
 **Note** some activities require direct access to Slurm compute nodes via ssh, such as running `htop` to monitor your running job. In order to achieve this you must use authentication forwarding when sshing onto the Slurm login node using the `-A` parameter, for example:
 
 ```bash
-ssh -A <username>@slurm.ilifu.ac.za
+ssh -A USERNAME@slurm.ilifu.ac.za
 ```
 
 See a summary of the Slurm partitions and their use cases [below](getting_started/access_ilifu?id=summary-of-ilifu-services-or-partitions-and-their-use-case).

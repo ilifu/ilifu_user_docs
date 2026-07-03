@@ -13,13 +13,13 @@ The `scp` and `rsync` tools are useful for transferring data up to 200 GB, or if
 The following is an example of how to scp from your personal computer to the ilifu facility. From the terminal on your personal computer:
 
 ```bash
-scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
+scp /path/to/file/FILENAME USERNAME@transfer.ilifu.ac.za:~
 ```
 
 The above command will copy the file to your home directory on ilifu. You can also specify an alternative path in the destination, for example:
 
 ```bash
-scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts/
+scp /path/to/file/FILENAME USERNAME@transfer.ilifu.ac.za:/idia/users/USERNAME/scripts/
 ```
 
 For more information about the `scp` and `rysnc` tools please read the manual pages using `man scp` or `man rysnc` from the command line.
@@ -69,7 +69,7 @@ Select `Transfer or Sync to...` to select the other endpoint in your file transf
 Globus does not transfer symbolic links (symlinks), so data transferred that includes symlinks, such as Multi-MeasurementSets (MMS) for astronomy, will be incomplete. Therefore, it is advised that the user select "Transfer & Timer Options" --> "preserve source file modification times" from the file manager. This enables the symlinks to be later repaired with a quick and simple rsync command, such as:
 
 ```bash
-rsync -avhn --size-only --progress --stats <username>@transfer.ilifu.ac.za:/scratch3/users/${USER}/my_data/ /${USER}/my_desktop/my_data
+rsync -avhn --size-only --progress --stats USERNAME@transfer.ilifu.ac.za:/scratch3/users/${USER}/my_data/ /${USER}/my_desktop/my_data
 ```
 
 This will perform a 'dry run', which will "perform a trial run with no changes made". After verifying the correct files (i.e. symlinks only) will be transferred, re-running the expression above with option `-n` removed will perform the transfer.

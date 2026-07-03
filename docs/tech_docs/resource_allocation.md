@@ -81,7 +81,7 @@ Which is given in units of kB. To calculate this in GB, divide the value by 1024
 For jobs that have been previously run, you can list the `MaxRSS` with
 
 ```bash
-sacct -j <jobid> --unit=G -o JobID,JobName,MaxRSS,ReqMem
+sacct -j JOBID --unit=G -o JobID,JobName,MaxRSS,ReqMem
 ```
 
 This will also list your requested memory (`ReqMem`) and the unit (e.g. `12 Gn` = 12 GB per node, or `7.25c` = 7.25 GB per core), for comparison to the used memory. By default, if the memory is unset (or `--mem=0`), it will use the default memory per CPU (`DefMemPerCPU`), which is 7.25 GB for a Main node, and 15 GB for a `HighMem` node. For a job with 32 CPUs, this uses all of the memory.
@@ -96,12 +96,12 @@ To determine CPU requirements, for running jobs, you can ssh onto the node(s) wh
 htop -u $USER
 ```
 
-This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (`ssh -A <username>@slurm.ilifu.ac.za`).
+This gives a dashboard of computing resources for your different (e.g. master and spawned) processes that are running on the node, and allows you to monitor how the resource usage of your job progresses in real time. To ssh onto the node, you must have a job running on that node, and you must enable authentication forwarding when you first ssh onto the cluster using the `-A` parameter (`ssh -A USERNAME@slurm.ilifu.ac.za`).
 
 Similar to sacct, for jobs that have been previous run, you can list the efficiency of your job’s use of compute resources with
 
 ```bash
-seff <jobid>
+seff JOBID
 ```
 
 This will display the CPU and memory efficiency as a percentage between allocated/requested and used resources. The used memory within this calculation is taken from the MaxRSS.
@@ -129,7 +129,7 @@ sacctmgr show user $USER
 You can change your default account using:
 
 ```bash
-sacctmgr modify user name=${USER} set DefaultAccount=<account>
+sacctmgr modify user name=${USER} set DefaultAccount=ACCOUNT
 ```
 
 When submitting a job, your account can be specified within the Slurm parameter `--account` (following `#SBATCH` within sbatch jobs). For example: `--account=b05-pipelines-ag`

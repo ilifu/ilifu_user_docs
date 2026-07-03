@@ -845,9 +845,9 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
     ```bash
     ssh username@slurm.ilifu.ac.za
     ```
-2. Navigate to a working area `/scratch3/users/<username>/tutorial/1491550051` or `/scratch3/projects/<project>/tutorial/1491550051)`:
+2. Navigate to a working area `/scratch3/users/USERNAME/tutorial/1491550051` or `/scratch3/projects/PROJECT_NAME/tutorial/1491550051`:
     ```bash
-    cd /scratch3/users/<username>/tutorial/1491550051
+    cd /scratch3/users/USERNAME/tutorial/1491550051
     ```
 3. Clone the contents of [OXKAT-repo](https://github.com/IanHeywood/oxkat.git) into your working area:
     ```bash

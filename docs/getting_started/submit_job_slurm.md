@@ -185,7 +185,7 @@ Note: In the rare occasion that the Slurm login node is restarted, even persiste
 In the event that you wish to use software that provides a GUI, such as `CASA plotms`, you can start an interactive session with `X11 forwarding`. You must `ssh` into the Slurm login node with the `-Y` parameter, which sets your `DISPLAY` variable for trusted `X11 forwarding`, for example:
 
 ```bash
-ssh -Y <username>@slurm.ilifu.ac.za
+ssh -Y USERNAME@slurm.ilifu.ac.za
 ```
 
 From there, you must use `--x11` to allocate a Slurm compute node to yourself with `X11 forwarding` as follows:
@@ -251,7 +251,7 @@ While your job is queued or running, you can check on its status using `squeue` 
 [scontrol](https://slurm.schedmd.com/scontrol.html) can be used to look at individual jobs in more detail. You can use `squeue` to determine the relevant `jobid` and then use the following command to view detailed information for that job:
 
 ```bash
-scontrol show j <jobid>
+scontrol show j JOBID
 ```
 
 This will show all the information associated with the job, including the job parameters you set, as well as the defaults that were used for parameters that you did not set. You can review a jobs timelimit this way and check if a long running jobs is at risk of timing out or not. **Note this command is only valid for pending or running jobs, use sacct for jobs that have completed.**
@@ -267,7 +267,7 @@ sacct
 If you know the jobid of the job you're interested in, you can do:
 
 ```bash
-sacct -j <jobid>
+sacct -j JOBID
 ```
 
 Otherwise, you can list all the jobs for your user after a certain date, or between dates using `--startime` and `--endtime`:

@@ -787,7 +787,7 @@ The name of the virtual environment will show enclosed in brackets before the co
 Specific python packages or a requirements list can then be installed using
 
 ```bash
-pip install <python_package>
+pip install PACKAGE_NAME
 ```
 
 ```bash
@@ -815,7 +815,7 @@ Note the kernel can be named anything, but it is recommended to use something de
 If you require a single, less common package to use in conjunction with an existing kernel, you can install it for your user account with
 
 ```bash
-pip install --user <python_package>
+pip install --user PACKAGE_NAME
 ```
 
 This command needs to be run from a worker node that has access to the `pip` command, either by using a Python module or by shelling inside a container. This is most easily done through a command line terminal started from the Jupyter Launcher. Note that packages installed this way in a user space can conflict with the same packages in existing kernels, and as such this method should only be used for very use-case specific packages. Note that to use a package in conjunction with an existing kernel, the pip python version must correspond to the python version of the kernel (3.6, 3.7 etc.).

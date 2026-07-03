@@ -51,10 +51,10 @@ When using MPI, you must wrap your software call (including Singularity) in an M
 #SBATCH --cpus-per-task=1
 
 module load openmpi/4.1.0
-mpirun -n <number of processes to run> singularity exec <path/to/container> </path/to/binary/within/container>
+mpirun -n NUM_PROCESSES singularity exec /path/to/container.sif /path/to/binary/within/container
 ```
 
-It is important to note that when running jobs in parallel using a container, the container must also have `MPI` installed in it and the version and implementation inside the container must be the same as the version used on the cluster. Please keep this in mind if building a new container intended for parallel jobs, and select an `MPI` implemtation this is supported on ilifu. There are a number of versions of `openmpi` supported, as well as a single version of `mpich`. View available versions by running `module avail`.
+It is important to note that when running jobs in parallel using a container, the container must also have `MPI` installed in it and the version and implementation inside the container must be the same as the version used on the cluster. Please keep this in mind if building a new container intended for parallel jobs, and select an `MPI` implementation that is supported on ilifu. There are a number of versions of `openmpi` supported, as well as a single version of `mpich`. View available versions by running `module avail`.
 
 A detailed guide on parallelism on the cluster can be found in the [ilifu User Training video](https://www.ilifu.ac.za/latest-training/#training-advanced2) and [presentation slides](https://docs.ilifu.ac.za/training/2025/ilifu_online_training_session3_20250916_presentation1.pdf).
 
@@ -90,7 +90,7 @@ The following table lists the parameters that can be used to describe the requir
 4. a task is an instance of a running program, and generally you will only want one task, unless you use software with MPI support (for example MPICASA), Slurm works with MPI to manage parallelised processing of data.
 5. nodes refers to a single compute node or Slurm worker, i.e. one node that has 32 CPUs and 232 GB RAM
 6. The partition is the specific part of the cluster your job will run. You will only set this if you are [running a GPU job](#notes-for-gpu-jobs).
-7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=<account>`, where `<account>` is one of your valid accounts.
+7. To find your default account you can run the command `sacctmgr show User -p | grep ${USER}`, while the command `sacctmgr show Associations User=${USER} -p | cut -f 2 --d="|"` will show all your valid accounts. Note that it is only important that you set the account parameter if you are associated with more than one project on the cluster. You can change your default account using `sacctmgr modify user name=${USER} set DefaultAccount=ACCOUNT`, where `ACCOUNT` is one of your valid accounts.
 8. Request generic resource (per node). You will only use this if you are [running a GPU job](#notes-for-gpu-jobs).
 9. The filename can include `%j`, which will be substituted with the job's ID.
 10. Email notifications can optionally be sent when a job's state changes. Create a comma-separated list with at least one of the following notification types: `NONE`; `BEGIN`; `END`; `FAIL`; `REQUEUE`; `ALL` (equivalent to `BEGIN,END,FAIL,REQUEUE,STAGE_OUT); STAGE_OUT`; `TIME_LIMIT`; `TIME_LIMIT_90` (reached 90 percent of time limit); `TIME_LIMIT_80` (reached 80 percent of time limit); `TIME_LIMIT_50` (reached 50 percent of time limit); and `ARRAY_TASKS`. ARRAY_TASKS will mean that a notification will be sent for each task in a job array (the default is only for the job array as a whole.)

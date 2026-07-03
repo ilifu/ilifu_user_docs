@@ -42,7 +42,7 @@ If you're hitting a `permission denied (publickey)` error it means that there is
 If you generated the SSH key pair using non-default name and path (i.e. it is not at ~/.ssh/id_rsa or ~/.ssh/id_ed25519), you will need to specify the path to the correct SSH key when running the `ssh` command:
 
 ```bash
-ssh -i /path/to/ssh/key <username>@slurm.ilifu.ac.za
+ssh -i /path/to/ssh/key USERNAME@slurm.ilifu.ac.za
 ```
 
 The path should point to the private key file, i.e. the file that doesn't have the .pub suffix, example: `ssh -i ~/.ssh/ilifu_key janedoe@slurm.ilifu.ac.za`.
