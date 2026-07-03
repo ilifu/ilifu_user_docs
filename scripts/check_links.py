@@ -81,10 +81,15 @@ def resolve(target: str, source: Path) -> Path | None:
         # Try both root-relative (Docsify default) and source-relative.
         bases = [DOCS_ROOT / clean, source.parent / clean]
 
+    root = DOCS_ROOT.resolve()
     for base in bases:
         for cand in _candidates(base):
             try:
-                if cand.resolve().is_file():
+                resolved = cand.resolve()
+                # Only accept targets served by Docsify: real files under docs/.
+                # A `../` path that escapes the site root would 404 on the live
+                # site, so treat it as broken even if it exists on disk.
+                if resolved.is_file() and resolved.is_relative_to(root):
                     return cand
             except OSError:
                 continue
