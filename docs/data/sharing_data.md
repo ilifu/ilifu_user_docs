@@ -30,7 +30,7 @@ To remove the group read and execute permission use a `-` in place of the `+`:
 chmod g-rx /idia/users/$USER
 ```
 
-These commands can be run rescursively, using `-R`, to adjust the permissions on all subdirectories and files. To navigate into a directory, execute (`x`) permission is required. If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory.
+These commands can be run recursively, using `-R`, to adjust the permissions on all subdirectories and files. To navigate into a directory, execute (`x`) permission is required. If you enable access on a file or directory in a subdirectory, and the user trying to access these paths doesn't have access permissions enabled on the parent directory, they will not be able to access the files. You can provide execute permissions (`x`) on parent directories, without providing read access (`r`), to allow the user to navigate to the intended file or subdirectory.
 
 When opening access to files or directories, always be aware of the group ownership and access permissions set on your other files and directories. You can list these using `ls -ld`, for example:
 

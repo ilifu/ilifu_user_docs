@@ -268,7 +268,7 @@ Several containers have been developed for use on the ilifu cluster and in other
 <details>
 <summary id="ASTRO-GPU-container">ASTRO-GPU containers</summary>
 
-**Description:** These containers includes Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python pacakges have also been included.
+**Description:** These containers include Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python packages have also been included.
 
 **JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
 

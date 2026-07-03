@@ -97,7 +97,7 @@ Please note the following before starting an interactive job:
 
 ### Interactive session quick start
 
-If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command aims to provide on-demand access to resources on the `Devel` partition. This partition is designed to elimiate wait time by sharing resources between mulitple users. The `sinteractive` command is a wrapper around the `srun` command that allows you to quickly start a job on the `Devel` partition, connect to the appropriate server, and work on that server directly with minimal configuration. By default, running `sinteractive` will allocate 1 CPU for 3 hours:
+If you need to do interactive work and don't want to wait in the queue, the `sinteractive` command aims to provide on-demand access to resources on the `Devel` partition. This partition is designed to eliminate wait time by sharing resources between multiple users. The `sinteractive` command is a wrapper around the `srun` command that allows you to quickly start a job on the `Devel` partition, connect to the appropriate server, and work on that server directly with minimal configuration. By default, running `sinteractive` will allocate 1 CPU for 3 hours:
 
 ```bash
 sinteractive
@@ -125,7 +125,7 @@ You can start a simple interactive session from the Slurm login node as follows:
 srun --pty bash
 ```
 
-This will place you in an interactive (`bash`) shell on a compute node in the `Main` partition. The `--pty` parameter provides a psuedo-terminal that allows for interactivity. The default resources allocated by the `srun` command are `1 task`, `1 CPU` and `3GB RAM`. Run the `srun --help` command to see additional parameters. Similar parameters to the `sbatch` command can be used to define the resources and other options of your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container to load an interactive CASA session, or to utilizing Nextflow.
+This will place you in an interactive (`bash`) shell on a compute node in the `Main` partition. The `--pty` parameter provides a pseudo-terminal that allows for interactivity. The default resources allocated by the `srun` command are `1 task`, `1 CPU` and `3GB RAM`. Run the `srun --help` command to see additional parameters. Similar parameters to the `sbatch` command can be used to define the resources and other options of your interactive session. From the shell session, you are able to run interactive tasks, such as opening a Singularity container to load an interactive CASA session, or utilizing Nextflow.
 
 To start an interactive session without waiting in the queue, the `Devel` partition can be used for an on-demand session on a resource-shared node.
 
