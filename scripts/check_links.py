@@ -57,7 +57,19 @@ def resolve(target: str, source: Path) -> Path | None:
     considered valid if it resolves under *either* interpretation, and only
     flagged when it resolves under neither. Extensionless links try ``.md`` and a
     folder ``README.md`` fallback, matching Docsify's routing.
+
+    A CommonMark link destination may be wrapped in ``<...>`` and/or followed by
+    an optional title: ``[t](path "title")`` / ``[t](<path> 'title')``. Extract
+    the bare destination before resolving.
     """
+    target = target.strip()
+    if target.startswith("<") and ">" in target:
+        target = target[1:target.index(">")]
+    elif target.split():
+        # Unbracketed destination is the first whitespace-delimited token; any
+        # remainder is a title (CommonMark requires <...> for spaces in a path).
+        target = target.split()[0]
+
     # Strip anchor (#...) and query (?id=...) fragments.
     clean = target.split("#", 1)[0].split("?", 1)[0].strip()
     if not clean:  # was a pure anchor / query — same-page reference
