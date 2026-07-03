@@ -10,10 +10,12 @@ whose target genuinely cannot be found.
 Checks, for every ``*.md`` file under ``docs/``:
   * Markdown links ``[text](target)``
   * Image targets ``![alt](target)`` and ``<img src="target">``
+  * HTML anchors ``<a href="target">``
 
 External links (http, https, protocol-relative ``//``, ``mailto:``) and pure
-anchors (``#...``) are skipped. Exit status is non-zero if any broken link is
-found, so it can gate a CI job.
+anchors (``#...``) are skipped, as is anything inside a fenced code block
+(link-shaped text there is example content). Exit status is non-zero if any
+broken link is found, so it can gate a CI job.
 """
 
 from __future__ import annotations
@@ -30,6 +32,8 @@ MD_LINK = re.compile(r"(?<!\!)\[[^\]]*\]\(([^)]+)\)")
 MD_IMAGE = re.compile(r"\!\[[^\]]*\]\(([^)]+)\)")
 # <img ... src="target" ...>
 HTML_IMG = re.compile(r"<img[^>]*\ssrc=[\"']([^\"']+)[\"']", re.IGNORECASE)
+# <a ... href="target" ...>
+HTML_A = re.compile(r"<a[^>]*\shref=[\"']([^\"']+)[\"']", re.IGNORECASE)
 
 SKIP_PREFIXES = ("http://", "https://", "//", "mailto:", "tel:", "data:")
 
@@ -98,11 +102,20 @@ def resolve(target: str, source: Path) -> Path | None:
 
 def check_file(md: Path) -> list[tuple[int, str]]:
     broken: list[tuple[int, str]] = []
+    in_fence = False
     for lineno, line in enumerate(md.read_text(encoding="utf-8").splitlines(), 1):
+        # Skip fenced code blocks: link-shaped text there is example content,
+        # not a navigable link.
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
         targets = (
             MD_LINK.findall(line)
             + MD_IMAGE.findall(line)
             + HTML_IMG.findall(line)
+            + HTML_A.findall(line)
         )
         for target in targets:
             target = target.strip()

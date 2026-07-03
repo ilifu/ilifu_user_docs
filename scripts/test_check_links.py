@@ -93,5 +93,51 @@ class ResolveTests(unittest.TestCase):
         self.assertFalse(self.cl.is_external("guide/intro.md"))
 
 
+class CheckFileTests(unittest.TestCase):
+    """End-to-end extraction tests: which targets check_file() flags."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls._tmp = tempfile.TemporaryDirectory()
+        root = Path(cls._tmp.name) / "docs"
+        (root / "guide").mkdir(parents=True)
+        (root / "guide" / "intro.md").write_text("# intro", encoding="utf-8")
+        (root / "guide" / "policy.pdf").write_text("x", encoding="utf-8")
+        cls.cl = _load_module(root)
+        cls.root = root
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._tmp.cleanup()
+
+    def broken(self, text: str) -> list:
+        page = self.root / "page.md"
+        page.write_text(text, encoding="utf-8")
+        return self.cl.check_file(page)
+
+    # --- <a href> internal links ------------------------------------------
+    def test_html_anchor_with_missing_target_is_flagged(self):
+        result = self.broken('<a href="/guide/missing.pdf">Policy</a>\n')
+        self.assertEqual(result, [(1, "/guide/missing.pdf")])
+
+    def test_html_anchor_with_valid_target_passes(self):
+        self.assertEqual(self.broken('<a href="/guide/policy.pdf">Policy</a>\n'), [])
+
+    def test_html_anchor_external_is_skipped(self):
+        self.assertEqual(self.broken('<a href="https://example.com/x">x</a>\n'), [])
+
+    def test_html_anchor_pure_fragment_is_skipped(self):
+        self.assertEqual(self.broken('<a href="#section">jump</a>\n'), [])
+
+    # --- fenced code blocks are not scanned --------------------------------
+    def test_link_inside_fenced_code_block_is_skipped(self):
+        text = "```markdown\n[example](does/not/exist.md)\n```\n"
+        self.assertEqual(self.broken(text), [])
+
+    def test_link_after_fence_closes_is_still_checked(self):
+        text = "```text\noutput\n```\n[bad](does/not/exist.md)\n"
+        self.assertEqual(self.broken(text), [(4, "does/not/exist.md")])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
