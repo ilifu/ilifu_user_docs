@@ -44,6 +44,7 @@ If you generated the SSH key pair using non-default name and path (i.e. it is no
 ```bash
 ssh -i /path/to/ssh/key <username>@slurm.ilifu.ac.za
 ```
+
 The path should point to the private key file, i.e. the file that doesn't have the .pub suffix, example: `ssh -i ~/.ssh/ilifu_key janedoe@slurm.ilifu.ac.za`.
 
 ### Your ssh-agent doesn't know about your SSH key
@@ -53,14 +54,17 @@ It is possible the ssh-agent running on your local workstation does not know abo
 ```bash
 ssh-add -L
 ```
-This should list the public SSH keys that that ssh-agent knows about. The keys (at least one) should match the key associated with your ilifu account (i.e. the original SSH key provided in the access request form or a key added to your ilifu account since then). If there is nothing listed, you can use the above solution and specify the correct path to the SSH key with the `-i` parameter. 
+
+This should list the public SSH keys that that ssh-agent knows about. The keys (at least one) should match the key associated with your ilifu account (i.e. the original SSH key provided in the access request form or a key added to your ilifu account since then). If there is nothing listed, you can use the above solution and specify the correct path to the SSH key with the `-i` parameter.
 
 If it indicates no ssh-agent is running, you can start the ssh-agent by running:
+
 ```bash
 eval "$(ssh-agent -s)"
 ```
 
 You can also add a key to the ssh-agent by running:
+
 ```bash
 ssh-add /path/to/ssh/key
 ```

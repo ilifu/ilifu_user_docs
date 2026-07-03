@@ -5,7 +5,7 @@ Once you have logged into the ilifu cloud services for the first time, please ch
 In the terminal, use the following command to change your password.
 
 ```bash
-$ passwd
-``` 
+passwd
+```
 
 Follow the prompts to set a new password.

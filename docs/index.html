@@ -29,28 +29,11 @@
       --theme-color: #0384bb;        /* ilifu cyan, darkened for AA contrast on white links */
     }
 
-    /* Copy-to-clipboard button (custom plugin below strips shell prompts on copy). */
-    .markdown-section pre[data-lang] {
-      position: relative;
-    }
-    .copy-btn {
-      position: absolute;
-      top: 0.5em;
-      right: 0.5em;
-      padding: 0.2em 0.7em;
-      font-size: 0.75em;
-      line-height: 1.6;
-      color: var(--theme-color);
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid var(--theme-color);
-      border-radius: 4px;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.15s ease-in-out;
-    }
-    .markdown-section pre[data-lang]:hover .copy-btn,
-    .copy-btn:focus {
-      opacity: 1;
+    /* Command blocks are prompt-free and meant to be copied. `console` blocks are
+       terminal transcripts (prompt + output) shown for illustration, not copying,
+       so hide the copy button on them. */
+    .markdown-section pre[data-lang="console"] .docsify-copy-code-button {
+      display: none;
     }
   </style>
 </head>
@@ -70,56 +53,7 @@
         placeholder: 'Search the docs…',
         noData: 'No results found.',
         depth: 4
-      },
-      plugins: [
-        // Copy button that strips a leading shell prompt ("$ " or
-        // "user@host:~$ ") from each line, so the clipboard holds a runnable
-        // command while the page still shows the prompt. Variables such as
-        // ${USER} are untouched (they have no trailing space after the $).
-        function (hook) {
-          var PROMPT = /^(\s*)(?:\([^)]*\)\s*)?(?:[\w.-]+@[\w.-]+:\S*)?\$ /;
-          function stripPrompts(text) {
-            return text
-              .split('\n')
-              .map(function (line) { return line.replace(PROMPT, '$1'); })
-              .join('\n')
-              .replace(/\n+$/, '');
-          }
-          function copy(text, btn) {
-            var done = function () {
-              btn.textContent = 'Copied!';
-              setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
-            };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              navigator.clipboard.writeText(text).then(done);
-            } else {
-              var ta = document.createElement('textarea');
-              ta.value = text;
-              document.body.appendChild(ta);
-              ta.select();
-              try { document.execCommand('copy'); } catch (e) {}
-              document.body.removeChild(ta);
-              done();
-            }
-          }
-          hook.doneEach(function () {
-            var blocks = document.querySelectorAll('.markdown-section pre[data-lang]');
-            Array.prototype.forEach.call(blocks, function (pre) {
-              if (pre.querySelector('.copy-btn')) return;
-              var btn = document.createElement('button');
-              btn.className = 'copy-btn';
-              btn.type = 'button';
-              btn.textContent = 'Copy';
-              btn.setAttribute('aria-label', 'Copy code to clipboard');
-              btn.addEventListener('click', function () {
-                var code = pre.querySelector('code');
-                if (code) copy(stripPrompts(code.innerText), btn);
-              });
-              pre.appendChild(btn);
-            });
-          });
-        }
-      ]
+      }
     }
   </script>
   <script src="https://unpkg.com/docsify@4.13.1/lib/docsify.min.js"></script>
@@ -137,5 +71,6 @@
   <script src="https://unpkg.com/docsify@4.13.1/lib/plugins/search.min.js"></script>
   <script src="https://unpkg.com/docsify@4.13.1/lib/plugins/emoji.min.js"></script>
   <script src="https://unpkg.com/docsify-pagination@2.10.1/dist/docsify-pagination.min.js"></script>
+  <script src="https://unpkg.com/docsify-copy-code@3.0.2/dist/docsify-copy-code.min.js"></script>
 </body>
 </html>

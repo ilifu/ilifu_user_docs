@@ -7,22 +7,25 @@ Resources on the ilifu Research Facility are shared amongst all members of our u
 Efficient use of resources essentially means only using what you require. Accurately determining your resource requirements will avoid wasting resources that are allocated but not used, allowing those resources to be used by other users, increasing resource availability, and potentially reducing your job wait time. Accurate resource allocation also improves the efficiency of the Slurm scheduler and its ability to assign resources to jobs. Furthermore, resource usage on the cluster is charged against your user account and affects your job priority (see information on [fairshare](tech_docs/fairshare)). By accurately specifying your job resources you can ensure a higher priority for your job submissions.
 
 The process of accurately determining the resource requirements for a job can be broken down into three measures:
+
 * profiling resource usage of previous similar jobs;
 * running a small test job and determining how your job performance scales with resources;
 * determining whether the software you want to run uses parallel computing, and in what form (detailed in CPU allocation section below).
- 
-When allocating resources to a job, it is important to consider the requirements, and check the resource usage of previous similar jobs. Profiling resources usage of past jobs is detailed in the sections below. 
 
-A good starting point when considering how to allocate resources is to start with a small test job (e.g. a small resource allocation on a small subset of your data), test the wall-time, run again with increased resources (e.g. CPUs/tasks and possibly memory), and repeat this process to see how the wall-time scales with resources. By the end, you should have a good idea of an efficient use of resources for your full data set. 
+When allocating resources to a job, it is important to consider the requirements, and check the resource usage of previous similar jobs. Profiling resources usage of past jobs is detailed in the sections below.
+
+A good starting point when considering how to allocate resources is to start with a small test job (e.g. a small resource allocation on a small subset of your data), test the wall-time, run again with increased resources (e.g. CPUs/tasks and possibly memory), and repeat this process to see how the wall-time scales with resources. By the end, you should have a good idea of an efficient use of resources for your full data set.
 
 Most processes do not scale linearly (or even close to it), so it is important to find a middle ground between performance and efficient use of resources. In most cases, the maximum performance (i.e. shortest wall-time) is not an efficient choice, given the large allocation necessary for such performance. Even larger allocations for MPI jobs (multi-node jobs) may end up taking longer due to the scatter/gather overhead associated with partitioning the data/work. In general, breaking your process up into many small independent jobs (a high-throughput computing approach) is most efficient.
 
 ## Maximum allocation
+
 As outlined in the [ilifu documentation](tech_docs/running_jobs#specifying-resources-when-running-jobs-on-slurm), nodes in the Slurm cluster are grouped under different partitions, with different resources and purposes for each partition. Below is a summary of the resources available in each partition, showing the maximum values that can be allocated to a job, as well as the default values. This information can also be listed with:
 
 ```bash
 scontrol show partition
 ```
+
 *Table 1. The different Slurm partitions and their resources, listing the default and maximum allocations. Default memory scales with the number of CPUs allocated. Jobs submitted to the Devel partition cannot allocate memory.*
 
 | Partition | Node names        | Default CPUs| Max CPUs| Default Memory (GiB) | Max Memory (GiB) | Default wall-time | Max wall-time |
@@ -65,7 +68,7 @@ This will display one line for every job with that name submitted during that ti
 
 ## Memory allocation
 
-When allocating memory, run one of the scaling tests mentioned above, or check the memory usage of previous similar jobs. Once you have determined your memory requirements, you should allocate this amount of memory to future jobs with a small (~10-20%) buffer, to avoid your job resulting in an out-of-memory (`OOM`) error. You should avoid allocating excessive memory, as this is an inefficient use of resources and reduces resource availability on the cluster. 
+When allocating memory, run one of the scaling tests mentioned above, or check the memory usage of previous similar jobs. Once you have determined your memory requirements, you should allocate this amount of memory to future jobs with a small (~10-20%) buffer, to avoid your job resulting in an out-of-memory (`OOM`) error. You should avoid allocating excessive memory, as this is an inefficient use of resources and reduces resource availability on the cluster.
 
 The maximum memory usage of a job, as sampled every 20 seconds, is given by the `MaxRSS` statistic. For a job (e.g. `jobID 123456`) that is running, this can be listed with
 
@@ -73,9 +76,10 @@ The maximum memory usage of a job, as sampled every 20 seconds, is given by the 
 sstat -j 123456 -o MaxRSS
 ```
 
-Which is given in units of kB. To calculate this in GB, divide the value by 1024<sup>2</sup>. 
+Which is given in units of kB. To calculate this in GB, divide the value by 1024<sup>2</sup>.
 
 For jobs that have been previously run, you can list the `MaxRSS` with
+
 ```bash
 sacct -j <jobid> --unit=G -o JobID,JobName,MaxRSS,ReqMem
 ```
@@ -100,13 +104,14 @@ Similar to sacct, for jobs that have been previous run, you can list the efficie
 seff <jobid>
 ```
 
-This will display the CPU and memory efficiency as a percentage between allocated/requested and used resources. The used memory within this calculation is taken from the MaxRSS. 
+This will display the CPU and memory efficiency as a percentage between allocated/requested and used resources. The used memory within this calculation is taken from the MaxRSS.
 
 ## Wall-time allocation
 
-Using an accurate wall-time improves the efficiency of the scheduler and how it allocates jobs to cluster resources. While wall-time can be  difficult to estimate, a good starting point, similar to the scaling tests mentioned above, is to test your job with a large allocation, see the resulting wall-time, and then run future equivalent jobs with a reduced wall-time, allowing for a ~20-30% buffer. Accurately specifying job wall-time may decrease your job wait time, but may result in your job timing out (hence the suggested buffer). If you under-estimate your wall-time and need your job wall-time to be increased, please contact ilifu Support to see if it is possible to increase the time limit of your running job. 
+Using an accurate wall-time improves the efficiency of the scheduler and how it allocates jobs to cluster resources. While wall-time can be  difficult to estimate, a good starting point, similar to the scaling tests mentioned above, is to test your job with a large allocation, see the resulting wall-time, and then run future equivalent jobs with a reduced wall-time, allowing for a ~20-30% buffer. Accurately specifying job wall-time may decrease your job wait time, but may result in your job timing out (hence the suggested buffer). If you under-estimate your wall-time and need your job wall-time to be increased, please contact ilifu Support to see if it is possible to increase the time limit of your running job.
 
 ## Account allocation
+
 Each project supported on ilifu has a corresponding Slurm accounting group, against which resource usage is charged. If you are a member of multiple projects on the ilifu cluster, it is important to select the correct project accounting group when submitting a job. A project’s Slurm accounting group affects the priority and therefore the scheduling of jobs (based on [fairshare](tech_docs/fairshare)), and allows accurate recording of job data within the Slurm database and ilifu reporting database. For example, if you belong to multiple projects, but charge all your resource usage to a single project, that project’s fairshare value will decrease and further jobs submitted under that project’s accounting group will have reduced priority in the Slurm queue. If accounting groups are correctly specified, fairshare values accurately reflect project resource usage, and access to resources is more fairly distributed amongst projects and users.
 
 You can list your accounting groups, corresponding to the different ilifu projects in which you’re involved, using the following:

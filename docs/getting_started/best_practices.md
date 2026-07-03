@@ -9,10 +9,11 @@ Please take note of the following best practices while using the ILIFU cloud com
   a) Total number of nodes and cores required
   b) Total amount of RAM required
   c) Total wall-time required
+
 5. Use job arrays where possible.
 6. Use Singularity containers on shared storage for your software.
 
-## Do not run software on the Slurm login node.
+## Do not run software on the Slurm login node
 
 When you ssh into the Slurm cluster you will be on the Slurm login node. The purpose of the login node is to manage job submissions. Please do not run any software on the Slurm login node as this can reduce performance of the Slurm service and affect performance for other users.
 

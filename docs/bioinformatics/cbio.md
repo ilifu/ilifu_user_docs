@@ -5,6 +5,7 @@
 Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-structure) to see how your data should be organised.
 
 ## Data transfer nodes
+
 * For `scp`, `cp` or `rsync` use `transfer.ilifu.ac.za`.
 * For Globus Online (gridftp) transfers use `dtn01.ilifu.ac.za`.
 

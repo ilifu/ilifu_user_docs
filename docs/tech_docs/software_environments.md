@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group. 
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group.
 
 ## Singularity containers
 
@@ -15,15 +15,19 @@ The container images that are maintained by the support team can be found at dif
 #### Execute software in a container
 
 A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
+
 ```bash
-$ sinteractive
+sinteractive
 ```
+
 This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
+
 ```console
 $ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
 ```
+
 This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10-latest.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
@@ -43,6 +47,7 @@ hello world!
 #### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
+
 ```console
 $ singularity shell /software/astro/containers/sofia-latest.sif
 SoFiA2v2.5.1.sif:~$ sofia
@@ -263,7 +268,7 @@ Several containers have been developed for use on the ilifu cluster and in other
 <details>
 <summary id="ASTRO-GPU-container">ASTRO-GPU containers</summary>
 
-**Description:** These containers includes Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python pacakges have also been included. 
+**Description:** These containers includes Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python pacakges have also been included.
 
 **JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
 
@@ -397,14 +402,17 @@ The maintained containers are generally named after the primary software they ar
 ##### Check the container %help information
 
 Sometimes a container will include information in its help function, which can be access using the following command:
+
 ```bash
-    $ srun singularity run-help /path/to/container
+srun singularity run-help /path/to/container
 ```
+
 ##### Check the included python packages
 
 A simple way to determine what Python packages a container includes is to run the command `pip freeze` within the container environment to list all the Python packages installed using `pip`. This can be achieved using the following command:
+
 ```bash
-	$ srun singularity exec /path/to/container pip freeze
+srun singularity exec /path/to/container pip freeze
 ```
 
 ##### Check the container build script (definition file)
@@ -412,7 +420,7 @@ A simple way to determine what Python packages a container includes is to run th
 You can generally see the build script that was used to build the container using the `inspect -d` parameter, for example:
 
 ```bash
-    $ srun singularity inspect -d /path/to/container
+srun singularity inspect -d /path/to/container
 ```
 
 The build script will include all the commands used to create the container, `apt-get`, `pip install`, etc, so you can use this information to find out what software was installed in the container. This unfortunately is not possible if the Singularity container was created by pulling a Docker container (although it will indicate which Docker library and image was used), or if the container was built from another base image/container only the last build script will be visible. If the latter is the case, the build scripts of each previous layer are included in the container at `/.singularity.d/bootstrap_history/` and may provide additional information about the included software.
@@ -433,31 +441,31 @@ MirrorURL: http://archive.ubuntu.com/ubuntu/
 OSVersion: focal
 
 %help
-	This container includes SoFiA2 master branch
+    This container includes SoFiA2 master branch
 
 %environment
-	export LC_ALL=C
-	export SOFIA2_PATH="/opt/SoFiA-2"
-	export PATH="$PATH:/opt/SoFiA-2"
+    export LC_ALL=C
+    export SOFIA2_PATH="/opt/SoFiA-2"
+    export PATH="$PATH:/opt/SoFiA-2"
 
 %post
-	# Installation of initial packages
-	export DEBIAN_FRONTEND=noninteractive
-	apt-get update -y
-	apt-get install -y software-properties-common
-	add-apt-repository -y universe
-	apt-get install -y wget vim apt-utils git build-essential make bzip2 curl pkg-config python3-pip python-is-python3 libpng-dev
+    # Installation of initial packages
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update -y
+    apt-get install -y software-properties-common
+    add-apt-repository -y universe
+    apt-get install -y wget vim apt-utils git build-essential make bzip2 curl pkg-config python3-pip python-is-python3 libpng-dev
 
-	# Install SoFiA2
-	apt-get install -y gcc wcslib-dev libopenmpi-dev openmpi-bin openmpi-common
-	cd /opt
-	git clone https://github.com/SoFiA-Admin/SoFiA-2.git
-	cd SoFiA-2
-	./compile.sh -fopenmp
+    # Install SoFiA2
+    apt-get install -y gcc wcslib-dev libopenmpi-dev openmpi-bin openmpi-common
+    cd /opt
+    git clone https://github.com/SoFiA-Admin/SoFiA-2.git
+    cd SoFiA-2
+    ./compile.sh -fopenmp
 
-	# Cleanup the container
-	apt-get clean
-	apt-get autoclean
+    # Cleanup the container
+    apt-get clean
+    apt-get autoclean
 ```
 
 In the example above the operating system that is abstracted or seen from within the container is Ubuntu 20.04 focal. Environmental variables and paths within the container are set within the `%environment` section. Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run `sofia` when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://docs.sylabs.io/guides/latest/user-guide/definition_files.html).
@@ -465,13 +473,13 @@ In the example above the operating system that is abstracted or seen from within
 In order to build the container from the recipe, the following command can be used:
 
 ```console
-$ sudo singularity build sofia2.sif sofia2.def 
+$ sudo singularity build sofia2.sif sofia2.def
 INFO:    Starting build...
-I: Retrieving InRelease 
+I: Retrieving InRelease
 I: Checking Release signature
 I: Valid Release signature (key id F6ECB3762474EDA9D21B7022871920D1991BC93C)
-I: Retrieving Packages 
-I: Validating Packages 
+I: Retrieving Packages
+I: Validating Packages
 I: Resolving dependencies of required packages...
 I: Resolving dependencies of base packages...
 I: Checking component main on http://archive.ubuntu.com/ubuntu...
@@ -642,6 +650,7 @@ You will then be presented with an rstudio session:
 <img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
 
 If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
+
 ```console
 USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
 USERNAME@compute-101:~$ rstudio
@@ -713,7 +722,7 @@ The Visual Studio Code server will be launched on the [Devel partition](getting_
 
 <div style="text-align:center"><img src="/_media/vscode_session.png" alt="application dashboard" width=600 /></div>
 
-You can reconnect to a running VS code server session by going to `My Interactive Sessions` on the top menu bar in the application dashboard. 
+You can reconnect to a running VS code server session by going to `My Interactive Sessions` on the top menu bar in the application dashboard.
 
 ### Old way of running Visual Code Studio
 
@@ -753,7 +762,7 @@ Virtual envrionments provide isolated environments for python projects, in which
 `virtualenv` is the package available for creating environments and can be used with
 
 ```bash
-$ virtualenv /path/to/virtualenv
+virtualenv /path/to/virtualenv
 ```
 
 This will create a virtual environment with the name *virtualenv* (any name can be used here) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
@@ -772,22 +781,24 @@ A created virtual environment can then be activated with
 $ source /path/to/virtualenv/bin/activate
 (virtualenv)$
 ```
+
 The name of the virtual environment will show enclosed in brackets before the command prompt cursor to indicate the environment is activated.
 
 Specific python packages or a requirements list can then be installed using
 
 ```bash
-(virtualenv)$ pip install <python_package>
+pip install <python_package>
 ```
+
 ```bash
-(virtualenv)$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/user_guide.html#introduction) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
 
 ### A virtual environment as a Jupyter kernel
 
-Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
+Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session.
 
 Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following commmand to install a kernel for the virtual environment.
 
@@ -797,14 +808,14 @@ Once a virtual environment is activated, you must install the `ipykernel` packag
 Installed kernelspec my_python_kernel in /users/USERNAME/.local/share/jupyter/kernels/my_python_kernel
 ```
 
-Note the kernel can be named anything, but it is recommended to use something descriptive of the environment's function. The kernel will then be available in the Jupyter Launcher. 
+Note the kernel can be named anything, but it is recommended to use something descriptive of the environment's function. The kernel will then be available in the Jupyter Launcher.
 
 ### Installing niche packages
 
 If you require a single, less common package to use in conjunction with an existing kernel, you can install it for your user account with
 
 ```bash
-$ pip install --user <python_package>
+pip install --user <python_package>
 ```
 
 This command needs to be run from a worker node that has access to the `pip` command, either by using a Python module or by shelling inside a container. This is most easily done through a command line terminal started from the Jupyter Launcher. Note that packages installed this way in a user space can conflict with the same packages in existing kernels, and as such this method should only be used for very use-case specific packages. Note that to use a package in conjunction with an existing kernel, the pip python version must correspond to the python version of the kernel (3.6, 3.7 etc.).

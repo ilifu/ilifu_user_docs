@@ -13,13 +13,13 @@ The `scp` and `rsync` tools are useful for transferring data up to 200 GB, or if
 The following is an example of how to scp from your personal computer to the ilifu facility. From the terminal on your personal computer:
 
 ```bash
-$ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
+scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:~
 ```
 
 The above command will copy the file to your home directory on ilifu. You can also specify an alternative path in the destination, for example:
 
 ```bash
-$ scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts/
+scp /path/to/file/<filename> <username>@transfer.ilifu.ac.za:/idia/users/<username>/scripts/
 ```
 
 For more information about the `scp` and `rysnc` tools please read the manual pages using `man scp` or `man rysnc` from the command line.
