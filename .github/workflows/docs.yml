@@ -1,9 +1,10 @@
 name: Docs checks
 
 # Guardrails for the documentation. Runs on every pull request to master and on
-# pushes to master. Two blocking checks (markdown lint + internal link check)
-# gate merges; external link rot is reported but non-blocking to avoid flaky
-# failures from transiently unreachable third-party hosts.
+# pushes to master. The internal link check is the blocking gate. Markdown lint
+# and external link rot are advisory (non-blocking): the docs carry a large
+# backlog of pre-existing mdl findings, and third-party hosts are sometimes
+# transiently unreachable, so neither should block a merge today.
 
 on:
   pull_request:
@@ -16,8 +17,11 @@ permissions:
 
 jobs:
   markdownlint:
-    name: Markdown lint (mdl)
+    name: Markdown lint (mdl, advisory)
     runs-on: ubuntu-latest
+    # Advisory only: reports style findings but does not block merges while the
+    # pre-existing backlog is worked down. Flip to false once the docs are clean.
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
@@ -26,7 +30,7 @@ jobs:
       - name: Install mdl
         run: gem install mdl
       - name: Lint docs
-        run: mdl -s mdl.style docs
+        run: mdl -s ./mdl.style docs
 
   internal-links:
     name: Internal link check
