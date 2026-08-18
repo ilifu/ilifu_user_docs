@@ -17,10 +17,10 @@ When running a job using `sbatch` or `srun`, a user is able to specify the resou
 | HighMem   | highmem-003       | 1           | 96      | 15                   | 1508             | 3 hours           | 14 days       |
 | HighMem   | highmem-[004-007] | 1           | 32      | 15                   | 503              | 3 hours           | 14 days       |
 | HighMem   | highmem-008       | 1           | 32      | 15                   | 1007             | 3 hours           | 14 days       |
-| GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           | 14 days       |
-| GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           | 14 days       |
-| GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
-| GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           | 14 days       |
+| GPU       | gpu-[001-004]     | 1           | 32      | 7                    | 232              | 3 hours           |  3 days       |
+| GPU       | gpu-005           | 1           | 24      | 7                    | 232              | 3 hours           |  3 days       |
+| GPU       | gpu-006           | 1           | 48      | 7                    | 354              | 3 hours           |  3 days       |
+| GPU       | gpu-007           | 1           | 48      | 7                    | 354              | 3 hours           |  3 days       |
 | Devel     | compute-001       | 1           | 32      | -                    | -                | 3 hours           |  5 days       |
 
 *Note jobs submitted to the Devel partition cannot allocate memory.*
@@ -33,6 +33,8 @@ The GPU nodes include NVIDIA P100 (gpu-[001-004]), V100 (gpu-005), two A40s (gpu
 | GPU       | gpu-005           | V100        | V100,v100      | 1                       | 32               |
 | GPU       | gpu-006           | A40         | A40,a40        | 2                       | 45               |
 | GPU       | gpu-007           | A100        | A100,a100      | 1                       | 40               |
+
+>**GPU partition wall-time**: For long running GPU jobs, where possible, we recommend making use of checkpointing — you may need to review the software that you are using to determine the checkpointing capabilities. If your workload strictly requires more than 3 days, you may submit an extension request with a clear motivation to our support team at [support@ilifu.ac.za](mailto:support@ilifu.ac.za).
 
 ### Parallel computing on the cluster
 
