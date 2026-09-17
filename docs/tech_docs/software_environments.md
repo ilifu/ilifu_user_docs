@@ -746,7 +746,7 @@ Lastly use VS Code's remote explorer to connect to compute-001. It will ask for 
 
 ## Python virtual environments
 
-Virtual envrionments provide isolated environments for python projects, in which you can customize the dependencies to suit your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
+Virtual environments provide isolated environments for python projects, in which you can customize the dependencies to suit your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
 
 ### Creating a virtual environment
 
@@ -787,9 +787,9 @@ More information on `virtualenv` can be found in its [documentation](https://vir
 
 ### A virtual environment as a Jupyter kernel
 
-Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
+Virtual environments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
 
-Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following commmand to install a kernel for the virtual environment.
+Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following command to install a kernel for the virtual environment.
 
 ```bash
 (virtualenv)$ ipython kernel install --name "my_python_kernel" --user
