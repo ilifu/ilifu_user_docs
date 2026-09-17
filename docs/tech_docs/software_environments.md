@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group. 
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include [Python virtual environments](#python-virtual-environments), created with `virtualenv` or `uv` -- these are generally created and managed by the user or project group. 
 
 ## Singularity containers
 

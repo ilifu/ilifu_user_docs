@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](tech_docs/software_environments?id=environment-modules). Additional software environments include virtual environments, either [Python virtual environments](tech_docs/software_environments?id=python-virtual-environments), or [Conda](tech_docs/software_environments?id=anaconda) -- these are generally created and managed by the user or project group. 
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](tech_docs/software_environments?id=environment-modules). Additional software environments include [Python virtual environments](tech_docs/software_environments?id=python-virtual-environments), created with `virtualenv` or `uv` -- these are generally created and managed by the user or project group. 
 
 Below we provide an introduction to using Singularity containers which will be helpful when using containerised software when submitting jobs to Slurm. For further information on the software environments available on ilifu, including [modules](tech_docs/software_environments?id=environment-modules) and [virtual environments](tech_docs/software_environments?id=python-virtual-environments), please see the supported [Software environments](tech_docs/software_environments.md) documentation.
 
