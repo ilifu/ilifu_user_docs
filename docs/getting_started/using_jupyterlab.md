@@ -9,7 +9,7 @@ For a more in-depth guide on the JupyterLab interface please see the JupyterLab 
 The directory navigation panel will default to your `$HOME` directory when you first log in. You can navigate to your personal workspace using the existing `workspace` symlink. In order to navigate to directories on other mounts, for example your scratch directory, you can create a symlink using the terminal, from your `$HOME` directory to the relevant target directory. For example you can use the following command to create a symlink from your `$HOME` directory to your personal scratch folder:
 
 ```bash
-	$ ln -s /scratch3/users/$USER $HOME/scratch3
+ln -s /scratch3/users/$USER $HOME/scratch3
 ```
 
 The first parameter is the target directory of the symlink, and the second parameter is the location and name of the symlink. Once the symlink is created, you'll be able to then navigate to your scratch folder in the directory navigation window in JupyterLab.
@@ -20,9 +20,10 @@ There are kernels for both Python and R languages. The different kernels include
 
 The kernels themselves are in fact Singularity software containers. All the additional software packages installed in the container, beyond the Python packages, are also available to use from within the Jupyter notebook. You can make calls to these other software packages or to the underlying operating system by prefixing the relevant command with `!` in the Jupyter notebook, for example:
 
-```
+```text
 [ ]: !pwd
 ```
+
 will provide you with the path of your current work directory.
 
 The following table lists the available kernels and their related Singularity containers:

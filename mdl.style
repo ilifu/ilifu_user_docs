@@ -1,7 +1,11 @@
 all
-exclude_rule 'MD013'
-exclude_rule 'MD033'
-exclude_rule 'MD034'
-exclude_rule 'MD041'
+exclude_rule 'MD013'  # line length: prose lines are intentionally long
+exclude_rule 'MD033'  # inline HTML: used for centred images, <details>, etc.
+exclude_rule 'MD034'  # bare URLs: allowed in this documentation
+exclude_rule 'MD041'  # first line need not be a top-level header (docsify pages)
+exclude_rule 'MD007'  # list indentation is left as authored; _sidebar.md nesting
+                      # is significant to docsify's sidebar rendering.
+exclude_rule 'MD046'  # the pipeline tutorial intentionally mixes indented and
+                      # fenced code blocks inside numbered-list steps.
 rule 'MD029', :style => 'ordered'
 rule 'MD026', :punctuation => '.,;:!'

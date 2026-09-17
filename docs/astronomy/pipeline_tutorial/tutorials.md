@@ -42,7 +42,7 @@ Knowing the dataset specifics allows you to troubleshoot confidently and manuall
 
 
 ## Lets Inspect the data with CASA interactively on ilifu
-1. Log in to slurm-ilifu:  
+1. Log in to slurm-ilifu:
 ```bash
 ssh walter@slurm.ilifu.ac.za
 ```
@@ -59,7 +59,7 @@ In the container shell, initialize CASA with:
 ```bash
 casa
 ```
-    **If CASA fails to start due to missing data, create the required directory and restart CASA** 
+    **If CASA fails to start due to missing data, create the required directory and restart CASA**
 ```bash
 mkdir ~/.casa/data
 casa
@@ -105,10 +105,10 @@ listunfl       = False                   # List unflagged row counts? If true, i
 cachesize      = 50.0                    # EXPERIMENTAL. Maximum size in megabytes of
                                         # cache in which data structures can be held.
 ```
-6. Then point the task to the correct MS: 
+6. Then point the task to the correct MS:
 ```bash
 vis = /idia/data/public/1525469431/1525469431_sdp_l0.ms
-``` 
+```
 and also provide an output file:
 ```bash
 listfile = details_1525469431.txt
@@ -117,7 +117,7 @@ listfile = details_1525469431.txt
 
     We can now inspect details about our observation in the `details_1525469431.txt` which should be similar to the output below.
 
-    ```bash
+    ```text
     ================================================================================
             MeasurementSet Name:  /idia/data/public/1525469431/1525469431_sdp_l0.ms      MS Version 2
     ================================================================================
@@ -194,9 +194,9 @@ listfile = details_1525469431.txt
     15   m061  m061      13.5 m   +021.26.37.4  -30.33.47.7        -17.4712    -2085.9876       -6.8131  5108231.343443  2006391.596905 -3240926.754178
     ```
 
-Notice that in this `listobs()` output, the first scans are the fields that will be used for calibration - they are observed before the target fields. What do you think, is there a reason to set up observations like that? Is it necessary? 
+Notice that in this `listobs()` output, the first scans are the fields that will be used for calibration - they are observed before the target fields. What do you think, is there a reason to set up observations like that? Is it necessary?
 
-**With this information we can continue with the processMeerKAT pipeline.** 
+**With this information we can continue with the processMeerKAT pipeline.**
 
 ## Data Processing with ProcessMeerKAT
 
@@ -313,7 +313,7 @@ The purpose of this call is to read the input MS and extract information used to
     **Note**: the `fields` section of our config are empty strings and this should be automatically populated by the pipeline. If you check/build DEEP2 config file, you’ll notice that fields are automatically populated. The issue here is seen in step 2 above, the output includes an error:
     `ERROR: You must have a field with intent "CALIBRATE_FLUX". I only found ['CALIBRATE_AMPLI', 'CALIBRATE_PHASE', 'TARGET', 'UNKNOWN']` which does not occur with the DEEP2 data. **This highlights the importance of understanding your dataset before launching the pipeline**. While the default configuration may work in many cases, there are situations where you will need to inspect and manually update the config file to ensure proper calibration and processing
 
-4. Edit the config file 
+4. Edit the config file
 
     Here we update the config file to add the `fields` and also update the reference antenna, `refant`. As you can see from `listobs()` our data does not include the m059 antenna and the config file has specified this as the reference antenna. For this tutorial I am selecting `m052` as my reference antenna. Why have I chosen this?
 
@@ -376,7 +376,7 @@ The purpose of this call is to read the input MS and extract information used to
 processMeerKAT.py -R -C tutorial_config.txt
 ```
 This should produce an output like
-```bash
+```text
 2025-09-17 11:48:04,902 INFO: Won't process spw '*:1170.909090909091~1243.6363636363635MHz', since it's completely encompassed by bad frequency range 'MHz'.
 2025-09-17 11:48:04,902 INFO: Won't process spw '*:1534.5454545454545~1607.2727272727273MHz', since it's completely encompassed by bad frequency range 'MHz'.
 2025-09-17 11:48:04,910 INFO: Making 9 directories for SPWs (['*:880.0~952.7272727272727MHz', '*:952.7272727272727~1025.4545454545455MHz', '*:1025.4545454545455~1098.1818181818182MHz', '*:1098.1818181818182~1170.909090909091MHz', '*:1243.6363636363635~1316.3636363636365MHz', '*:1316.3636363636365~1389.090909090909MHz', '*:1389.090909090909~1461.818181818182MHz', '*:1461.8181818181818~1534.5454545454545MHz', '*:1607.2727272727273~1680.0MHz']) and copying 'tutorial_config.txt' to each of them.
@@ -414,23 +414,23 @@ This should produce an output like
 ```
 A number of sbatch files have now been written to your working directory, each of which corresponds to the python script in the list of scripts set by the scripts parameter in our config file. Our config file was copied to .`config.tmp`, which is the config file written and edited by the pipeline, which **the user should not touch**. A `logs` directory was created, which will store the **CASA and Slurm** log files. Lastly, a bash script called `submit_pipeline.sh` was written, however, this script was not run, since we set `submit = False` in our config file (to immediately submit to the Slurm queue, you can change this in your config file, or by using option [-s --submit] when you build your config file with processMeerKAT.py). Normally, we would run `./submit_pipeline.sh` to run the pipeline, and return later when it is completed. However, we will look at that later, as we first want to get a handle on how the pipeline works.
 
-    ```
+    ```console
     walter@slurm-login:/scratch3/users/walter/tutorial/1525469431$ ls -l
-    1025.4545454545455~1098.1818181818182MHz  
-    1389.090909090909~1461.818181818182MHz    
-    952.7272727272727~1025.4545454545455MHz  
-    1098.1818181818182~1170.909090909091MHz   
-    1461.8181818181818~1534.5454545454545MHz  
-    1243.6363636363635~1316.3636363636365MHz  
-    1607.2727272727273~1680.0MHz 
-    1316.3636363636365~1389.090909090909MHz   
-    880.0~952.7272727272727MHz 
+    1025.4545454545455~1098.1818181818182MHz
+    1389.090909090909~1461.818181818182MHz
+    952.7272727272727~1025.4545454545455MHz
+    1098.1818181818182~1170.909090909091MHz
+    1461.8181818181818~1534.5454545454545MHz
+    1243.6363636363635~1316.3636363636365MHz
+    1607.2727272727273~1680.0MHz
+    1316.3636363636365~1389.090909090909MHz
+    880.0~952.7272727272727MHz
     partition.sbatch
-    casa-20250917-105225.log                 
-    plotcal_spw.sbatch             
-    concat.sbatch                            
-    submit_pipeline.sh               
-    logs                                     
+    casa-20250917-105225.log
+    plotcal_spw.sbatch
+    concat.sbatch
+    submit_pipeline.sh
+    logs
     tutorial_config.txt
     ```
 
@@ -474,7 +474,7 @@ A number of sbatch files have now been written to your working directory, each o
 
     Using the `./summary.sh` script.
 
-    ```
+    ```console
     walter@compute-001:/scratch3/users/walter/tutorial/1525469431$ ./summary.sh
     SPW #1: /scratch3/users/walter/tutorial/1525469431/880.0~952.7272727272727MHz
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
@@ -559,7 +559,7 @@ A number of sbatch files have now been written to your working directory, each o
     You can also select any other SPW directory from the summary above and run the same command.
     The output will provide a detailed summary of the pipeline jobs for that SPW.
 
-    ```
+    ```console
     walter@compute-001:/scratch3/users/walter/tutorial/1525469431/1607.2727272727273~1680.0MHz$ ./summary.sh
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
     --------------- --------------- ---------- ---------- ------ ------ ----- ------------ ------------ -------------------- ---------- ---------- ---------- ---------- --------
@@ -609,7 +609,7 @@ A number of sbatch files have now been written to your working directory, each o
 Below is an example case where the correct reference antenna was missing.
 
     The full summary (`./summary.sh`) of that failed processing is shown below.
-    ```
+    ```console
     walter@compute-001:~/scratch3/users/walter/tutorial/1525469431$ ./summary.sh
     SPW #1: /scratch3/users/walter/tutorial/1525469431/880.0~952.7272727272727MHz
     JobID           JobName          Partition    Elapsed NNodes NTasks NCPUS  MaxDiskRead MaxDiskWrite             NodeList   TotalCPU    CPUTime     MaxRSS      State ExitCode
@@ -644,7 +644,7 @@ Below is an example case where the correct reference antenna was missing.
     11534153        quick_tclean          Main   00:00:00      1            0                                  None assigned   00:00:00   00:00:00             CANCELLED      0:0
     -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     ```
-    If we select the first SPW and inspect the logs, we can navigate to its directory using: 
+    If we select the first SPW and inspect the logs, we can navigate to its directory using:
     ```
     cd /scratch3/users/walter/tutorial/1525469431/880.0~952.7272727272727MHz
     ```
@@ -652,7 +652,7 @@ Below is an example case where the correct reference antenna was missing.
     ```
     cat logs/validate_input-11534154.err
     ```
-    Where the output would look like 
+    Where the output would look like
     ```
     2025-09-03 13:05:48,645 INFO: This is version 2.0 of the pipeline - commit ID f4c7c719e65cf07a2d4609dededd825cb8c8f202
 
@@ -686,7 +686,7 @@ Now lets Begin:
 ```bash
 source /idia/software/pipelines/master/setup.sh
 processMeerKAT.py -B -C tutorial_config.txt -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -2 -I
-``` 
+```
 2. Inspect the generated configuration file and update it where necessary. The new config should include these sections for `selfcal` and `image`. Similarly you can refer to [DEEP2 tutorial](https://idia-pipelines.github.io/docs/processMeerKAT/config-files/) for a detailed breakdown of the parameters.
 
     ```
@@ -738,7 +738,7 @@ processMeerKAT.py -R -C tutorial_config.txt
 ```
 Now we wait until all scheduled jobs have completed successfully. Once all imaging jobs have finalized, the resulting product directories will be available in your working area. Using ls -l helps to quickly list and identify the various image products created during the iterative self-calibration process:
 
-```bash
+```console
 walter@compute-001:/scratch3/users/walter/pipeline-training/1525469431-3$ ls -l | grep image.tt0
 drwxr-xr-x 3 walter idia-group         6 Sep  5 03:52 1525469431_sdp_l0_2025-09-03T09-10-19_s1f.ACT-CLJ2023.3-5535.science_image.image.tt0
 drwxr-xr-x 3 walter idia-group         6 Sep  5 03:52 1525469431_sdp_l0_2025-09-03T09-10-19_s1f.ACT-CLJ2023.3-5535.science_image.katbeam_pbcor.image.tt0
@@ -751,9 +751,9 @@ The directories shown in this snipet correspond to the self-calibration stages:
 - im_0.image.tt0: The initial image, created before the first round of self-calibration.
 - im_1.image.tt0: The image produced after the first round of self-calibration.
 - im_2.image.tt0: The final image produced after the second (and final) round of self-calibration.
-- science_image.image.tt0: The final, self-calibrated image, often accompanied by the primary-beam corrected version (katbeam_pbcor). 
+- science_image.image.tt0: The final, self-calibrated image, often accompanied by the primary-beam corrected version (katbeam_pbcor).
 
-Take a moment to critically inspect the resulting images. You should see a noticeable improvement in image quality as the self-calibration rounds progress. We recommend using a visualization tool like [CARTA](https://carta.idia.ac.za/) to compare these images side-by-side. 
+Take a moment to critically inspect the resulting images. You should see a noticeable improvement in image quality as the self-calibration rounds progress. We recommend using a visualization tool like [CARTA](https://carta.idia.ac.za/) to compare these images side-by-side.
 
 Does the background noise appear smoother? Are artefacts around bright sources reduced or eliminated in im_1 and im_2 compared to im_0? We can also utilize CARTA to measure the sensitivity of the background region in all three images (im_0, im_1, and im_2). The fundamental goal of self-calibration is to drive down the RMS noise, confirming that the process was successful and led to a higher dynamic range.
 
@@ -830,14 +830,14 @@ Antennas: 16:
   15   m063  m063      13.5 m   +021.24.29.5  -30.33.32.1      -3421.1962    -1602.0938       -9.4852  5109701.398386  2003312.684080 -3240508.721138
 ```
 
-## Data Processing with OXKAT.
+## Data Processing with OXKAT
 The OXKAT pipeline is a comprehensive, modular processing framework designed for the calibration and imaging of MeerKAT data. It is built on a sequence of distinct stages, each corresponding to a Python setup script that generates and submits a series of interdependent jobs (typically using Bash and various radio astronomy packages like CASA, WSClean, and CubiCal).
 
 The full processing flow is partitioned into sequential stages: GET_INFO, 1GC, FLAG, 2GC, 3GC_peel, and 3GC_facet. A key feature of OXKAT is the ability to pause after each stage to examine the data's state before continuing. Each of these steps is briefly described [here](https://github.com/IanHeywood/oxkat/tree/master/setups); please refer to that page for detailed information.
 
 Technically, only the 1GC and FLAG stages are required to obtain a calibrated image of your target. However, the resulting image is often significantly improved by applying direction-independent self-calibration.
 
-In this processing walk-through, we will run the pipeline up to the 2GC stage. This will provide us with a high-quality, calibrated Measurement Set (MS). 
+In this processing walk-through, we will run the pipeline up to the 2GC stage. This will provide us with a high-quality, calibrated Measurement Set (MS).
 
 **Now Lets Start with OXKAT.**
 
@@ -845,9 +845,9 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
     ```bash
     ssh username@slurm.ilifu.ac.za
     ```
-2. Navigate to a working area `/scratch3/users/<username>/tutorial/1491550051` or `/scratch3/projects/<project>/tutorial/1491550051)`:
+2. Navigate to a working area `/scratch3/users/USERNAME/tutorial/1491550051` or `/scratch3/projects/PROJECT_NAME/tutorial/1491550051`:
     ```bash
-    cd /scratch3/users/<username>/tutorial/1491550051
+    cd /scratch3/users/USERNAME/tutorial/1491550051
     ```
 3. Clone the contents of [OXKAT-repo](https://github.com/IanHeywood/oxkat.git) into your working area:
     ```bash
@@ -898,7 +898,7 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
 
     - You will see several new files created during the execution of the job.
     - The critical output you need for the next processing step is the project_info.json file.
-    
+
     Please ensure this file exists before moving on to the next section of the tutorial.
 
     5. Now that you have the `project_info.json` file from the previous step, we're ready to perform the Reference Calibration (1GC). This process is similar to the GET_INFO step, where we first generate the necessary job files and then submit them to the cluster.
@@ -958,10 +958,10 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
         You should inspect these plots to ensure the calibration was successful. For example, a file like plot-1491550051_1024ch-0252-712-CORRECTED_DATA-XX-amp-FREQ-ANTENNA1.png shows the **Amplitude versus Frequency** of your corrected data for XX polarization, with colors typically representing different antennas.
 
         Below is an example of a similar visualization:
-        ![ACT-CL J2023.3-5535 in UHF band](plot-1491550051_1024ch-0252-712-CORRECTED_DATA-XX-amp-FREQ-ANTENNA1.png). 
+        ![ACT-CL J2023.3-5535 in UHF band](plot-1491550051_1024ch-0252-712-CORRECTED_DATA-XX-amp-FREQ-ANTENNA1.png).
 
         ❓ Are you happy with the plots? If the calibration looks good, you are ready to proceed. If there are clear issues, you may need to revisit the calibration step.
-    
+
     **If you suspect there could be something wrong at any point during the processing, immediately inspect the detailed execution logs for each step in `LOGS` directory**
 
     <!-- 6. Flagging: Similar to the previous 1GC and GET_INFO steps, this process is managed by the FLAG.py script. This script performs automated data cleanup using tricolour and initial imaging/mask generation using wsclean. When submitted to a cluster, the script efficiently runs these steps in parallel for all targets in your measurement set (MS). -->
@@ -977,10 +977,10 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
 
         This folder includes a number of `FITS` files for various products, such as:
         - Target MFS-Image (Top right)
-        - Models (bottom right)  
+        - Models (bottom right)
         - Cleaning Masks (bottom left)
         - Dirty Image (Top left)
-        - Point Spread Functions (PSF) (not displayed) 
+        - Point Spread Functions (PSF) (not displayed)
 
         You can use [CARTA](https://carta.idia.ac.za/) to visualize these images and inspect the results, as shown in the example below:
 
@@ -990,7 +990,7 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
         A variant of this script that performs only the flagging step and not the initial imaging is available in the waterhole folder. This is for cases where a cleaning mask for the field is already in hand. Placing the mask in the IMAGES folder with a *<field-name>*.mask0.fits filename should allow the 2GC script to pick it up automatically and save the extra imaging cycle.
 
     7. Direction-Independent Self-Calibration (2GC): The next step is the Direction-Independent Self-Calibration (2GC), which refines the calibration performed previously. This iterative process uses the masks generated in the Flagging step to achieve better phase and amplitude solutions. This process is managed by the 2GC.py script and is submitted to the cluster to run in parallel for all target fields. You can see the full technical details of this step [here](https://github.com/IanHeywood/oxkat/tree/master/setups).
-        
+
         Similar to the previous steps, let's first generate the job submission script and then immediately submit the 2GC jobs to the cluster:
         ```bash
         python setups/2GC.py idia
@@ -1010,4 +1010,3 @@ In this processing walk-through, we will run the pipeline up to the 2GC stage. T
 
 
 <!-- # CARACAL Tutorial -->
-

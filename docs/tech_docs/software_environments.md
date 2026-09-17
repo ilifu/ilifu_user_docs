@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group. 
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group.
 
 ## Singularity containers
 
@@ -15,20 +15,24 @@ The container images that are maintained by the support team can be found at dif
 #### Execute software in a container
 
 A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
+
 ```bash
-$ sinteractive
+sinteractive
 ```
+
 This will place you on a development node, `compute-001`. Singularity is then available from the compute node. You could execute a Python script using the `python` software in a container, for example:
-```bash
+
+```console
 $ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
 ```
+
 This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10-latest.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to submit jobs on Slurm**.
 
-```bash
+```console
 $ singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger -c 'print("hello world!")'
 
 optional configuration file not found, continuing CASA startup without it
@@ -43,7 +47,8 @@ hello world!
 #### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
-```bash
+
+```console
 $ singularity shell /software/astro/containers/sofia-latest.sif
 SoFiA2v2.5.1.sif:~$ sofia
 ____________________________________________________________________________
@@ -63,7 +68,7 @@ This command will spawn a new shell inside the container, in this case the lates
 
 When containers are built a runscript can be designated in the recipe file. This allows programs to be automatically initiated using a `run` command. For example:
 
-```shell
+```console
 $ singularity run /software/astro/containers/ASTRO-PY3.10-latest.sif -c 'print("hello world!")'
 hello world!
 ```
@@ -263,7 +268,7 @@ Several containers have been developed for use on the ilifu cluster and in other
 <details>
 <summary id="ASTRO-GPU-container">ASTRO-GPU containers</summary>
 
-**Description:** These containers includes Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python pacakges have also been included. 
+**Description:** These containers include Tensorflow or PyTorch and software for accelerating ETL (DALI, RAPIDS), Training (cuDNN, NCCL), and Inference (TensorRT) workloads. Common astronomy Python packages have also been included.
 
 **JupyterLab Kernel:** ASTRO-GPU (TensorFlow), ASTRO-GPU (PyTorch)
 
@@ -397,14 +402,17 @@ The maintained containers are generally named after the primary software they ar
 ##### Check the container %help information
 
 Sometimes a container will include information in its help function, which can be access using the following command:
+
 ```bash
-    $ srun singularity run-help /path/to/container
+srun singularity run-help /path/to/container
 ```
+
 ##### Check the included python packages
 
 A simple way to determine what Python packages a container includes is to run the command `pip freeze` within the container environment to list all the Python packages installed using `pip`. This can be achieved using the following command:
+
 ```bash
-	$ srun singularity exec /path/to/container pip freeze
+srun singularity exec /path/to/container pip freeze
 ```
 
 ##### Check the container build script (definition file)
@@ -412,7 +420,7 @@ A simple way to determine what Python packages a container includes is to run th
 You can generally see the build script that was used to build the container using the `inspect -d` parameter, for example:
 
 ```bash
-    $ srun singularity inspect -d /path/to/container
+srun singularity inspect -d /path/to/container
 ```
 
 The build script will include all the commands used to create the container, `apt-get`, `pip install`, etc, so you can use this information to find out what software was installed in the container. This unfortunately is not possible if the Singularity container was created by pulling a Docker container (although it will indicate which Docker library and image was used), or if the container was built from another base image/container only the last build script will be visible. If the latter is the case, the build scripts of each previous layer are included in the container at `/.singularity.d/bootstrap_history/` and may provide additional information about the included software.
@@ -433,45 +441,45 @@ MirrorURL: http://archive.ubuntu.com/ubuntu/
 OSVersion: focal
 
 %help
-	This container includes SoFiA2 master branch
+    This container includes SoFiA2 master branch
 
 %environment
-	export LC_ALL=C
-	export SOFIA2_PATH="/opt/SoFiA-2"
-	export PATH="$PATH:/opt/SoFiA-2"
+    export LC_ALL=C
+    export SOFIA2_PATH="/opt/SoFiA-2"
+    export PATH="$PATH:/opt/SoFiA-2"
 
 %post
-	# Installation of initial packages
-	export DEBIAN_FRONTEND=noninteractive
-	apt-get update -y
-	apt-get install -y software-properties-common
-	add-apt-repository -y universe
-	apt-get install -y wget vim apt-utils git build-essential make bzip2 curl pkg-config python3-pip python-is-python3 libpng-dev
+    # Installation of initial packages
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update -y
+    apt-get install -y software-properties-common
+    add-apt-repository -y universe
+    apt-get install -y wget vim apt-utils git build-essential make bzip2 curl pkg-config python3-pip python-is-python3 libpng-dev
 
-	# Install SoFiA2
-	apt-get install -y gcc wcslib-dev libopenmpi-dev openmpi-bin openmpi-common
-	cd /opt
-	git clone https://github.com/SoFiA-Admin/SoFiA-2.git
-	cd SoFiA-2
-	./compile.sh -fopenmp
+    # Install SoFiA2
+    apt-get install -y gcc wcslib-dev libopenmpi-dev openmpi-bin openmpi-common
+    cd /opt
+    git clone https://github.com/SoFiA-Admin/SoFiA-2.git
+    cd SoFiA-2
+    ./compile.sh -fopenmp
 
-	# Cleanup the container
-	apt-get clean
-	apt-get autoclean
+    # Cleanup the container
+    apt-get clean
+    apt-get autoclean
 ```
 
 In the example above the operating system that is abstracted or seen from within the container is Ubuntu 20.04 focal. Environmental variables and paths within the container are set within the `%environment` section. Installation of packages and software is undertaken in the `%post` section. In this example no `%runscript` is initiated but could be instantiated to run `sofia` when a container session is initialled using the `run` command. Additional information about Singularity recipes can be found [here](https://docs.sylabs.io/guides/latest/user-guide/definition_files.html).
 
 In order to build the container from the recipe, the following command can be used:
 
-```shell
-$ sudo singularity build sofia2.sif sofia2.def 
+```console
+$ sudo singularity build sofia2.sif sofia2.def
 INFO:    Starting build...
-I: Retrieving InRelease 
+I: Retrieving InRelease
 I: Checking Release signature
 I: Valid Release signature (key id F6ECB3762474EDA9D21B7022871920D1991BC93C)
-I: Retrieving Packages 
-I: Validating Packages 
+I: Retrieving Packages
+I: Validating Packages
 I: Resolving dependencies of required packages...
 I: Resolving dependencies of base packages...
 I: Checking component main on http://archive.ubuntu.com/ubuntu...
@@ -514,7 +522,7 @@ The [Lmod environment module system](https://lmod.readthedocs.io/en/latest/) is 
 
 Use the `module avail` command, e.g.
 
-```bash
+```console
 $ module avail
 
 ------------------------------ /software/modules/common -------------------------------
@@ -547,7 +555,7 @@ the "keys".
 
 Use the `module add` command, e.g.
 
-```bash
+```console
 USERNAME@compute-101:~$ R --version  # this won't work until the module is added
 
 Command 'R' not found, but can be installed with:
@@ -572,7 +580,7 @@ https://www.gnu.org/licenses/.
 
 Use the `module list` command, e.g.
 
-```bash
+```console
 USERNAME@compute-101:/cbio/soft/lmod$ module list
 No modules loaded
 USERNAME@compute-101:/cbio/soft/lmod$ module add bio/svtoolkit/2.00.1918
@@ -621,7 +629,7 @@ RStudio has been updated to be launched via a the use of modules (which is descr
 
 The procedure is to start an interactive job, add the RStudio module and run the `rstudio` as below:
 
-```bash
+```console
 USERNAME@slurm-login:~$ srun --nodes=1 --tasks=1 --mem=8g --time 08:00:00 --job-name="rstudio test" --pty bash
 USERNAME@compute-101:~$ module load R/RStudio2025.05.1-513-R4.5.1
 USERNAME@compute-101:~$ rstudio
@@ -635,14 +643,15 @@ then visit http://localhost:8081 in your browser and use the username "USERNAME"
 
 Note the instructions on how to access the rstudio server now from your own machine: these need to be run on the machine you're working on (rather than on the login / compute node). *The port and password will change each time you run the `rstudio` command.* When you visit the url on your local browser (http://localhost:8081) you will be presented with a login screen. Use your ilifu username and the password provided:
 
-<img src="/_media/rstudio_login.png" alt="rsudio login page" width=800 />
+<img src="/_media/rstudio_login.png" alt="RStudio login page" width=800 />
 
 You will then be presented with an rstudio session:
 
 <img src="/_media/rstudio_session.png" alt="rstudio session" width=800 />
 
 If you don't want the automated/random password to be created then you can set your own password using the environmental variable `RSTUDIO_PASSWORD`, i.e.
-```bash
+
+```console
 USERNAME@compute-101:~$ export RSTUDIO_PASSWORD="this is a long password, HoopLA"
 USERNAME@compute-101:~$ rstudio
 Running rserver on port 60759
@@ -656,7 +665,7 @@ then visit http://localhost:8081 in your browser and use the username "USERNAME"
 
 Should you wish to use RStudio Server the process is slightly more complicated — largely due to the process of ensuring the security of the RStudio session as well as allowing several simultaneous sessions. Firstly one should configure `ssh` in such a way that it is simple to connect to a worker node once a job is running. The easiest way it to add the following to your local `~/.ssh/config` file:
 
-```bash
+```text
 Host *.ilifu.ac.za
     User USERNAME
     ForwardAgent yes
@@ -686,7 +695,7 @@ Running rserver on port 37543
 
 This will launch an RStudio server listening on a random free port (in this case `37543`). Now one needs to port-forward from your local machine to the host machine. One connects to the appropriate node by running:
 
-```bash
+```console
 $ ssh compute-103 -L8082:localhost:37543
 Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 ...
@@ -694,7 +703,7 @@ Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 4.15.0-58-generic x86_64)
 
 on your local machine. Specifically what this does is forward traffic on your local machine's port `8082` to the worker node's port `37543` (and it knows how to connect to `compute-103` by using the `.ssh/config` settings above). One may use any free local port – ssh will complain if you choose something that is not free with an error message approximating:
 
-```bash
+```text
 bind [127.0.0.1]:8000: Address already in use
 channel_setup_fwd_listener_tcpip: cannot listen to port: 8000
 ```
@@ -713,7 +722,7 @@ The Visual Studio Code server will be launched on the [Devel partition](getting_
 
 <div style="text-align:center"><img src="/_media/vscode_session.png" alt="application dashboard" width=600 /></div>
 
-You can reconnect to a running VS code server session by going to `My Interactive Sessions` on the top menu bar in the application dashboard. 
+You can reconnect to a running VS code server session by going to `My Interactive Sessions` on the top menu bar in the application dashboard.
 
 ### Old way of running Visual Code Studio
 
@@ -721,7 +730,7 @@ Running VS Code on the Slurm login node will impacted the performance of the Slu
 
 Firstly one should configure `ssh` in such a way that it is able to connect directly to an interactive job once it is running. The easiest way is to add the following to your local `~/.ssh/config` file:
 
-```bash 
+```text
 Host *.ilifu.ac.za
     User <USERNAME>
     ForwardAgent yes
@@ -736,7 +745,7 @@ Host compute-001
 
 Next, an interactive job should be started and then connected to with VS Code. To start an interactive job, the `sinteractive` command is used. The below example extends the default length of 3 hours to 1 day by using the `--time` flag and allocates 4 CPUS using the `-c` flag. Currently, the maximum length for an interactive session is 5 days.
 
-```bash
+```console
 USERNAME@slurm-login:~$ sinteractive --time=1-00:00:00 -c 4
 ```
 
@@ -753,14 +762,14 @@ Virtual envrionments provide isolated environments for python projects, in which
 `virtualenv` is the package available for creating environments and can be used with
 
 ```bash
-$ virtualenv /path/to/virtualenv
+virtualenv /path/to/virtualenv
 ```
 
 This will create a virtual environment with the name *virtualenv* (any name can be used here) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
 
 The `virtualenv` command will create an environment using the version of python available on the current `$PATH` which by default is the system `python 3.8.10`. If you want to use a different version of python, you can load the corresponding module from those available before creating the virtual environment
 
-```bash
+```console
 $ module load python/2.7.18
 $ which python
 /software/common/python/2.7.18/bin/python
@@ -768,43 +777,45 @@ $ which python
 
 A created virtual environment can then be activated with
 
-```bash
+```console
 $ source /path/to/virtualenv/bin/activate
 (virtualenv)$
 ```
+
 The name of the virtual environment will show enclosed in brackets before the command prompt cursor to indicate the environment is activated.
 
 Specific python packages or a requirements list can then be installed using
 
 ```bash
-(virtualenv)$ pip install <python_package>
+pip install PACKAGE_NAME
 ```
+
 ```bash
-(virtualenv)$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/user_guide.html#introduction) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
 
 ### A virtual environment as a Jupyter kernel
 
-Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session. 
+Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session.
 
 Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following commmand to install a kernel for the virtual environment.
 
-```bash
+```console
 (virtualenv)$ ipython kernel install --name "my_python_kernel" --user
 
 Installed kernelspec my_python_kernel in /users/USERNAME/.local/share/jupyter/kernels/my_python_kernel
 ```
 
-Note the kernel can be named anything, but it is recommended to use something descriptive of the environment's function. The kernel will then be available in the Jupyter Launcher. 
+Note the kernel can be named anything, but it is recommended to use something descriptive of the environment's function. The kernel will then be available in the Jupyter Launcher.
 
 ### Installing niche packages
 
 If you require a single, less common package to use in conjunction with an existing kernel, you can install it for your user account with
 
 ```bash
-$ pip install --user <python_package>
+pip install --user PACKAGE_NAME
 ```
 
 This command needs to be run from a worker node that has access to the `pip` command, either by using a Python module or by shelling inside a container. This is most easily done through a command line terminal started from the Jupyter Launcher. Note that packages installed this way in a user space can conflict with the same packages in existing kernels, and as such this method should only be used for very use-case specific packages. Note that to use a package in conjunction with an existing kernel, the pip python version must correspond to the python version of the kernel (3.6, 3.7 etc.).

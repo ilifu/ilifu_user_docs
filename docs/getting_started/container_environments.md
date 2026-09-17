@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](tech_docs/software_environments?id=environment-modules). Additional software environments include virtual environments, either [Python virtual environments](tech_docs/software_environments?id=python-virtual-environments), or [Conda](tech_docs/software_environments?id=anaconda) -- these are generally created and managed by the user or project group. 
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](tech_docs/software_environments?id=environment-modules). Additional software environments include virtual environments, either [Python virtual environments](tech_docs/software_environments?id=python-virtual-environments), or [Conda](tech_docs/software_environments?id=anaconda) -- these are generally created and managed by the user or project group.
 
 Below we provide an introduction to using Singularity containers which will be helpful when using containerised software when submitting jobs to Slurm. For further information on the software environments available on ilifu, including [modules](tech_docs/software_environments?id=environment-modules) and [virtual environments](tech_docs/software_environments?id=python-virtual-environments), please see the supported [Software environments](tech_docs/software_environments.md) documentation.
 
@@ -17,20 +17,24 @@ The container images that are maintained by the support team can be found at dif
 #### Execute software in a container
 
 A user is able to execute a script using the software from the container environment using the singularity `exec` command. From the Slurm login node, if you want to try the commands, you'll first need to allocate some resources on a compute node to yourself using the following:
+
 ```bash
-$ sinteractive
+sinteractive
 ```
+
 This will place you on the development node `compute-001`. Singularity is then available and you could execute a Python script using the `python` software in a container, for example:
-```bash
+
+```console
 $ singularity exec /software/astro/containers/ASTRO-PY3.10-latest.sif python myscript.py
 hello world!
 $
 ```
+
 This command will execute the script, `myscript.py`, using the Python software that is contained within the `ASTRO-PY3.10-latest.sif` container. The script will have access to all the Python libraries that have been included in the container.
 
 Similary, the following will execute `print("hello world!")` using the CASA software package that is contained in the `casa-stable-v6.sif` container. Note that once the script has been run successfully the container session is closed automatically. **The `singularity exec` command is widely used to run commands in jobs submitted on Slurm**.
 
-```bash
+```console
 $ singularity exec /software/astro/containers/casa-stable-latest.sif casa --log2term --nologger -c 'print("hello world!")'
 
 optional configuration file not found, continuing CASA startup without it
@@ -45,8 +49,9 @@ hello world!
 #### Interactive shell command
 
 A user is able to open a Singularity container as an interactive shell and issue command line tasks within the environment that the container provides. To do this a user calls the Singularity container using the `shell` command. You can open a shell session within an available container using the following:
-```bash
-$ singularity shell /software/astro/containers/sofia-latest.sif 
+
+```console
+$ singularity shell /software/astro/containers/sofia-latest.sif
 SoFiA2v2.5.1.sif:~$ sofia
 ____________________________________________________________________________
 

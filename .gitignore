@@ -3,3 +3,7 @@
 .idea
 node_modules
 *.json
+
+# Python
+__pycache__/
+*.pyc
