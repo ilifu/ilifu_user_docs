@@ -44,6 +44,8 @@ You will be redirected to the secure login page with a confirmation message.
 
 Note: If you haven’t received the email within 5 minutes, please check your Spam or Junk folder, or click "Resend Verification Email" on the login screen.
 
+>**Verification email not reaching UCT mailbox**: UCT makes use of Mimecast firewall software, which is known to block our emails. If you are using a UCT email and are not receiving the verification email, you will need to add a permit rule in Mimecast for `ilifu.ac.za`. You can do so by following the instructions from UCT ICTS's page, under the section "Manage permitted and blocked senders’ lists" on [https://icts.uct.ac.za/services-email-uct/mimecast](https://icts.uct.ac.za/services-email-uct/mimecast)
+
 ## Step 4: Add an SSH Key to Your Account
 If you plan to interact with the ilifu platform via the command line or securely push code/data, you must link an SSH key to your profile.
 

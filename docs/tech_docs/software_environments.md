@@ -756,14 +756,15 @@ Virtual envrionments provide isolated environments for python projects, in which
 $ virtualenv /path/to/virtualenv
 ```
 
-This will create a virtual environment with the name *virtualenv* (any name can be used here) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
+This will create a virtual environment with the name *virtualenv* (any name can be used here, it's helpful to name the virtual environment after its primary software or use case so that you remember what different virtual environments are for!) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
 
-The `virtualenv` command will create an environment using the version of python available on the current `$PATH` which by default is the system `python 3.8.10`. If you want to use a different version of python, you can load the corresponding module from those available before creating the virtual environment
+The `virtualenv` command will create an environment using the version of Python available on the current `$PATH` which by default is the system `python 3.12.3`. We strongly recommend making use of a Python module to create your virual environemt, as the environment can then persist even through upgrades to the operating system. When using a Python module you can also select a Python version that meets your requirements (for example, if the intended software depends on earlier Python versions).
 
 ```bash
-$ module load python/2.7.18
+$ module load python/3.8.16
 $ which python
-/software/common/python/2.7.18/bin/python
+/software/common/python/3.8.16/bin/python
+$ virtualenv /path/to/virtualenv
 ```
 
 A created virtual environment can then be activated with
@@ -783,7 +784,7 @@ Specific python packages or a requirements list can then be installed using
 (virtualenv)$ pip install -r requirements.txt
 ```
 
-More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/user_guide.html#introduction) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
+More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/tutorial/getting-started.html) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
 
 ### A virtual environment as a Jupyter kernel
 
