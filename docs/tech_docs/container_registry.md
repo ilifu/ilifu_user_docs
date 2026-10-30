@@ -1,11 +1,11 @@
 # IDIA Singularity Registry Server
 
-The IDIA Singularity Registry Server (IDIA sregistry) is available for managing, organising, and sharing Singularity container images. Ilifu users are able to upload containers and manage who can use them. Public containers can be downloaded to any remote site using `SingularityCE` or `Apptainer`.
+The IDIA Singularity Registry Server (IDIA sregistry) is available for managing, organising, and sharing Singularity container images. Ilifu users are able to upload containers and manage who can use them. Public containers can be downloaded to any remote site.
 
 ## Requirements
 
 An ilifu user account is required to upload containers to the IDIA Singularity Registry repository, and to pull containers from private collections.
-Pulling and pushing need SingularityCE `version 3.3.0+` (3.10 or newer is recommended) or Apptainer.
+Pulling and pushing need SingularityCE `version 3.3.0+` (3.10 or newer is recommended). Away from ilifu, Apptainer works too: use the same commands with `apptainer` in place of `singularity`.
 
 ## Support
 
@@ -20,7 +20,17 @@ Contact ilifu support at support@ilifu.ac.za to get help with uploading or downl
 
 ## Available collections
 
-To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All public container-collections are available without requiring an ilifu account. Each container's page also shows the commands to pull it.
+To view available containers visit our web UI at https://sregistry.idia.ac.za/collections. All public container-collections are available without requiring an ilifu account.
+
+### Browsing the registry
+
+Search for a collection from the [homepage](https://sregistry.idia.ac.za), or filter the [collections list](https://sregistry.idia.ac.za/collections) by collection or container name.
+
+Each collection has a **CLI examples** button showing the commands to pull, shell into and run its containers. If you are logged in as an owner of the collection, it also shows the command to push to it.
+
+A container's page has tabs with what is known about that container: the commands to use it (CLI), its help text, the Singularity recipe it was built from (which you can download), its runscript, tests, environment and labels. A tab only appears when the container includes that information.
+
+<div style="text-align:center"><img src="/_media/sregistry_container_page.png" alt="container page showing the Singularity recipe tab" width=700 /></div>
 
 ## Adding the registry (once)
 
@@ -31,7 +41,7 @@ singularity remote add --no-login idia-registry https://sregistry.idia.ac.za
 singularity remote use idia-registry
 ```
 
-With Apptainer, use the same commands with `apptainer` in place of `singularity`. If you added the registry before, `remote add` reports that `idia-registry` already exists: just run `remote use`.
+If you added the registry before, `remote add` reports that `idia-registry` already exists: just run `remote use`.
 
 ### Logging in
 
@@ -58,6 +68,8 @@ FATAL:   while verifying token: error response from server: Invalid Credentials
 ```
 
 Get a new token from the token page and run `singularity remote login idia-registry` again. There is no need to add the remote again.
+
+The token page also has a **Regenerate token** button. A regenerated token replaces the old one, so run `singularity remote login idia-registry` again with the new token afterwards.
 
 ## Access/download available containers
 
@@ -91,7 +103,7 @@ Shell into the container:
 singularity shell library://collection/container:tag
 ```
 
-**Note**: containers used this way are stored in a local cache (usually `$HOME/.singularity/cache`, or `$HOME/.apptainer/cache` for Apptainer, if an alternative is not set using `SINGULARITY_CACHEDIR` or `APPTAINER_CACHEDIR`). The storage used for this can grow considerably over time and we recommend using `singularity cache clean -a` to remove images after use.
+**Note**: containers used this way are stored in a local cache (usually `$HOME/.singularity/cache`, if an alternative is not set using `SINGULARITY_CACHEDIR`). The storage used for this can grow considerably over time and we recommend using `singularity cache clean -a` to remove images after use.
 
 ## Pushing containers to the registry
 
@@ -101,7 +113,9 @@ Any user with the IDIA/ilifu user account is able to push images to collections 
 
 **NB**. You can only push containers to collections you are an owner of. Readers can view and pull a collection, but not push to it.
 
-Pushing to a collection name that doesn't exist yet creates the collection, with you as its owner. You can also create it first: login via the [webUI](https://sregistry.idia.ac.za), go to [View Collection](https://sregistry.idia.ac.za/collections) and use the "New Collection" button. This is useful to make a collection private before its first push. Collection names are lowercase: other characters, such as `.` or `/`, are replaced by `-`.
+New collections are **public**: anyone can find and pull their containers. Pushing to a collection name that doesn't exist yet creates the collection, public, with you as its owner.
+
+To keep a collection private, create it before the first push: login via the [webUI](https://sregistry.idia.ac.za), go to [View Collection](https://sregistry.idia.ac.za/collections) and use the "New Collection" button, then open the collection's Settings and choose **Make private**. Collection names are lowercase: other characters, such as `.` or `/`, are replaced by `-`.
 
 ### Push the container to your collection
 
