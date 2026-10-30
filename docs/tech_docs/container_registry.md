@@ -43,6 +43,8 @@ singularity remote use idia-registry
 
 If you added the registry before, `remote add` reports that `idia-registry` already exists: just run `remote use`.
 
+`remote use` makes the IDIA registry the default for every `library://` address, including those in recipes that start with `Bootstrap: library`. To use Sylabs Cloud again, run `singularity remote use SylabsCloud`.
+
 ### Logging in
 
 Public containers need no login. To pull from a private collection, or to push, log in with an access token:
@@ -140,6 +142,8 @@ singularity push -U ASTRO-R.sif library://walter/calibration/astror:latest
 ```
 
 In this command: `ASTRO-R.sif` is the local name of the container that I want to push, `walter` is my username, `calibration` is the name of the collection I am pushing the container to, `astror` is the name a container will have in the IDIA sregistry, `latest` is the tag of the container. `-U` pushes an unsigned container.
+
+Unlike pull, push includes your username before the collection, as in the push command on the collection's **CLI examples** page.
 
 ## Collection members and teams
 
