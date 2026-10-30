@@ -5,7 +5,7 @@ The IDIA Singularity Registry Server (IDIA sregistry) is available for managing,
 ## Requirements
 
 An ilifu user account is required to upload containers to the IDIA Singularity Registry repository, and to pull containers from private collections.
-Pulling and pushing need SingularityCE `version 3.3.0+` (3.10 or newer is recommended). Away from ilifu, Apptainer works too: use the same commands with `apptainer` in place of `singularity`.
+Pulling and pushing need SingularityCE 3.10 or newer; this guide was tested with 4.4.1. Away from ilifu, Apptainer works too: use the same commands with `apptainer` in place of `singularity`.
 
 ## Support
 
@@ -14,7 +14,7 @@ Contact ilifu support at support@ilifu.ac.za to get help with uploading or downl
 ## Definitions
 
 `Collection` describes a class of containers, or a project group for which containers are created. A collection can be public or private; a private collection is only visible to its owners and readers.<br />
-`Container_name`, is the name of the container (this is usually the name of the primary software, the project group for which the container is created, or a custom name if the container includes multiple software packages without a clear primary packages).<br />
+`Container_name`, is the name of the container (this is usually the name of the primary software, the project group for which the container is created, or a custom name if the container includes multiple software packages without a clear primary package).<br />
 `Tag` is the version of the primary software package included in the container (example v6.5.0), a date to indicate different builds (2023-01-23), or another custom versioning method.<br />
 `Team` is a group of users. Owners of a collection pick its owners and readers from the members of their teams.
 
@@ -53,7 +53,7 @@ Public containers need no login. To pull from a private collection, or to push, 
 singularity remote login idia-registry
 ```
 
-To get a token, log in to the [webUI](https://sregistry.idia.ac.za), open the dropdown menu from your username at the top right and select Token (or go to https://sregistry.idia.ac.za/token). Copy the token (it will look something like: `742a2ca17065a2d0137f24ec30455a4a3cd3fe2e`) and paste it on the terminal. You should receive confirmation that the token is verified, as follows:
+To get a token, log in to the [webUI](https://sregistry.idia.ac.za), open the dropdown menu from your username at the top right and select Token (or go to https://sregistry.idia.ac.za/token). Copy the token (a long string of letters and digits) and paste it on the terminal. You should receive confirmation that the token is verified, as follows:
 
 ```console
 Generate an access token at https://sregistry.idia.ac.za/auth/tokens, and paste it here.
@@ -62,6 +62,8 @@ Access Token:
 INFO:    Access Token Verified!
 INFO:    Token stored in /users/walter/.singularity/remote.yaml
 ```
+
+The link in the prompt opens the same token page.
 
 If you get an issue like:
 
@@ -73,7 +75,7 @@ Get a new token from the token page and run `singularity remote login idia-regis
 
 The token page also has a **Regenerate token** button. A regenerated token replaces the old one, so run `singularity remote login idia-registry` again with the new token afterwards.
 
-## Access/download available containers
+## Pulling and running containers
 
 Once the registry is added, pull a `container` in `collection` with `tag`:
 
@@ -81,7 +83,7 @@ Once the registry is added, pull a `container` in `collection` with `tag`:
 singularity pull library://collection/container:tag
 ```
 
-To pull a container called `wsclean` with a tag `v3.3` in a collection called `wsclean`, we use the cmd:
+To pull a container called `wsclean` with a tag `v3.3` in a collection called `wsclean`, run:
 
 ```bash
 singularity pull library://wsclean/wsclean:v3.3
@@ -117,7 +119,7 @@ Any user with the IDIA/ilifu user account is able to push images to collections 
 
 New collections are **public**: anyone can find and pull their containers. Pushing to a collection name that doesn't exist yet creates the collection, public, with you as its owner.
 
-To keep a collection private, create it before the first push: login via the [webUI](https://sregistry.idia.ac.za), go to [View Collection](https://sregistry.idia.ac.za/collections) and use the "New Collection" button, then open the collection's Settings and choose **Make private**. Collection names are lowercase: other characters, such as `.` or `/`, are replaced by `-`.
+To keep a collection private, create it before the first push: log in via the [webUI](https://sregistry.idia.ac.za), go to [View Collection](https://sregistry.idia.ac.za/collections) and use the "New Collection" button, then open the collection's Settings and choose **Make private**. Collection names contain only lowercase letters, digits and `-`: uppercase letters are lowercased, and each run of other characters becomes a single `-`. For example, pushing to `My_Calib.v2` creates the collection `my-calib-v2`, and later pulls must use that name.
 
 ### Push the container to your collection
 
@@ -160,7 +162,8 @@ Create a team:
 
 - Go to webUI: https://sregistry.idia.ac.za/
 - Click on the “Teams” tab in the navigation bar
-- Choose a name, team name, and image.
-- Decide if your team is “open” or “invite” only
-- **invite** only means that an owner must send an invitation link.
-- **open** means that anyone can join the team that is authenticated in the registry
+- Choose a team name and an image
+- Decide if your team is “open” or “invite” only:
+   - **invite** only means that an owner must send an invitation link.
+   - **open** means that any user logged in to the registry can join the team.
+- Bring your collaborators into the team: send them the invitation link, or for an open team ask them to join. You can then add them to your collection's owners or readers.
