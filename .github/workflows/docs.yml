@@ -58,6 +58,7 @@ jobs:
           # and use ?id= anchors) are covered by the internal-links job instead.
           args: >-
             --scheme https --scheme http
+            --root-dir ${{ github.workspace }}/docs
             --exclude localhost
             --exclude 'example\.(com|org)'
             --accept 200,206,429
