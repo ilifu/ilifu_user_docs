@@ -31,7 +31,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 |---------------------|----------------|
 | /users ($HOME)      | 200GB          |
 | /idia/users/        | 10TB           |
-| /cbio/users/        | 10TB           |
+| /cbio/users/        | 2TiB           |
 | /ilifu/users/       | 2TB            |
 
 `/software` contains common software packages needed for workflows, including containers and modules.
@@ -56,7 +56,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 Users' home directories are in `/users/`. This is not currently backed up.
 
 CBIO users will be using the CephFS parallel file partition — our space is in `/cbio/`. Directories that have been setup:
-* `/cbio/users` - user's personal workspace. **Limited to 10TB**. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
+* `/cbio/users` - user's personal workspace. **Limited to 2TiB**. Working in a project space allows storage space to be used more efficiently. Please see the [Data Management Form](/bioinformatics/cbio#data-management-plan-for-projects) in regard to data management plan for projects.
 
 * `/cbio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project long-term data, data products, intermediate data and project specific resources, such as scripts , are stored here.
 
