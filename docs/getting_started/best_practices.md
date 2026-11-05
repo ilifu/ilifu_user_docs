@@ -17,7 +17,7 @@ Please take note of the following best practices while using the ILIFU cloud com
 
 When you ssh into the Slurm cluster you will be on the Slurm login node. The purpose of the login node is to manage job submissions. Please do not run any software on the Slurm login node as this can reduce performance of the Slurm service and affect performance for other users.
 
-To submit jobs to the Slurm job queue use either [srun](tech_docs/running_jobs?running_jobs?id=interactive-slurm-sessions) or [sbatch](tech_docs/running_jobs?id=slurm-batch-scheduler) commands, or use the [srun](tech_docs/running_jobs?id=interactive-slurm-sessions) command to allocate a worker node for an interactive session.
+To submit jobs to the Slurm job queue use either [srun](getting_started/submit_job_slurm?id=interactive-slurm-sessions) or [sbatch](getting_started/access_ilifu?id=slurm-batch-scheduler) commands, or use the [srun](getting_started/submit_job_slurm?id=interactive-slurm-sessions) command to allocate a worker node for an interactive session.
 
 ## Do not store large files in your home directory
 

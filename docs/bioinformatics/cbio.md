@@ -2,7 +2,7 @@
 
 ## Directory structure
 
-Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-structure) to see how your data should be organised.
+Please read [CBIO Directory Structure](/data/directory_structure#cbio-directory-structure) to see how your data should be organised.
 
 ## Data transfer nodes
 
