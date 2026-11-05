@@ -4,7 +4,7 @@ The following describes the directory structure as related to the ilifu data pol
 
 ### User home directories
 
-Users' home directories (`$HOME`) are located in `/users/`, **limited to 200GB**. This directory is for users' scripts. No large files should be stored in `/users/`. It is highly recommended that users make use of a repository such as Github to backup important scripts and files.
+Users' home directories (`$HOME`) are located in `/users/`, **limited to 200GiB**. This directory is for users' scripts. No large files should be stored in `/users/`. It is highly recommended that users make use of a repository such as Github to backup important scripts and files.
 
 ### Scratch storage
 
@@ -29,10 +29,10 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 | Directory path      | Quota          |
 |---------------------|----------------|
-| /users ($HOME)      | 200GB          |
-| /idia/users/        | 10TB           |
+| /users ($HOME)      | 200GiB         |
+| /idia/users/        | 10TiB          |
 | /cbio/users/        | 2TiB           |
-| /ilifu/users/       | 2TB            |
+| /ilifu/users/       | 2TiB           |
 
 `/software` contains common software packages needed for workflows, including containers and modules.
 
@@ -41,7 +41,7 @@ There are a number of groups within the ilifu cloud computing community, includi
 
 * `/idia/` - the base directory for all IDIA related projects.
 
-* `/idia/users` - user's personal workspace. **Limited to 10TB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
+* `/idia/users` - user's personal workspace. **Limited to 10TiB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
 
 * `/idia/projects/` - project specific directories. These directories are for sharing data and resources within project groups. Project long-term data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. Raw data associated with a project will also be available from the project folder. Raw data folders should always be read-only.
 
@@ -74,7 +74,7 @@ Please note the [restrictions](/bioinformatics/cbio#restrictions).
 
 * `/ilifu/` - the base directory for all ilifu related projects.
 
-* `/ilifu/users` - user's personal workspace. **Limited to 2TB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
+* `/ilifu/users` - user's personal workspace. **Limited to 2TiB**. For storing longer-term data and data products that are not ready to be placed in shared project space.
 
 * `/ilifu/astro/projects/` and `ilifu/bio/projects` - project specific directories. These directories are for sharing data and resources within project groups. Project raw data, data products, intermediate data and project specific resources, such as script or software containers, are stored here. It is recommended that raw data folders should always be read-only.
 
