@@ -28,7 +28,7 @@ Data can be moved or copied between directories on the same or different mounts 
 mv /idia/users/$USER/run1 /idia/projects/my-project/processed
 ```
 
-[Python virtual environments](/tech_docs/software_environments?id=python-virtual-environments) should not be moved, as the path associated with these environments is hard-coded, and the environment cannot be activated after changing its location. Instead, the virtual environment can be rebuilt, making use of the `pip freeze` command where necessary, to identify the virtual environment's packages. In general, we recommend building virtual environments in one of your personal workspaces, such as `/idia/users/$USER/software`.
+[Python virtual environments](/tech_docs/software_environments?id=python-virtual-environments) should not be moved, as the path associated with these environments is hard-coded, and the environment cannot be activated after changing its location. Instead, the virtual environment can be rebuilt, making use of the `pip freeze` command where necessary, to identify the virtual environment's packages. An environment managed as a [uv project](/tech_docs/software_environments?id=uv-projects) can be rebuilt with `uv sync`. In general, we recommend building virtual environments in one of your personal workspaces, such as `/idia/users/$USER/software`.
 
 <!-- https://stackoverflow.com/questions/32407365/can-i-move-a-virtualenv -->
 

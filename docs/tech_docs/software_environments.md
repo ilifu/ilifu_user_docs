@@ -1,6 +1,6 @@
 # Supported software environments
 
-The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include virtual environments, either [Python virtual environments](#python-virtual-environments), or [Conda](#anaconda) -- these are generally created and managed by the user or project group.
+The software environments on ilifu are provided principally through [Singularity](https://docs.sylabs.io/guides/latest/user-guide/) containers and [environment modules](#environment-modules). Additional software environments include [Python virtual environments](#python-virtual-environments), created with `virtualenv` or `uv` -- these are generally created and managed by the user or project group.
 
 ## Singularity containers
 
@@ -755,7 +755,7 @@ Lastly use VS Code's remote explorer to connect to compute-001. It will ask for 
 
 ## Python virtual environments
 
-Virtual envrionments provide isolated environments for python projects, in which you can customize the dependencies to suit your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
+Virtual environments provide isolated environments for python projects, in which you can customize the dependencies to suit your requirements. This kind of environment is ideal for prototyping and development as they are easy to set up and maintain. It is, however, important to note that virtual environments are limited to non-python libraries of the base operating system.
 
 ### Creating a virtual environment
 
@@ -765,14 +765,15 @@ Virtual envrionments provide isolated environments for python projects, in which
 virtualenv /path/to/virtualenv
 ```
 
-This will create a virtual environment with the name *virtualenv* (any name can be used here) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
+This will create a virtual environment with the name *virtualenv* (any name can be used here, it's helpful to name the virtual environment after its primary software or use case so that you remember what different virtual environments are for!) at the specified path. Note that environments created in shared folders will be accessible to anyone with access to the folder, and similarly environments created in private folders will be accessible only to the user.
 
-The `virtualenv` command will create an environment using the version of python available on the current `$PATH` which by default is the system `python 3.8.10`. If you want to use a different version of python, you can load the corresponding module from those available before creating the virtual environment
+The `virtualenv` command will create an environment using the version of Python available on the current `$PATH` which by default is the system `python 3.12.3`. We strongly recommend making use of a Python module to create your virtual environment, as the environment can then persist even through upgrades to the operating system. When using a Python module you can also select a Python version that meets your requirements (for example, if the intended software depends on earlier Python versions).
 
 ```console
-$ module load python/2.7.18
+$ module load python/3.8.16
 $ which python
-/software/common/python/2.7.18/bin/python
+/software/common/python/3.8.16/bin/python
+$ virtualenv /path/to/virtualenv
 ```
 
 A created virtual environment can then be activated with
@@ -794,13 +795,69 @@ pip install PACKAGE_NAME
 pip install -r requirements.txt
 ```
 
-More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/user_guide.html#introduction) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
+More information on `virtualenv` can be found in its [documentation](https://virtualenv.pypa.io/en/latest/tutorial/getting-started.html) and on our [online training site](https://www.ilifu.ac.za/latest-training/#advanced1).
+
+### Using uv
+
+[uv](https://docs.astral.sh/uv/) is a fast Python package and project manager that can be used in place of `virtualenv` and `pip`. It is available as a module
+
+```bash
+module add python/uv
+```
+
+A virtual environment is created and activated with
+
+```console
+$ uv venv /path/to/virtualenv
+$ source /path/to/virtualenv/bin/activate
+(virtualenv)$
+```
+
+As with `virtualenv`, `uv` uses the version of python on the current `$PATH`, so load a `python` module first to use a specific version. Alternatively, a version can be requested directly, and `uv` will download it if it is not available on the cluster
+
+```bash
+uv venv --python 3.12 /path/to/virtualenv
+```
+
+Packages are installed into the activated environment using the `pip`-compatible interface
+
+```bash
+uv pip install PACKAGE_NAME
+```
+
+```bash
+uv pip install -r requirements.txt
+```
+
+#### uv projects
+
+`uv` can also manage a project, recording its dependencies in `pyproject.toml` and pinning exact versions in `uv.lock`, so that the environment can be rebuilt reproducibly
+
+```bash
+uv init my_project
+cd my_project
+uv add PACKAGE_NAME
+uv run python myscript.py
+```
+
+`uv add` creates the environment in `.venv` inside the project directory and installs the package. `uv run` executes a command in the project environment without activating it, and `uv sync` rebuilds the environment from `uv.lock`, for example after cloning the project. As with other virtual environments, create projects in a personal or project workspace rather than your `$HOME` directory.
+
+#### Cache and downloaded python versions
+
+`uv` caches packages in `~/.cache/uv` and installs downloaded python versions in `~/.local/share/uv`. Both can grow large, and your home directory is intended for scripts only (see [directory structure](/data/directory_structure)). To store them in a personal workspace instead, set the following before using `uv`, for example in your `~/.bashrc`
+
+```bash
+export UV_CACHE_DIR=/idia/users/$USER/software/uv/cache
+export UV_PYTHON_INSTALL_DIR=/idia/users/$USER/software/uv/python
+```
+
+Keeping the cache on the same filesystem as your environments also avoids a warning from `uv` that it cannot hardlink files.
 
 ### A virtual environment as a Jupyter kernel
 
-Virtual envrionments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session.
+Virtual environments can also be used as Jupyter kernels. This is useful if you have a python configuration not already available on the cluster that you wish to develop in or test in a Jupyter session.
 
-Once a virtual environment is activated, you must install the `ipykernel` package. You can then run the following commmand to install a kernel for the virtual environment.
+Once a virtual environment is activated, you must install the `ipykernel` package (with `pip install ipykernel`, or `uv pip install ipykernel` for an environment created with `uv`). You can then run the following command to install a kernel for the virtual environment.
 
 ```console
 (virtualenv)$ ipython kernel install --name "my_python_kernel" --user

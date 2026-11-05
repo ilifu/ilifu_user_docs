@@ -14,7 +14,7 @@ Please familiarise yourself with the list of recommendations below.
 #### DOs
 
 * try to run jobs using [sbatch](getting_started/submit_job_slurm#submitting-a-job-using-a-batch-script) rather than interactive jobs
-* store larger files in a project [directory](data/directory_structure.md) or your ~/workspace directory (latter limited to 10 TiB total)
+* store larger files in a project [directory](data/directory_structure.md) or your ~/workspace directory (see [quotas](data/directory_structure.md))
 * cleanup unused files when not needed
 * set --time, --mem, --account parameters when [submitting jobs](getting_started/submit_job_slurm#specifying-resources-when-running-jobs-on-slurm), as accurate job parameters improves the performance of the SLURM scheduler
 

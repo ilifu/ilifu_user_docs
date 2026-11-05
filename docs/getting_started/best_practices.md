@@ -21,7 +21,7 @@ To submit jobs to the Slurm job queue use either [srun](tech_docs/running_jobs?r
 
 ## Do not store large files in your home directory
 
-Your home directory is located at `/users/`. This directory is part of a mount that is only 20 TB which is shared between all users. Do not store large files or data in your home directory. Your home directory is for small files and scripts only. Filling up the `/users/` mount can prevent jobs from running and may prevent users accessing the cluster. Please see information on the ilifu [directory structure](data/directory_structure).
+Your home directory is located at `/users/`. This directory is part of a mount that is only 20 TiB which is shared between all users. Do not store large files or data in your home directory. Your home directory is for small files and scripts only. Filling up the `/users/` mount can prevent jobs from running and may prevent users accessing the cluster. Please see information on the ilifu [directory structure](data/directory_structure).
 
 ## Do not leave files in your scratch folder
 
