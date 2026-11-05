@@ -222,6 +222,9 @@ To start, SSH into the ilifu cluster (slurm.ilifu.ac.za), and created a working 
 
     ```bash
     processMeerKAT.py -B -C tutorial_config.txt -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -v
+    ```
+
+    ```text
     2025-09-17 10:52:11,534 INFO: Extracting field IDs from MeasurementSet "/idia/data/public/1525469431/1525469431_sdp_l0.ms" using CASA.
     2025-09-17 10:52:11,534 DEBUG: Using the following command:
         srun --time=10 --mem=4GB --partition=Main --account=b03-idia-ag --qos qos-interactive singularity exec /software/astro/containers/casa-modular-py3.10-latest.sif  python /idia/software/pipelines/master/processMeerKAT/read_ms.py -B -M /idia/data/public/1525469431/1525469431_sdp_l0.ms -C tutorial_config.txt -N 1 -t 8 -v
