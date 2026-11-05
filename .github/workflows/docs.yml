@@ -20,10 +20,10 @@ jobs:
     name: Markdown lint (mdl, advisory)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
+          ruby-version: '3.4'
       - name: Install mdl
         run: gem install --no-document mdl
       - name: Lint docs
@@ -37,8 +37,8 @@ jobs:
     name: Internal link check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Unit test the link checker
@@ -50,7 +50,7 @@ jobs:
     name: External link check (non-blocking)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Check external URLs with lychee
         uses: lycheeverse/lychee-action@v2
         with:
