@@ -140,6 +140,24 @@ class CheckFileTests(unittest.TestCase):
         text = "```text\noutput\n```\n[bad](does/not/exist.md)\n"
         self.assertEqual(self.broken(text), [(4, "does/not/exist.md")])
 
+    # --- destinations wrapped in <...> ------------------------------------
+    def test_should_skip_link_when_external_destination_is_wrapped(self):
+        self.assertEqual(self.broken("[site](<https://example.com/guide>)\n"), [])
+
+    def test_should_skip_link_when_wrapped_external_destination_has_title(self):
+        text = "[site](<https://example.com/guide> \"Guide\")\n"
+        self.assertEqual(self.broken(text), [])
+
+    def test_should_skip_image_when_external_destination_is_wrapped(self):
+        self.assertEqual(self.broken("![logo](<https://example.com/logo.png>)\n"), [])
+
+    def test_should_skip_link_when_wrapped_destination_is_a_pure_fragment(self):
+        self.assertEqual(self.broken("[jump](<#section>)\n"), [])
+
+    def test_should_flag_link_when_wrapped_internal_destination_is_missing(self):
+        result = self.broken("[bad](<does/not/exist.md>)\n")
+        self.assertEqual(result, [(1, "<does/not/exist.md>")])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

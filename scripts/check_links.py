@@ -51,6 +51,20 @@ def _candidates(base: Path) -> list[Path]:
     return cands
 
 
+def link_destination(target: str) -> str:
+    """Return the bare destination of a link target, without ``<...>`` or a title.
+
+    A CommonMark link destination may be wrapped in ``<...>`` and/or followed by
+    an optional title: ``[t](path "title")`` / ``[t](<path> 'title')``.
+    """
+    target = target.strip()
+    if target.startswith("<") and ">" in target:
+        return target[1 : target.index(">")]
+    # Unbracketed destination is the first whitespace-delimited token; any
+    # remainder is a title (CommonMark requires <...> for spaces in a path).
+    return target.split()[0] if target.split() else target
+
+
 def resolve(target: str, source: Path) -> Path | None:
     """Return a resolved filesystem path for a link, or None if genuinely broken.
 
@@ -61,21 +75,9 @@ def resolve(target: str, source: Path) -> Path | None:
     considered valid if it resolves under *either* interpretation, and only
     flagged when it resolves under neither. Extensionless links try ``.md`` and a
     folder ``README.md`` fallback, matching Docsify's routing.
-
-    A CommonMark link destination may be wrapped in ``<...>`` and/or followed by
-    an optional title: ``[t](path "title")`` / ``[t](<path> 'title')``. Extract
-    the bare destination before resolving.
     """
-    target = target.strip()
-    if target.startswith("<") and ">" in target:
-        target = target[1:target.index(">")]
-    elif target.split():
-        # Unbracketed destination is the first whitespace-delimited token; any
-        # remainder is a title (CommonMark requires <...> for spaces in a path).
-        target = target.split()[0]
-
     # Strip anchor (#...) and query (?id=...) fragments.
-    clean = target.split("#", 1)[0].split("?", 1)[0].strip()
+    clean = link_destination(target).split("#", 1)[0].split("?", 1)[0].strip()
     if not clean:  # was a pure anchor / query — same-page reference
         return source
 
@@ -119,10 +121,11 @@ def check_file(md: Path) -> list[tuple[int, str]]:
         )
         for target in targets:
             target = target.strip()
-            if not target or target.startswith("#") or is_external(target):
+            destination = link_destination(target)
+            if not destination or destination.startswith("#") or is_external(destination):
                 continue
             # Bare email address written as a link target (no scheme, no path).
-            if "@" in target and "/" not in target:
+            if "@" in destination and "/" not in destination:
                 continue
             if resolve(target, md) is None:
                 broken.append((lineno, target))
