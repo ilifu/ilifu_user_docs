@@ -24,30 +24,27 @@ docsify serve ilifu_user_docs/docs
 
 By default this serves the pages to [http://localhost:3000](http://localhost:3000) in your web browser.
 
-If you wish to do some code linting you can install [markdown linter](https://github.com/markdownlint/markdownlint). Then run the command `mdl -s ./mdl.style docs` to check you code.
+## Conventions
 
-```console
-$ mdl -s ./mdl.style docs
-docs/_coverpage.md:1: MD041 First line in file should be a top level header
-docs/_sidebar.md:2: MD007 Unordered list indentation
-docs/_sidebar.md:1: MD041 First line in file should be a top level header
-docs/about/what_is.md:1: MD002 First header should be a top level header
-docs/about/what_is.md:1: MD026 Trailing punctuation in header
-docs/about/what_is.md:12: MD026 Trailing punctuation in header
-docs/about/what_is.md:1: MD041 First line in file should be a top level header
-docs/cluster/running_jobs.md:15: MD009 Trailing spaces
-docs/cluster/running_jobs.md:24: MD009 Trailing spaces
-docs/cluster/running_jobs.md:33: MD009 Trailing spaces
-docs/cluster/running_jobs.md:49: MD009 Trailing spaces
-docs/cluster/running_jobs.md:52: MD009 Trailing spaces
-docs/cluster/running_jobs.md:54: MD009 Trailing spaces
-docs/cluster/running_jobs.md:66: MD009 Trailing spaces
-docs/cluster/running_jobs.md:71: MD009 Trailing spaces
-docs/cluster/running_jobs.md:75: MD009 Trailing spaces
-docs/cluster/running_jobs.md:79: MD009 Trailing spaces
-docs/cluster/running_jobs.md:87: MD009 Trailing spaces
-...
-```
+Tag fenced code blocks by intent, so they highlight correctly and get the right copy-button behaviour:
+
+- ` ```bash ` — commands the reader should run. Write them **without** a `$` prompt so the copy button yields a runnable command.
+- ` ```console ` — terminal transcripts shown for illustration (prompt **and** output). These get no copy button.
+- ` ```text ` — plain output or configuration file contents.
+- ` ```python `, ` ```yaml `, ` ```json ` — code or config in that language.
+
+## Checks
+
+Every pull request runs three checks (`.github/workflows/docs.yml`):
+
+- **Internal link check** (blocking) — verifies that every internal link and image resolves the way Docsify would serve it. Run it locally with:
+
+  ```bash
+  python3 scripts/check_links.py
+  ```
+
+- **Markdown lint** (advisory) — install [markdown linter](https://github.com/markdownlint/markdownlint) and run `mdl -s ./mdl.style docs`. It reports style findings without blocking merges while the pre-existing backlog is worked down; please avoid adding new findings.
+- **External link check** (non-blocking) — [lychee](https://github.com/lycheeverse/lychee) checks outbound URLs for link rot.
 
 ---
 

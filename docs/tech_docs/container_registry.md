@@ -55,7 +55,7 @@ singularity remote login idia-registry
 
 To get a token, log in to the [webUI](https://sregistry.idia.ac.za), open the dropdown menu from your username at the top right and select Token (or go to https://sregistry.idia.ac.za/token). Copy the token (a long string of letters and digits) and paste it on the terminal. You should receive confirmation that the token is verified, as follows:
 
-```console
+```text
 Generate an access token at https://sregistry.idia.ac.za/auth/tokens, and paste it here.
 Token entered will be hidden for security.
 Access Token:
@@ -67,7 +67,7 @@ The link in the prompt opens the same token page.
 
 If you get an issue like:
 
-```console
+```text
 FATAL:   while verifying token: error response from server: Invalid Credentials
 ```
 
@@ -125,7 +125,7 @@ To keep a collection private, create it before the first push: log in via the [w
 
 You can check the remote status via `singularity remote status idia-registry`, and output would look like:
 
-```console
+```text
 INFO:    Checking status of remote: idia-registry
 SERVICE    STATUS  VERSION  URI
 Keyserver  OK      v1.0.0   https://sregistry.idia.ac.za

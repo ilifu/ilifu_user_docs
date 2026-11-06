@@ -2,9 +2,10 @@
 
 ## Directory structure
 
-Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-structure) to see how your data should be organised.
+Please read [CBIO Directory Structure](/data/directory_structure#cbio-directory-structure) to see how your data should be organised.
 
 ## Data transfer nodes
+
 * For `scp`, `cp` or `rsync` use `transfer.ilifu.ac.za`.
 * For Globus Online (gridftp) transfers use `dtn01.ilifu.ac.za`.
 
@@ -21,7 +22,7 @@ Please read [CBIO Directory Structure](/data/directory_structure#CBIO-directory-
 
 Genome strip requires the use of [environment modules](tech_docs/software_environments#environment-modules) to configure your software environment. The genome strip module is: `bio/svtoolkit/2.00.1918`, i.e. you should run:
 
-```bash
+```console
 $ module add bio/svtoolkit/2.00.1918
 $ module list
 

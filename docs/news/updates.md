@@ -14,7 +14,7 @@ The call document is attached and available [here](http://www.ilifu.ac.za/sites/
 
 ## ilifu user engagement workshop announcement (28 Aug 2019 @ UWC)
 
-The ilifu consortium would like to invite current and prospective users of the ilifu cloud computing facility to a user engagement workshop where we will present the current status of the ilifu cloud computing facility and opportunities to run new Astronomy and Bioinformatics projects on the facility. 
+The ilifu consortium would like to invite current and prospective users of the ilifu cloud computing facility to a user engagement workshop where we will present the current status of the ilifu cloud computing facility and opportunities to run new Astronomy and Bioinformatics projects on the facility.
 
 This workshop aims to provide support and background information for the current call for projects (closing on 1st October 2019) to use the ilifu facilities.
 
