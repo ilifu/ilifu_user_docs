@@ -26,24 +26,31 @@ The kernels themselves are in fact Singularity software containers. All the addi
 
 will provide you with the path of your current work directory.
 
-The following table lists the available kernels and their related Singularity containers:
+The following table lists the available kernels and their related Singularity containers (at `/software/astro/containers`):
 
 | Kernel name                 | Container                                 |
 |-----------------------------|-------------------------------------------|
-| ASTRO-GPU                   | ASTRO-GPU.simg                            |
-| ASTRO-PY3                   | ASTRO-PY3.simg                            |
-| ASTRO-R                     | ASTRO-R.simg                              |
-| CASA-5                      | jupyter-casa-latest.simg                  |
-| CASA-6                      | casa-6.simg                               |
-| katcal (public)             | katcal.sif                                |
+| ASTRO-GPU (PyTorch)         | ASTRO-GPU-PyTorch-latest.sif              |
+| ASTRO-GPU (TensorFlow)      | ASTRO-GPU-TF-latest.sif                   |
+| ASTRO-PY3 (Python 3.12)     | ASTRO-PY3.12-latest.sif                   |
+| ASTRO-PY3 (Python 3.10)     | ASTRO-PY3.10-latest.sif                   |
+| ASTRO-PY3 (Python 3.8)      | ASTRO-PY3.8-latest.sif                    |
+| ASTRO-PY3                   | ASTRO-PY3.6-latest.sif                    |
+| ASTRO-R                     | ASTRO-R-latest.sif                        |
+| CASA-6 (Python 3.12)        | casa-modular-py3.12-latest.sif            |
+| CASA-6                      | casa-modular-py3.10-latest.sif            |
+| CASA-5                      | casa-stable-5.5.0-kernel-2026-07-16.sif   |
+| HI_IM PY3                   | hi_im-latest.sif                          |
+| katcal_py3 (public)         | katcal-latest.sif                         |
+| katcal (public)             | katcal_20210128.sif                       |
 | KERN-2                      | kern-2.img                                |
 | KERN-5                      | kern5.simg                                |
-| PY2                         | python-2.7.img                            |
-| PY3                         | python-3.6.img                            |
-| Python 3                    | System Python (not a container)           |
-| SF-PY2                      | source-finding.img                        |
-| SF-PY3                      | ASTRO-PY3.simg                            |
-| Simba                       | SIMBA.simg                                |
+| MEERPOWER                   | meerpower-latest.sif                      |
+| Python 3 (ipykernel)        | System Python (not a container)           |
+| RMextract                   | rmextract-latest.sif                      |
+| SF-PY2                      | source-finding-latest.sif                 |
+| SF-PY3                      | ASTRO-PY3.6-latest.sif                    |
+| Simba                       | simba-latest.sif                          |
 
 Details of the python libraries, software and other libraries available within the different kernels can be found in the [Available containers](tech_docs/software_environments?id=available-containers) section. An alternative way to view the available Python packages included in the kernel is to run the command `!pip freeze` in your Jupyter notebook. This command will list all the python packages available in the currently active kernel. To create a custom kernel for use in your Jupyter session, see [Using a custom container as a Jupyter kernel](tech_docs/software_environments?id=using-a-custom-container-as-a-jupyter-kernel).
 
