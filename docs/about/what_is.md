@@ -1,11 +1,8 @@
 # What is ilifu?
 
-ilifu is a research computing facility focused on astronomy and bioinformatics
-which is managed by a consortium of institutions: **University of Cape Town (UCT)** (lead),
-**University of the Western Cape (UWC)**, **Stellenbosch University (SU)**, **Cape Peninsula University
-of Technology (CPUT)**, **Sol Plaatje University (SPU)**, and **South African Radio Astronomy Observatory (SARAO)**.
+Ilifu, a big data infrastructure for data-intensive research, enables South African researchers to be world leaders in the strategic science domains of astronomy and bioinformatics. Hosted at UCT ICTS and operated by IDIA, a partnership of UCT, UWC, UP and NWU.
 
-Hardware comprising the compute facility is contributed by [DIRISA](https://www.dirisa.ac.za/) through a 3-year funding grant, by The Inter-University Institute of Data Intensive Astronomy [(IDIA)](http://www.idia.ac.za/) through a donation of equipment and by the UCT Computational Biology Group [(CBIO)](http://www.cbio.uct.ac.za/) through a donation of equipment.
+The original ilifu project (2017-2023, DIRISA Tier 2) was completed in 2023. Ilifu is now fully funded by the IDIA partner universities. Our goal is to build capacity and expertise in data intensive research within the South African university research community to enable South African leadership in MeerKAT and MeerKAT+ science in preparation for the SKA Observatory era. As such, resources are strictly dedicated to astronomy-focused initiatives, with the exception of select bioinformatics projects that have contributed additional funds and compute hardware.
 
 The system is hosted at UCT and is supported by technical staff from the partner institutions.
 
